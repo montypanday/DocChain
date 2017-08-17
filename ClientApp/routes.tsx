@@ -10,17 +10,17 @@ import { contentPreview } from './components/contentPreview';
 import { contentTree } from './components/contentTree';
 import { contentUploader } from './components/contentUploader';
 import { fileExplorer } from './components/fileExplorer';
-
-
-
+import { Login } from './components/login';
 
 export const routes = <Layout>
-    <Route exact path='/' component={ Home } />
-    <Route path='/counter' component={ Counter } />
+    <Route exact path='/' component={Home} />
+    <Route path='/counter' component={Counter} />
     <Route path='/fetchdata' component={FetchData} />
     <Route path='/fileexplorer' component={fileExplorer} />
     <Route path='/contentpicker' component={contentPicker} />
     <Route path='/contentpreview' component={contentPreview} />
     <Route path='/contenttree' component={contentTree} />
     <Route path='/contentuploader' component={contentUploader} />
+    <Route path='/login/:state?/:code?'  component={(props) => <Login {...props} code="haha"/>} />
 </Layout>;
+
