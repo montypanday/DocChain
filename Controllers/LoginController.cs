@@ -1,11 +1,13 @@
-﻿using Box.V2.Auth;
+﻿using Microsoft.AspNetCore.Http;
+using Box.V2.Auth;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Box.V2.Config;
 using Box.V2;
+using Newtonsoft.Json;
+
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,10 +27,12 @@ namespace front_end.Controllers
         [HttpGet("{id}")]
         public async Task<string> Get(string authCode)
         {
-            BoxClient client = new BoxClient(new BoxConfig("3syx1zpgoraznjex526u78ozutwvgeby", "0vf9isuhRisKTy9nvR1CLVaSObuaG3lx", new Uri("https://127.0.0.1")));
+            var client = new BoxClient(new BoxConfig("3syx1zpgoraznjex526u78ozutwvgeby", "0vf9isuhRisKTy9nvR1CLVaSObuaG3lx", new Uri("https://127.0.0.1")));
             OAuthSession x =await client.Auth.AuthenticateAsync(authCode);
-
-            return x.AccessToken.ToString();
+            var serialisedOAuthSession = JsonConvert.SerializeObject(x);
+            
+            //HttpContext.Session.SetString("Session", serialisedOAuthSession);
+            return x.AccessToken;
         }
 
         // POST api/values

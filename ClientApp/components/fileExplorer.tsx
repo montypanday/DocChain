@@ -5,7 +5,8 @@ import messages from 'box-ui-elements/lib/i18n/en-US';
 import 'box-ui-elements/dist/explorer.css';
 
 //const token = 'ACCESS_TOKEN';
-const token = 'JkwQVYiGws0xoQafiB86oQjhqeARmKhn';
+const token = JSON.parse(sessionStorage.getItem("Session"));
+console.log("token " + token);
 const getLocalizedMessage = (id, replacements) =>
     messages[id].replace(/{\s*(\w+)\s*}/g, (match, key) => replacements[key]);
 

@@ -1,4 +1,5 @@
 ﻿import * as $ from "jquery";
+
 import { BaseService } from "./baseService";
 var JQueryPromise = require('promise');
 
@@ -6,8 +7,10 @@ var JQueryPromise = require('promise');
 //import { Category } from "../models/category";
 
 export class UserService extends BaseService {
-    getAccessToken(authcode: string) {
+    getAccessToken(authcode: string): JQueryPromise<string> {
+        
         return $.getJSON(this.getRootUrl() + "/Login/get?authCode=" + authcode);
+        
     }
     //getFeaturedProducts(): JQueryPromise<Product[]> {
     //    return $.getJSON(this.getRootUrl() + "/product/featured");

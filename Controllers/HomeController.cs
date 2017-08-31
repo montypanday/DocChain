@@ -11,9 +11,7 @@ namespace front_end.Controllers
     {
         public ActionResult Index()
         {
-            //if (response.IsError()) return Error(Request.QueryString["error"], Request.QueryString["error_description"]);
-            //if (IsCode()) return await Token(Request.QueryString["code"], Request.QueryString["state"]);
-
+          
             return View();
         }
 
