@@ -4,8 +4,6 @@ import { ContentExplorer } from 'box-ui-elements';
 import messages from 'box-ui-elements/lib/i18n/en-US';
 import 'box-ui-elements/dist/explorer.css';
 
-
-const token = 'ACCESS_TOKEN';
 const getLocalizedMessage = (id, replacements) =>
     messages[id].replace(/{\s*(\w+)\s*}/g, (match, key) => replacements[key]);
 
@@ -18,9 +16,12 @@ export class fileExplorer extends React.Component<{}, fileinterface> {
     }
 
     public render() {
-        return(
-        <div>
-            <ContentExplorer token={token} getLocalizedMessage={getLocalizedMessage} /> ,document.querySelector('.container')
+        const token = sessionStorage.getItem('accessToken');
+        return (
+            <div>
+                <ContentExplorer token={sessionStorage.getItem('accessToken')} getLocalizedMessage={getLocalizedMessage} logoUrl='box' />
             </div>)
     }
+//
+    // this was present after the ContentExplorer tag above, (yes after /> was ,document.querySelector('.container'))
 }

@@ -4,6 +4,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import * as RoutesModule from './routes';
 let routes = RoutesModule.routes;
 
@@ -12,7 +13,7 @@ function renderApp() {
     // configuration and injects the app into a DOM element.
     ReactDOM.render(
         <AppContainer>
-            <BrowserRouter children={ routes } />
+            <BrowserRouter children={routes} />
         </AppContainer>,
         document.getElementById('react-app')
     );
