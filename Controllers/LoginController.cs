@@ -30,8 +30,7 @@ namespace front_end.Controllers
             var client = new BoxClient(new BoxConfig("3syx1zpgoraznjex526u78ozutwvgeby", "0vf9isuhRisKTy9nvR1CLVaSObuaG3lx", new Uri("https://127.0.0.1")));
             OAuthSession x =await client.Auth.AuthenticateAsync(authCode);
             var serialisedOAuthSession = JsonConvert.SerializeObject(x);
-            
-            //HttpContext.Session.SetString("Session", serialisedOAuthSession);
+            HttpContext.Session.SetString("Session", serialisedOAuthSession);
             return x.AccessToken;
         }
 
