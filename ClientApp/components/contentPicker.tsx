@@ -4,7 +4,7 @@ import { ContentPicker } from 'box-ui-elements';
 import messages from 'box-ui-elements/lib/i18n/en-US';
 import 'box-ui-elements/dist/picker.css';
 
-
+const token = 'ACCESS_TOKEN';
 
 const getLocalizedMessage = (id, replacements) =>
     messages[id].replace(/{\s*(\w+)\s*}/g, (match, key) => replacements[key]);
@@ -19,11 +19,10 @@ export class contentPicker extends React.Component<{}, pickerinterface> {
 
 
     public render() {
-        const token = sessionStorage.getItem('accessToken');
         return (
             <div>
-                <ContentPicker token={sessionStorage.getItem('accessToken')} getLocalizedMessage={getLocalizedMessage} logoUrl='box' />
-            </div>
+                <ContentPicker token={token} getLocalizedMessage={getLocalizedMessage} /> , document.querySelector('.container')
+        </div>
         )
     }
 }
