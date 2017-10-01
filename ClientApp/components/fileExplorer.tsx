@@ -14,12 +14,14 @@ export class fileExplorer extends React.Component<{}, fileinterface> {
         super();
         this.state = { currentCount: 0 };
     }
-
+    handleClick() {
+        console.log(`such knowledge`)
+    }
     public render() {
         const token = sessionStorage.getItem('accessToken');
         return (
             <div>
-                <ContentExplorer token={sessionStorage.getItem('accessToken')} getLocalizedMessage={getLocalizedMessage} logoUrl='box' />
+                <ContentExplorer token={sessionStorage.getItem('accessToken')} getLocalizedMessage={getLocalizedMessage} logoUrl='box' onChoose={this.handleClick}/>
             </div>)
     }
 //

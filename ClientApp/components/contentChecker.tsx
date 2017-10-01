@@ -10,7 +10,7 @@ const getLocalizedMessage = (id, replacements) =>
 
 interface IPickerinterface { }
 
-export class contentPicker extends React.Component<{}, IPickerinterface> {
+export class contentChecker extends React.Component<{}, IPickerinterface> {
     constructor() {
         super();
     }
@@ -34,18 +34,18 @@ export class contentPicker extends React.Component<{}, IPickerinterface> {
             .then(response => {
                 //response is the file object captured. 
                 //It has all file information like file id, sha1
-                fetch("/api/Login/put?hash=" + btoa(response.sha1), { method: 'POST' })
+                fetch("/api/Login/check?hash=" + btoa(response.sha1), { method: 'PUT' })
                     .then(response => response.json())
                     .then(data => {
                         console.log(data);
                         if (data.statusCode == 200) {
-                            alert("The hash of this file has been entered previously");
+                            alert("The hash of this file exists in Blockchain. Therefore, file has not changed!");
                         }
-                        if (data.statusCode == 201) {
-                            alert("The hash of this file has been successfully embedded into Blockchain");
+                        if (data.statusCode == 404) {
+                            alert("The hash of this file was not found in the Blockchain. Be careful, either the file has changed or you forgot to put its hash into Blockchain");
                         }
-                    }
-                    )
+                        
+                    })
             })
     }
     render() {

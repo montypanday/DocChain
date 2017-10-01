@@ -46,7 +46,12 @@ export class NavMenu extends React.Component<{}, {}> {
                         </li>
                         <li>
                             <NavLink to={'/contentpicker'} activeClassName='active'>
-                                <span className='glyphicon glyphicon-th-list'></span> Content Picker
+                                <span className='glyphicon glyphicon-th-list'></span> Embed into Blockchain
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/contentChecker'} activeClassName='active'>
+                                <span className='glyphicon glyphicon-th-list'></span> Match with Blockchain
                             </NavLink>
                         </li>
                         {
