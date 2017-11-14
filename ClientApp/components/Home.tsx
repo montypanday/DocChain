@@ -9,7 +9,7 @@ export class Home extends React.Component<{}, {}> {
                 <div className="about">
                     <p>
                         LINCD is...
-        </p>
+                    </p>
                 </div>
             </div>
             <div className="tutorial-container">
@@ -18,7 +18,7 @@ export class Home extends React.Component<{}, {}> {
 
                     </p>
                 </div>
-                <a className="button" href="tutorial-login.html">Start Tutorial</a>
+                <a className="button" href="/Tutorial1/">Start Tutorial</a>
             </div>
         </div>;
     }
