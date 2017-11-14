@@ -28,6 +28,45 @@
     position: relative;
 }
 
+.pic-container {
+    width: 30vw;
+    padding: 0 35vw;
+    padding-top: 2vh;
+    position: relative;
+}
+
+
+.login-picture {
+    background-image: url("../css/img/LoginBTN.png");
+    background-size: 48px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 48px;
+}
+
+
+.explorer-picture {
+    height: 48px;
+    background-image: url("img/ExplorerBTN.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.embed-picture {
+    height: 48px;
+    background-image: url("img/EmbedBTN.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.match-picture {
+    height: 48px;
+    background-image: url("img/MatchBTN.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+
 .tutorial-container {
     text-align: center;
     font-size: 16px;
