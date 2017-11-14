@@ -1,0 +1,186 @@
+.body {
+    background-color: white;
+    font-family: 'europa', 'fira-sans-2', sans-serif;
+    font-style: normal;
+    color: rgba(104, 104, 104, 0.89);
+    font-size: 16px;
+    height: 100vh;
+    margin: 0;
+}
+
+.welcome {
+    font-size: 2vw;
+    font-weight: 700;
+    color: #6CBBFF;
+    text-align: center;
+    margin: 0;
+}
+
+.loading {
+    font-size: 1.25vw;
+    font-weight: 300;
+}
+
+.center-fade {
+    -webkit-animation: fade 10s ease-in 1 forwards;
+    animation: fade 10s ease-in 1 forwards;
+    padding-top: 30vh;
+    position: relative;
+}
+
+.tutorial-container {
+    text-align: center;
+    font-size: 16px;
+    padding-top: 2vh;
+    -webkit-animation: appear 2s ease-in 1 forwards;
+    animation: appear 2s ease-in 1 forwards;
+}
+
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    background-color: #b3b3b3;
+    color: white;
+    border-radius: 2px;
+    padding: 2px 5px;
+    text-decoration: none;
+}
+
+.prev {
+    float: left;
+}
+
+.next {
+    float: right;
+}
+
+.center-fade {
+    text-align: center;
+    font-size: 16px;
+}
+
+.center-appear {
+    text-align: center;
+    font-size: 16px;
+    width: 30%;
+    padding-left: 35%;
+    -webkit-animation: appear 11s ease-in 1 forwards;
+    animation: appear 11s ease-in 1 forwards;
+}
+
+@-webkit-keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    33% {
+        opacity: 1;
+    }
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    33% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes appear {
+    0% {
+        opacity: 0;
+    }
+
+    98% {
+        opacity: 0;
+    }
+
+    99% {
+        opacity: .75;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+
+    98% {
+        opacity: 0;
+    }
+
+    99% {
+        opacity: .75;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.spinner {
+    height: 8vh;
+    text-align: center;
+    padding-right: 1vw;
+    font-size: 1vw;
+    -webkit-animation: fade 10s ease-in 1 forwards;
+    animation: fade 10s ease-in 1 forwards;
+}
+
+.spinner > div {
+    background-color: #6CBBFF;
+    height: 100%;
+    width: .3vw;
+    display: inline-block;
+    -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+    animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .rect2 {
+    -webkit-animation-delay: -1.1s;
+    animation-delay: -1.1s;
+}
+
+.spinner .rect3 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+.spinner .rect4 {
+    -webkit-animation-delay: -0.9s;
+    animation-delay: -0.9s;
+}
+
+.spinner .rect5 {
+    -webkit-animation-delay: -0.8s;
+    animation-delay: -0.8s;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+    0%, 40%, 100% {
+        -webkit-transform: scaleY(0.4)
+    }
+
+    20% {
+        -webkit-transform: scaleY(1.0)
+    }
+}
+
+@keyframes sk-stretchdelay {
+    0%, 40%, 100% {
+        transform: scaleY(0.4);
+        -webkit-transform: scaleY(0.4);
+    }
+
+    20% {
+        transform: scaleY(1.0);
+        -webkit-transform: scaleY(1.0);
+    }
+}
