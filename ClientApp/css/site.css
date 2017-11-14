@@ -21,6 +21,10 @@
     font-style: normal;
     color: rgba(104, 104, 104, 0.89);
     font-size: 16px;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 @media (max-width: 767px) {
@@ -34,7 +38,7 @@
     /* On small screens, convert the nav menu to a vertical sidebar */
     .main-nav {
         height: 100%;
-        width: calc(25% - 20px);
+        width: calc(20vw - 20px);
     }
     .main-nav .navbar {
         border-radius: 0px;
@@ -53,7 +57,7 @@
     }
     .main-nav .navbar li {
         float: none;
-        font-size: 15px;
+        font-size: 1vw;
         margin: 6px;
     }
     .main-nav .navbar li a {
@@ -66,5 +70,9 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+
+    .navbar-brand{
+        font-size: 1.2vw;
     }
 }
