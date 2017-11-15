@@ -38,30 +38,36 @@
 
 .login-picture {
     background-image: url("../css/img/LoginBTN.png");
-    background-size: 48px;
     background-position: center center;
     background-repeat: no-repeat;
-    height: 200px;
-    width:200px;
+    background-size: 210px 48px;
+    height: 48px;
+    width: 210px;
 }
 
 
 .explorer-picture {
+    background-size: 210px 48px;
     height: 48px;
+    width: 210px;
     background-image: url("img/ExplorerBTN.png");
     background-position: center center;
     background-repeat: no-repeat;
 }
 
 .embed-picture {
+    background-size: 210px 48px;
     height: 48px;
+    width: 210px;
     background-image: url("img/EmbedBTN.png");
     background-position: center center;
     background-repeat: no-repeat;
 }
 
 .match-picture {
+    background-size: 210px 48px;
     height: 48px;
+    width: 210px;
     background-image: url("img/MatchBTN.png");
     background-position: center center;
     background-repeat: no-repeat;
