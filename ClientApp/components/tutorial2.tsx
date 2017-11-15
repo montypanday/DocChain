@@ -1,5 +1,4 @@
 ﻿import * as React from 'react';
-var img = require('../css/img/LoginBTN.png');
 
 interface Tutorial2Prop {
     handler: any
@@ -8,6 +7,7 @@ interface Tutorial2Prop {
 interface Tutorial2State {
 
 }
+
 export class Tutorial2 extends React.Component<Tutorial2Prop, Tutorial2State> {
     public render() {
         return <div className="body">
@@ -15,7 +15,7 @@ export class Tutorial2 extends React.Component<Tutorial2Prop, Tutorial2State> {
                 <p className="welcome">Logging In</p>
             </div>
             <div className="pic-container">
-                <section className="login-picture" style={{ backgroundImage: "url(" + img + ")" }}></section>
+                <section className="login-picture"></section>
             </div>
             <div className="tutorial-container">
                 <div className="tutorial-start">

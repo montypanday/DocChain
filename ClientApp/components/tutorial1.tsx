@@ -1,5 +1,4 @@
 ﻿import * as React from 'react';
-const img = require('../css/img/LoginBTN.png');
 
 interface Tutorial1Prop {
     handler: any
