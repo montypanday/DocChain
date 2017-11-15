@@ -1,24 +1,31 @@
 ﻿import * as React from 'react';
-const img = require('../css/img/ExplorerBTN.png');
+var img = require('../css/img/LoginBTN.png');
 
-export class Tutorial2 extends React.Component<{}, {}> {
+interface Tutorial2Prop {
+    handler: any
+    decHandler: any
+}
+interface Tutorial2State {
+
+}
+export class Tutorial2 extends React.Component<Tutorial2Prop, Tutorial2State> {
     public render() {
         return <div className="body">
             <div className="center-fade">
-                <p className="welcome">Managing your files</p>
+                <p className="welcome">Logging In</p>
             </div>
             <div className="pic-container">
-                <section className="explorer-picture" style={{ backgroundImage: "url(" + img + ")" }}></section>
+                <section className="login-picture" style={{ backgroundImage: "url(" + img + ")" }}></section>
             </div>
             <div className="tutorial-container">
                 <div className="tutorial-start">
                     <p>
-                        Access and manage your files by navigating to the file explorer provided by your cloud storage option.
-                     </p>
-                </div>
-                <a className="button prev" href="/tutorial1/">Return</a>
-                <a className="button next" href="/tutorial3/">Next</a>
+                        Login to your cloud storage service by navigating to the login page here.
+                    </p>
+                </div>               
             </div>
+            <button className="button prev" onClick={this.props.decHandler}> Return</button>
+            <button className="button next" onClick={this.props.handler}>Next</button>
         </div>;
     }
 }

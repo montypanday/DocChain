@@ -4,15 +4,12 @@
 
 <div id="react-app">
     <div class="center-fade">
-        <p class="welcome">Welcome to LINCD</p>
-        <p class="loading">Loading...</p>
-        <div class="spinner" id="spinner">
-            <div class="rect1"></div>
-            <div class="rect2"></div>
-            <div class="rect3"></div>
-            <div class="rect4"></div>
-            <div class="rect5"></div>
-        </div>
+        <img style="
+position: absolute;
+top: 30%;
+left: 35%;
+margin: 0px 0px 0px 0px;
+" src="~/dist/loading-animations-preloader-gifs-ui-ux-effects-18.gif" />
     </div>
 </div>
 
@@ -20,7 +17,7 @@
     <script src="~/dist/main.js" asp-append-version="true"></script>
     <link href="~/css/loading.css" rel="stylesheet" />
 
-<script>
+    <script>
         (function (d) {
             var config = {
                 kitId: 'dee8yaf',
@@ -29,5 +26,5 @@
             },
                 h = d.documentElement, t = setTimeout(function () { h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive"; }, config.scriptTimeout), tk = d.createElement("script"), f = false, s = d.getElementsByTagName("script")[0], a; h.className += " wf-loading"; tk.src = 'https://use.typekit.net/' + config.kitId + '.js'; tk.async = true; tk.onload = tk.onreadystatechange = function () { a = this.readyState; if (f || a && a != "complete" && a != "loaded") return; f = true; clearTimeout(t); try { Typekit.load(config) } catch (e) { } }; s.parentNode.insertBefore(tk, s)
         })(document);
-</script>
+    </script>
 }

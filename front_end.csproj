@@ -20,6 +20,9 @@
     <!-- Files not to show in IDE -->
     <None Remove="yarn.lock" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\dist\loading-animations-preloader-gifs-ui-ux-effects-18.gif" />
+  </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec Command="npm install" />
