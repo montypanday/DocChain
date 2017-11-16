@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 export class NavMenu extends React.Component<{}, {}> {
     public render() {
-
+        
         var placeholder;
         if (sessionStorage.getItem('accessToken') == null) {
             placeholder = <li>
@@ -53,6 +53,13 @@ export class NavMenu extends React.Component<{}, {}> {
                             <NavLink to={'/contentChecker'} activeClassName='active'>
                                 <span className='glyphicon glyphicon-th-list'></span> Match with Blockchain
                             </NavLink>
+
+                        </li>
+                        <li>
+                            <NavLink to={'/faq'} activeClassName='active'>
+                                <span className='glyphicon glyphicon-th-list'></span> FAQ
+                            </NavLink>
+
                         </li>
                         {
                             placeholder

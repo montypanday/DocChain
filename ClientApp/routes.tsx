@@ -12,6 +12,7 @@ import { Tutorial2 } from './components/tutorial2';
 import { Tutorial3 } from './components/tutorial3';
 import { Tutorial4 } from './components/tutorial4';
 import { Tutorial5 } from './components/tutorial5';
+import { Faq } from './components/FAQ';
 
 export const routes = <Layout>
     <Route exact path='/' component={Home} />
@@ -25,5 +26,6 @@ export const routes = <Layout>
     <Route path='/tutorial5' component={Tutorial5} />
     <Route path='/login/:state?/:code?' component={(props) => <Login {...props} code="haha" />} />
     <Route path='/logout' component={Logout} />
+    <Route path='/faq' component={Faq} />
 </Layout>;
 
