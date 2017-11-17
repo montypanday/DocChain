@@ -11,9 +11,11 @@
 .welcome {
     font-size: 2vw;
     font-weight: 700;
-    color: #6CBBFF;
+    color: #6CBBFF;   
     text-align: center;
     margin: 0;
+    margin-bottom: 1vh;
+
 }
 
 .loading {
@@ -27,13 +29,14 @@
     animation: fade 3s ease-in 1 forwards;
     padding-top: 30vh;
     position: relative;
+    width: 50%;
+    left: 25%;
 }
 
 .pic-container {
-    width: 30vw;
-    padding: 0 35vw;
-    padding-top: 2vh;
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -82,19 +85,9 @@
     -moz-animation: appear 2s ease-in 1 forwards;
     -webkit-animation: appear 2s ease-in 1 forwards;
     animation: appear 2s ease-in 1 forwards;
+    width: 50%;
+    margin-left:25%;
 }
-/*
-.button {
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    background-color: #b3b3b3;
-    color: white;
-    border-radius: 2px;
-    padding: 2px 5px;
-    text-decoration: none;
-}
-    */
 
 .prev {
     float: left;
