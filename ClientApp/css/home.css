@@ -22,8 +22,9 @@
 }
 
 .center-fade {
-    -webkit-animation: fade 10s ease-in 1 forwards;
-    animation: fade 10s ease-in 1 forwards;
+    -moz-animation: fade 3s ease-in 1 forwards;
+    -webkit-animation: fade 3s ease-in 1 forwards;
+    animation: fade 3s ease-in 1 forwards;
     padding-top: 30vh;
     position: relative;
 }
@@ -78,11 +79,12 @@
     text-align: center;
     font-size: 16px;
     padding-top: 2vh;
+    -moz-animation: appear 2s ease-in 1 forwards;
     -webkit-animation: appear 2s ease-in 1 forwards;
     animation: appear 2s ease-in 1 forwards;
 }
-
-a.button {
+/*
+.button {
     -webkit-appearance: button;
     -moz-appearance: button;
     appearance: button;
@@ -92,6 +94,7 @@ a.button {
     padding: 2px 5px;
     text-decoration: none;
 }
+    */
 
 .prev {
     float: left;
@@ -111,8 +114,9 @@ a.button {
     font-size: 16px;
     width: 30%;
     padding-left: 35%;
-    -webkit-animation: appear 11s ease-in 1 forwards;
-    animation: appear 11s ease-in 1 forwards;
+    -moz-animation: appear 3s ease-in 1 forwards;
+    -webkit-animation: appear 3s ease-in 1 forwards;
+    animation: appear 3s ease-in 1 forwards;
 }
 
 @-webkit-keyframes fade {
@@ -140,7 +144,7 @@ a.button {
         opacity: 0;
     }
 
-    98% {
+    90% {
         opacity: 0;
     }
 
@@ -158,7 +162,7 @@ a.button {
         opacity: 0;
     }
 
-    98% {
+    90% {
         opacity: 0;
     }
 
@@ -176,57 +180,65 @@ a.button {
     text-align: center;
     padding-right: 1vw;
     font-size: 1vw;
+    -moz-animation: fade 10s ease-in 1 forwards;
     -webkit-animation: fade 10s ease-in 1 forwards;
     animation: fade 10s ease-in 1 forwards;
 }
 
-.spinner > div {
-    background-color: #6CBBFF;
-    height: 100%;
-    width: .3vw;
-    display: inline-block;
-    -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
-    animation: sk-stretchdelay 1.2s infinite ease-in-out;
-}
+    .spinner > div {
+        background-color: #6CBBFF;
+        height: 100%;
+        width: .3vw;
+        display: inline-block;
+        -moz-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+        -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+        animation: sk-stretchdelay 1.2s infinite ease-in-out;
+    }
 
-.spinner .rect2 {
-    -webkit-animation-delay: -1.1s;
-    animation-delay: -1.1s;
-}
+    .spinner .rect2 {
+        -moz-animation-delay: -1.1s;
+        -webkit-animation-delay: -1.1s;
+        animation-delay: -1.1s;
+    }
 
-.spinner .rect3 {
-    -webkit-animation-delay: -1.0s;
-    animation-delay: -1.0s;
-}
+    .spinner .rect3 {
+        -moz-animation-delay: -1.1s;
+        -webkit-animation-delay: -1.0s;
+        animation-delay: -1.0s;
+    }
 
-.spinner .rect4 {
-    -webkit-animation-delay: -0.9s;
-    animation-delay: -0.9s;
-}
+    .spinner .rect4 {
+        -moz-animation-delay: -1.1s;
+        -webkit-animation-delay: -0.9s;
+        animation-delay: -0.9s;
+    }
 
-.spinner .rect5 {
-    -webkit-animation-delay: -0.8s;
-    animation-delay: -0.8s;
-}
+    .spinner .rect5 {
+        -moz-animation-delay: -1.1s;
+        -webkit-animation-delay: -0.8s;
+        animation-delay: -0.8s;
+    }
 
 @-webkit-keyframes sk-stretchdelay {
     0%, 40%, 100% {
-        -webkit-transform: scaleY(0.4)
+        -webkit-transform: scaleY(0.4);
+        transform: scaleY(0.4);
     }
 
     20% {
-        -webkit-transform: scaleY(1.0)
+        -webkit-transform: scaleY(1.0);
+        transform: scaleY(1.0);
     }
 }
 
 @keyframes sk-stretchdelay {
     0%, 40%, 100% {
-        transform: scaleY(0.4);
         -webkit-transform: scaleY(0.4);
+        transform: scaleY(0.4);
     }
 
     20% {
-        transform: scaleY(1.0);
         -webkit-transform: scaleY(1.0);
+        transform: scaleY(1.0);
     }
 }
