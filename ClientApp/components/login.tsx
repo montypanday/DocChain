@@ -1,4 +1,6 @@
 ﻿import * as React from "react";
+const s = require('../css/login.css');
+
 interface LoginState {
     loggedIn: boolean
 }
@@ -29,7 +31,31 @@ export class Login extends React.Component<{}, LoginState>
         }
         if (sessionStorage.getItem("accessToken") == null)
         {
-            return <div><p> here is my paragraph</p><h2></h2><a href="https://account.box.com/api/oauth2/authorize?response_type=code&client_id=3syx1zpgoraznjex526u78ozutwvgeby&state=security_token%3DKnhMJatFipTAnM0nHlZA">Box Login</a></div >;
+            return <div className="body">          
+                <div className="grid-container">
+                    <div className="select">
+                       <p> Select your cloud storage provider </p>
+                    </div>
+                    <div className="onedrive">
+                        <section className="onedrive-logo"></section>
+                        <p>OneDrive</p>
+                    </div>
+                    <div className="googledrive">
+                        <section className="googledrive-logo"></section>
+                        <p>Google Drive</p>
+                    </div>
+                    <div className="dropbox">
+                        <section className="dropbox-logo"></section>
+                        <p>Dropbox</p>
+                    </div>
+                    <a href="https://account.box.com/api/oauth2/authorize?response_type=code&client_id=3syx1zpgoraznjex526u78ozutwvgeby&state=security_token%3DKnhMJatFipTAnM0nHlZA">
+                        <div className="box">
+                            <section className="box-logo"></section>
+                            <p>Box</p>
+                        </div>
+                    </a>
+                </div>
+            </div>;
         }
         else {
             return null;
