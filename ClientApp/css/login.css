@@ -1,0 +1,108 @@
+.body {
+    font-family: 'europa', 'fira-sans-2', sans-serif;
+    color: rgba(104, 104, 104, 0.89);
+    font-size: 1vw;
+}
+
+.select{
+    font-size: 1.5vw;
+    text-align: center;
+    grid-area: select;
+    grid-column: span 2;
+    align-self:center;
+}
+
+.grid-container {
+    position: fixed;
+    width: 20vw;
+    display: grid;
+    left: 50%;   
+    top: 10%;
+    grid-template: repeat(3, 10vw) / repeat(2, 10vw);
+    grid-row-gap: 1vh;
+    grid-column-gap: 0;
+    grid-template-areas: 
+        'select select'
+        'onedrive box' 
+        'googledrive dropbox';
+}
+
+  a{ text-decoration: none; color: rgba(104, 104, 104, 0.89); }
+  a:visited { text-decoration: none; color: rgba(104, 104, 104, 0.89); }
+  a:hover { text-decoration: none; color: rgba(104, 104, 104, 0.89); }
+  a:focus { text-decoration: none; color: rgba(104, 104, 104, 0.89); }
+  a:hover, a:active { text-decoration: none; color: rgba(104, 104, 104, 0.89); }
+
+.onedrive{
+  grid-area: onedrive;
+  text-align: center;
+}
+.onedrive-logo{
+  background-image: url('icons/onedrive-icons/icons8-onedrive.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 5vw;
+}
+
+.googledrive{
+  grid-area: googledrive;
+  text-align: center;
+}
+.googledrive-logo{
+  background-image: url('icons/google-product-logos/logo_drive_128px.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 5vw;
+}
+
+.dropbox{
+  grid-area: dropbox;
+  text-align: center;
+}
+.dropbox-logo{
+  background-image: url('icons/dropbox-icons/dropbox-icon256.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 5vw;
+}
+
+.box{
+  grid-area: box;
+  text-align: center;
+}
+.box-logo {
+    background-image: url('icons/box-icon/icons8-box-blue.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 5vw;
+}
+
+
+@media (max-width: 767px) {
+
+    .body {
+        font-size: 1.5vh;
+    }
+
+    .grid-container {
+        top: 20%;
+        margin-left: -20vw;
+        width: 40vw;
+        grid-template: repeat(3, 20vw) / repeat(2, 20vw);
+        grid-row-gap: 1vh;
+        grid-column-gap: 0;
+        grid-template-areas: 'select select' 'onedrive box' 'googledrive dropbox';
+    }
+
+    .box-logo, .dropbox-logo, .googledrive-logo, .onedrive-logo {
+        height: 10vw;
+    }
+
+    .select {
+        font-size:2vh;
+    }
+}
