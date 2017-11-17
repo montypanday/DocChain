@@ -13,7 +13,7 @@
 }
 
 .grid-container {
-    position: fixed;
+    position: absolute;
     width: 20vw;
     display: grid;
     left: 50%;   
