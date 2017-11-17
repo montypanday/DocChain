@@ -22,10 +22,11 @@ export class Tutorial3 extends React.Component<Tutorial3Prop, Tutorial3State> {
                     <p>
                         Access and manage your files by navigating to the file explorer provided by your cloud storage option.
                      </p>
-                </div>              
+                </div>      
+                <button className="button prev" onClick={this.props.decHandler}>Return</button>
+                <button className="button next" onClick={this.props.handler}>Next</button>
             </div>
-            <button className="button prev" onClick={this.props.decHandler}>Return</button>
-            <button className="button next" onClick={this.props.handler}>Next</button>
+            
         </div>;
     }
 }
