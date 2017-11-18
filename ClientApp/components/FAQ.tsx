@@ -1,7 +1,4 @@
 ﻿import * as React from 'react';
-import '../css/bootstrap.min.css';
-import '../css/bootstrap-theme.min.css';
-
 
 interface FAQProp {
    
