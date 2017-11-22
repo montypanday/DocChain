@@ -1,4 +1,5 @@
 ﻿import * as React from 'react';
+import { File } from './file';
 
 interface Tutorial1Prop {
     handler: any
@@ -28,6 +29,9 @@ export class Tutorial1 extends React.Component<Tutorial1Prop, Tutorial1State> {
                     </p>
                 </div>
                 <button className="button" onClick={this.props.handler}>Start Tutorial</button>
+            </div>
+            <div>
+                <File></File>
             </div>
         </div>;
     }
