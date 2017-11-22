@@ -11,6 +11,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using Box.V2.Models;
 using Microsoft.AspNetCore.Session;
+using front_end.Models;
 
 namespace front_end.Controllers
 {
@@ -26,13 +27,8 @@ namespace front_end.Controllers
             BoxClient client = new BoxClient(new BoxConfig("3syx1zpgoraznjex526u78ozutwvgeby", "0vf9isuhRisKTy9nvR1CLVaSObuaG3lx", new Uri("https://127.0.0.1")));
             OAuthSession Oauth= await client.Auth.AuthenticateAsync(authCode);
             // Access token from that x object is returned to browser which is stored in cache and attached with each request which is made to BOX
-            var items = await client.FoldersManager.GetFolderItemsAsync("0", 500);
-            var serializedClient = JsonConvert.SerializeObject(client);
-            Response.Cookies.Append("Client", serializedClient);
             
-            //this.HttpContext.Session.SetString("AccessToken", Oauth.AccessToken);
-            //var a = this.HttpContext.Session.GetString("AccessToken");
-            return Json(Oauth);
+             return Json(Oauth);
         }
         [HttpPost("{id}")]
         public async Task<HttpResponseMessage> Put(string hash)
@@ -66,10 +62,12 @@ namespace front_end.Controllers
         [HttpGet]
         public async Task<BoxCollection> GetBoxFiles(string token)
         {
-            var a = HttpContext.Request.Cookies["Client"];
-                       
-
-            return null;
+            var oobject = JsonConvert.DeserializeObject<OAuthSession>(token);
+            OAuthSession session = new OAuthSession(oobject.AccessToken, oobject.RefreshToken, oobject.ExpiresIn, oobject.TokenType);
+            BoxClient client = new BoxClient(new BoxConfig("3syx1zpgoraznjex526u78ozutwvgeby", "0vf9isuhRisKTy9nvR1CLVaSObuaG3lx", new Uri("https://127.0.0.1")),session);
+            var items = await client.FoldersManager.GetFolderItemsAsync("0", 500);
+           
+            return items;
         }
     }
 }
