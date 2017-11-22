@@ -16,7 +16,7 @@ export class Explorer extends React.Component<{}, {}> {
         console.log("test1complete");
         
 
-        fetch("/api/Login/GetBoxFiles/?token=" + sessionStorage.getItem("box_access_token"))
+        fetch("/api/Login/GetBoxFiles/?token=" + sessionStorage.getItem("OAuthSession"))
             .then(response => response.json)
             .then(data => {
                 console.log(data);

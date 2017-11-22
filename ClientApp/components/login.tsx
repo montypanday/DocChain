@@ -65,16 +65,9 @@ export class Login extends React.Component<{}, LoginState>
             const params = new URLSearchParams(search);
             const AuthorizationCode = params.get('code');
 
-            if (params.get('state') === 'security_token')
-            {
-                fetch("/api/Login/get?authCode=" + AuthorizationCode)
-                    .then(response => response.json())
-                    .then(data => {
-
-                        sessionStorage.setItem("box_access_token", data["access_token"]);
-                        sessionStorage.setItem("box_refresh_token", data["refresh_token"]);
-                    });
-            }
+            
+                
+            
             if (params.get('state') === 'state_parameter_passthrough_value')
             {
                 console.log("i will make a request to Google for access and refresh tokens.");
@@ -86,6 +79,15 @@ export class Login extends React.Component<{}, LoginState>
                         sessionStorage.setItem("google_access_token", data["access_token"]);
                         sessionStorage.setItem("google_refresh_token", data["refresh_token"]);
                     })
+            }
+            else {
+                fetch("/api/Login/get?authCode=" + AuthorizationCode)
+                    .then(response => response.json())
+                    .then(data => {
+                        sessionStorage.setItem("OAuthSession", JSON.stringify(data));
+                        sessionStorage.setItem("box_access_token", data["access_token"]);
+                        sessionStorage.setItem("box_refresh_token", data["refresh_token"]);
+                    });
             }
             
 
