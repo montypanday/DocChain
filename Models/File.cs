@@ -7,23 +7,30 @@ namespace front_end.Models
 {
     public class File
     {
+        public File(string type, string id, string fileName)
+        {
+            this.type = type;
+            this.id = id;
+            this.fileName = fileName;
+            
+        }
         public string type { get; set; }
         // in Google, type is called kind and is always drive#file.
         public string id { get; set; }
         // this is unique to a file.
+
+        public string fileName { get; set; }
+        // Box calls it name, Drive calls it title.
+        // This title will be displayed.
+
+        public string size { get; set; }
 
         public string hash { get; set; }
         // Box calls it sha1, Drive calls it md5Checksum.
         // Box uses sha1 and Drive uses MD5
         // To be checked if works fine when using with blockchain.
 
-        public string fileName { get; set; }
-        // Box calls it name, Drive calls it title.
-        // This title will be displayed.
-
-        public string description { get; set; }
-        // description of file.
-
+        
         public string lastModified { get; set; }
         // both uses datetime object
         // Drive uses RFC 3339 timestamp

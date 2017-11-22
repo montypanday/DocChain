@@ -12,6 +12,7 @@ using System.Text;
 using Box.V2.Models;
 using Microsoft.AspNetCore.Session;
 using front_end.Models;
+using System.Collections.Generic;
 
 namespace front_end.Controllers
 {
@@ -60,14 +61,21 @@ namespace front_end.Controllers
 
         [Route("GetBoxFiles")]
         [HttpGet]
-        public async Task<BoxCollection> GetBoxFiles(string token)
+        public async Task<List<File>> GetBoxFiles(string token)
         {
             var oobject = JsonConvert.DeserializeObject<OAuthSession>(token);
             OAuthSession session = new OAuthSession(oobject.AccessToken, oobject.RefreshToken, oobject.ExpiresIn, oobject.TokenType);
             BoxClient client = new BoxClient(new BoxConfig("3syx1zpgoraznjex526u78ozutwvgeby", "0vf9isuhRisKTy9nvR1CLVaSObuaG3lx", new Uri("https://127.0.0.1")),session);
             var items = await client.FoldersManager.GetFolderItemsAsync("0", 500);
-           
-            return items;
+            
+            List<File> list = new List<File>();
+            for(int i= 0; i<items.TotalCount;i++)
+            {
+                list.Add(new File(items.Entries[i].Type, items.Entries[i].Id, items.Entries[i].Name));
+            }
+            
+
+            return list;
         }
     }
 }
