@@ -9,6 +9,7 @@ import { Header } from 'box-ui-elements/lib/components/Header';
 import { EmptyState } from 'box-ui-elements/lib/components/EmptyState';
 import { FileIcon } from 'box-ui-elements/lib/components/icons/file/FileIcon';
 import LoadingIndicator from 'box-ui-elements/lib/components/LoadingIndicator';
+import { File } from './file';
 
 
 export class Explorer extends React.Component<{}, {}> {
@@ -40,7 +41,11 @@ export class Explorer extends React.Component<{}, {}> {
              
                   <LoadingIndicator />
                   
-              
+
+                  <div>
+                      <File></File>
+                  </div>
+
           </div>
     );
   }
