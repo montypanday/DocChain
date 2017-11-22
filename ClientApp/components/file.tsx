@@ -6,7 +6,7 @@ export class File extends React.Component<{}, {}> {
         //This needs to become dynamic. How to import JSON data, pass it to this, render it in file explorer and wrap it with the link to file??
         var data = [
             {
-                "fileName": "James Angutest.docx",
+                "fileName": "test.docx",
                 "size": "2KB",
                 "lastMod": "22/11/17"
             },
