@@ -26,28 +26,11 @@ export class Explorer extends React.Component<{}, {}> {
   public render() {
       return (
           <div>
-              <Button onClick={this.test1}> Button </Button><br /><br />
-              <PlainButton> PlainButton </PlainButton><br /><br />
-              <PrimaryButton> PrimaryButton </PrimaryButton><br /><br />
-              <DropdownMenu>
-                  <Button className='buik-dropdown-menu-example-button' type='button'>
-                      DropdownMenu
-        </Button>
-                  <Menu>
-                      <MenuItem /*onClick={ }*/>MenuItem</MenuItem>
-                      <MenuItem /*onClick={ }*/>MenuItem</MenuItem>
-                  </Menu>
-              </DropdownMenu>
-             
-                  <LoadingIndicator />
-                  
-
-                  <div>
-                      <File></File>
-                  </div>
-
+            <Button onClick={this.test1}> Button </Button><br /><br />
+            <div>
+                <File></File>
+            </div>
           </div>
     );
   }
-
 }

@@ -19,19 +19,21 @@ export class File extends React.Component<{}, {}> {
 
         var rows = data.map(function (row) {
             return <tr>
-                <td>{row.fileName}</td>
-                <td>{row.size}</td>
-                <td>{row.lastMod}</td>
+                <td className="col-md-6 col-md-pull-1">{row.fileName}</td>
+                <td className="col-md-1 col-md-pull-2">{row.size}</td>
+                <td className="col-md-3 col-md-pull-3">{row.lastMod}</td>
             </tr>
         });
 
-        return <table>
+        return <table className="table table-striped table-hover table-responsive">
             <thead>
-                <th>File</th>
-                <th>Size</th>
-                <th>Last modified</th>
+                <th className="col-md-6 col-md-pull-1">File</th>
+                <th className="col-md-1 col-md-pull-2">Size</th>
+                <th className="col-md-3 col-md-pull-3">Last modified</th>
             </thead>
-            {rows}
+            <tbody>
+                {rows}
+            </tbody>
         </table>
 
     }
