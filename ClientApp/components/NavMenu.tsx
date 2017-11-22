@@ -7,7 +7,7 @@ export class NavMenu extends React.Component<{}, {}> {
         var placeholder;
         if (sessionStorage.getItem('accessToken') == null) {
             placeholder = <li>
-                <NavLink to={'/login'} activeClassName='active'>
+                <NavLink to={'/Login'} activeClassName='active'>
                     <span className='glyphicon glyphicon-user'></span> Login
                             </NavLink>
             </li>;
@@ -61,9 +61,16 @@ export class NavMenu extends React.Component<{}, {}> {
                             </NavLink>
 
                         </li>
+                      
                         {
                             placeholder
                         }
+                        <li>
+                            <NavLink to={'/explorer'} activeClassName='active'>
+                                <span className='glyphicon glyphicon-th-list'></span> FAQ
+                            </NavLink>
+
+                        </li>
                     </ul>
                 </div>
             </div>

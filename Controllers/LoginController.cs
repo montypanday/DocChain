@@ -9,23 +9,30 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using Box.V2.Models;
+using Microsoft.AspNetCore.Session;
 
 namespace front_end.Controllers
 {
+    
     [Route("api/[controller]")]
     public class LoginController : Controller
     {
         [HttpGet("{id}")]
-        public async Task<string> Get(string authCode)
+        public async Task<JsonResult> Get(string authCode)
         {
             // This method exchanges the authorization code with a OAuthSession object which has access token, refresh token inside it.
 
-            var client = new BoxClient(new BoxConfig("3syx1zpgoraznjex526u78ozutwvgeby", "0vf9isuhRisKTy9nvR1CLVaSObuaG3lx", new Uri("https://127.0.0.1")));
-            OAuthSession x = await client.Auth.AuthenticateAsync(authCode);
-            string serialisedOAuthSession = JsonConvert.SerializeObject(x);
-            HttpContext.Session.SetString("Session", serialisedOAuthSession);
+            BoxClient client = new BoxClient(new BoxConfig("3syx1zpgoraznjex526u78ozutwvgeby", "0vf9isuhRisKTy9nvR1CLVaSObuaG3lx", new Uri("https://127.0.0.1")));
+            OAuthSession Oauth= await client.Auth.AuthenticateAsync(authCode);
             // Access token from that x object is returned to browser which is stored in cache and attached with each request which is made to BOX
-            return x.AccessToken;
+            var items = await client.FoldersManager.GetFolderItemsAsync("0", 500);
+            var serializedClient = JsonConvert.SerializeObject(client);
+            Response.Cookies.Append("Client", serializedClient);
+            
+            //this.HttpContext.Session.SetString("AccessToken", Oauth.AccessToken);
+            //var a = this.HttpContext.Session.GetString("AccessToken");
+            return Json(Oauth);
         }
         [HttpPost("{id}")]
         public async Task<HttpResponseMessage> Put(string hash)
@@ -53,6 +60,16 @@ namespace front_end.Controllers
             // gets the response from the Blockchain API and send it back to browser. A GET request is used.
             var response = await client.GetAsync("https://ctxp-deakin.lincd.co/data/" + hash);
             return response;
+        }
+
+        [Route("GetBoxFiles")]
+        [HttpGet]
+        public async Task<BoxCollection> GetBoxFiles(string token)
+        {
+            var a = HttpContext.Request.Cookies["Client"];
+                       
+
+            return null;
         }
     }
 }

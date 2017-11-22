@@ -13,6 +13,7 @@ import { Tutorial3 } from './components/tutorial3';
 import { Tutorial4 } from './components/tutorial4';
 import { Tutorial5 } from './components/tutorial5';
 import { Faq } from './components/FAQ';
+import { Explorer } from './components/Explorer';
 
 export const routes = <Layout>
     <Route exact path='/' component={Home} />
@@ -24,8 +25,10 @@ export const routes = <Layout>
     <Route path='/tutorial3' component={Tutorial3} />
     <Route path='/tutorial4' component={Tutorial4} />
     <Route path='/tutorial5' component={Tutorial5} />
-    <Route path='/login/:state?/:code?' component={(props) => <Login {...props} code="haha" />} />
+    <Route path='/Login/:state?/:code?' component={(props) => <Login {...props} code="haha" />} />
     <Route path='/logout' component={Logout} />
     <Route path='/faq' component={Faq} />
+    <Route path='/explorer' component={Explorer}/>
+
 </Layout>;
 

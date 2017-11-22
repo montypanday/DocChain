@@ -27,9 +27,9 @@
     "url-loader": "0.5.8",
     "webpack": "2.5.1",
     "webpack-hot-middleware": "2.18.0",
-    "glyphicons": "^0.2.0"
+    "glyphicons": "^0.2.0",
+    "material-ui": "0.19.4"
+   
   },
-  "dependencies": {
-    
-  }
+  "dependencies": {}
 }

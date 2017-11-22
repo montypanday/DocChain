@@ -6,7 +6,14 @@
     <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="ClientApp\NewFolder\**" />
+    <Content Remove="ClientApp\NewFolder\**" />
+    <EmbeddedResource Remove="ClientApp\NewFolder\**" />
+    <None Remove="ClientApp\NewFolder\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Box.V2.Core" Version="3.0.0" />
+    <PackageReference Include="Google.Apis.Drive.v3" Version="1.30.0.1037" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OAuth" Version="1.1.2" />
@@ -22,9 +29,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\dist\loading-animations-preloader-gifs-ui-ux-effects-18.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ClientApp\NewFolder\" />
   </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->

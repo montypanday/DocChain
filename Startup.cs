@@ -26,7 +26,8 @@ namespace front_end
         public void ConfigureServices(IServiceCollection services)
         {
             // Adds a default in-memory implementation of IDistributedCache.
-            services.AddDistributedMemoryCache();
+            //services.AddDistributedMemoryCache();
+            services.AddMemoryCache();
             services.AddSession();
             // Add framework services.
             services.AddMvc();
@@ -35,7 +36,7 @@ namespace front_end
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseSession();
+            
             if (env.IsDevelopment())
             {
                 loggerFactory.AddConsole(Configuration.GetSection("Logging"));
@@ -57,7 +58,7 @@ namespace front_end
             }
 
             app.UseStaticFiles();
-            
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
