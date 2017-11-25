@@ -7,11 +7,17 @@ namespace front_end.Models
 {
     public class File
     {
-        public File(string type, string id, string fileName)
+        public File(string type, string id, string fileName, string size, string hash, string modifiedat,string embedlink, string downloadlink)
         {
             this.type = type;
             this.id = id;
             this.fileName = fileName;
+            this.size = size;
+            this.hash = hash;
+            this.lastModified = modifiedat;
+            this.embedLink = embedlink;
+            this.downloadUrl = downloadlink;
+            
             
         }
         public string type { get; set; }
@@ -37,15 +43,12 @@ namespace front_end.Models
         // To be verified for Box.
         // Box calls it modified_at, Drive calls it modifiedByMeDate
 
-        public string extension { get; set; }
-        // Box calls it extension, Drive calls it fileExtension.
-        // can be used to decide an icon to display on screen along with file.
-
         public string embedLink { get; set; }
         //This link can be used to embed the file in a iframe.
         //Search for the iframe tag, iframe tag can also be used inside a bootstrap modal, search for examples
         //Called expiring_embed_link in box and embedLink in Drive.
 
+        public string downloadUrl { get; set; }
 
 
 

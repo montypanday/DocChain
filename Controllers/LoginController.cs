@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Box.V2.Auth;
+﻿using Box.V2.Auth;
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -9,14 +8,12 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using Box.V2.Models;
-using Microsoft.AspNetCore.Session;
 using front_end.Models;
 using System.Collections.Generic;
 
 namespace front_end.Controllers
 {
-    
+
     [Route("api/[controller]")]
     public class LoginController : Controller
     {
@@ -61,21 +58,30 @@ namespace front_end.Controllers
 
         [Route("GetBoxFiles")]
         [HttpGet]
-        public async Task<List<File>> GetBoxFiles(string token)
+        public async Task<JsonResult> GetBoxFiles(string token)
         {
             var oobject = JsonConvert.DeserializeObject<OAuthSession>(token);
             OAuthSession session = new OAuthSession(oobject.AccessToken, oobject.RefreshToken, oobject.ExpiresIn, oobject.TokenType);
             BoxClient client = new BoxClient(new BoxConfig("3syx1zpgoraznjex526u78ozutwvgeby", "0vf9isuhRisKTy9nvR1CLVaSObuaG3lx", new Uri("https://127.0.0.1")),session);
             var items = await client.FoldersManager.GetFolderItemsAsync("0", 500);
             
-            List<File> list = new List<File>();
+            File[] list = new File[items.TotalCount];
+           
             for(int i= 0; i<items.TotalCount;i++)
             {
-                list.Add(new File(items.Entries[i].Type, items.Entries[i].Id, items.Entries[i].Name));
+                var fileitem = await client.FilesManager.GetInformationAsync(items.Entries[i].Id);
+                var embedurl = await client.FilesManager.GetPreviewLinkAsync(items.Entries[0].Id);
+                var downloadlink = await client.FilesManager.GetDownloadUriAsync(items.Entries[0].Id);
+
+                list[i] =new File(items.Entries[i].Type, items.Entries[i].Id, items.Entries[i].Name, fileitem.Size.ToString(),fileitem.Sha1,fileitem.ModifiedAt.ToString(),embedurl.ToString(),downloadlink.ToString());
             }
             
 
-            return list;
+            return Json(list);
         }
+
+        //[Route("GetGoogleSession")]
+        //[HttpGet]
+        //public async Task<JsonResult> GetGoogleSession(string google_access_token, string google_refresh_token)
     }
 }
