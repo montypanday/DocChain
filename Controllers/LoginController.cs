@@ -10,9 +10,9 @@ using System.Net.Http.Headers;
 using System.Text;
 using front_end.Models;
 using System.Collections.Generic;
-using Google.Apis.Drive.v3;
-using Google.Apis.Drive.v3.Data;
-using Google.Apis.Services;
+//using Google.Apis.Drive.v3;
+//using Google.Apis.Drive.v3.Data;
+//using Google.Apis.Services;
 
 namespace front_end.Controllers
 {
@@ -83,14 +83,14 @@ namespace front_end.Controllers
             return Json(list);
         }
 
-        [Route("GetGoogleSession")]
-        [HttpGet]
-        public async Task<JsonResult> GetGoogleSession(string google_access_token, string google_refresh_token)
-        {
-            DriveService service = new DriveService(new BaseClientService.Initializer());
-            FilesResource.ListRequest request = service.Files.List();
-            FileList files = request.Execute();
-            return null;
-        }
+        //[Route("GetGoogleSession")]
+        //[HttpGet]
+        //public async Task<JsonResult> GetGoogleSession(string google_access_token, string google_refresh_token)
+        //{
+        //    DriveService service = new DriveService(new BaseClientService.Initializer());
+        //    FilesResource.ListRequest request = service.Files.List();
+        //    FileList files = request.Execute();
+        //    return null;
+        //}
     }
 }
