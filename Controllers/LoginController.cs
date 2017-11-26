@@ -10,6 +10,9 @@ using System.Net.Http.Headers;
 using System.Text;
 using front_end.Models;
 using System.Collections.Generic;
+using Google.Apis.Drive.v3;
+using Google.Apis.Drive.v3.Data;
+using Google.Apis.Services;
 
 namespace front_end.Controllers
 {
@@ -73,15 +76,21 @@ namespace front_end.Controllers
                 var embedurl = await client.FilesManager.GetPreviewLinkAsync(items.Entries[0].Id);
                 var downloadlink = await client.FilesManager.GetDownloadUriAsync(items.Entries[0].Id);
 
-                list[i] =new File(items.Entries[i].Type, items.Entries[i].Id, items.Entries[i].Name, fileitem.Size.ToString(),fileitem.Sha1,fileitem.ModifiedAt.ToString(),embedurl.ToString(),downloadlink.ToString());
+                list[i] =new File(items.Entries[i].Type, items.Entries[i].Id, items.Entries[i].Name, ((fileitem.Size/1000)+" KB").ToString(),fileitem.Sha1,fileitem.ModifiedAt.ToString(),embedurl.ToString(),downloadlink.ToString());
             }
             
 
             return Json(list);
         }
 
-        //[Route("GetGoogleSession")]
-        //[HttpGet]
-        //public async Task<JsonResult> GetGoogleSession(string google_access_token, string google_refresh_token)
+        [Route("GetGoogleSession")]
+        [HttpGet]
+        public async Task<JsonResult> GetGoogleSession(string google_access_token, string google_refresh_token)
+        {
+            DriveService service = new DriveService(new BaseClientService.Initializer());
+            FilesResource.ListRequest request = service.Files.List();
+            FileList files = request.Execute();
+            return null;
+        }
     }
 }
