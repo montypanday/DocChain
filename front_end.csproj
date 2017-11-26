@@ -4,6 +4,7 @@
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <IsPackable>false</IsPackable>
     <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
+    <StartupObject>front_end.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="ClientApp\NewFolder\**" />

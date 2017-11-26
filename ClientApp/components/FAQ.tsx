@@ -30,103 +30,157 @@ export class Faq extends React.Component<FAQProp, FAQState> {
             <div className="container" style={pstyle}>
                 <div className="container" style={sizing}>
                     <div className="panel-group" id="accordion">
+
                         <div className="faqHeader" style={big_font}>General questions</div>
                         <div className="panel panel-default">
                             <div className="panel-heading">
-                                <h4 className="panel-title"><a className="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Is account registration required?</a></h4></div>
+                                <h4 className="panel-title"><a className="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    What <strong>LINCD.com</strong> can do?
+                        </a></h4>
+                            </div>
                             <div id="collapseOne" className="panel-collapse collapse in">
-                                <div className="panel-body">Account registration at<strong> PrepBootstrap </strong>is only required if you will be selling or buying themes. This ensures a valid communication channel for all parties involved in any transactions.</div>
+                                <div className="panel-body">
+                                    <strong>LINCD.com</strong> aims to introduce Blockchain technology to current cloud storage users.
+                          <br />By combining LINCD blockchain and cloud storage, <strong>LINCD.com</strong> could allow users to calculate and store the hash of documents in Blockchain and retrieve it in future to check with their documents or to prove existence.
+                        </div>
                             </div>
                         </div>
                         <div className="panel panel-default">
                             <div className="panel-heading">
-                                <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">Can I submit my own Bootstrap templates or themes?</a></h4></div>
-                            <div id="collapseTen" className="panel-collapse collapse">
-                                <div className="panel-body">A lot of the content of the site has been submitted by the community. Whether it is a commercial element/template/theme or a free one, you are encouraged to contribute. All credits are published along with the resources.</div>
+                                <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                    Which form of files can be previewed on the <strong>LINCD.com</strong>?
+                        </a></h4>
                             </div>
-                        </div>
-                        <div className="panel panel-default">
-                            <div className="panel-heading">
-                                <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">What is the currency used for all transactions?</a></h4></div>
-                            <div id="collapseEleven" className="panel-collapse collapse">
-                                <div className="panel-body">All prices for themes, templates and other items, including each seller&#39;s or buyer&#39;s account balance are in<strong>USD</strong></div>
-                            </div>
-                        </div>
-                        <div className="faqHeader" style={big_font}>Sellers</div>
-                        <div className="panel panel-default">
-                            <div className="panel-heading">
-                                <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Who cen sell items?</a></h4></div>
                             <div id="collapseTwo" className="panel-collapse collapse">
-                                <div className="panel-body">Any registed user, who presents a work, which is genuine and appealing, can post it on<strong>PrepBootstrap</strong>.</div>
+                                <div className="panel-body">
+                                    Only doument file can be previewed, including doc \ docx \ ppt \ ppts \ xls \ xlsx \ txt \ pdf.
+                        </div>
                             </div>
                         </div>
+
+
+                        <div className="faqHeader" style={big_font}>Main Function</div>
                         <div className="panel panel-default">
                             <div className="panel-heading">
-                                <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">I want to sell my items - what are the steps?</a></h4></div>
+                                <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                    how to login?
+                        </a></h4>
+                            </div>
                             <div id="collapseThree" className="panel-collapse collapse">
-                                <div className="panel-body">The steps involved in this process are really simple. All you need to do is:
-                        <ul>
-                                        <li>Register an account</li>
-                                        <li>Activate your account</li>
-                                        <li>Go to the<strong>Themes</strong>section and upload your theme</li>
-                                        <li>The next step is the approval step, which usually takes about 72 hours.</li>
+                                <div className="panel-body">
+                                    <strong>LINCD.com</strong> provide link service to 4 cloud storage providers: OneDrive, Google Drive, Dropbox, Box.
+                          <ul>
+                                        <li>Click the Login and choose your storage providers.</li>
+                                        <li>Follow the guide and permit the <strong>LINCD.com</strong>'s requirement of managing files in your storage.</li>
+                                        <li>Turn to the <strong>File Explorer</strong>.</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div className="panel panel-default">
                             <div className="panel-heading">
-                                <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">How much do I get from each sale?</a></h4></div>
-                            <div id="collapseFive" className="panel-collapse collapse">
-                                <div className="panel-body">Here, at<strong>PrepBootstrap</strong>, we offer a great, 70% rate for each seller, regardless of any restrictions, such as volume, date of entry, etc.
-                        <br />
-                                </div>
+                                <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                                    File uploading, rename, copy and delete.
+                        </a></h4>
                             </div>
-                        </div>
-                        <div className="panel panel-default">
-                            <div className="panel-heading">
-                                <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">Why sell my items here?</a></h4></div>
-                            <div id="collapseSix" className="panel-collapse collapse">
-                                <div className="panel-body">There are a number of reasons why you should join us:
-                        <ul>
-                                        <li>A great 70% flat rate for your items.</li>
-                                        <li>Fast response/approval times. Many sites take weeks to process a theme or template. And if it gets rejected, there is another iteration. We have aliminated this, and made the process very fast. It only takes up to 72 hours
-                                for a template/theme to get reviewed.</li>
-                                        <li>We are not an exclusive marketplace. This means that you can sell your items on<strong>PrepBootstrap</strong>, as well as on any other marketplate, and thus increase your earning potential.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="panel panel-default">
-                            <div className="panel-heading">
-                                <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight">What are the payment options?</a></h4></div>
-                            <div id="collapseEight" className="panel-collapse collapse">
-                                <div className="panel-body">The best way to transfer funds is via Paypal. This secure platform ensures timely payments and a secure environment.</div>
-                            </div>
-                        </div>
-                        <div className="panel panel-default">
-                            <div className="panel-heading">
-                                <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNine">When do I get paid?</a></h4></div>
-                            <div id="collapseNine" className="panel-collapse collapse">
-                                <div className="panel-body">Our standard payment plan provides for monthly payments. At the end of each month, all accumulated funds are transfered to your account. The minimum amount of your balance should be at least 70 USD.</div>
-                            </div>
-                        </div>
-                        <div className="faqHeader" style={big_font}>Buyers</div>
-                        <div className="panel panel-default">
-                            <div className="panel-heading">
-                                <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">I want to buy a theme - what are the steps?</a></h4></div>
                             <div id="collapseFour" className="panel-collapse collapse">
-                                <div className="panel-body">Buying a theme on<strong>PrepBootstrap</strong>is really simple. Each theme has a live preview. Once you have selected a theme or template, which is to your liking, you can quickly and securely pay via Paypal.
-                        <br />Once the transaction is complete, you gain full access to the purchased product.</div>
+                                <div className="panel-body">
+                                    File function of <strong>LINCD.com</strong> is provided by <strong>Box.com</strong>.
+                          <br />Please check at: <a href="https://community.box.com/t5/Get-Started-Guide-for-New-Users/tkb-p/GettingStartedToolkit">Get Started Guide for New Users</a>
+                        </div>
                             </div>
                         </div>
                         <div className="panel panel-default">
                             <div className="panel-heading">
-                                <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">Is this the latest version of an item</a></h4></div>
-                            <div id="collapseSeven" className="panel-collapse collapse">
-                                <div className="panel-body">Each item in<strong>PrepBootstrap</strong>is maintained to its latest version. This ensures its smooth operation.</div>
+                                <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                                    How to embed my file into blockchain? (unfinished)
+                        </a></h4>
+                            </div>
+                            <div id="collapseFive" className="panel-collapse collapse">
+                                <div className="panel-body">
+                                    <ul>
+                                        <li>Turn to <strong>Embed into Blockchain</strong>.</li>
+                                        <li>Select files you want to link to the Blockchain</li>
+                                        <li>Click the button "Embed"</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+                                    How to access to delete files? (unfinished)
+                        </a></h4>
+                            </div>
+                            <div id="collapseSix" className="panel-collapse collapse">
+                                <div className="panel-body">
+                                    <ul>
+                                        <li>Turn to <strong>Match with Blockchain</strong>.</li>
+                                        <li>Select files you want to check</li>
+                                        <li>Click the button "Match"</li>
+                                        <li>If the file is not matched, there would be a alarm message.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
+                                    How to logout/change the cloud drive? (unfinished)
+                        </a></h4>
+                            </div>
+                            <div id="collapseSeven" className="panel-collapse collapse">
+                                <div className="panel-body">
+                                    <ul>
+                                        <li>Turn to <strong>Home</strong>.</li>
+                                        <li>Click the button "Logout"</li>
+                                        <li>Turn to <strong>Login</strong>.</li>
+                                        <li>Change to the other cloud Drive Provider</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div className="faqHeader" style={big_font}>Error handling</div>
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight">
+                                    Why there is an error when I access to <strong>File Explorer</strong>? (unfinished)
+                        </a></h4>
+                            </div>
+                            <div id="collapseEight" className="panel-collapse collapse">
+                                <div className="panel-body">
+                                    unfinished
+                        </div>
+                            </div>
+                        </div>
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNine">
+                                    Why there is an error when I access to <strong>Embed into Blockchain</strong>? (unfinished)
+                        </a></h4>
+                            </div>
+                            <div id="collapseNine" className="panel-collapse collapse">
+                                <div className="panel-body">
+                                    unfinished
+                        </div>
+                            </div>
+                        </div>
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">
+                                    Why there is an error when I access to <strong>Match with Blockchain</strong>? (unfinished)
+                        </a></h4>
+                            </div>
+                            <div id="collapseTen" className="panel-collapse collapse">
+                                <div className="panel-body">
+                                    unfinished
+                        </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
