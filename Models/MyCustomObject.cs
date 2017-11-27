@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace front_end.Models
 {
-    public class File
+    public class MyCustomObject
     {
-        public File(string type, string id, string fileName, string size, string hash, string modifiedat,string embedlink, string downloadlink)
+        public MyCustomObject(string type, string id, string fileName, string size, string hash, string modifiedat,string embedlink, string downloadlink)
         {
             this.type = type;
             this.id = id;
