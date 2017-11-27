@@ -6,6 +6,7 @@ import { Tutorial4 } from './tutorial4';
 import { Tutorial5 } from './tutorial5';
 const s = require('../css/home.css');
 
+
 interface HomeState {
     slideCount: number
 }
@@ -43,6 +44,7 @@ export class Home extends React.Component<HomeProperties, HomeState> {
 
     public render() {
         return <div className="body">
+            
             {this.state.slideCount === 1 ? <Tutorial1 handler={this.handler} /> : null}
             {this.state.slideCount === 2 ? <Tutorial2 handler={this.handler} decHandler={this.decHandler} /> : null}
             {this.state.slideCount === 3 ? <Tutorial3 handler={this.handler} decHandler={this.decHandler} /> : null}

@@ -21,7 +21,7 @@ export class NavMenu extends React.Component<{}, {}> {
         }
 
         return <div className='main-nav'>
-            <div className='navbar navbar-inverse'>
+            <div className='navbar navbar-inverse navbar-fixed-top'>
                 <div className='navbar-header'>
                     <button type='button' className='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
                         <span className='sr-only'>Toggle navigation</span>
@@ -29,9 +29,9 @@ export class NavMenu extends React.Component<{}, {}> {
                         <span className='icon-bar'></span>
                         <span className='icon-bar'></span>
                     </button>
-                    <Link className='navbar-brand' to={'/'}>Lincd Blockchain</Link>
+                    <Link className='navbar-brand' to={'/'}>DocChain</Link>
                 </div>
-                <div className='clearfix'></div>
+                
                 <div className='navbar-collapse collapse'>
                     <ul className='nav navbar-nav'>
                         <li>
@@ -41,17 +41,12 @@ export class NavMenu extends React.Component<{}, {}> {
                         </li>
                         <li>
                             <NavLink to={'/fileexplorer'} activeClassName='active'>
-                                <span className='glyphicon glyphicon-th-list'></span> File Explorer
+                                <span className='glyphicon glyphicon-th-list'></span> Box Explorer
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={'/contentpicker'} activeClassName='active'>
-                                <span className='glyphicon glyphicon-th-list'></span> Embed into Blockchain
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={'/contentChecker'} activeClassName='active'>
-                                <span className='glyphicon glyphicon-th-list'></span> Match with Blockchain
+                            <NavLink to={'/explorer'} activeClassName='active'>
+                                <span className='glyphicon glyphicon-th-list'></span> Explorer
                             </NavLink>
 
                         </li>
@@ -65,12 +60,7 @@ export class NavMenu extends React.Component<{}, {}> {
                         {
                             placeholder
                         }
-                        <li>
-                            <NavLink to={'/explorer'} activeClassName='active'>
-                                <span className='glyphicon glyphicon-th-list'></span> FAQ
-                            </NavLink>
-
-                        </li>
+                       
                     </ul>
                 </div>
             </div>

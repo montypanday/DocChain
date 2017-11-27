@@ -1,6 +1,7 @@
 ﻿import * as React from 'react';
 import { render } from 'react-dom';
 
+
 var imageStyle = {
     'width': '100%',
     'textAlign': 'center',
@@ -38,9 +39,9 @@ export class Explorer extends React.Component<{}, {}> {
             })
             .then(data => {
                 // console messages in order to help you understand what's happening
-                console.log(data);
+                //console.log(data);
                 this.setState({ filesarray: data, loading: false });
-                console.log("this is filearray->>>   " + JSON.stringify(this.state['filesarray']['10']));
+                //console.log("this is filearray->>>   " + JSON.stringify(this.state['filesarray']['10']));
             })
             
 
@@ -74,8 +75,8 @@ export class Explorer extends React.Component<{}, {}> {
                             <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Options
                             <span className="caret"></span></button>
                             <ul className="dropdown-menu">
-                                <li><a href={row.downloadUrl} download>Download</a></li>
-                                <li><a >Preview</a></li>
+                                <i className="fa fa-download" aria-hidden="true"></i><li><a href={row.downloadUrl} download>Download</a></li>
+                                <li><a href="#" >Preview</a></li>
                                 <li><a href="#">JavaScript</a></li>
                                 <li className="divider"></li>
                                 <li><a href="#">About Us</a></li>
@@ -109,28 +110,5 @@ export class Explorer extends React.Component<{}, {}> {
             }
 
         }
-
-
-
-
-        //<div id="myModal" className="modal fade" role="dialog">
-        //    <div className="modal-dialog">
-
-
-        //        <div className="modal-content">
-        //            <div className="modal-header">
-        //                <button type="button" className="close" data-dismiss="modal">&times;</button>
-        //                <h4 className="modal-title">Modal Header</h4>
-        //            </div>
-        //            <div className="modal-body">
-        //                <p>Some text in the modal.</p>
-        //            </div>
-        //            <div className="modal-footer">
-        //                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-        //            </div>
-        //        </div>
-
-        //    </div>
-        //</div>
     }
 }

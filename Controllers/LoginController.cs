@@ -95,15 +95,7 @@ namespace front_end.Controllers
                     boxFolder = await client.FoldersManager.GetInformationAsync(items.Entries[i].Id);
                     list[i] = new MyCustomObject(items.Entries[i].Type, items.Entries[i].Id, items.Entries[i].Name, ((boxFolder.Size / 1000) + " KB").ToString(), "", boxFolder.ModifiedAt.ToString(), "", "");
                 }
-                //if(items.Entries[i].ex)
-                //var embedurl = await client.FilesManager.GetPreviewLinkAsync(items.Entries[i].Id);
-                //var downloadlink = await client.FilesManager.GetDownloadUriAsync(items.Entries[i].Id);
-
-
-
             }
-
-
             return Json(list);
         }
 
