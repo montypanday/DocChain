@@ -21,20 +21,20 @@ export class contentChecker extends React.Component<{}, IPickerinterface> {
         // This fetch is made to box api
         // e is an array of an array.
         //e[0] is the object which has id field which is effectively file id
-        fetch('https://api.box.com/2.0/files/' + e[0].id, {
+        fetch("https://api.box.com/2.0/files/" + e[0].id, {
             method: "PUT", mode: "cors",
             headers: {
 
                 // Access token is taken from session storage.
-                'Accept': 'application / json',
-                'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken'),
+                "Accept": "application / json",
+                "Authorization": "Bearer " + sessionStorage.getItem("accessToken"),
             },
 
         }).then(response => response.json())
             .then(response => {
-                //response is the file object captured. 
+                //response is the file object captured.
                 //It has all file information like file id, sha1
-                fetch("/api/Login/check?hash=" + btoa(response.sha1), { method: 'PUT' })
+                fetch("/api/Login/check?hash=" + btoa(response.sha1), { method: "PUT" })
                     .then(response => response.json())
                     .then(data => {
                         console.log(data);
@@ -44,16 +44,16 @@ export class contentChecker extends React.Component<{}, IPickerinterface> {
                         if (data.statusCode == 404) {
                             alert("The hash of this file was not found in the Blockchain. Be careful, either the file has changed or you forgot to put its hash into Blockchain");
                         }
-                        
-                    })
-            })
+
+                    });
+            });
     }
     render() {
 
         const fileobject = null;
         return (
             <div>
-                <ContentPicker token={sessionStorage.getItem('accessToken')} getLocalizedMessage={getLocalizedMessage} logoUrl="box" maxSelectable={1} onChoose={(e) => this.fileChosen(e)} />
+                <ContentPicker token={sessionStorage.getItem("accessToken")} getLocalizedMessage={getLocalizedMessage} logoUrl="box" maxSelectable={1} onChoose={(e) => this.fileChosen(e)} />
             </div>
         );
     }

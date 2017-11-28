@@ -1,9 +1,9 @@
-﻿import * as React from 'react';
+﻿import * as React from "react";
 
 interface Tutorial5Prop {
-    handler: any
-    decHandler: any
-    finishHandler: any
+    handler: any;
+    decHandler: any;
+    finishHandler: any;
 }
 interface Tutorial5State {
 

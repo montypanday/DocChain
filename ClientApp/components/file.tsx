@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+﻿import * as React from "react";
 
 export class File extends React.Component<{}, {}> {
     render() {
@@ -22,7 +22,7 @@ export class File extends React.Component<{}, {}> {
                 <td className="col-md-6 col-md-pull-1">{row.fileName}</td>
                 <td className="col-md-1 col-md-pull-2">{row.size}</td>
                 <td className="col-md-3 col-md-pull-3">{row.lastMod}</td>
-            </tr>
+            </tr>;
         });
 
         return <table className="table table-striped table-hover table-responsive">
@@ -34,7 +34,7 @@ export class File extends React.Component<{}, {}> {
             <tbody>
                 {rows}
             </tbody>
-        </table>
+        </table>;
 
     }
-};
+}

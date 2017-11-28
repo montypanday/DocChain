@@ -1,31 +1,31 @@
-﻿import * as React from 'react';
+﻿import * as React from "react";
 
 interface FAQProp {
-   
+
 }
 interface FAQState {
 
 }
 const pstyle = {
-    paddingTop:'40px',
-    paddingBottom: '40px',
-    'width' : 'auto'
+    paddingTop:"40px",
+    paddingBottom: "40px",
+    "width" : "auto"
 };
 const big_font = {
-    fontSize: '27px',
-    marginBottom: '20px',
-    marginLeft: '20px',
-    marginRight: '20px',
-    marginTop: '20px'
+    fontSize: "27px",
+    marginBottom: "20px",
+    marginLeft: "20px",
+    marginRight: "20px",
+    marginTop: "20px"
 
 };
 const sizing = {
-    'width' : 'auto'
-}
+    "width" : "auto"
+};
 export class Faq extends React.Component<FAQProp, FAQState> {
-    
+
     public render() {
-        
+
         return <div >
             <div className="container" style={pstyle}>
                 <div className="container" style={sizing}>

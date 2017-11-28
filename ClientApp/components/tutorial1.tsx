@@ -1,8 +1,8 @@
-﻿import * as React from 'react';
+﻿import * as React from "react";
 
 
 interface Tutorial1Prop {
-    handler: any
+    handler: any;
 }
 interface Tutorial1State {
 

@@ -1,8 +1,8 @@
-﻿import * as React from 'react';
+﻿import * as React from "react";
 
 interface Tutorial4Prop {
-    handler: any
-    decHandler: any
+    handler: any;
+    decHandler: any;
 }
 interface Tutorial4State {
 
