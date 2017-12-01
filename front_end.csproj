@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <EnableDefaultContentItems>false</EnableDefaultContentItems>
     <IsPackable>false</IsPackable>
     <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
     <StartupObject>front_end.Program</StartupObject>
