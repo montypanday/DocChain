@@ -78,7 +78,7 @@ export class Explorer extends React.Component<{}, {}> {
 
 
             return (
-                <div >
+                <div className="well pull-down">
                     <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#fcfcfc' }}>
                         <SearchBar />
                     </div>

@@ -8,6 +8,7 @@ export interface LayoutProps {
 var divstyle = {
     "padding": "3px"
 };
+
 export class Layout extends React.Component<LayoutProps, {}> {
 
     public render() {

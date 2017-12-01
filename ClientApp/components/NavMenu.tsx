@@ -8,13 +8,13 @@ export class NavMenu extends React.Component<{}, {}> {
         if (sessionStorage.getItem("accessToken") == null) {
             placeholder = <li>
                 <NavLink to={"/Login"} activeClassName="active">
-                    <span className="glyphicon glyphicon-user"></span> Login
+                    <i className="fa fa-sign-in" aria-hidden="true"></i> Login
                             </NavLink>
             </li>;
         } else {
             placeholder = <li>
                 <NavLink to={"/logout"} activeClassName="active">
-                    <span className="glyphicon glyphicon-user"></span> Logout
+                    <i className="fa fa-sign-out" aria-hidden="true"></i> Logout
                             </NavLink>
             </li>;
         }
@@ -35,23 +35,23 @@ export class NavMenu extends React.Component<{}, {}> {
                     <ul className="nav navbar-nav">
                         <li>
                             <NavLink to={"/"} exact activeClassName="active">
-                                <span className="glyphicon glyphicon-home"></span> Home
+                                <i className="fa fa-home" aria-hidden="true"></i> Home
                             </NavLink>
                         </li>
                         <li>
                             <NavLink to={"/fileexplorer"} activeClassName="active">
-                                <span className="glyphicon glyphicon-th-list"></span> Box Explorer
+                                <i className="fa fa-folder-open-o" aria-hidden="true"></i> Box Explorer
                             </NavLink>
                         </li>
                         <li>
                             <NavLink to={"/explorer"} activeClassName="active">
-                                <span className="glyphicon glyphicon-th-list"></span> Explorer
+                                <i className="fa fa-folder-open-o" aria-hidden="true"></i> Explorer
                             </NavLink>
 
                         </li>
                         <li>
                             <NavLink to={"/faq"} activeClassName="active">
-                                <span className="glyphicon glyphicon-th-list"></span> FAQ
+                                <i className="fa fa-question-circle" aria-hidden="true"></i> FAQ
                             </NavLink>
 
                         </li>
