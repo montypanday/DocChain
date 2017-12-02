@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 
-namespace front_end
+namespace LINCD.Docchain.FrontEnd
 {
     public class Program
     {
@@ -13,7 +13,6 @@ namespace front_end
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
-
             host.Run();
         }
     }

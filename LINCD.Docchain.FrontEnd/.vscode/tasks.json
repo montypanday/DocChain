@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/front_end.csproj"
+                "${workspaceFolder}/LINCD.Docchain.FrontEnd/LINCD.Docchain.FrontEnd.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

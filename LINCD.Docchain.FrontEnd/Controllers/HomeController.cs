@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace front_end.Controllers
+namespace LINCD.Docchain.FrontEnd.Controllers
 {
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
-          
+
             return View();
         }
 

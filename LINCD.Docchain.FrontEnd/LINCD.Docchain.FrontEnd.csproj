@@ -5,7 +5,7 @@
     <EnableDefaultContentItems>false</EnableDefaultContentItems>
     <IsPackable>false</IsPackable>
     <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
-    <StartupObject>front_end.Program</StartupObject>
+    <StartupObject>LINCD.Docchain.FrontEnd.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="ClientApp\NewFolder\**" />
@@ -44,6 +44,10 @@
     </Content>
     <Content Include="wwwroot\dist\vendor.css" />
     <Content Include="wwwroot\dist\vendor.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LINCD.Docchain.Database\LINCD.Docchain.Database.csproj" />
+    <ProjectReference Include="..\LINCD.Docchain.Model\LINCD.Docchain.Model.csproj" />
   </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->

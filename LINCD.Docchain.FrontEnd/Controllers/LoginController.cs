@@ -8,15 +8,15 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using front_end.Models;
 using System.Collections.Generic;
 using Box.V2.Models;
 using System.IO;
+using LINCD.Docchain.Model;
 //using Google.Apis.Drive.v3;
 //using Google.Apis.Drive.v3.Data;
 //using Google.Apis.Services;
 
-namespace front_end.Controllers
+namespace LINCD.Docchain.FrontEnd.Controllers
 {
 
     [Route("api/[controller]")]
@@ -30,7 +30,6 @@ namespace front_end.Controllers
             BoxClient client = new BoxClient(new BoxConfig("3syx1zpgoraznjex526u78ozutwvgeby", "0vf9isuhRisKTy9nvR1CLVaSObuaG3lx", new Uri("https://127.0.0.1")));
             OAuthSession Oauth = await client.Auth.AuthenticateAsync(authCode);
             // Access token from that x object is returned to browser which is stored in cache and attached with each request which is made to BOX
-
             return Json(Oauth);
         }
         [HttpPost("{id}")]
@@ -71,10 +70,9 @@ namespace front_end.Controllers
             var items = await client.FoldersManager.GetFolderItemsAsync("0", 500);
 
             MyCustomObject[] list = new MyCustomObject[items.TotalCount];
-
             for (int i = 0; i < items.TotalCount; i++)
             {
-                
+
                 if (items.Entries[i].Type == "file")
                 {
                     BoxFile boxFile = new BoxFile();
@@ -85,7 +83,7 @@ namespace front_end.Controllers
                         var embedUrl = await client.FilesManager.GetPreviewLinkAsync(items.Entries[i].Id);
                         embedurl = embedUrl.ToString();
                     }
-                        
+
                     var downloadlink = await client.FilesManager.GetDownloadUriAsync(items.Entries[i].Id);
                     list[i] = new MyCustomObject(items.Entries[i].Type, items.Entries[i].Id, items.Entries[i].Name, ((boxFile.Size / 1000) + " KB").ToString(), boxFile.Sha1, boxFile.ModifiedAt.ToString(), embedurl.ToString(), downloadlink.ToString());
                 }

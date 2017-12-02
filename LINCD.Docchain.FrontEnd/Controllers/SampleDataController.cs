@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace front_end.Controllers
+namespace LINCD.Docchain.FrontEnd.Controllers
 {
     [Route("api/[controller]")]
     public class SampleDataController : Controller

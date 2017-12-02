@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace front_end.Models
+namespace LINCD.Docchain.Model
 {
     public class MyCustomObject
     {
-        public MyCustomObject(string type, string id, string fileName, string size, string hash, string modifiedat,string embedlink, string downloadlink)
+        public MyCustomObject(string type, string id, string fileName, string size, string hash, string modifiedat, string embedlink, string downloadlink)
         {
             this.type = type;
             this.id = id;
@@ -17,8 +16,8 @@ namespace front_end.Models
             this.lastModified = modifiedat;
             this.embedLink = embedlink;
             this.downloadUrl = downloadlink;
-            
-            
+
+
         }
         public string type { get; set; }
         // in Google, type is called kind and is always drive#file.
@@ -36,7 +35,7 @@ namespace front_end.Models
         // Box uses sha1 and Drive uses MD5
         // To be checked if works fine when using with blockchain.
 
-        
+
         public string lastModified { get; set; }
         // both uses datetime object
         // Drive uses RFC 3339 timestamp
@@ -49,10 +48,5 @@ namespace front_end.Models
         //Called expiring_embed_link in box and embedLink in Drive.
 
         public string downloadUrl { get; set; }
-
-
-
-
-
     }
 }
