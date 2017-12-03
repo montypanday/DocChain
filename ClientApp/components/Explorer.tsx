@@ -82,7 +82,7 @@ export class Explorer extends React.Component<{}, {}> {
                     <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#fcfcfc' }}>
                         <SearchBar />
                     </div>
-                    <BreadCrumb address="Explorer"/>
+                    <BreadCrumb/>
                     <table className="table table-striped table-hover table-responsive">
                         <thead>
                             <tr>

@@ -1,6 +1,4 @@
 ﻿import * as React from "react";
-import { BreadCrumb } from '../components/BreadCrumb';
-
 
 interface FAQProp {
 
@@ -28,10 +26,7 @@ export class Faq extends React.Component<FAQProp, FAQState> {
 
     public render() {
 
-        return (
-
-            <div >
-            <BreadCrumb address="FAQ" />
+        return <div >
             <div className="container" style={pstyle}>
                 <div className="container" style={sizing}>
                     <div className="panel-group" id="accordion">
@@ -92,7 +87,7 @@ export class Faq extends React.Component<FAQProp, FAQState> {
                                 <div className="panel-body">
                                     File function of <strong>LINCD.com</strong> is provided by <strong>Box.com</strong>.
                           <br />Please check at: <a href="https://community.box.com/t5/Get-Started-Guide-for-New-Users/tkb-p/GettingStartedToolkit">Get Started Guide for New Users</a>
-                                </div>
+                        </div>
                             </div>
                         </div>
                         <div className="panel panel-default">
@@ -189,6 +184,6 @@ export class Faq extends React.Component<FAQProp, FAQState> {
                     </div>
                 </div>
             </div>
-        </div>);
+        </div>;
     }
 }
