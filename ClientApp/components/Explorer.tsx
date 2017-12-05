@@ -87,7 +87,7 @@ export class Explorer extends React.Component<{}, {}> {
                                 <th>Last Modified</th>
                             </tr>
                         </thead>
-                        <tbody className="filezone">
+                        <tbody>
                             {rows}
                         </tbody>
                     </table>
