@@ -64,7 +64,7 @@ export class Row extends React.Component<AppProps, AppState> {
                         <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">...
                             </button>
                         <ul className="dropdown-menu">
-                            <li><a href={this.props.downloadUrl} download>Download</a></li>
+                            <li><a href={this.props.downloadUrl} download><i className="fa fa-download" aria-hidden="true"></i>       Download</a></li>
                             <li><a href="#" >Preview</a></li>
                             <li><a href="#">JavaScript</a></li>
                             <li className="divider"></li>
@@ -72,9 +72,11 @@ export class Row extends React.Component<AppProps, AppState> {
                         </ul>
                     </div>
                 </td>
+                <td><i className="fa fa-lock fa-2x"></i></td>
                 <td className="col-md-1">{this.props.size}</td>
                 <td className="col-md-3">{this.props.lastModified}</td>
             </tr>
         );
     }
 }
+//<td><i className="fa fa-exclamation-triangle fa-2x"></i></td>

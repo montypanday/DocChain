@@ -66,41 +66,37 @@ export class Explorer extends React.Component<{}, {}> {
             // this .map function is like a foreach loop on filesarray, gives us a row object which has all the values that are related to a file object
             //rows is the variable which is being inserted into the render function at its given function see {rows} in render method.
             var rows = this.state['filesarray'].map(function (row) {
-                return (<Row key={row.ID}filename={row.fileName} size={row.size} lastModified={row.lastModified} downloadUrl={row.downloadUrl}></Row>);
+                return (<Row key={row.ID} filename={row.fileName} size={row.size} lastModified={row.lastModified} downloadUrl={row.downloadUrl}></Row>);
             });
         }
 
         // determine if that loading is finished and render accordingly
-        if (this.state['loading'] === true) {
-            return (<LoadingGif />);
-        }
-        else {
 
 
-            return (
-                <div >
-                    <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#fcfcfc' }}>
-                        <SearchBar />
-                    </div>
-                    <BreadCrumb/>
-                    <table className="table table-striped table-hover table-responsive">
-                        <thead>
-                            <tr>
-                                <th>File Name</th>
-                                <th></th>
-                                <th>Size </th>
-                                <th>Last Modified</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {rows}
-                        </tbody>
-                    </table>
 
+        return (
+            <div >
+                <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#fcfcfc' }}>
+                    <SearchBar />
                 </div>
-            );
+                <BreadCrumb />
+                <table className="table table-striped table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th>File Name</th>
+                            <th></th>
+                            <th>Status</th>
+                            <th>Size </th>
+                            <th>Last Modified</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {rows}
+                        {this.state['loading'] ? (<LoadingGif/>):(null)}
+                    </tbody>
+                </table>
 
-
-        }
+            </div>
+        );
     }
 }

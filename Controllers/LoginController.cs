@@ -12,9 +12,12 @@ using front_end.Models;
 using System.Collections.Generic;
 using Box.V2.Models;
 using System.IO;
-//using Google.Apis.Drive.v3;
-//using Google.Apis.Drive.v3.Data;
-//using Google.Apis.Services;
+using Google.Apis.Drive.v3;
+using Google.Apis.Drive.v3.Data;
+using Google.Apis.Services;
+using Google.Apis.Auth.OAuth2.Flows;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Drive;
 
 namespace front_end.Controllers
 {
@@ -74,18 +77,16 @@ namespace front_end.Controllers
 
             for (int i = 0; i < items.TotalCount; i++)
             {
-                
                 if (items.Entries[i].Type == "file")
                 {
                     BoxFile boxFile = new BoxFile();
                     boxFile = await client.FilesManager.GetInformationAsync(items.Entries[i].Id);
                     string embedurl = "";
-                    if(Path.GetExtension(items.Entries[i].Name) != ".zip")
+                    if (Path.GetExtension(items.Entries[i].Name) != ".zip")
                     {
                         var embedUrl = await client.FilesManager.GetPreviewLinkAsync(items.Entries[i].Id);
                         embedurl = embedUrl.ToString();
                     }
-                        
                     var downloadlink = await client.FilesManager.GetDownloadUriAsync(items.Entries[i].Id);
                     list[i] = new MyCustomObject(items.Entries[i].Type, items.Entries[i].Id, items.Entries[i].Name, ((boxFile.Size / 1000) + " KB").ToString(), boxFile.Sha1, boxFile.ModifiedAt.ToString(), embedurl.ToString(), downloadlink.ToString());
                 }
@@ -99,14 +100,40 @@ namespace front_end.Controllers
             return Json(list);
         }
 
-        //[Route("GetGoogleSession")]
-        //[HttpGet]
-        //public async Task<JsonResult> GetGoogleSession(string google_access_token, string google_refresh_token)
-        //{
-        //    DriveService service = new DriveService(new BaseClientService.Initializer());
-        //    FilesResource.ListRequest request = service.Files.List();
-        //    FileList files = request.Execute();
-        //    return null;
-        //}
+        [Route("GetGoogleSession")]
+        [HttpGet]
+        public async Task<JsonResult> GetGoogleSession(string google_access_token, string google_refresh_token)
+        {
+            var token = new Google.Apis.Auth.OAuth2.Responses.TokenResponse()
+            {
+                AccessToken = google_access_token,
+                RefreshToken = google_refresh_token,
+                ExpiresInSeconds = 3600
+            };
+            var fakeflow = new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
+            {
+                ClientSecrets = new ClientSecrets
+                {
+                    ClientId = "900082198060-kdvsjc3ecm82gn48dl9083cg0gihggm1.apps.googleusercontent.com",
+                    ClientSecret = "i1EN7mH7usgONgINmnNKbOFi"
+                }
+            });
+
+            UserCredential credential = new UserCredential(fakeflow, "fakeid", token);
+            var serviceInitializer = new BaseClientService.Initializer()
+            {
+                ApplicationName = "LINCD-Blockchain",
+                HttpClientInitializer = credential
+            };
+            DriveService service = new DriveService(serviceInitializer);
+            FilesResource.ListRequest request = service.Files.List();
+            request.PageSize = 10;
+            // List files.
+            IList<Google.Apis.Drive.v3.Data.File> files = request.Execute().Files;
+            //DriveService service = new DriveService(new BaseClientService.Initializer());
+            //FilesResource.ListRequest request = service.Files.List();
+            //FileList files = request.Execute();
+            return Json(files);
+        }
     }
 }
