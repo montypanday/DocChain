@@ -44,8 +44,12 @@ export class Row extends React.Component<AppProps, AppState> {
                 return "fa fa-file-image-o fa-2x";
             case 'pdf':
                 return "fa fa-file-pdf-o fa-2x";
+            case 'jpg':
+                return "fa fa-file-image-o fa-2x";
             case 'gif':
                 return "fa fa-file-image-o fa-2x";
+            case 'xlsx':
+                return "fa fa-file-excel-o fa-2x";
             case '':
                 return "fa fa-folder fa-2x";
             default:
@@ -58,7 +62,7 @@ export class Row extends React.Component<AppProps, AppState> {
         var iconClass = this.getIconClass(a);
         return (
             <tr>
-                <td className="col-md-6 "><i className={iconClass} style={{ verticalAlign: 'middle', float: 'left' }}></i><h5 style={{ float: 'left', paddingLeft: '15px' }}>{this.props.filename}</h5></td>
+                <td className="col-md-6 "><span className={iconClass} style={{ verticalAlign: 'middle', float: 'left' }}></span><h5 style={{ float: 'left', paddingLeft: '15px' }}>{this.props.filename}</h5></td>
                 <td className="col-md-1 ">
                     <div className="dropdown">
                         <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">...

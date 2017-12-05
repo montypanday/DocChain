@@ -8,15 +8,16 @@ export interface LayoutProps {
 var divstyle = {
     "padding": "3px"
 };
+
 export class Layout extends React.Component<LayoutProps, {}> {
 
     public render() {
         return <div className="container-fluid">
             <div className="row">
-                <div className="col-sm-3">
+                <div >
                     <NavMenu />
                 </div>
-                <div className="col-sm-9" style={divstyle}>
+                <div style={divstyle}>
                     { this.props.children }
                 </div>
             </div>

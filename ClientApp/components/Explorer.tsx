@@ -3,8 +3,6 @@ import { render } from 'react-dom';
 import { LoadingGif } from '../components/loadingGif';
 import { SearchBar } from '../components/SearchBar';
 import { Row } from '../components/Row';
-import { BreadCrumb } from '../components/BreadCrumb';
-
 
 
 export class Explorer extends React.Component<{}, {}> {
@@ -71,6 +69,7 @@ export class Explorer extends React.Component<{}, {}> {
         }
 
         // determine if that loading is finished and render accordingly
+<<<<<<< HEAD
 
 
 
@@ -98,5 +97,32 @@ export class Explorer extends React.Component<{}, {}> {
 
             </div>
         );
+=======
+        if (this.state['loading'] === true) {
+            return (<LoadingGif />);
+        }
+        else {
+            return (
+                <div className="well well-lg pull-down">
+                    <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#f5f5f5' }}>
+                        <SearchBar />
+                    </div>
+                    <table className="table table-striped table-hover table-responsive well header-fixed">
+                        <thead>
+                            <tr>
+                                <th>File Name</th>
+                                <th></th>
+                                <th>Size </th>
+                                <th>Last Modified</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {rows}
+                        </tbody>
+                    </table>
+                </div>
+            );
+        }
+>>>>>>> dd97f50c88d020e057390dd0193233007fe11c36
     }
 }
