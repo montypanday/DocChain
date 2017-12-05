@@ -3,8 +3,6 @@ import { render } from 'react-dom';
 import { LoadingGif } from '../components/loadingGif';
 import { SearchBar } from '../components/SearchBar';
 import { Row } from '../components/Row';
-import { BreadCrumb } from '../components/BreadCrumb';
-
 
 
 export class Explorer extends React.Component<{}, {}> {
@@ -75,15 +73,12 @@ export class Explorer extends React.Component<{}, {}> {
             return (<LoadingGif />);
         }
         else {
-
-
             return (
-                <div className="well pull-down">
-                    <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#fcfcfc' }}>
+                <div className="well well-lg pull-down">
+                    <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#f5f5f5' }}>
                         <SearchBar />
                     </div>
-                    <BreadCrumb/>
-                    <table className="table table-striped table-hover table-responsive">
+                    <table className="table table-striped table-hover table-responsive well header-fixed">
                         <thead>
                             <tr>
                                 <th>File Name</th>
@@ -92,15 +87,12 @@ export class Explorer extends React.Component<{}, {}> {
                                 <th>Last Modified</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="filezone">
                             {rows}
                         </tbody>
                     </table>
-
                 </div>
             );
-
-
         }
     }
 }

@@ -17,7 +17,7 @@ export class SearchBar extends React.Component<AppProps, AppState> {
 
     render() {
         return (
-            <div className="col-lg-6" style={{ padding: '10px' }}>
+            <div className="col-lg-6" style={{ padding: '0px'}}>
                 <div className="input-group">
                     <input type="text" className="form-control" placeholder="Search for files and folders" />
                     <span className="input-group-btn">
