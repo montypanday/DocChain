@@ -236,14 +236,12 @@
     }
 }
 
-
 .pull-down {
     margin-top: 55px;
     margin-left: 5px;
     margin-right: 5px;
-
     position:fixed;
-    height:93%;
+    height: calc(100vh - 65px);
 }
 /*zone for everything, fixed not scrollable*/
 .table{
@@ -259,10 +257,11 @@ tr {
 
 tbody {
     overflow-y: scroll;
-    height: 80vh;
+    height: calc(100vh - 65px);
     position: absolute;
     margin-right:24px;
 }
+
 
 /*
     FILE ICON STYLING
@@ -276,6 +275,9 @@ case 'PNG': return "fa fa-file-image-o fa-2x";
 case 'gif': return "fa fa-file-image-o fa-2x"; 
 
 */
+.fa-lock{
+    color: steelblue;
+}
 
 .fa-file-pdf-o{
     color: red;

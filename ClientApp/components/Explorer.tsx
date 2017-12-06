@@ -3,6 +3,8 @@ import { render } from 'react-dom';
 import { LoadingGif } from '../components/loadingGif';
 import { SearchBar } from '../components/SearchBar';
 import { Row } from '../components/Row';
+//import * as ReactBootstrap from 'react-bootstrap';
+//var Modal = ReactBootstrap.Modal;
 
 
 export class Explorer extends React.Component<{}, {}> {
@@ -69,60 +71,29 @@ export class Explorer extends React.Component<{}, {}> {
         }
 
         // determine if that loading is finished and render accordingly
-<<<<<<< HEAD
-
-
-
         return (
-            <div >
-                <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#fcfcfc' }}>
+            <div className="well well-lg pull-down">
+                <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#f5f5f5' }}>
                     <SearchBar />
                 </div>
-                <BreadCrumb />
-                <table className="table table-striped table-hover table-responsive">
+                <table className="table table-striped table-hover table-responsive well header-fixed">
                     <thead>
                         <tr>
-                            <th>File Name</th>
-                            <th></th>
-                            <th>Status</th>
-                            <th>Size </th>
-                            <th>Last Modified</th>
+                            <th className="col-xs-6">File Name</th>
+                            <th className="col-xs-1">More</th>
+                            <th className="col-xs-1">Secure</th>
+                            <th className="col-xs-1">Size </th>
+                            <th className="col-xs-2">Last Modified</th>
                         </tr>
                     </thead>
                     <tbody>
                         {rows}
-                        {this.state['loading'] ? (<LoadingGif/>):(null)}
+                        <div className="loadingGif">
+                            {this.state['loading'] ? (<LoadingGif />) : (null)}
+                        </div>
                     </tbody>
                 </table>
-
             </div>
         );
-=======
-        if (this.state['loading'] === true) {
-            return (<LoadingGif />);
-        }
-        else {
-            return (
-                <div className="well well-lg pull-down">
-                    <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#f5f5f5' }}>
-                        <SearchBar />
-                    </div>
-                    <table className="table table-striped table-hover table-responsive well header-fixed">
-                        <thead>
-                            <tr>
-                                <th>File Name</th>
-                                <th></th>
-                                <th>Size </th>
-                                <th>Last Modified</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {rows}
-                        </tbody>
-                    </table>
-                </div>
-            );
-        }
->>>>>>> dd97f50c88d020e057390dd0193233007fe11c36
     }
 }

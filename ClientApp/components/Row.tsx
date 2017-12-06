@@ -62,10 +62,10 @@ export class Row extends React.Component<AppProps, AppState> {
         var iconClass = this.getIconClass(a);
         return (
             <tr>
-                <td className="col-md-6 "><span className={iconClass} style={{ verticalAlign: 'middle', float: 'left' }}></span><h5 style={{ float: 'left', paddingLeft: '15px' }}>{this.props.filename}</h5></td>
-                <td className="col-md-1 ">
+                <td className="col-xs-6 "><span className={iconClass} style={{ verticalAlign: 'middle', float: 'left' }}></span><h5 style={{ float: 'left', paddingLeft: '15px' }}>{this.props.filename}</h5></td>
+                <td className="col-xs-1 ">
                     <div className="dropdown">
-                        <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">...
+                        <button className="btn btn-default dropdown-toggle" style={{ verticalAlign: 'middle'}} type="button" data-toggle="dropdown">...
                             </button>
                         <ul className="dropdown-menu">
                             <li><a href={this.props.downloadUrl} download><i className="fa fa-download" aria-hidden="true"></i>       Download</a></li>
@@ -76,9 +76,9 @@ export class Row extends React.Component<AppProps, AppState> {
                         </ul>
                     </div>
                 </td>
-                <td><i className="fa fa-lock fa-2x"></i></td>
-                <td className="col-md-1">{this.props.size}</td>
-                <td className="col-md-3">{this.props.lastModified}</td>
+                <td className="col-xs-1 " style={{ verticalAlign: 'middle' }}><i className="fa fa-lock fa-2x"></i></td>
+                <td className="col-xs-1 " style={{ verticalAlign: 'middle'}}>{this.props.size}</td>
+                <td className="col-xs-2 " style={{ verticalAlign: 'middle'}}>{this.props.lastModified}</td>
             </tr>
         );
     }
