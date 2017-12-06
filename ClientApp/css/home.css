@@ -257,7 +257,7 @@ tr {
 
 tbody {
     overflow-y: scroll;
-    height: calc(100vh - 65px);
+    height: calc(100vh - 200px);
     position: absolute;
     margin-right:24px;
 }
