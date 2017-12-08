@@ -1,11 +1,14 @@
 ﻿import * as React from 'react';
 import { render } from 'react-dom';
+//import { Preview } from '../components/filePreview';
+
 
 export interface AppProps {
     filename: string,
     size: string,
     lastModified: string,
-    downloadUrl: string
+    downloadUrl: string,
+    //isOpen: boolean
 }
 
 export interface AppState {
@@ -20,6 +23,10 @@ export class Row extends React.Component<AppProps, AppState> {
 
         }
     }
+
+    //toggleModal() {
+    //    this.setState({ isOpen: true });
+    //}
 
     getFileExtension(filename) {
         return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
