@@ -136,7 +136,7 @@ namespace front_end.Controllers
             FilesResource.ListRequest request = service.Files.List();
             request.PageSize = 100;
             request.PrettyPrint = true;
-            request.Q = "'root' in parents";
+            request.Q = "'root' in parents and trashed = false";
             request.Fields = @"files(*)";
             // List files.
             IList<Google.Apis.Drive.v3.Data.File> files = request.Execute().Files;
