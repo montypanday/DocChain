@@ -3,9 +3,7 @@ import { render } from 'react-dom';
 import { LoadingGif } from '../components/loadingGif';
 import { SearchBar } from '../components/SearchBar';
 import { Row } from '../components/Row';
-//import * as ReactBootstrap from 'react-bootstrap';
-//var Modal = ReactBootstrap.Modal;
-
+//import { Modal } from '../components/Modal';
 
 export class Explorer extends React.Component<{}, {}> {
     constructor() {
@@ -22,7 +20,7 @@ export class Explorer extends React.Component<{}, {}> {
 
             errorMessage: "",
 
-            showingPreview: false,
+            //isOpen: false,
 
             PreviewUrl: ""
         }
@@ -47,9 +45,9 @@ export class Explorer extends React.Component<{}, {}> {
 
     }
 
-    showPreview() {
-        this.setState({ showingPreview: true });
-    }
+    //toggleModal() {
+    //    this.setState({ isOpen: true });
+    //}
 
     public render() {
         //if (this.state['showingPreview'] === true) {
