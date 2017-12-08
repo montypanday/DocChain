@@ -1,8 +1,6 @@
 ﻿import * as React from 'react';
 import { render } from 'react-dom';
 import FileViewer from 'react-file-viewer';
-import 'react-responsive-modal/lib/react-responsive-modal.css';
-import Modal from 'react-responsive-modal/lib/css';
 
 export interface AppProps {
     filename: string,
