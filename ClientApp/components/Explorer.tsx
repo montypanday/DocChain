@@ -66,32 +66,38 @@ export class Explorer extends React.Component<{}, {}> {
             var rows = this.state['filesarray'].map(function (row) {
                 return (<Row key={row.ID} filename={row.fileName} size={row.size} lastModified={row.lastModified} downloadUrl={row.downloadUrl}></Row>);
             });
+
+            return (
+                <div className="well well-lg pull-down">
+                    <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#f5f5f5' }}>
+                        <SearchBar />
+                    </div>
+                    <table className="table table-striped table-hover table-responsive well header-fixed">
+                        <thead>
+                            <tr>
+                                <th className="col-xs-6">File Name</th>
+                                <th className="col-xs-1">More</th>
+                                <th className="col-xs-1">Secure</th>
+                                <th className="col-xs-1">Size </th>
+                                <th className="col-xs-2">Last Modified</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {rows}
+                        </tbody>
+                    </table>
+                </div>
+            );
         }
 
         // determine if that loading is finished and render accordingly
-        return (
-            <div className="well well-lg pull-down">
-                <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#f5f5f5' }}>
-                    <SearchBar />
+        else
+            return (
+                <div className="loadingGif">
+                    <LoadingGif />
+                    <p>If this takes a long time to load</p>
+                    <p>please ensure you've logged in to your provider.</p>
                 </div>
-                <table className="table table-striped table-hover table-responsive well header-fixed">
-                    <thead>
-                        <tr>
-                            <th className="col-xs-6">File Name</th>
-                            <th className="col-xs-1">More</th>
-                            <th className="col-xs-1">Secure</th>
-                            <th className="col-xs-1">Size </th>
-                            <th className="col-xs-2">Last Modified</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {rows}
-                        <div className="loadingGif">
-                            {this.state['loading'] ? (<LoadingGif />) : (null)}
-                        </div>
-                    </tbody>
-                </table>
-            </div>
         );
     }
 }
