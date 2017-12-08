@@ -77,11 +77,12 @@ export class Login extends React.Component<{}, LoginState> {
                         sessionStorage.setItem("google_access_token", data.access_token);
                         sessionStorage.setItem("google_refresh_token", data.refresh_token);
 
-                        fetch("/api/Login/GetGoogleSession?google_access_token=" + sessionStorage.getItem("google_access_token") + "&google_refresh_token=" + sessionStorage.getItem("google_refresh_token"))
-                            .then(response => response.json())
-                            .then(data => {
-                                console.log(data);
-                            })
+                        //fetch("/api/Login/GetGoogleSession?google_access_token=" + sessionStorage.getItem("google_access_token") + "&google_refresh_token=" + sessionStorage.getItem("google_refresh_token"))
+                        //    .then(response => response.json())
+                        //    .then(data => {
+                        //        console.log("This is service:" + data);
+
+                        //    })
 
 
                     });

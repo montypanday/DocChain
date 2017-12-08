@@ -28,22 +28,6 @@
     <!-- Files not to show in IDE -->
     <None Remove="yarn.lock" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="wwwroot\dist\89889688147bd7575d6327160d64e760.svg">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="wwwroot\dist\loading-animations-preloader-gifs-ui-ux-effects-18 (1).gif" />
-    <Content Include="wwwroot\dist\loading-animations-preloader-gifs-ui-ux-effects-18.gif" />
-    <Content Include="wwwroot\dist\main.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="wwwroot\dist\main.js.map" />
-    <Content Include="wwwroot\dist\vendor-manifest.json">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="wwwroot\dist\vendor.css" />
-    <Content Include="wwwroot\dist\vendor.js" />
-  </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec Command="npm install" />

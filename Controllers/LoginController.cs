@@ -71,30 +71,37 @@ namespace front_end.Controllers
             var oobject = JsonConvert.DeserializeObject<OAuthSession>(token);
             OAuthSession session = new OAuthSession(oobject.AccessToken, oobject.RefreshToken, oobject.ExpiresIn, oobject.TokenType);
             BoxClient client = new BoxClient(new BoxConfig("3syx1zpgoraznjex526u78ozutwvgeby", "0vf9isuhRisKTy9nvR1CLVaSObuaG3lx", new Uri("https://127.0.0.1")), session);
-            var items = await client.FoldersManager.GetFolderItemsAsync("0", 500);
+            BoxCollection<BoxItem> items = await client.FoldersManager.GetFolderItemsAsync("0", 500,0, new List<string>()
+            {
+                BoxFolder.FieldCreatedAt,BoxFolder.FieldCreatedBy,BoxFolder.FieldFolderUploadEmail,
+                BoxFolder.FieldHasCollaborations,BoxFolder.FieldItemCollection,BoxFolder.FieldItemStatus, BoxFolder.FieldModifiedAt,BoxFolder.FieldModifiedBy,
+                BoxFolder.FieldName, BoxFolder.FieldOwnedBy,BoxFolder.FieldPathCollection,BoxFolder.FieldPermissions,
+                BoxFolder.FieldSharedLink,BoxFolder.FieldSize,
+                BoxFile.FieldExpiringEmbedLink, BoxFile.FieldExtension, BoxFile.FieldModifiedAt, BoxFile.FieldModifiedBy,
+                BoxFile.FieldName, BoxFile.FieldOwnedBy, BoxFile.FieldPathCollection, BoxFile.FieldSha1, BoxFile.FieldSharedLink, BoxFile.FieldSize
 
-            MyCustomObject[] list = new MyCustomObject[items.TotalCount];
-
+            });
+            Content[] list = new Content[items.TotalCount];
             for (int i = 0; i < items.TotalCount; i++)
             {
                 if (items.Entries[i].Type == "file")
                 {
-                    BoxFile boxFile = new BoxFile();
-                    boxFile = await client.FilesManager.GetInformationAsync(items.Entries[i].Id);
-                    string embedurl = "";
+                    BoxFile boxFile = (BoxFile)items.Entries[i];
+                    //boxFile = await client.FilesManager.GetInformationAsync(items.Entries[i].Id);
+                    //string embedurl = "";
                     if (Path.GetExtension(items.Entries[i].Name) != ".zip")
                     {
-                        var embedUrl = await client.FilesManager.GetPreviewLinkAsync(items.Entries[i].Id);
-                        embedurl = embedUrl.ToString();
+                        //var embedUrl = await client.FilesManager.GetPreviewLinkAsync(items.Entries[i].Id);
+                        //embedurl = embedUrl.ToString();
                     }
                     var downloadlink = await client.FilesManager.GetDownloadUriAsync(items.Entries[i].Id);
-                    list[i] = new MyCustomObject(items.Entries[i].Type, items.Entries[i].Id, items.Entries[i].Name, ((boxFile.Size / 1000) + " KB").ToString(), boxFile.Sha1, boxFile.ModifiedAt.ToString(), embedurl.ToString(), downloadlink.ToString());
+                    list[i] = new Content(boxFile.Type, boxFile.Id, boxFile.Name, ((boxFile.Size / 1000) + " KB").ToString(), boxFile.Sha1, boxFile.ModifiedAt.ToString(), boxFile.ExpiringEmbedLink.Url.ToString(), downloadlink.ToString());
                 }
                 else
                 {
-                    BoxFolder boxFolder = new BoxFolder();
-                    boxFolder = await client.FoldersManager.GetInformationAsync(items.Entries[i].Id);
-                    list[i] = new MyCustomObject(items.Entries[i].Type, items.Entries[i].Id, items.Entries[i].Name, ((boxFolder.Size / 1000) + " KB").ToString(), "", boxFolder.ModifiedAt.ToString(), "", "");
+                    BoxFolder boxFolder = (BoxFolder)items.Entries[i];
+                    //boxFolder = await client.FoldersManager.GetInformationAsync(items.Entries[i].Id);
+                    list[i] = new Content(boxFolder.Type, boxFolder.Id, boxFolder.Name, ((boxFolder.Size / 1000) + " KB").ToString(), "", boxFolder.ModifiedAt.ToString(), "", "");
                 }
             }
             return Json(list);
@@ -102,7 +109,7 @@ namespace front_end.Controllers
 
         [Route("GetGoogleSession")]
         [HttpGet]
-        public async Task<JsonResult> GetGoogleSession(string google_access_token, string google_refresh_token)
+        public JsonResult GetGoogleSession(string google_access_token, string google_refresh_token)
         {
             var token = new Google.Apis.Auth.OAuth2.Responses.TokenResponse()
             {
@@ -127,13 +134,21 @@ namespace front_end.Controllers
             };
             DriveService service = new DriveService(serviceInitializer);
             FilesResource.ListRequest request = service.Files.List();
-            request.PageSize = 10;
+            request.PageSize = 100;
+            request.Fields = @"files(*)";
             // List files.
             IList<Google.Apis.Drive.v3.Data.File> files = request.Execute().Files;
             //DriveService service = new DriveService(new BaseClientService.Initializer());
             //FilesResource.ListRequest request = service.Files.List();
             //FileList files = request.Execute();
-            return Json(files);
+
+            Content[] list = new Content[files.Count];
+
+            for(int i=0; i<files.Count;i++)
+            {
+                list[i] = new Content(files[i].Kind, files[i].Id, files[i].Name, files[i].Size.ToString(), files[i].Md5Checksum, files[i].ModifiedTime.ToString(), files[i].WebViewLink, files[i].WebContentLink);
+            }
+            return Json(list);
         }
     }
 }

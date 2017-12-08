@@ -39,13 +39,14 @@ export class NavMenu extends React.Component<{}, {}> {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={"/fileexplorer"} activeClassName="active">
-                                <i className="fa fa-folder-open-o" aria-hidden="true"></i> Box Explorer
+                            <NavLink to={"/explorer"} activeClassName="active">
+                                <i className="fa fa-folder-open-o" aria-hidden="true"></i> Box
                             </NavLink>
+
                         </li>
                         <li>
-                            <NavLink to={"/explorer"} activeClassName="active">
-                                <i className="fa fa-folder-open-o" aria-hidden="true"></i> Explorer
+                            <NavLink to={"/driveExplorer"} activeClassName="active">
+                                <i className="fa fa-folder-open-o" aria-hidden="true"></i> Google Drive
                             </NavLink>
 
                         </li>

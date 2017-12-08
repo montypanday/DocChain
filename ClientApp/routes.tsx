@@ -14,6 +14,7 @@ import { Tutorial4 } from "./components/tutorial4";
 import { Tutorial5 } from "./components/tutorial5";
 import { Faq } from "./components/FAQ";
 import { Explorer } from "./components/Explorer";
+import { DriveExplorer} from "./components/DriveExplorer";
 
 export const routes = <Layout>
     <Route exact path="/" component={Home} />
@@ -28,7 +29,8 @@ export const routes = <Layout>
     <Route path="/Login/:state?/:code?" component={(props) => <Login {...props} code="haha" />} />
     <Route path="/logout" component={Logout} />
     <Route path="/faq" component={Faq} />
-    <Route path="/explorer" component={Explorer}/>
+    <Route path="/explorer" component={Explorer} />
+    <Route path="/driveExplorer" component={DriveExplorer}/>
 
 </Layout>;
 
