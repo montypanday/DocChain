@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { LoadingGif } from '../components/loadingGif';
 import { SearchBar } from '../components/SearchBar';
 import { Row } from '../components/Row';
+import { Link, NavLink } from "react-router-dom";
 //import { Modal } from '../components/Modal';
 
 export class Explorer extends React.Component<{}, {}> {
@@ -97,6 +98,7 @@ export class Explorer extends React.Component<{}, {}> {
                     <LoadingGif />
                     <p>If this takes a long time to load</p>
                     <p>please ensure you've logged in to your provider.</p>
+                    <p> You can login <NavLink to={"/login"}>here</NavLink>.</p>
                 </div>
         );
     }
