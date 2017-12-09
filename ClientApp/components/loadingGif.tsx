@@ -4,8 +4,11 @@ import { render } from "react-dom";
 var imageStyle = {
     "width": "100%",
     "textAlign": "center",
-    "paddingTop": "90px"
+    "paddingTop": "90px",
+    "left": "0",
+    "right": "0",
 };
+
 export class LoadingGif extends React.Component<{}, {}> {
     constructor() {
         super();
