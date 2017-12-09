@@ -13,20 +13,26 @@ namespace Database
             ConnectionProvider conn = new ConnectionProvider();
             if (conn.Open())
             {
-                Console.WriteLine("Connected!");
-            }
+                Console.WriteLine("Connected");
 
-            FileAction fakeAction = new FileAction("00000002", "99999997", "docchain_dev", "cool user", "fun action", DateTime.Now);
-            Console.WriteLine(fakeAction.FileID);
-            conn.Get().Insert(fakeAction);
-            conn.Get().Close();
+                //FileAction fakeAction = new FileAction("00000002", "99999997", "docchain_dev", "cool user", "fun action", DateTime.Now);
+                //Console.WriteLine(fakeAction.FileID);
+                //conn.Get().Insert(fakeAction);
+                //conn.Get().Close();
 
-            FileActionService fileService = new FileActionService();
-            SortedList<DateTime, FileAction> actions = fileService.GetUserActions("cool user");
-            foreach (KeyValuePair<DateTime, FileAction> action in actions)
+                FileActionService fileService = new FileActionService();
+                SortedList<DateTime, FileAction> actions = fileService.GetUserActions("cool user");
+                foreach (KeyValuePair<DateTime, FileAction> action in actions)
+                {
+                    Console.WriteLine(action.Key.ToString() + " " + action.Value.FileID + " " + action.Value.ActionType);
+                }
+
+            } else
             {
-                Console.WriteLine(action.Key.ToString() + " " + action.Value.FileID + " " + action.Value.ActionType);
+                Console.WriteLine("No good");
             }
+
+
         }
     }
 }
