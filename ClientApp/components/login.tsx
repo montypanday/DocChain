@@ -70,7 +70,7 @@ export class Login extends React.Component<{}, LoginState> {
             var details = {
                 client_id: '900082198060-kdvsjc3ecm82gn48dl9083cg0gihggm1.apps.googleusercontent.com',
                 client_secret: 'i1EN7mH7usgONgINmnNKbOFi',
-                refresh_token: "'"+sessionStorage.getItem("google_refresh_token").toString()+"'",
+                refresh_token: "'" + sessionStorage.getItem("google_refresh_token").toString() + "'",
                 grant_type: 'refresh_token'
             };
             const a = new FormData();
@@ -85,7 +85,7 @@ export class Login extends React.Component<{}, LoginState> {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Cache-Control': 'no-cache'
                 },
-                body: "client_id=900082198060-kdvsjc3ecm82gn48dl9083cg0gihggm1.apps.googleusercontent.com&client_secret=i1EN7mH7usgONgINmnNKbOFi&refresh_token=" + sessionStorage.getItem("google_refresh_token") +"&grant_type=refresh_token" // see the usage here
+                body: "client_id=900082198060-kdvsjc3ecm82gn48dl9083cg0gihggm1.apps.googleusercontent.com&client_secret=i1EN7mH7usgONgINmnNKbOFi&refresh_token=" + sessionStorage.getItem("google_refresh_token") + "&grant_type=refresh_token" // see the usage here
             })
         }
 
@@ -143,14 +143,10 @@ export class Login extends React.Component<{}, LoginState> {
                     });
             }
         }
-<<<<<<< HEAD
-        return <div className="body">
-            <div className="grid-container">
-                <div className="select">
-                    <p> Select your cloud storage provider </p>
-=======
+
+
         if (sessionStorage.getItem("accessToken") == null) {
-            return <div className="body">
+            return (<div className="body">
                 <div className="grid-container">
                     <div className="select">
                         <p> Select your cloud storage provider </p>
@@ -180,36 +176,9 @@ export class Login extends React.Component<{}, LoginState> {
                             <p>Box</p>
                         </div>
                     </a>
-
-
->>>>>>> 04c1c30acf7531cea73a75f248920b0c050f31b3
                 </div>
-                {/*<a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=2e5c31a7-72e0-4e93-9def-581432e66277&scope=files.readwrite.all&response_type=code&redirect_uri=https://localhost:44374/Login/">*/}
-                <a /*onClick={this.launchOneDrive}*/>
-                    <div className="onedrive">
-                        <section className="onedrive-logo"></section>
-                        <p>OneDrive</p>
-                    </div>
-                </a>
-                <a href="https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/drive&client_id=900082198060-kdvsjc3ecm82gn48dl9083cg0gihggm1.apps.googleusercontent.com&redirect_uri=https://localhost:44374/Login/&response_type=code&access_type=offline&include_granted_scopes=true&state=state_parameter_passthrough_value&prompt=consent">
-                    <div className="googledrive">
-                        <section className="googledrive-logo"></section>
-                        <p>Google Drive</p>
-                    </div>
-                </a>
-                <a /*onClick={this.launchDropBox}*/ >
-                    <div className="dropbox">
-                        <section className="dropbox-logo"></section>
-                        <p>Dropbox</p>
-                    </div>
-                </a>
-                <a href="https://account.box.com/api/oauth2/authorize?response_type=code&client_id=3syx1zpgoraznjex526u78ozutwvgeby&state=security_token%3DKnhMJatFipTAnM0nHlZA">
-                    <div className="box">
-                        <section className="box-logo"></section>
-                        <p>Box</p>
-                    </div>
-                </a>
             </div>
-        </div>;
+            );
+        }
     }
 }
