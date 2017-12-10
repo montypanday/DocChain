@@ -11,7 +11,8 @@
     /*Lets add the numbers for each link using CSS counters. flag is the name of the counter. to be defined using counter-reset in the parent element of the links*/
     counter-reset: flag;
     width: 100%;
-    background: #666;
+    background: rgb(245, 245, 245);
+    padding: 0;
 }
 
 .breadcrumb a {
@@ -27,6 +28,7 @@
     background: #666;
     background: linear-gradient(#666, #333);
     position: relative;
+    border: 1px solid #e3e3e3
 }
 /*since the first link does not have a triangle before it we can reduce the left padding to make it look consistent with other links*/
 .breadcrumb a:first-child {
