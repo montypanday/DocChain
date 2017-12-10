@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { LoadingGif } from '../components/loadingGif';
 import { SearchBar } from '../components/SearchBar';
 import { Row } from '../components/Row';
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Redirect } from "react-router-dom";
 //import { Modal } from '../components/Modal';
 
 export class Explorer extends React.Component<{}, {}> {
@@ -59,8 +59,10 @@ export class Explorer extends React.Component<{}, {}> {
         //    );
 
         //}
+        if (sessionStorage.getItem("box_access_token") == null) {
+            return <Redirect to='/boxLogin' />
 
-        if (this.state['loading'] === false) {
+        } else if (this.state['loading'] === false) {
 
             // this .map function is like a foreach loop on filesarray, gives us a row object which has all the values that are related to a file object
             //rows is the variable which is being inserted into the render function at its given function see {rows} in render method.

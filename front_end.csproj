@@ -9,13 +9,13 @@
   <ItemGroup>
     <Compile Remove="ClientApp\NewFolder\**" />
     <Compile Remove="Database\**" />
-    <Compile Remove="Models\**" />
+    <Compile Remove="Model\**" />
     <Content Remove="ClientApp\NewFolder\**" />
     <Content Remove="Database\**" />
-    <Content Remove="Models\**" />
+    <Content Remove="Model\**" />
     <EmbeddedResource Remove="ClientApp\NewFolder\**" />
     <EmbeddedResource Remove="Database\**" />
-    <EmbeddedResource Remove="Models\**" />
+    <EmbeddedResource Remove="Model\**" />
     <None Remove="ClientApp\NewFolder\**" />
     <None Remove="Database\**" />
     <None Remove="Model\**" />

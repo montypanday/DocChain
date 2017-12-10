@@ -4,12 +4,13 @@ import { LoadingGif } from '../components/loadingGif';
 import { SearchBar } from '../components/SearchBar';
 import { Row } from '../components/Row';
 import { BreadCrumb } from '../components/breadCrumb';
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Redirect } from "react-router-dom";
 //import * as ReactBootstrap from 'react-bootstrap';
 //var Modal = ReactBootstrap.Modal;
 
 
 export class DriveExplorer extends React.Component<{}, {}> {
+
     constructor() {
         super();
 
@@ -44,9 +45,6 @@ export class DriveExplorer extends React.Component<{}, {}> {
                 this.setState({ filesarray: data, loading: false });
                 //console.log("this is filearray->>>   " + JSON.stringify(this.state['filesarray']['10']));
             })
-
-
-
     }
 
     showPreview() {
@@ -54,6 +52,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
     }
 
     public render() {
+
         //if (this.state['showingPreview'] === true) {
         //    return(
         //        <div className="embed-responsive embed-responsive-16by9">
@@ -63,7 +62,10 @@ export class DriveExplorer extends React.Component<{}, {}> {
 
         //}
 
-        if (this.state['loading'] === false) {
+        if (sessionStorage.getItem("google_access_token") == null) {
+            return <Redirect to='/driveLogin' />
+
+        } else if (this.state['loading'] === false) {
 
             // this .map function is like a foreach loop on filesarray, gives us a row object which has all the values that are related to a file object
             //rows is the variable which is being inserted into the render function at its given function see {rows} in render method.
@@ -93,10 +95,8 @@ export class DriveExplorer extends React.Component<{}, {}> {
                     </table>
                 </div>
             );
-        }
-
+        } else
         // determine if that loading is finished and render accordingly
-        else
             return (
                 <div className="loadingGif">
                     <LoadingGif />

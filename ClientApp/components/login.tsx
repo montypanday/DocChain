@@ -99,6 +99,7 @@ export class Login extends React.Component<{}, LoginState> {
 
         }
         if (sessionStorage.getItem("accessToken") == null) {
+
             return <div className="body">
                 <div className="grid-container">
                     <div className="select">
@@ -137,6 +138,5 @@ export class Login extends React.Component<{}, LoginState> {
         } else {
             return null;
         }
-
     }
 }

@@ -14,9 +14,12 @@ import { Tutorial4 } from "./components/tutorial4";
 import { Tutorial5 } from "./components/tutorial5";
 import { Faq } from "./components/FAQ";
 import { Explorer } from "./components/Explorer";
-import { DriveExplorer} from "./components/DriveExplorer";
+import { DriveExplorer } from "./components/DriveExplorer";
+import { DriveLogin } from "./components/DriveLogin";
+import { BoxLogin } from "./components/BoxLogin";
 
 export const routes = <Layout>
+
     <Route exact path="/" component={Home} />
     <Route path="/fileexplorer" component={fileExplorer} />
     <Route path="/contentpicker" component={contentPicker} />
@@ -30,7 +33,9 @@ export const routes = <Layout>
     <Route path="/logout" component={Logout} />
     <Route path="/faq" component={Faq} />
     <Route path="/explorer" component={Explorer} />
-    <Route path="/driveExplorer" component={DriveExplorer}/>
+    <Route path="/driveExplorer" component={DriveExplorer} />
+    <Route path="/driveLogin" component={DriveLogin} />
+    <Route path="/boxLogin" component={BoxLogin} />
 
 </Layout>;
 

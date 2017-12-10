@@ -9,6 +9,13 @@ interface Tutorial1State {
 }
 export class Tutorial1 extends React.Component<Tutorial1Prop, Tutorial1State> {
 
+    constructor() {
+        super();
+        this.state = {
+            loggedIn: false
+        };
+    }
+
     public render() {
         return <div className="body">
             <div className="center-fade">
