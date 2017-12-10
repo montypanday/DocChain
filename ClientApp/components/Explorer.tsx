@@ -33,7 +33,7 @@ export class Explorer extends React.Component<{}, {}> {
 
     }
 
-    componentWillMount() {
+    componentDidMount() {
         // this is the network call made everytime the page is reload, before the render method.
         fetch("/api/Login/GetBoxFiles/?token=" + sessionStorage.getItem("OAuthSession"))
             .then(response => {
@@ -46,6 +46,19 @@ export class Explorer extends React.Component<{}, {}> {
                 this.setState({ filesarray: data, loading: false });
                 //console.log("this is filearray->>>   " + JSON.stringify(this.state['filesarray']['10']));
             })
+        fetch("https://api.box.com/2.0/folders/0/items?fields=name,size,id,type,sha1,path_collection,modified_at,shared_link,expiring_embed_link", {
+            method: "GET",
+            headers:
+            {
+                'Authorization': 'Bearer ' + sessionStorage.getItem("box_access_token"),
+                'Accept': 'application/json'
+            }
+
+        })
+            .then(data => {
+                console.log(data);
+            })
+
 
 
 
@@ -108,6 +121,6 @@ export class Explorer extends React.Component<{}, {}> {
                     <p>please ensure you've logged in to your provider.</p>
                     <p> You can login <NavLink to={"/login"}>here</NavLink>.</p>
                 </div>
-        );
+            );
     }
 }
