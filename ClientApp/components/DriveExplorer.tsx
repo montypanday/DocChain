@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { LoadingGif } from '../components/loadingGif';
 import { SearchBar } from '../components/SearchBar';
 import { Row } from '../components/Row';
+import { BreadCrumb } from '../components/breadCrumb';
 import { Link, NavLink } from "react-router-dom";
 //import * as ReactBootstrap from 'react-bootstrap';
 //var Modal = ReactBootstrap.Modal;
@@ -72,6 +73,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
 
             return (
                 <div className="well well-lg pull-down">
+                    <BreadCrumb address="Home" />
                     <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#f5f5f5' }}>
                         <SearchBar />
                     </div>

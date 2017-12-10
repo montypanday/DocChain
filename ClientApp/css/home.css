@@ -241,6 +241,9 @@
     align-content: center;
     font-family: 'europa', 'fira-sans-2', sans-serif;
     font-style: normal;
+    position: fixed;
+    left: 0;
+    right: 0;
 }
 
 .pull-down {
@@ -264,9 +267,10 @@ tr {
 
 tbody {
     overflow-y: scroll;
-    height: calc(100vh - 200px);
+    overflow-x: hidden;
+    height: calc(100vh - 250px);
     position: absolute;
-    margin-right:24px;
+    margin-right: 24px;
 }
 
 
