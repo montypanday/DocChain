@@ -146,12 +146,8 @@ export class Login extends React.Component<{}, LoginState> {
 
 
         if (sessionStorage.getItem("accessToken") == null) {
-<<<<<<< HEAD
 
-            return <div className="body">
-=======
             return (<div className="body">
->>>>>>> 70db88b115f63eab43c05c89450ba1562d4e92ce
                 <div className="grid-container">
                     <div className="select">
                         <p> Select your cloud storage provider </p>
