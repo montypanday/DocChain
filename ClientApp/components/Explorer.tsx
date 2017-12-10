@@ -34,6 +34,7 @@ export class Explorer extends React.Component<{}, {}> {
     }
 
     componentDidMount() {
+
         //this is the network call made everytime the page is reload, before the render method.
         //fetch("/api/Login/GetBoxFiles/?token=" + sessionStorage.getItem("OAuthSession"))
         //    .then(response => {
