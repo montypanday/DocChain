@@ -24,35 +24,64 @@ export class Explorer extends React.Component<{}, {}> {
 
             //isOpen: false,
 
-            PreviewUrl: ""
+            PreviewUrl: "",
+
+            // Default item id. 0 is default denotes root folder.
+            // Change this to get items from another folder.
+            item_id: 0
         }
 
     }
 
     componentDidMount() {
-        // this is the network call made everytime the page is reload, before the render method.
-        fetch("/api/Login/GetBoxFiles/?token=" + sessionStorage.getItem("OAuthSession"))
+        //this is the network call made everytime the page is reload, before the render method.
+        //fetch("/api/Login/GetBoxFiles/?token=" + sessionStorage.getItem("OAuthSession"))
+        //    .then(response => {
+        //        if (!response.ok) { throw response }
+        //        return response.json()  //we only get here if there is no error)
+        //    })
+        //    .then(data => {
+        //        // console messages in order to help you understand what's happening
+        //        //console.log(data);
+        //        this.setState({ filesarray: data, loading: false });
+        //        console.log("this is filearray->>>   " + JSON.stringify(this.state['filesarray']));
+        //    })
+        fetch("https://api.box.com/2.0/folders/0/items?fields=name,size,id,type,sha1,path_collection,modified_at,shared_link,expiring_embed_link",
+            {
+                method: "GET",
+                headers:
+                {
+                    'Authorization': 'Bearer ' + sessionStorage.getItem("box_access_token"),
+                    'Accept': 'application/json'
+                }
+            })
             .then(response => {
                 if (!response.ok) { throw response }
                 return response.json()  //we only get here if there is no error)
             })
             .then(data => {
-                // console messages in order to help you understand what's happening
-                //console.log(data);
-                this.setState({ filesarray: data, loading: false });
-                //console.log("this is filearray->>>   " + JSON.stringify(this.state['filesarray']['10']));
-            })
-        fetch("https://api.box.com/2.0/folders/0/items?fields=name,size,id,type,sha1,path_collection,modified_at,shared_link,expiring_embed_link", {
-            method: "GET",
-            headers:
-            {
-                'Authorization': 'Bearer ' + sessionStorage.getItem("box_access_token"),
-                'Accept': 'application/json'
-            }
 
-        })
-            .then(data => {
                 console.log(data);
+                var newData = [];
+                for (var i = 0; i < data["entries"].length; i++) {
+
+                    var a = {};
+                    if (data.entries[i].type == "file") {
+                        console.log(data.entries[i].type);
+                        a = { type: data.entries[i].type, id: data.entries[i].id, fileName: data.entries[i].name, size: data.entries[i].size, hash: data.entries[i].sha1, lastModified: data.entries[i].modified_at, embedLink: data.entries[i].expiring_embed_link.url, downloadUrl: "" }
+                    }
+                    else {
+                        a = { type: data.entries[i].type, id: data.entries[i].id, fileName: data.entries[i].name, size: data.entries[i].size, hash: "", lastModified: data.entries[i].modified_at, embedLink: "", downloadUrl: "" }
+                    }
+
+                    newData.push(a)
+
+                }
+                if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
+                    this.setState({ filesarray: newData, loading: false });
+                    console.log("different data was received this time.")
+                }
+
             })
 
 
@@ -73,8 +102,9 @@ export class Explorer extends React.Component<{}, {}> {
         //    );
 
         //}
+        if (Object.keys(this.state['filesarray']).length > 0) { console.log("filesarray is not empty"); } else { console.log("filearray is empty"); }
 
-        if (this.state['loading'] === false) {
+        if (this.state['loading'] === false || Object.keys(this.state['filesarray']).length > 0) {
 
             // this .map function is like a foreach loop on filesarray, gives us a row object which has all the values that are related to a file object
             //rows is the variable which is being inserted into the render function at its given function see {rows} in render method.
@@ -84,10 +114,10 @@ export class Explorer extends React.Component<{}, {}> {
 
             return (
                 <div className="well well-lg pull-down">
-                    <BreadCrumb address="Home" />
                     <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#f5f5f5' }}>
                         <SearchBar />
                     </div>
+                    <BreadCrumb address="Home" />
                     <table className="table table-striped table-hover table-responsive well header-fixed">
                         <thead>
                             <tr>

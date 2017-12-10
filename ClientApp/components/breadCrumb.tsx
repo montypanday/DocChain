@@ -14,20 +14,21 @@ export class BreadCrumb extends React.Component<{ address }, {}> {
         super();
         this.address = prop.address
         this.state = {
+
         }
     }
     render() {
         if (this.address != "Home") {
             return (
                 <div className="breadcrumb flat">
-                    <a href="#" >Home</a>
+                    <a href="#" >All Files</a>
                     <a href="#" className="active">{this.address}</a>
                 </div>
             );
         } else {
             return (
                 <div className="breadcrumb flat">
-                    <a href="#" >Home</a>
+                    <a href="#" >All Files</a>
                     <a href="#">Compare</a>
                     <a href="#">Order Confirmation</a>
                     <a href="#" className="active">Checkout</a>

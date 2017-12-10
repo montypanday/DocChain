@@ -1,6 +1,8 @@
 ﻿import * as React from 'react';
 import { render } from 'react-dom';
 //import { Preview } from '../components/filePreview';
+//var Modal = ReactBootstrap.Modal;
+import { Modal } from 'react-bootstrap';
 
 
 export interface AppProps {
@@ -18,9 +20,9 @@ export interface AppState {
 export class Row extends React.Component<AppProps, AppState> {
     constructor(props: AppProps) {
         super();
-
+        this.showPreviewOrNavigate = this.showPreviewOrNavigate.bind(this);
         this.state = {
-
+            showModal: false
         }
     }
 
@@ -32,8 +34,7 @@ export class Row extends React.Component<AppProps, AppState> {
         return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
     }
 
-    getIconClass(extension)
-    {
+    getIconClass(extension) {
         switch (extension) {
             case 'txt':
                 return "fa fa-file-text-o fa-2x";
@@ -64,15 +65,20 @@ export class Row extends React.Component<AppProps, AppState> {
         }
     }
 
+    showPreviewOrNavigate() {
+        console.log("showPreviewOrNavigate is clicked");
+        this.setState({ showModal: true });
+    }
     render() {
         var a = this.getFileExtension(this.props.filename);
         var iconClass = this.getIconClass(a);
         return (
             <tr>
-                <td className="col-xs-6 "><span className={iconClass} style={{ verticalAlign: 'middle', float: 'left' }}></span><h5 style={{ float: 'left', paddingLeft: '15px' }}>{this.props.filename}</h5></td>
+
+                <td className="col-xs-6 "><span className={iconClass} style={{ verticalAlign: 'middle', float: 'left' }}></span><h5 onClick={this.showPreviewOrNavigate} style={{ float: 'left', paddingLeft: '15px' }}><div style={{ cursor: 'pointer' }}>{this.props.filename}</div></h5></td>
                 <td className="col-xs-1 ">
                     <div className="dropdown">
-                        <button className="btn btn-default dropdown-toggle" style={{ verticalAlign: 'middle'}} type="button" data-toggle="dropdown">...
+                        <button className="btn btn-default dropdown-toggle" style={{ verticalAlign: 'middle' }} type="button" data-toggle="dropdown">...
                             </button>
                         <ul className="dropdown-menu">
                             <li><a href={this.props.downloadUrl} download><i className="fa fa-download" aria-hidden="true"></i>       Download</a></li>
@@ -84,8 +90,8 @@ export class Row extends React.Component<AppProps, AppState> {
                     </div>
                 </td>
                 <td className="col-xs-1 " style={{ verticalAlign: 'middle' }}><i className="fa fa-lock fa-2x"></i></td>
-                <td className="col-xs-1 " style={{ verticalAlign: 'middle'}}>{this.props.size}</td>
-                <td className="col-xs-2 " style={{ verticalAlign: 'middle'}}>{this.props.lastModified}</td>
+                <td className="col-xs-1 " style={{ verticalAlign: 'middle' }}>{this.props.size}</td>
+                <td className="col-xs-2 " style={{ verticalAlign: 'middle' }}>{this.props.lastModified}</td>
             </tr>
         );
     }
