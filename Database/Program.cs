@@ -10,15 +10,14 @@ namespace Database
     {
         static void Main(string[] args)
         {
-            ConnectionProvider conn = new ConnectionProvider();
-            if (conn.Open())
+            ConnectionProvider connection = new ConnectionProvider();
+            if (connection.Open())
             {
                 Console.WriteLine("Connected");
 
-                //FileAction fakeAction = new FileAction("00000002", "99999997", "docchain_dev", "cool user", "fun action", DateTime.Now);
-                //Console.WriteLine(fakeAction.FileID);
-                //conn.Get().Insert(fakeAction);
-                //conn.Get().Close();
+                FileAction fakeAction = new FileAction("00000002", "99999997", "docchain_dev", "cool user", "fun action", DateTime.Now);
+                connection.Get().Insert(fakeAction);
+                connection.Get().Close();
 
                 FileActionService fileService = new FileActionService();
                 SortedList<DateTime, FileAction> actions = fileService.GetUserActions("cool user");

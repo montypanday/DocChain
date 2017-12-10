@@ -8,13 +8,13 @@ namespace Database.Services
 {
     public class FileActionService
     {
-        private ConnectionProvider conn = new ConnectionProvider();
+        private ConnectionProvider connection = new ConnectionProvider();
 
         public void RecordFileAction(FileAction action)
         {
-            conn.Open();
-            conn.Get().Insert(action);
-            conn.Get().Close();
+            connection.Open();
+            connection.Get().Insert(action);
+            connection.Get().Close();
         }
 
         public SortedList<DateTime, FileAction> GetUserActions(string userID)
@@ -23,8 +23,8 @@ namespace Database.Services
 
             string sql = "SELECT * FROM fileactions WHERE userid = @UserID";
 
-            conn.Open();
-            var actions = conn.Get().Query<FileAction>(sql, new { UserID = userID }).AsList<FileAction>();
+            connection.Open();
+            var actions = connection.Get().Query<FileAction>(sql, new { UserID = userID }).AsList<FileAction>();
 
             actions.ForEach(action => sortedActions.Add(action.ActionTime, action));
 
