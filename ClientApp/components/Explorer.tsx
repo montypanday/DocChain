@@ -3,7 +3,12 @@ import { render } from 'react-dom';
 import { LoadingGif } from '../components/loadingGif';
 import { SearchBar } from '../components/SearchBar';
 import { Row } from '../components/Row';
+<<<<<<< HEAD
 import { Link, NavLink, Redirect } from "react-router-dom";
+=======
+import { BreadCrumb } from '../components/breadCrumb';
+import { Link, NavLink } from "react-router-dom";
+>>>>>>> 04c1c30acf7531cea73a75f248920b0c050f31b3
 //import { Modal } from '../components/Modal';
 
 export class Explorer extends React.Component<{}, {}> {
@@ -72,6 +77,7 @@ export class Explorer extends React.Component<{}, {}> {
 
             return (
                 <div className="well well-lg pull-down">
+                    <BreadCrumb address="Home" />
                     <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#f5f5f5' }}>
                         <SearchBar />
                     </div>

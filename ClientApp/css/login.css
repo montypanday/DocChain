@@ -97,20 +97,22 @@
     }
 
     .grid-container {
-        top: 20%;
+        top: 10%;
         margin-left: -20vw;
-        width: 40vw;
+        width: 60vw;
         grid-template: repeat(3, 20vw) / repeat(2, 20vw);
-        grid-row-gap: 1vh;
+        grid-row-gap: 4vh;
         grid-column-gap: 0;
         grid-template-areas: 'select select' 'onedrive box' 'googledrive dropbox';
     }
 
     .box-logo, .dropbox-logo, .googledrive-logo, .onedrive-logo {
-        height: 10vw;
+        height: 20vw;
     }
 
     .select {
         font-size:2vh;
     }
 }
+
+
