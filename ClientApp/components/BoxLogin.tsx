@@ -40,7 +40,6 @@ export class BoxLogin extends React.Component<{}, LoginState> {
                     <a className="logo-link" href="https://account.box.com/api/oauth2/authorize?response_type=code&client_id=3syx1zpgoraznjex526u78ozutwvgeby&state=security_token%3DKnhMJatFipTAnM0nHlZA">
                         <div className="box">
                             <section className="box-logo"></section>
-                            <p>Box</p>
                         </div>
                     </a>
                 </div>;

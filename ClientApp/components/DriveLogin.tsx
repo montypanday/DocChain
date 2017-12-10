@@ -54,7 +54,6 @@ export class DriveLogin extends React.Component<{}, LoginState> {
                     <a className="logo-link" href="https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/drive&client_id=900082198060-kdvsjc3ecm82gn48dl9083cg0gihggm1.apps.googleusercontent.com&redirect_uri=https://localhost:44374/Login/&response_type=code&access_type=offline&include_granted_scopes=true&state=state_parameter_passthrough_value&prompt=consent" >
                         <div className="logo" >
                             <section className="googledrive-logo" ></section>
-                            <p>Google Drive</p>
                         </div>
                     </a>
                 </div>;
