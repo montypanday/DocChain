@@ -73,12 +73,12 @@ namespace front_end.Controllers
             BoxClient client = new BoxClient(new BoxConfig("3syx1zpgoraznjex526u78ozutwvgeby", "0vf9isuhRisKTy9nvR1CLVaSObuaG3lx", new Uri("https://127.0.0.1")), session);
             BoxCollection<BoxItem> items = await client.FoldersManager.GetFolderItemsAsync("0", 500,0, new List<string>()
             {
-                BoxFolder.FieldCreatedAt,BoxFolder.FieldCreatedBy,BoxFolder.FieldFolderUploadEmail,
-                BoxFolder.FieldHasCollaborations,BoxFolder.FieldItemCollection,BoxFolder.FieldItemStatus, BoxFolder.FieldModifiedAt,BoxFolder.FieldModifiedBy,
-                BoxFolder.FieldName, BoxFolder.FieldOwnedBy,BoxFolder.FieldPathCollection,BoxFolder.FieldPermissions,
+                BoxFolder.FieldCreatedAt,BoxFolder.FieldCreatedBy,
+                BoxFolder.FieldModifiedAt,
+                BoxFolder.FieldName, BoxFolder.FieldOwnedBy,BoxFolder.FieldPathCollection,
                 BoxFolder.FieldSharedLink,BoxFolder.FieldSize,
-                BoxFile.FieldExpiringEmbedLink, BoxFile.FieldExtension, BoxFile.FieldModifiedAt, BoxFile.FieldModifiedBy,
-                BoxFile.FieldName, BoxFile.FieldOwnedBy, BoxFile.FieldPathCollection, BoxFile.FieldSha1, BoxFile.FieldSharedLink, BoxFile.FieldSize
+                BoxFile.FieldExpiringEmbedLink, BoxFile.FieldModifiedAt,
+                BoxFile.FieldName, BoxFile.FieldPathCollection, BoxFile.FieldSha1, BoxFile.FieldSharedLink, BoxFile.FieldSize
 
             });
             Content[] list = new Content[items.TotalCount];
@@ -151,6 +151,42 @@ namespace front_end.Controllers
                 list[i] = new Content(files[i].Kind, files[i].Id, files[i].Name, files[i].Size.ToString(), files[i].Md5Checksum, files[i].ModifiedTime.ToString(), files[i].WebViewLink, files[i].WebContentLink);
             }
             return Json(list);
+        }
+
+        [Route("RefreshBox")]
+        [HttpGet]
+        public async Task<JsonResult> RefreshBox(string previousSession)
+        {
+            var oobject = JsonConvert.DeserializeObject<OAuthSession>(previousSession);
+            OAuthSession session = new OAuthSession(oobject.AccessToken, oobject.RefreshToken, oobject.ExpiresIn, oobject.TokenType);
+            BoxClient client = new BoxClient(new BoxConfig("3syx1zpgoraznjex526u78ozutwvgeby", "0vf9isuhRisKTy9nvR1CLVaSObuaG3lx", new Uri("https://127.0.0.1")), session);
+            OAuthSession newSession = await client.Auth.RefreshAccessTokenAsync(oobject.AccessToken);
+            return Json(newSession);
+        }
+
+        [Route("refreshGoogle")]
+        [HttpGet]
+        public async Task<HttpResponseMessage> refreshGoogle(string accessToken, string refreshToken)
+        {
+            HttpClient httpClient = new HttpClient();
+            Dictionary<string, string> content = new Dictionary<string, string>();
+            content.Add("client_id", "900082198060-kdvsjc3ecm82gn48dl9083cg0gihggm1.apps.googleusercontent.com");
+            content.Add("client_secret", "i1EN7mH7usgONgINmnNKbOFi");
+            content.Add("refresh_token", refreshToken);
+            content.Add("grant_type", "refresh_token");
+            FormUrlEncodedContent formContent =
+                new FormUrlEncodedContent(content);
+
+            //var content = new FormUrlEncodedContent(new[]
+            //{
+            //    new KeyValuePair<string, string>("client_id","900082198060-kdvsjc3ecm82gn48dl9083cg0gihggm1.apps.googleusercontent.com"),
+            //    new KeyValuePair<string, string>("client_secret","i1EN7mH7usgONgINmnNKbOFi"),
+            //    new KeyValuePair<string, string>("refresh_token",refreshToken),
+            //    new KeyValuePair<string, string>("grant_type", "refresh_token")
+            //});
+            //content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/x-www-form-urlencoded");
+            var response = await httpClient.PostAsync("https://www.googleapis.com/oauth2/v4/token", formContent);
+            return response;
         }
     }
 }

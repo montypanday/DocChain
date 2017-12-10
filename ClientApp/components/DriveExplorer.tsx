@@ -30,7 +30,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
 
     }
 
-    componentWillMount() {
+    componentDidMount() {
         // this is the network call made everytime the page is reload, before the render method.
         fetch("/api/Login/GetGoogleSession?google_access_token=" + sessionStorage.getItem("google_access_token") + "&google_refresh_token=" + sessionStorage.getItem("google_refresh_token"))
             .then(response => {
