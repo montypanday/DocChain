@@ -2,23 +2,30 @@ import * as React from "react";
 import { Link, NavLink } from "react-router-dom";
 
 export class NavMenu extends React.Component<{}, {}> {
-    public render() {
-
-        var placeholder;
-        if (sessionStorage.getItem("accessToken") == null) {
-            placeholder = <li>
-                <NavLink to={"/Login"} activeClassName="active">
-                    <i className="fa fa-sign-in" aria-hidden="true"></i> Login
-                            </NavLink>
-            </li>;
-        } else {
-            placeholder = <li>
-                <NavLink to={"/logout"} activeClassName="active">
-                    <i className="fa fa-sign-out" aria-hidden="true"></i> Logout
-                            </NavLink>
-            </li>;
+    constructor() {
+        super();
+        this.updateNavBar = this.updateNavBar.bind(this);
+        this.state = {
+            boxSigned: false,
+            googleSigned: false
         }
+    }
+    updateNavBar() {
+        console.log("updating Nav bar");
+        if (sessionStorage.getItem("box_access_token") != null && this.state["boxSigned"] == false)
+        {
+            this.setState({ boxSigned: true });
+        }
+        if (sessionStorage.getItem("google_access_token") != null && this.state['googleSigned'] == false)
+        {
+            this.setState({ googleSigned: true });
+        }
+    }
 
+    componentDidMount() {
+        setInterval(this.updateNavBar,500);
+    }
+    public render() {
         return <div className="main-nav">
             <div className="navbar navbar-inverse navbar-fixed-top">
                 <div className="navbar-header">
@@ -38,29 +45,33 @@ export class NavMenu extends React.Component<{}, {}> {
                                 <i className="fa fa-home" aria-hidden="true"></i> Home
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to={"/explorer"} activeClassName="active">
-                                <i className="fa fa-folder-open-o" aria-hidden="true"></i> Box
+                        {this.state['boxSigned'] == true &&
+                                <li>
+                                    <NavLink to={"/explorer"} activeClassName="active">
+                                        <i className="fa fa-folder-open-o" aria-hidden="true"></i> Box
                             </NavLink>
 
-                        </li>
-                        <li>
-                            <NavLink to={"/driveExplorer"} activeClassName="active">
-                                <i className="fa fa-folder-open-o" aria-hidden="true"></i> Google Drive
+                                </li>
+                        }
+                        {
+                            this.state['googleSigned'] == true &&
+                            <li>
+                                <NavLink to={"/driveExplorer"} activeClassName="active">
+                                    <i className="fa fa-folder-open-o" aria-hidden="true"></i> Google Drive
                             </NavLink>
 
-                        </li>
+                            </li>
+                        }
                         <li>
                             <NavLink to={"/faq"} activeClassName="active">
                                 <i className="fa fa-question-circle" aria-hidden="true"></i> FAQ
                             </NavLink>
-
                         </li>
-
-                        {
-                            placeholder
-                        }
-
+                        <li>
+                            <NavLink to={"/Login"} activeClassName="active">
+                                <i className="fa fa-sign-in" aria-hidden="true"></i> Account
+                            </NavLink>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -5,9 +5,6 @@ import { SearchBar } from '../components/SearchBar';
 import { Row } from '../components/Row';
 import { BreadCrumb } from '../components/breadCrumb';
 import { Link, NavLink, Redirect } from "react-router-dom";
-//import * as ReactBootstrap from 'react-bootstrap';
-//var Modal = ReactBootstrap.Modal;
-
 
 export class DriveExplorer extends React.Component<{}, {}> {
 
@@ -29,7 +26,6 @@ export class DriveExplorer extends React.Component<{}, {}> {
 
             PreviewUrl: ""
         }
-
     }
 
     componentDidMount() {
@@ -40,10 +36,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
                 return response.json()  //we only get here if there is no error)
             })
             .then(data => {
-                // console messages in order to help you understand what's happening
-                //console.log(data);
                 this.setState({ filesarray: data, loading: false });
-                //console.log("this is filearray->>>   " + JSON.stringify(this.state['filesarray']['10']));
             })
     }
 
@@ -52,15 +45,6 @@ export class DriveExplorer extends React.Component<{}, {}> {
     }
 
     public render() {
-
-        //if (this.state['showingPreview'] === true) {
-        //    return(
-        //        <div className="embed-responsive embed-responsive-16by9">
-        //            <iframe className="embed-responsive-item" src={this.state['PreviewUrl']}></iframe>
-        //        </div>
-        //    );
-
-        //}
 
         if (sessionStorage.getItem("google_access_token") == null) {
             return <Redirect to='/driveLogin' />
@@ -75,10 +59,10 @@ export class DriveExplorer extends React.Component<{}, {}> {
 
             return (
                 <div className="well well-lg pull-down">
-                    <BreadCrumb address="Home" />
                     <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#f5f5f5' }}>
                         <SearchBar />
                     </div>
+                    <BreadCrumb address="Home" />
                     <table className="table table-striped table-hover table-responsive well header-fixed">
                         <thead>
                             <tr>
@@ -96,7 +80,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
                 </div>
             );
         } else
-        // determine if that loading is finished and render accordingly
+            // determine if that loading is finished and render accordingly
             return (
                 <div className="loadingGif">
                     <LoadingGif />

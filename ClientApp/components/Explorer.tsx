@@ -26,11 +26,9 @@ export class Explorer extends React.Component<{}, {}> {
 
             PreviewUrl: ""
         }
-
     }
 
     componentDidMount() {
-        // this is the network call made everytime the page is reload, before the render method.
         fetch("/api/Login/GetBoxFiles/?token=" + sessionStorage.getItem("OAuthSession"))
             .then(response => {
                 if (!response.ok) { throw response }
@@ -39,8 +37,8 @@ export class Explorer extends React.Component<{}, {}> {
             .then(data => {
                 // console messages in order to help you understand what's happening
                 //console.log(data);
-                this.setState({ filesarray: data, loading: false });
-                //console.log("this is filearray->>>   " + JSON.stringify(this.state['filesarray']['10']));
+                //this.setState({ filesarray: data, loading: false });
+                console.log("this is filearray->>>   " + JSON.stringify(this.state['filesarray']));
             })
         fetch("https://api.box.com/2.0/folders/0/items?fields=name,size,id,type,sha1,path_collection,modified_at,shared_link,expiring_embed_link", {
             method: "GET",
@@ -49,30 +47,45 @@ export class Explorer extends React.Component<{}, {}> {
                 'Authorization': 'Bearer ' + sessionStorage.getItem("box_access_token"),
                 'Accept': 'application/json'
             }
-
         })
+            .then(response => {
+                if (!response.ok) { throw response }
+                return response.json()  //we only get here if there is no error)
+            })
             .then(data => {
                 console.log(data);
+                var newData = [];
+                for (var i = 0; i < data["entries"].length; i++) {
+
+                    var a = {};
+                    if (data.entries[i].type == "file") {
+                        console.log(data.entries[i].type);
+                        a = { type: data.entries[i].type, id: data.entries[i].id, fileName: data.entries[i].name, size: this.formatSizeUnits(data.entries[i].size), hash: data.entries[i].sha1, lastModified: (new Date(Date.parse(data.entries[i].modified_at.toString()))).toUTCString(), embedLink: data.entries[i].expiring_embed_link.url, downloadUrl: "" }
+                    }
+                    else {
+                        a = { type: data.entries[i].type, id: data.entries[i].id, fileName: data.entries[i].name, size: this.formatSizeUnits(data.entries[i].size), hash: "", lastModified: (new Date(Date.parse(data.entries[i].modified_at.toString()))).toUTCString(), embedLink: "", downloadUrl: "" }
+                    }
+
+                    newData.push(a)
+
+                }
+                if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
+                    this.setState({ filesarray: newData, loading: false });
+                    console.log("different data was received this time.")
+                }
             })
-
-
-
-
     }
 
-    //toggleModal() {
-    //    this.setState({ isOpen: true });
-    //}
-
+    formatSizeUnits(bytes) {
+        if (bytes >= 1073741824) { bytes = (bytes / 1073741824).toFixed(2) + ' GB'; }
+        else if (bytes >= 1048576) { bytes = (bytes / 1048576).toFixed(2) + ' MB'; }
+        else if (bytes >= 1024) { bytes = (bytes / 1024).toFixed(2) + ' KB'; }
+        else if (bytes > 1) { bytes = bytes + ' bytes'; }
+        else if (bytes == 1) { bytes = bytes + ' byte'; }
+        else { bytes = '0 byte'; }
+        return bytes;
+    }
     public render() {
-        //if (this.state['showingPreview'] === true) {
-        //    return(
-        //        <div className="embed-responsive embed-responsive-16by9">
-        //            <iframe className="embed-responsive-item" src={this.state['PreviewUrl']}></iframe>
-        //        </div>
-        //    );
-
-        //}
         if (sessionStorage.getItem("box_access_token") == null) {
             return <Redirect to='/boxLogin' />
 
@@ -86,10 +99,10 @@ export class Explorer extends React.Component<{}, {}> {
 
             return (
                 <div className="well well-lg pull-down">
-                    <BreadCrumb address="Home" />
                     <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#f5f5f5' }}>
                         <SearchBar />
                     </div>
+                    <BreadCrumb address="Home" />
                     <table className="table table-striped table-hover table-responsive well header-fixed">
                         <thead>
                             <tr>

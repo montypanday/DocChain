@@ -125,7 +125,6 @@ namespace front_end.Controllers
                     ClientSecret = "i1EN7mH7usgONgINmnNKbOFi"
                 }
             });
-
             UserCredential credential = new UserCredential(fakeflow, "fakeid", token);
             var serviceInitializer = new BaseClientService.Initializer()
             {
@@ -138,14 +137,8 @@ namespace front_end.Controllers
             request.PrettyPrint = true;
             request.Q = "'root' in parents and trashed = false";
             request.Fields = @"files(*)";
-            // List files.
             IList<Google.Apis.Drive.v3.Data.File> files = request.Execute().Files;
-            //DriveService service = new DriveService(new BaseClientService.Initializer());
-            //FilesResource.ListRequest request = service.Files.List();
-            //FileList files = request.Execute();
-
             Content[] list = new Content[files.Count];
-
             for(int i=0; i<files.Count;i++)
             {
                 list[i] = new Content(files[i].Kind, files[i].Id, files[i].Name, files[i].Size.ToString(), files[i].Md5Checksum, files[i].ModifiedTime.ToString(), files[i].WebViewLink, files[i].WebContentLink);

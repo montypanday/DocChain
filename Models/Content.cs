@@ -17,8 +17,8 @@ namespace front_end.Models
             this.lastModified = modifiedat;
             this.embedLink = embedlink;
             this.downloadUrl = downloadlink;
-            
-            
+
+
         }
         public string type { get; set; }
         // in Google, type is called kind and is always drive#file.
@@ -36,7 +36,7 @@ namespace front_end.Models
         // Box uses sha1 and Drive uses MD5
         // To be checked if works fine when using with blockchain.
 
-        
+
         public string lastModified { get; set; }
         // both uses datetime object
         // Drive uses RFC 3339 timestamp
