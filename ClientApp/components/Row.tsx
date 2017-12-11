@@ -9,6 +9,8 @@ export interface AppProps {
     lastModified: string,
     downloadUrl: string,
     //isOpen: boolean
+    navHandler: any
+    id:any
 }
 
 export interface AppState {
@@ -68,7 +70,7 @@ export class Row extends React.Component<AppProps, AppState> {
         var a = this.getFileExtension(this.props.filename);
         var iconClass = this.getIconClass(a);
         return (
-            <tr>
+            <tr onClick={this.props.navHandler} >
                 <td className="col-xs-6 "><span className={iconClass} style={{ verticalAlign: 'middle', float: 'left' }}></span><h5 style={{ float: 'left', paddingLeft: '15px' }}>{this.props.filename}</h5></td>
                 <td className="col-xs-1 ">
                     <div className="dropdown">

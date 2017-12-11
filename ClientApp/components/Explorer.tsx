@@ -6,15 +6,16 @@ import { Row } from '../components/Row';
 import { Link, NavLink, Redirect } from "react-router-dom";
 import { BreadCrumb } from '../components/breadCrumb';
 require('../css/breadcrumb.css');
-
+import { Modal } from 'react-bootstrap';
 
 export class Explorer extends React.Component<{}, {}> {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.handleSearchBarChange = this.handleSearchBarChange.bind(this);
         this.performSearch = this.performSearch.bind(this);
         this.formatSizeUnits = this.formatSizeUnits.bind(this);
         this.searchRoot = this.searchRoot.bind(this);
+        this.navigate = this.navigate.bind(this);
         this.state = {
             // This is space we will put the json response
             filesarray: {},
@@ -30,7 +31,13 @@ export class Explorer extends React.Component<{}, {}> {
 
             PreviewUrl: "",
 
-            query: ""
+            PreviewFileName: "",
+
+            query: "",
+
+            showModal: false,
+
+
 
         }
     }
@@ -87,8 +94,7 @@ export class Explorer extends React.Component<{}, {}> {
     handleSearchBarChange(e) {
         console.log("searching => " + e.target.value);
         this.setState({ query: e.target.value });
-        if (this.state['query'] == "")
-        {
+        if (this.state['query'] == "") {
             this.searchRoot();
         }
     }
@@ -133,7 +139,20 @@ export class Explorer extends React.Component<{}, {}> {
                 })
         }
     }
+    navigate(row,event) {
 
+        console.log(row);
+        if (row.type == "folder")
+        {
+
+        }
+        if (row.type == "file")
+        {
+            //this.setState({PreviewUrl})
+
+        }
+
+    }
 
     public render() {
         if (sessionStorage.getItem("box_access_token") == null) {
@@ -144,8 +163,8 @@ export class Explorer extends React.Component<{}, {}> {
             // this .map function is like a foreach loop on filesarray, gives us a row object which has all the values that are related to a file object
             //rows is the variable which is being inserted into the render function at its given function see {rows} in render method.
             var rows = this.state['filesarray'].map(function (row) {
-                return (<Row key={row.ID} filename={row.fileName} size={row.size} lastModified={row.lastModified} downloadUrl={row.downloadUrl}></Row>);
-            });
+                return (<Row key={row.ID} id={row.ID} navHandler={this.navigate.bind(null,row)} filename={row.fileName} size={row.size} lastModified={row.lastModified} downloadUrl={row.downloadUrl}></Row>);
+            }.bind(this));
 
             return (
                 <div className="well well-lg pull-down">
@@ -179,6 +198,11 @@ export class Explorer extends React.Component<{}, {}> {
                             {rows}
                         </tbody>
                     </table>
+                    <Modal show={this.state['showmodal']}>
+                        <Modal.Header closeButton>
+                            <Modal.Title id="contained-modal-title-lg">Modal heading</Modal.Title>
+                        </Modal.Header>
+                    </Modal>
                 </div>
             );
         }

@@ -6,6 +6,9 @@ import { Row } from '../components/Row';
 import { BreadCrumb } from '../components/breadCrumb';
 import { Link, NavLink, Redirect } from "react-router-dom";
 require('../css/breadcrumb.css');
+import { Modal } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+
 
 export class DriveExplorer extends React.Component<{}, {}> {
 
@@ -14,6 +17,8 @@ export class DriveExplorer extends React.Component<{}, {}> {
         this.handleSearchBarChange = this.handleSearchBarChange.bind(this);
         this.performSearch = this.performSearch.bind(this);
         this.searchRoot = this.searchRoot.bind(this);
+        this.navigate = this.navigate.bind(this);
+        this.closeModal = this.closeModal.bind(this);
         this.state = {
             // This is space we will put the json response
             filesarray: {},
@@ -29,7 +34,12 @@ export class DriveExplorer extends React.Component<{}, {}> {
 
             PreviewUrl: "",
 
-            query:""
+            PreviewFileName: "",
+
+            query: "",
+
+            showModal: false,
+
         }
     }
 
@@ -140,8 +150,15 @@ export class DriveExplorer extends React.Component<{}, {}> {
         }
 
     }
+    navigate(row,event)
+    {
+        console.log(row);
+        this.setState({ PreviewUrl: row.embedLink, PreviewFileName: row.fileName, showModal: true})
+    }
 
-
+    closeModal() {
+        this.setState({PreviewUrl: "", showModal: false, PreviewFileName: ""})
+    }
     showPreview() {
         this.setState({ showingPreview: true });
     }
@@ -156,8 +173,8 @@ export class DriveExplorer extends React.Component<{}, {}> {
             // this .map function is like a foreach loop on filesarray, gives us a row object which has all the values that are related to a file object
             //rows is the variable which is being inserted into the render function at its given function see {rows} in render method.
             var rows = this.state['filesarray'].map(function (row) {
-                return (<Row key={row.ID} filename={row.fileName} size={row.size} lastModified={row.lastModified} downloadUrl={row.downloadUrl}></Row>);
-            });
+                return (<Row key={row.ID} id={row.ID} navHandler={this.navigate.bind(null, row)} filename={row.fileName} size={row.size} lastModified={row.lastModified} downloadUrl={row.downloadUrl}></Row>);
+            }.bind(this));
 
             return (
                 <div className="well well-lg pull-down">
@@ -191,10 +208,21 @@ export class DriveExplorer extends React.Component<{}, {}> {
                             {rows}
                         </tbody>
                     </table>
+                    <Modal show={this.state["showModal"]}>
+                        <Modal.Header closeButton>
+                            <Modal.Title id="contained-modal-title-lg">{this.state['PreviewFileName']}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                           <embed src={this.state["PreviewUrl"]}></embed>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button onClick={this.closeModal}>Close</Button>
+                        </Modal.Footer>
+                    </Modal>
                 </div>
             );
         } else
-            // determine if that loading is finished and render accordingly
+            // determine if that loading is finished and render accordinglyf
             return (
                 <div className="loadingGif">
                     <LoadingGif />
