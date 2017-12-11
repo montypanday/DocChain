@@ -14,6 +14,6 @@ export class LoadingGif extends React.Component<{}, {}> {
         super();
     }
     public render() {
-        return (<div style= { imageStyle } > <img src="dist/loading-animations-preloader-gifs-ui-ux-effects-18.gif" /></div >);
+        return (<div style= { imageStyle } > <img src="dist/loading.gif" /></div >);
     }
 }
