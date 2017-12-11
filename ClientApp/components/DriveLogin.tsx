@@ -61,5 +61,4 @@ export class DriveLogin extends React.Component<{}, LoginState> {
             return null;
         }
     }
-
 }
