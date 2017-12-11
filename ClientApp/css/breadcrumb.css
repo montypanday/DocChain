@@ -20,7 +20,7 @@
     outline: none;
     display: block;
     float: left;
-    font-size: 12px;
+    cursor: pointer;
     line-height: 36px;
     color: white;
     /*need more margin on the left of links to accomodate the numbers*/

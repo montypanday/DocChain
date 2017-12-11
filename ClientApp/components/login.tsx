@@ -108,7 +108,7 @@ export class Login extends React.Component<{}, LoginState> {
         this.refreshGoogleAccessToken();
         setInterval(this.refreshBoxAccessToken, 1200000);
 
-        setInterval(this.refreshGoogleAccessToken, 10000);
+        setInterval(this.refreshGoogleAccessToken, 1200000);
     }
     render() {
         if (location.search != "") {

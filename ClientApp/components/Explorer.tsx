@@ -5,14 +5,16 @@ import { SearchBar } from '../components/SearchBar';
 import { Row } from '../components/Row';
 import { Link, NavLink, Redirect } from "react-router-dom";
 import { BreadCrumb } from '../components/breadCrumb';
-//import { Modal } from '../components/Modal';
+require('../css/breadcrumb.css');
+
 
 export class Explorer extends React.Component<{}, {}> {
     constructor() {
         super();
         this.handleSearchBarChange = this.handleSearchBarChange.bind(this);
         this.performSearch = this.performSearch.bind(this);
-
+        this.formatSizeUnits = this.formatSizeUnits.bind(this);
+        this.searchRoot = this.searchRoot.bind(this);
         this.state = {
             // This is space we will put the json response
             filesarray: {},
@@ -69,6 +71,15 @@ export class Explorer extends React.Component<{}, {}> {
                 }
             })
     }
+    formatSizeUnits(bytes) {
+        if (bytes >= 1073741824) { bytes = (bytes / 1073741824).toFixed(2) + ' GB'; }
+        else if (bytes >= 1048576) { bytes = (bytes / 1048576).toFixed(2) + ' MB'; }
+        else if (bytes >= 1024) { bytes = (bytes / 1024).toFixed(2) + ' KB'; }
+        else if (bytes > 1) { bytes = bytes + ' bytes'; }
+        else if (bytes == 1) { bytes = bytes + ' byte'; }
+        else { bytes = '0 byte'; }
+        return bytes;
+    }
     componentDidMount() {
         this.searchRoot();
     }
@@ -121,20 +132,9 @@ export class Explorer extends React.Component<{}, {}> {
                     }
                 })
         }
-
-
-
     }
 
-    formatSizeUnits(bytes) {
-        if (bytes >= 1073741824) { bytes = (bytes / 1073741824).toFixed(2) + ' GB'; }
-        else if (bytes >= 1048576) { bytes = (bytes / 1048576).toFixed(2) + ' MB'; }
-        else if (bytes >= 1024) { bytes = (bytes / 1024).toFixed(2) + ' KB'; }
-        else if (bytes > 1) { bytes = bytes + ' bytes'; }
-        else if (bytes == 1) { bytes = bytes + ' byte'; }
-        else { bytes = '0 byte'; }
-        return bytes;
-    }
+
     public render() {
         if (sessionStorage.getItem("box_access_token") == null) {
             return <Redirect to='/boxLogin' />
@@ -159,7 +159,12 @@ export class Explorer extends React.Component<{}, {}> {
                             </div>
                         </div>
                     </div>
-                    <BreadCrumb address="Home" />
+                    <div className="breadcrumb flat">
+                        <a onClick={this.searchRoot}>All Files</a>
+                        <a href="#">Compare</a>
+                        <a href="#">Order Confirmation</a>
+                        <a href="#" className="active">Checkout</a>
+                    </div>
                     <table className="table table-striped table-hover table-responsive well header-fixed">
                         <thead>
                             <tr>
