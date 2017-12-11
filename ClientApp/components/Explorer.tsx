@@ -113,9 +113,7 @@ export class Explorer extends React.Component<{}, {}> {
             return (
                 <div className="loadingGif">
                     <LoadingGif />
-                    <p>If this takes a long time to load</p>
-                    <p>please ensure you've logged in to your provider.</p>
-                    <p> You can login <NavLink to={"/login"}>here</NavLink>.</p>
+                    <p>Loading...</p>
                 </div>
             );
     }
