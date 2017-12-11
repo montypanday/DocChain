@@ -40,6 +40,10 @@ export class DriveExplorer extends React.Component<{}, {}> {
             })
     }
 
+    searchHandling() {
+
+    }
+
     showPreview() {
         this.setState({ showingPreview: true });
     }
@@ -60,7 +64,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
             return (
                 <div className="well well-lg pull-down">
                     <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#f5f5f5' }}>
-                        <SearchBar />
+                        <SearchBar searchhandler={this.searchHandling} />
                     </div>
                     <BreadCrumb address="Home" />
                     <table className="table table-striped table-hover table-responsive well header-fixed">

@@ -10,6 +10,8 @@ import { BreadCrumb } from '../components/breadCrumb';
 export class Explorer extends React.Component<{}, {}> {
     constructor() {
         super();
+        this.handleSearchBarChange = this.handleSearchBarChange.bind(this);
+        this.performSearch = this.performSearch.bind(this);
 
         this.state = {
             // This is space we will put the json response
@@ -24,22 +26,14 @@ export class Explorer extends React.Component<{}, {}> {
 
             //isOpen: false,
 
-            PreviewUrl: ""
+            PreviewUrl: "",
+
+            query: ""
+
         }
     }
 
-    componentDidMount() {
-        fetch("/api/Login/GetBoxFiles/?token=" + sessionStorage.getItem("OAuthSession"))
-            .then(response => {
-                if (!response.ok) { throw response }
-                return response.json()  //we only get here if there is no error)
-            })
-            .then(data => {
-                // console messages in order to help you understand what's happening
-                //console.log(data);
-                //this.setState({ filesarray: data, loading: false });
-                console.log("this is filearray->>>   " + JSON.stringify(this.state['filesarray']));
-            })
+    searchRoot() {
         fetch("https://api.box.com/2.0/folders/0/items?fields=name,size,id,type,sha1,path_collection,modified_at,shared_link,expiring_embed_link", {
             method: "GET",
             headers:
@@ -53,13 +47,13 @@ export class Explorer extends React.Component<{}, {}> {
                 return response.json()  //we only get here if there is no error)
             })
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 var newData = [];
                 for (var i = 0; i < data["entries"].length; i++) {
 
                     var a = {};
                     if (data.entries[i].type == "file") {
-                        console.log(data.entries[i].type);
+                        //console.log(data.entries[i].type);
                         a = { type: data.entries[i].type, id: data.entries[i].id, fileName: data.entries[i].name, size: this.formatSizeUnits(data.entries[i].size), hash: data.entries[i].sha1, lastModified: (new Date(Date.parse(data.entries[i].modified_at.toString()))).toUTCString(), embedLink: data.entries[i].expiring_embed_link.url, downloadUrl: "" }
                     }
                     else {
@@ -71,9 +65,65 @@ export class Explorer extends React.Component<{}, {}> {
                 }
                 if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
                     this.setState({ filesarray: newData, loading: false });
-                    console.log("different data was received this time.")
+                    //console.log("different data was received this time.")
                 }
             })
+    }
+    componentDidMount() {
+        this.searchRoot();
+    }
+
+    handleSearchBarChange(e) {
+        console.log("searching => " + e.target.value);
+        this.setState({ query: e.target.value });
+        if (this.state['query'] == "")
+        {
+            this.searchRoot();
+        }
+    }
+
+    performSearch(e) {
+        var querystring = this.state['query'];
+        if (querystring == "") { this.searchRoot(); }
+        else {
+            fetch("https://api.box.com/2.0/search?query=" + querystring + "&fields=name,size,id,type,sha1,path_collection,modified_at,shared_link,expiring_embed_link", {
+                method: "GET",
+                headers:
+                {
+                    'Authorization': 'Bearer ' + sessionStorage.getItem("box_access_token"),
+                    'Accept': 'application/json'
+                }
+            })
+                .then(response => {
+                    if (!response.ok) { throw response }
+                    return response.json()  //we only get here if there is no error)
+                })
+                .then(data => {
+
+                    var newData = [];
+                    for (var i = 0; i < data["entries"].length; i++) {
+
+                        var a = {};
+                        if (data.entries[i].type == "file") {
+
+                            a = { type: data.entries[i].type, id: data.entries[i].id, fileName: data.entries[i].name, size: this.formatSizeUnits(data.entries[i].size), hash: data.entries[i].sha1, lastModified: (new Date(Date.parse(data.entries[i].modified_at.toString()))).toUTCString(), embedLink: data.entries[i].expiring_embed_link.url, downloadUrl: "" }
+                        }
+                        else {
+                            a = { type: data.entries[i].type, id: data.entries[i].id, fileName: data.entries[i].name, size: this.formatSizeUnits(data.entries[i].size), hash: "", lastModified: (new Date(Date.parse(data.entries[i].modified_at.toString()))).toUTCString(), embedLink: "", downloadUrl: "" }
+                        }
+
+                        newData.push(a)
+
+                    }
+                    if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
+                        this.setState({ filesarray: newData, loading: false });
+                        //console.log("different data was received this time.")
+                    }
+                })
+        }
+
+
+
     }
 
     formatSizeUnits(bytes) {
@@ -100,7 +150,14 @@ export class Explorer extends React.Component<{}, {}> {
             return (
                 <div className="well well-lg pull-down">
                     <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#f5f5f5' }}>
-                        <SearchBar />
+                        <div className="col-lg-6" style={{ padding: '0px' }}>
+                            <div className="input-group">
+                                <input type="text" className="form-control" onChange={this.handleSearchBarChange} onKeyDown={this.performSearch} onKeyUp={this.performSearch} placeholder="Search for files and folders" />
+                                <span className="input-group-btn">
+                                    <button className="btn btn-default" type="button" onClick={this.performSearch}> Search</button>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                     <BreadCrumb address="Home" />
                     <table className="table table-striped table-hover table-responsive well header-fixed">
