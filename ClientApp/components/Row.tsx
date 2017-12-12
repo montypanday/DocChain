@@ -41,6 +41,8 @@ export class Row extends React.Component<AppProps, AppState> {
                 return "fa fa-file-text-o fa-2x";
             case 'docx':
                 return "fa fa-file-word-o fa-2x";
+            case 'doc':
+                return "fa fa-file-word-o fa-2x";
             case 'zip':
                 return "fa fa-file-archive-o fa-2x";
             case 'pptx':
@@ -70,8 +72,13 @@ export class Row extends React.Component<AppProps, AppState> {
         var a = this.getFileExtension(this.props.filename);
         var iconClass = this.getIconClass(a);
         return (
-            <tr onClick={this.props.navHandler} >
-                <td className="col-xs-6 "><span className={iconClass} style={{ verticalAlign: 'middle', float: 'left' }}></span><h5 style={{ float: 'left', paddingLeft: '15px' }}>{this.props.filename}</h5></td>
+            <tr>
+                <td className="col-xs-6 " >
+                    <a onClick={this.props.navHandler} style={{cursor: 'pointer'}}>
+                        <span className={iconClass} style={{ verticalAlign: 'middle', float: 'left' }}></span>
+                        <h5 style={{ float: 'left', paddingLeft: '15px' }}>{this.props.filename}</h5>
+                    </a>
+                </td>
                 <td className="col-xs-1 ">
                     <div className="dropdown">
                         <button className="btn btn-default dropdown-toggle" style={{ verticalAlign: 'middle'}} type="button" data-toggle="dropdown">...
