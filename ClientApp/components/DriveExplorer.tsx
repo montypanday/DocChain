@@ -157,16 +157,16 @@ export class DriveExplorer extends React.Component<{}, {}> {
         var res = row.embedLink.toString();
         var str = res.replace("view", "preview");
         console.log(row);
-<<<<<<< HEAD
+
         this.setState({ PreviewUrl: str, PreviewFileName: row.fileName, showModal: true})
-=======
+
         if (row.type == "folder") {
 
         }
         if (row.type == "drive#file") {
             this.setState({ PreviewUrl: row.embedLink, PreviewFileName: row.fileName, showModal: true })
         }
->>>>>>> 856470a51b9640303e6c7cddde4b8bc7e4b7bbe3
+
     }
 
     closeModal() {
@@ -227,11 +227,11 @@ export class DriveExplorer extends React.Component<{}, {}> {
                             <Modal.Title id="contained-modal-title-lg">{this.state['PreviewFileName']}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-<<<<<<< HEAD
+
                             <iframe src={this.state["PreviewUrl"]} width ='200px' height ='200px'></iframe>
-=======
+
                             <embed src={this.state["PreviewUrl"]}></embed>
->>>>>>> 856470a51b9640303e6c7cddde4b8bc7e4b7bbe3
+
                         </Modal.Body>
                         <Modal.Footer>
                             <Button onClick={this.closeModal}>Close</Button>
