@@ -7,8 +7,10 @@ import { Link, NavLink, Redirect } from "react-router-dom";
 import { BreadCrumb } from '../components/breadCrumb';
 require('../css/breadcrumb.css');
 import { Modal } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 export class Explorer extends React.Component<{}, {}> {
+
     constructor(props) {
         super(props);
         this.handleSearchBarChange = this.handleSearchBarChange.bind(this);
@@ -16,6 +18,7 @@ export class Explorer extends React.Component<{}, {}> {
         this.formatSizeUnits = this.formatSizeUnits.bind(this);
         this.searchRoot = this.searchRoot.bind(this);
         this.navigate = this.navigate.bind(this);
+        this.closeModal = this.closeModal.bind(this);
         this.state = {
             // This is space we will put the json response
             filesarray: {},
@@ -36,8 +39,6 @@ export class Explorer extends React.Component<{}, {}> {
             query: "",
 
             showModal: false,
-
-
 
         }
     }
@@ -78,6 +79,7 @@ export class Explorer extends React.Component<{}, {}> {
                 }
             })
     }
+
     formatSizeUnits(bytes) {
         if (bytes >= 1073741824) { bytes = (bytes / 1073741824).toFixed(2) + ' GB'; }
         else if (bytes >= 1048576) { bytes = (bytes / 1048576).toFixed(2) + ' MB'; }
@@ -87,6 +89,7 @@ export class Explorer extends React.Component<{}, {}> {
         else { bytes = '0 byte'; }
         return bytes;
     }
+
     componentDidMount() {
         this.searchRoot();
     }
@@ -148,10 +151,17 @@ export class Explorer extends React.Component<{}, {}> {
         }
         if (row.type == "file")
         {
-            //this.setState({PreviewUrl})
-
+            this.setState({ PreviewUrl: row.embedLink, PreviewFileName: row.fileName, showModal: true })
         }
 
+    }
+
+    closeModal() {
+        this.setState({ PreviewUrl: "", showModal: false, PreviewFileName: "" })
+    }
+
+    showPreview() {
+        this.setState({ showingPreview: true });
     }
 
     public render() {
@@ -198,10 +208,16 @@ export class Explorer extends React.Component<{}, {}> {
                             {rows}
                         </tbody>
                     </table>
-                    <Modal show={this.state['showmodal']}>
+                    <Modal show={this.state["showModal"]}>
                         <Modal.Header closeButton>
-                            <Modal.Title id="contained-modal-title-lg">Modal heading</Modal.Title>
+                            <Modal.Title id="contained-modal-title-lg">{this.state['PreviewFileName']}</Modal.Title>
                         </Modal.Header>
+                        <Modal.Body>
+                            <embed src={this.state["PreviewUrl"]}></embed>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button onClick={this.closeModal}>Close</Button>
+                        </Modal.Footer>
                     </Modal>
                 </div>
             );
