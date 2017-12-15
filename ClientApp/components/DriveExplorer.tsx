@@ -229,7 +229,6 @@ export class DriveExplorer extends React.Component<{}, {}> {
                         </Modal.Header>
                         <Modal.Body>
 
-                            <iframe src={this.state["PreviewUrl"]} width ='200px' height ='200px'></iframe>
 
                             <embed src={this.state["PreviewUrl"]}></embed>
 
