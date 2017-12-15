@@ -3,12 +3,11 @@ import { render } from 'react-dom';
 import { LoadingGif } from '../components/loadingGif';
 import { SearchBar } from '../components/SearchBar';
 import { Row } from '../components/Row';
-import { BreadCrumb } from '../components/breadCrumb';
 import { Link, NavLink, Redirect } from "react-router-dom";
+import { BreadCrumb } from '../components/breadCrumb';
 require('../css/breadcrumb.css');
 import { Modal } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
-
 
 export class DriveExplorer extends React.Component<{}, {}> {
 
@@ -16,6 +15,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
         super();
         this.handleSearchBarChange = this.handleSearchBarChange.bind(this);
         this.performSearch = this.performSearch.bind(this);
+        this.formatSizeUnits = this.formatSizeUnits.bind(this);
         this.searchRoot = this.searchRoot.bind(this);
         this.navigate = this.navigate.bind(this);
         this.closeModal = this.closeModal.bind(this);
@@ -30,7 +30,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
 
             errorMessage: "",
 
-            showingPreview: false,
+            //isOpen: false,
 
             PreviewUrl: "",
 
@@ -79,6 +79,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
                 }
             })
     }
+
     formatSizeUnits(bytes) {
         if (bytes >= 1073741824) { bytes = (bytes / 1073741824).toFixed(2) + ' GB'; }
         else if (bytes >= 1048576) { bytes = (bytes / 1048576).toFixed(2) + ' MB'; }
@@ -109,6 +110,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
             this.searchRoot();
         }
     }
+
     performSearch() {
         var querystring = this.state['query'];
         if (querystring == ""){this.searchRoot }
@@ -149,16 +151,28 @@ export class DriveExplorer extends React.Component<{}, {}> {
                 })
         }
 
-    }
+    }//"https://docs.google.com/viewer?url="+
     navigate(row,event)
     {
+        var res = row.embedLink.toString();
+        var str = res.replace("view", "preview");
         console.log(row);
-        this.setState({ PreviewUrl: row.embedLink, PreviewFileName: row.fileName, showModal: true})
+<<<<<<< HEAD
+        this.setState({ PreviewUrl: str, PreviewFileName: row.fileName, showModal: true})
+=======
+        if (row.type == "folder") {
+
+        }
+        if (row.type == "drive#file") {
+            this.setState({ PreviewUrl: row.embedLink, PreviewFileName: row.fileName, showModal: true })
+        }
+>>>>>>> 856470a51b9640303e6c7cddde4b8bc7e4b7bbe3
     }
 
     closeModal() {
         this.setState({PreviewUrl: "", showModal: false, PreviewFileName: ""})
     }
+
     showPreview() {
         this.setState({ showingPreview: true });
     }
@@ -208,12 +222,16 @@ export class DriveExplorer extends React.Component<{}, {}> {
                             {rows}
                         </tbody>
                     </table>
-                    <Modal show={this.state["showModal"]}>
+                    <Modal show={this.state["showModal"]} bsSize="large" >
                         <Modal.Header closeButton>
                             <Modal.Title id="contained-modal-title-lg">{this.state['PreviewFileName']}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                           <embed src={this.state["PreviewUrl"]}></embed>
+<<<<<<< HEAD
+                            <iframe src={this.state["PreviewUrl"]} width ='200px' height ='200px'></iframe>
+=======
+                            <embed src={this.state["PreviewUrl"]}></embed>
+>>>>>>> 856470a51b9640303e6c7cddde4b8bc7e4b7bbe3
                         </Modal.Body>
                         <Modal.Footer>
                             <Button onClick={this.closeModal}>Close</Button>
