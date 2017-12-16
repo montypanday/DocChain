@@ -19,6 +19,8 @@ export class DriveExplorer extends React.Component<{}, {}> {
         this.searchRoot = this.searchRoot.bind(this);
         this.navigate = this.navigate.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.navigateOut = this.navigateOut.bind(this);
+        this.searchInFolder = this.searchInFolder.bind(this);
         this.state = {
             // This is space we will put the json response
             filesarray: {},
@@ -40,10 +42,13 @@ export class DriveExplorer extends React.Component<{}, {}> {
 
             showModal: false,
 
+            pathCollection: [{ fileId: "root", Name: "All Files" }]
+
         }
     }
 
     searchRoot() {
+        console.log("Searching in Root Folder");
         fetch("https://www.googleapis.com/drive/v3/files?q='root'+in+parents&trashed=false&fields=files", {
             method: "GET",
             headers:
@@ -62,16 +67,14 @@ export class DriveExplorer extends React.Component<{}, {}> {
                 for (var i = 0; i < data["files"].length; i++) {
 
                     var a = {};
-                    if (data.files[i].kind == "drive#file") {
+                    if (data.files[i].mimeType == "application/vnd.google-apps.folder") {
                         //console.log(data.entries[i].type);
-                        a = { type: data.files[i].kind, id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: data.files[i].md5Checksum, lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "https://docs.google.com/viewer?srcid=" + data.files[i].id + "&pid=explorer&efh=false&a=v&chrome=false&embedded=true", downloadUrl: data.files[i].webContentLink }
+                        a = { type: "folder", id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: "", lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "", downloadUrl: "" };
                     }
                     else {
-                        a = { type: data.files[i].kind, id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: "", lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "", downloadUrl: "" }
+                        a = { type: data.files[i].kind, id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: data.files[i].md5Checksum, lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "https://docs.google.com/viewer?srcid=" + data.files[i].id + "&pid=explorer&efh=false&a=v&chrome=false&embedded=true", downloadUrl: data.files[i].webContentLink };
                     }
-
                     newData.push(a)
-
                 }
                 if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
                     this.setState({ filesarray: newData, loading: false });
@@ -91,15 +94,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
     }
 
     componentDidMount() {
-        // this is the network call made everytime the page is reload, before the render method.
-        //fetch("/api/Login/GetGoogleSession?google_access_token=" + sessionStorage.getItem("google_access_token") + "&google_refresh_token=" + sessionStorage.getItem("google_refresh_token"))
-        //    .then(response => {
-        //        if (!response.ok) { throw response }
-        //        return response.json()  //we only get here if there is no error)
-        //    })
-        //    .then(data => {
-        //        this.setState({ filesarray: data, loading: false });
-        //    })
+        console.log("Component Mounted -> Search Root Called");
         this.searchRoot();
     }
 
@@ -113,7 +108,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
 
     performSearch() {
         var querystring = this.state['query'];
-        if (querystring == ""){this.searchRoot }
+        if (querystring == "") { this.searchRoot }
         else {
             fetch("https://www.googleapis.com/drive/v3/files?q=name+contains+'" + this.state['query'] + "'&trashed=false&fields=files(kind,id,name,md5Checksum,modifiedTime,webViewLink,webContentLink,size)", {
                 method: "GET",
@@ -136,14 +131,13 @@ export class DriveExplorer extends React.Component<{}, {}> {
                         if (data.files[i].kind == "drive#file") {
                             //console.log(data.entries[i].type);
                             a = {
-                                type: data.files[i].kind, id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: data.files[i].md5Checksum, lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "https://docs.google.com/viewer?srcid="+data.files[i].id+"&pid=explorer&efh=false&a=v&chrome=false&embedded=true", downloadUrl: data.files[i].webContentLink }
+                                type: data.files[i].kind, id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: data.files[i].md5Checksum, lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "https://docs.google.com/viewer?srcid=" + data.files[i].id + "&pid=explorer&efh=false&a=v&chrome=false&embedded=true", downloadUrl: data.files[i].webContentLink
+                            }
                         }
                         else {
                             a = { type: data.files[i].kind, id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: "", lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "", downloadUrl: "" }
                         }
-
                         newData.push(a)
-
                     }
                     if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
                         this.setState({ filesarray: newData, loading: false });
@@ -151,27 +145,85 @@ export class DriveExplorer extends React.Component<{}, {}> {
                     }
                 })
         }
-
-    }//"https://docs.google.com/viewer?url="+
-    navigate(row,event)
-    {
+    }
+    //"https://docs.google.com/viewer?url="+
+    navigate(row, event) {
+        // this is to navigate into folders
         var res = row.embedLink.toString();
         var str = res.replace("view", "preview");
         console.log(row);
-
-        this.setState({ PreviewUrl: str, PreviewFileName: row.fileName, showModal: true})
-
-        if (row.type == "folder") {
-
+        if (row.type === "folder") {
+            console.log("Navigated into folder ->" + row);
+            var newArray = this.state['pathCollection'];
+            newArray.push({ fileId: row.id, Name: row.fileName });
+            this.setState({ pathCollection: newArray });
+            this.searchInFolder(row.id);
         }
-        if (row.type == "drive#file") {
+        if (row.type === "drive#file") {
             this.setState({ PreviewUrl: row.embedLink, PreviewFileName: row.fileName, showModal: true })
         }
+    }
 
+    navigateOut(fileid, name) {
+        console.log("fileid -> " + fileid + " " + name);
+        var coll = this.state['pathCollection'];
+        console.log(this.state['pathCollection']);
+        console.log(coll);
+        var index;
+        for (var i = 0; i <= coll.length; i++)
+        {
+            console.log(coll[i].fileId);
+            if (coll[i].fileId == fileid) {
+                index = i;
+            }
+        }
+        console.log("this is old Coll " + coll);
+        coll.length = index;
+        console.log("this is coll ->" + coll);
+        this.setState({ pathCollection: coll });
+
+        this.searchInFolder(fileid);
+    }
+
+    searchInFolder(fileID) {
+        console.log("Searching in folder -> " + fileID);
+        fetch("https://www.googleapis.com/drive/v3/files?q='"+fileID+"'+in+parents&trashed=false&fields=files", {
+            method: "GET",
+            headers:
+            {
+                'Authorization': 'Bearer ' + sessionStorage.getItem("google_access_token"),
+                'Accept': 'application/json'
+            }
+        })
+            .then(response => {
+                if (!response.ok) { throw response }
+                return response.json()  //we only get here if there is no error)
+            })
+            .then(data => {
+                //console.log(data);
+                var newData = [];
+                for (var i = 0; i < data["files"].length; i++) {
+
+                    var a = {};
+                    if (data.files[i].mimeType == "application/vnd.google-apps.folder") {
+                        //console.log(data.entries[i].type);
+                        a = { type: "folder", id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: "", lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "", downloadUrl: "" };
+                    }
+                    else {
+                        a = { type: data.files[i].kind, id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: data.files[i].md5Checksum, lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "https://docs.google.com/viewer?srcid=" + data.files[i].id + "&pid=explorer&efh=false&a=v&chrome=false&embedded=true", downloadUrl: data.files[i].webContentLink };
+                    }
+                    newData.push(a)
+                }
+                if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
+
+                    this.setState({ filesarray: newData, loading: false });
+                    //console.log("different data was received this time.")
+                }
+            })
     }
 
     closeModal() {
-        this.setState({PreviewUrl: "", showModal: false, PreviewFileName: ""})
+        this.setState({ PreviewUrl: "", showModal: false, PreviewFileName: "" })
     }
 
     showPreview() {
@@ -191,6 +243,11 @@ export class DriveExplorer extends React.Component<{}, {}> {
                 return (<Row key={row.ID} id={row.ID} navHandler={this.navigate.bind(null, row)} filename={row.fileName} size={row.size} lastModified={row.lastModified} downloadUrl={row.downloadUrl}></Row>);
             }.bind(this));
 
+            var pathElements = this.state['pathCollection'].map(function (row) {
+                console.log(row);
+                return (<a key={row.fileID} onClick={() =>this.navigateOut(row.fileId,row.Name)}>{row.Name}</a>);
+            }.bind(this));
+
             return (
                 <div className="well well-lg pull-down">
                     <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#f5f5f5' }}>
@@ -204,10 +261,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
                         </div>
                     </div>
                     <div className="breadcrumb flat">
-                        <a onClick={this.searchRoot}>All Files</a>
-                        <a href="#">Compare</a>
-                        <a href="#">Order Confirmation</a>
-                        <a href="#" className="active">Checkout</a>
+                        {pathElements}
                     </div>
                     <table className="table table-striped table-hover table-responsive well header-fixed">
                         <thead>

@@ -18,7 +18,7 @@ export class Explorer extends React.Component<{}, {}> {
         this.formatSizeUnits = this.formatSizeUnits.bind(this);
         this.searchRoot = this.searchRoot.bind(this);
         this.navigate = this.navigate.bind(this);
-        this.closeModal = this.closeModal.bind(this);
+        this.closePreviewModal = this.closePreviewModal.bind(this);
         this.state = {
             // This is space we will put the json response
             filesarray: {},
@@ -38,7 +38,7 @@ export class Explorer extends React.Component<{}, {}> {
 
             query: "",
 
-            showModal: false,
+            showPreviewModal: false,
 
         }
     }
@@ -151,13 +151,13 @@ export class Explorer extends React.Component<{}, {}> {
         }
         if (row.type == "file")
         {
-            this.setState({ PreviewUrl: row.embedLink, PreviewFileName: row.fileName, showModal: true })
+            this.setState({ PreviewUrl: row.embedLink, PreviewFileName: row.fileName, showPreviewModal: true })
         }
 
     }
 
-    closeModal() {
-        this.setState({ PreviewUrl: "", showModal: false, PreviewFileName: "" })
+    closePreviewModal() {
+        this.setState({ PreviewUrl: "", showPreviewModal: false, PreviewFileName: "" })
     }
 
     showPreview() {
@@ -208,7 +208,7 @@ export class Explorer extends React.Component<{}, {}> {
                             {rows}
                         </tbody>
                     </table>
-                    <Modal show={this.state["showModal"]}>
+                    <Modal show={this.state["showPreviewModal"]}>
                         <Modal.Header closeButton>
                             <Modal.Title id="contained-modal-title-lg">{this.state['PreviewFileName']}</Modal.Title>
                         </Modal.Header>
@@ -216,7 +216,7 @@ export class Explorer extends React.Component<{}, {}> {
                             <embed src={this.state["PreviewUrl"]}></embed>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button onClick={this.closeModal}>Close</Button>
+                            <Button onClick={this.closePreviewModal}>Close</Button>
                         </Modal.Footer>
                     </Modal>
                 </div>

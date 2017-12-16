@@ -19,7 +19,7 @@ export class Tutorial1 extends React.Component<Tutorial1Prop, Tutorial1State> {
     public render() {
         return <div className="body">
             <div className="center-fade">
-                <p className="welcome">Welcome to LINCD</p>
+                <p className="welcome">Welcome to DocChain</p>
                 <div className="about">
                     <p>
                         LINCD is a blockchain platform-as-a-service designed for incorporating your documents from box.com, OneDrive, Google Drive and Dropbox into the blockchain using our API.
