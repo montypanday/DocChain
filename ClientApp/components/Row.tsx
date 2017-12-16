@@ -61,6 +61,8 @@ export class Row extends React.Component<AppProps, AppState> {
                 return "fa fa-file-image-o fa-2x";
             case 'xlsx':
                 return "fa fa-file-excel-o fa-2x";
+            case 'm4a':
+                return "fa fa-file-audio-o fa-2x";
             case '':
                 return "fa fa-folder fa-2x";
             default:
