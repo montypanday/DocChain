@@ -40,6 +40,7 @@ export class Explorer extends React.Component<{}, {}> {
 
             showPreviewModal: false,
 
+            user: "",
         }
     }
 
@@ -92,6 +93,7 @@ export class Explorer extends React.Component<{}, {}> {
 
     componentDidMount() {
         this.searchRoot();
+        this.getUser();
     }
 
     handleSearchBarChange(e) {
@@ -142,16 +144,20 @@ export class Explorer extends React.Component<{}, {}> {
                 })
         }
     }
-    navigate(row,event) {
+    navigate(row, event) {
 
         console.log(row);
-        if (row.type == "folder")
-        {
+        if (row.type == "folder") {
 
         }
+<<<<<<< HEAD
         if (row.type == "file")
         {
             this.setState({ PreviewUrl: row.embedLink, PreviewFileName: row.fileName, showPreviewModal: true })
+=======
+        if (row.type == "file") {
+            this.setState({ PreviewUrl: row.embedLink, PreviewFileName: row.fileName, showModal: true })
+>>>>>>> 80abc659cab3f0304bc7cead44f8d0b6a317fbed
         }
 
     }
@@ -164,12 +170,32 @@ export class Explorer extends React.Component<{}, {}> {
         this.setState({ showingPreview: true });
     }
 
+    getUser() {
+        fetch("https://api.box.com/2.0/users/me", {
+            method: "GET",
+            headers:
+            {
+                'Authorization': 'Bearer ' + sessionStorage.getItem("box_access_token"),
+                'Accept': 'application/json'
+            }
+        })
+            .then(response => {
+                if (!response.ok) { throw response }
+                return response.json()  //we only get here if there is no error)
+            })
+            .then(data => {
+                var user = data['name']
+                console.log(user)
+                this.setState({ user: user });
+            })
+    }
+
     public render() {
         if (sessionStorage.getItem("box_access_token") == null) {
             return <Redirect to='/boxLogin' />
 
         } else if (this.state['loading'] === false) {
-
+            //this.getUser();
             // this .map function is like a foreach loop on filesarray, gives us a row object which has all the values that are related to a file object
             //rows is the variable which is being inserted into the render function at its given function see {rows} in render method.
             var rows = this.state['filesarray'].map(function (row) {
@@ -178,6 +204,11 @@ export class Explorer extends React.Component<{}, {}> {
 
             return (
                 <div className="well well-lg pull-down">
+
+                    <div style={{ float: 'right' }} className="user-details">
+                        {this.state['user']}
+                    </div>
+
                     <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#f5f5f5' }}>
                         <div className="col-lg-6" style={{ padding: '0px' }}>
                             <div className="input-group">
@@ -188,6 +219,7 @@ export class Explorer extends React.Component<{}, {}> {
                             </div>
                         </div>
                     </div>
+
                     <div className="breadcrumb flat">
                         <a onClick={this.searchRoot}>All Files</a>
                         <a href="#">Compare</a>
