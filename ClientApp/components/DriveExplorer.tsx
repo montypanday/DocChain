@@ -178,13 +178,33 @@ export class DriveExplorer extends React.Component<{}, {}> {
         this.setState({ showingPreview: true });
     }
 
+    getUser() {
+        console.log("I'm here");
+        fetch("https://www.googleapis.com/auth/plus.me", {
+            method: "GET",
+            headers:
+            {
+                'Authorization': 'Bearer ' + sessionStorage.getItem("google_access_token"),
+                'Accept': 'application/json'
+            }
+        })
+            .then(response => {
+                if (!response.ok) { throw response }
+                console.log(response.json()['id'])
+                return response.json()  //we only get here if there is no error)
+            })
+            .then(data => {
+                console.log(data["id"]);
+            })
+    }
+
     public render() {
 
         if (sessionStorage.getItem("google_access_token") == null) {
+            sessionStorage.getItem("")
             return <Redirect to='/driveLogin' />
 
         } else if (this.state['loading'] === false) {
-
             // this .map function is like a foreach loop on filesarray, gives us a row object which has all the values that are related to a file object
             //rows is the variable which is being inserted into the render function at its given function see {rows} in render method.
             var rows = this.state['filesarray'].map(function (row) {
