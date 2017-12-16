@@ -15,7 +15,7 @@ namespace Database
             {
                 Console.WriteLine("Connected");
 
-                FileAction fakeAction = new FileAction("00000003", "99999996", "docchain_dev", "cool user", "fun action", DateTime.Now);
+                FileAction fakeAction = new FileAction("00000002", "99999997", "docchain_dev", "cool user", "fun action", DateTime.Now);
                 connection.Get().Insert(fakeAction);
                 connection.Get().Close();
 
