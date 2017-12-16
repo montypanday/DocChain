@@ -37,32 +37,52 @@ export class Row extends React.Component<AppProps, AppState> {
     getIconClass(extension)
     {
         switch (extension) {
+
+            /*DOCUMENT TYPES*/
             case 'txt':
                 return "fa fa-file-text-o fa-2x";
             case 'doc':
                 return "fa fa-file-word-o fa-2x";
             case 'docx':
                 return "fa fa-file-word-o fa-2x";
-            case 'zip':
-                return "fa fa-file-archive-o fa-2x";
-            case 'pptx':
-                return "fa fa-file-powerpoint-o fa-2x";
-            case 'm4a':
-                return "fa fa-file-audio-o fa-2x";
-            case 'png':
-                return "fa fa-file-image-o fa-2x";
-            case 'PNG':
-                return "fa fa-file-image-o fa-2x";
+            case 'gdoc':
+                return "fa fa-file-word-o fa-2x";
             case 'pdf':
                 return "fa fa-file-pdf-o fa-2x";
+
+            /* SPREADSHEET TYPES */
+            case 'xls':
+                return "fa fa-file-excel-o fa-2x";
+            case 'xlsx':
+                return "fa fa-file-excel-o fa-2x";
+            case 'gsheets':
+                return "fa fa-file-excel-o fa-2x";
+
+            /* PRESENTATION TYPES */
+            case 'ppt':
+                return "fa fa-file-powerpoint-o fa-2x";
+            case 'pptx':
+                return "fa fa-file-powerpoint-o fa-2x";
+            case 'gslides':
+                return "fa fa-file-powerpoint-o fa-2x";
+
+            /* AUDIO TYPES */
+            case 'm4a':
+                return "fa fa-file-audio-o fa-2x";
+
+            /* IMAGE TYPES */
+            case 'png':
+                return "fa fa-file-image-o fa-2x"; 
             case 'jpg':
                 return "fa fa-file-image-o fa-2x";
             case 'gif':
                 return "fa fa-file-image-o fa-2x";
-            case 'xlsx':
-                return "fa fa-file-excel-o fa-2x";
-            case 'm4a':
-                return "fa fa-file-audio-o fa-2x";
+
+            /* ARCHIVE TYPES */
+            case 'zip':
+                return "fa fa-file-archive-o fa-2x";
+
+            /* DEFAULTS */               
             case '':
                 return "fa fa-folder fa-2x";
             default:
