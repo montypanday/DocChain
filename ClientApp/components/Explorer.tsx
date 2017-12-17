@@ -150,14 +150,10 @@ export class Explorer extends React.Component<{}, {}> {
         if (row.type == "folder") {
 
         }
-<<<<<<< HEAD
+
         if (row.type == "file")
         {
             this.setState({ PreviewUrl: row.embedLink, PreviewFileName: row.fileName, showPreviewModal: true })
-=======
-        if (row.type == "file") {
-            this.setState({ PreviewUrl: row.embedLink, PreviewFileName: row.fileName, showModal: true })
->>>>>>> 80abc659cab3f0304bc7cead44f8d0b6a317fbed
         }
 
     }
