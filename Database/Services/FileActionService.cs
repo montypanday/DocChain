@@ -17,6 +17,13 @@ namespace Database.Services
             connection.Get().Close();
         }
 
+        public void RecordFileAction(FileAction[] actions)
+        {
+            connection.Open();
+            connection.Get().Insert(actions);
+            connection.Get().Close();
+        }
+
         public SortedList<DateTime, FileAction> GetUserActions(string userID)
         {
             SortedList<DateTime, FileAction> sortedActions = new SortedList<DateTime, FileAction>();
@@ -28,6 +35,7 @@ namespace Database.Services
 
             actions.ForEach(action => sortedActions.Add(action.ActionTime, action));
 
+            connection.Get().Close();
             return sortedActions;
         }
     }

@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "front_end", "front_end.csproj", "{316FD401-2FD4-4670-84B5-D2F6EC166FD9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8F1484CF-A877-44E4-A36A-BA1F7BB2B95E} = {8F1484CF-A877-44E4-A36A-BA1F7BB2B95E}
+		{4EABC8E4-F7BE-4A0E-B1B4-B3F217D9603E} = {4EABC8E4-F7BE-4A0E-B1B4-B3F217D9603E}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Database.csproj", "{8F1484CF-A877-44E4-A36A-BA1F7BB2B95E}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -11,8 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Databa
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{4EABC8E4-F7BE-4A0E-B1B4-B3F217D9603E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blockchain", "..\Blockchain\Blockchain.csproj", "{D4A16BF4-6849-46CF-90CC-60B185F8570D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

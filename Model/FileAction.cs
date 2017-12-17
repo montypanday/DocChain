@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -26,6 +27,18 @@ namespace Model
         public FileAction()
         {
 
+        }
+
+        public FileAction(JObject json)
+        {
+            //JObject jObject = JObject.Parse(json);
+            JToken jFileAction = json["fileAction"];
+            FileID = (string)jFileAction["FileID"];
+            FileHash = (string)jFileAction["FileHash"];
+            StoragePlatform = (string)jFileAction["StoragePlatform"];
+            UserID = (string)jFileAction["UserID"];
+            ActionTime = DateTime.Now;
+            ActionType = (string)jFileAction["ActionType"];
         }
     }
 }

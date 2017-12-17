@@ -90,6 +90,29 @@ export class Row extends React.Component<AppProps, AppState> {
         }
     }
 
+    doSomething(e) {
+        console.log("something");
+
+        var fileActionJson = {
+            fileAction: {
+                "FileID" : "11111111",
+                "FileHash": "256bit hexadecimal number",
+                "StoragePlatform": "Docchain Development",
+                "UserID" : "22222222",
+                "ActionType" : "Test Action"
+            }
+        }
+
+        fetch('https://localhost:44374/api/FileAction/LogAction', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(fileActionJson)
+        })
+    }
+
     render() {
         var a = this.getFileExtension(this.props.filename);
         var iconClass = this.getIconClass(a);
@@ -109,6 +132,7 @@ export class Row extends React.Component<AppProps, AppState> {
                             <li><a href={this.props.downloadUrl} download><i className="fa fa-download" aria-hidden="true"></i>       Download</a></li>
                             <li><a href="#" >Preview</a></li>
                             <li><a href="#">JavaScript</a></li>
+                            <li><a href="#" onClick={ this.doSomething }>Do Something</a></li>
                             <li className="divider"></li>
                             <li><a href="#">About Us</a></li>
                         </ul>
