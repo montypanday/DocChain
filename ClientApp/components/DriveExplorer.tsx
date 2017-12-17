@@ -8,6 +8,8 @@ import { BreadCrumb } from '../components/breadCrumb';
 require('../css/breadcrumb.css');
 import { Modal } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
+import { ContextMenu } from '../components/ContextMenu';
+require('../css/ContexMenu.css');
 
 export class DriveExplorer extends React.Component<{}, {}> {
 
@@ -283,6 +285,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
                     <div className="breadcrumb flat">
                         {pathElements}
                     </div>
+                    <ContextMenu root="rows" />
                     <table className="table table-striped table-hover table-responsive well header-fixed">
                         <thead>
                             <tr>
@@ -293,7 +296,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
                                 <th className="col-xs-2">Last Modified</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="rows">
                             {rows}
                         </tbody>
                     </table>
