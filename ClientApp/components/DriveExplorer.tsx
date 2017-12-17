@@ -172,7 +172,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
         console.log(this.state['pathCollection']);
         console.log(coll);
         var index;
-        for (var i = 0; i <= coll.length; i++)
+        for (var i = 0; i < coll.length; i++)
         {
             console.log(coll[i].fileId);
             if (coll[i].fileId == fileid) {
@@ -180,7 +180,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
             }
         }
         console.log("this is old Coll " + coll);
-        coll.length = index;
+        coll.length = index + 1;
         console.log("this is coll ->" + coll);
         this.setState({ pathCollection: coll });
 
