@@ -4,6 +4,7 @@ import { render } from 'react-dom';
 
 
 export interface AppProps {
+    type: string,
     filename: string,
     size: string,
     lastModified: string,
@@ -12,7 +13,8 @@ export interface AppProps {
     navHandler: any
     id: any
     mimeType: any,
-    iconLink: any
+    iconLink: any,
+
 }
 
 export interface AppState {
@@ -133,6 +135,7 @@ export class Row extends React.Component<AppProps, AppState> {
         else {
             icon = <span className={iconClass} style={{ verticalAlign: 'middle', float: 'left', fontSize: '2em' }}></span>;
         }
+
         return (
             <tr>
                 <td className="col-xs-6 " >
@@ -147,16 +150,17 @@ export class Row extends React.Component<AppProps, AppState> {
                             </button>
                         <ul className="dropdown-menu">
                             <li><a href={this.props.downloadUrl} download><i className="fa fa-download dropDownIcon" aria-hidden="true"></i>Download</a></li>
-                            <li><a href="#" ><i className="fa fa-eye dropDownIcon" aria-hidden="true"></i>Preview</a></li>
+                            {this.props.type != 'folder' && <li><a onClick={this.props.navHandler} ><i className="fa fa-eye dropDownIcon" aria-hidden="true"></i>Preview</a></li>}
                             <li><a href="#"><i className="fa fa-trash-o dropDownIcon" aria-hidden="true"></i>Delete</a></li>
+                            <li><a href="#"><i className="fa fa-pencil-square-o dropDownIcon" aria-hidden="true"></i>Rename</a></li>
                             <li><a href="#"><i className="fa fa-share dropDownIcon" aria-hidden="true"></i>Share</a></li>
-                            <li className="divider"></li>
-                            <li><a href="#"><i className="fa fa-database dropDownIcon" aria-hidden="true"></i>Get Document Trail</a></li>
-                            <li><a href="#"><i className="fa fa-play dropDownIcon" aria-hidden="true"></i>Start Trail</a></li>
-                            <li><a href="#"><i className="fa fa-stop dropDownIcon" aria-hidden="true"></i>Stop Trail</a></li>
-                            <li><a href="#"><i className="fa fa-certificate dropDownIcon" aria-hidden="true"></i>Get DocChain Certificate</a></li>
-                            <li><a href="#"><i className="fa fa-link dropDownIcon" aria-hidden="true"></i>Embed Document</a></li>
-                            <li><a href="#"><i className="fa fa-calendar-check-o dropDownIcon" aria-hidden="true"></i>Check File</a></li>
+                            {this.props.type != 'folder' && <li className="divider"></li>}
+                            {this.props.type != 'folder' && <li><a href="#"><i className="fa fa-database dropDownIcon" aria-hidden="true"></i>Get Document Trail</a></li>}
+                            {this.props.type != 'folder' && <li><a href="#"><i className="fa fa-play dropDownIcon" aria-hidden="true"></i>Start Trail</a></li>}
+                            {this.props.type != 'folder' && <li><a href="#"><i className="fa fa-stop dropDownIcon" aria-hidden="true"></i>Stop Trail</a></li>}
+                            {this.props.type != 'folder' && <li><a href="#"><i className="fa fa-certificate dropDownIcon" aria-hidden="true"></i>Get DocChain Certificate</a></li>}
+                            {this.props.type != 'folder' && <li><a href="#"><i className="fa fa-link dropDownIcon" aria-hidden="true"></i>Embed Document</a></li>}
+                            {this.props.type != 'folder' && <li><a href="#"><i className="fa fa-calendar-check-o dropDownIcon" aria-hidden="true"></i>Check File</a></li>}
                         </ul>
                     </div>
                 </td>
