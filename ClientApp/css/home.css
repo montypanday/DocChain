@@ -264,3 +264,6 @@ tbody {
     height: 26px;
     width: auto;
 }
+.dropDownIcon {
+    padding-right: 10px;
+}

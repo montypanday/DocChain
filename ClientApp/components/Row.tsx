@@ -146,12 +146,17 @@ export class Row extends React.Component<AppProps, AppState> {
                         <button className="btn btn-default dropdown-toggle" style={{ verticalAlign: 'middle'}} type="button" data-toggle="dropdown">...
                             </button>
                         <ul className="dropdown-menu">
-                            <li><a href={this.props.downloadUrl} download><i className="fa fa-download" aria-hidden="true"></i>       Download</a></li>
-                            <li><a href="#" >Preview</a></li>
-                            <li><a href="#">JavaScript</a></li>
-                            <li><a href="#" onClick={ this.doSomething }>Do Something</a></li>
+                            <li><a href={this.props.downloadUrl} download><i className="fa fa-download dropDownIcon" aria-hidden="true"></i>Download</a></li>
+                            <li><a href="#" ><i className="fa fa-eye dropDownIcon" aria-hidden="true"></i>Preview</a></li>
+                            <li><a href="#"><i className="fa fa-trash-o dropDownIcon" aria-hidden="true"></i>Delete</a></li>
+                            <li><a href="#"><i className="fa fa-share dropDownIcon" aria-hidden="true"></i>Share</a></li>
                             <li className="divider"></li>
-                            <li><a href="#">About Us</a></li>
+                            <li><a href="#"><i className="fa fa-database dropDownIcon" aria-hidden="true"></i>Get Document Trail</a></li>
+                            <li><a href="#"><i className="fa fa-play dropDownIcon" aria-hidden="true"></i>Start Trail</a></li>
+                            <li><a href="#"><i className="fa fa-stop dropDownIcon" aria-hidden="true"></i>Stop Trail</a></li>
+                            <li><a href="#"><i className="fa fa-certificate dropDownIcon" aria-hidden="true"></i>Get DocChain Certificate</a></li>
+                            <li><a href="#"><i className="fa fa-link dropDownIcon" aria-hidden="true"></i>Embed Document</a></li>
+                            <li><a href="#"><i className="fa fa-calendar-check-o dropDownIcon" aria-hidden="true"></i>Check File</a></li>
                         </ul>
                     </div>
                 </td>
