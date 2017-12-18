@@ -11,7 +11,7 @@
 .welcome {
     font-size: 2vw;
     font-weight: 700;
-    color: #6CBBFF;   
+    color: #6CBBFF;
     text-align: center;
     margin: 0;
     margin-bottom: 1vh;
@@ -259,4 +259,8 @@ tbody {
 .modal-body embed {
     width: 100%;
     height: 100%;
+}
+.googleImage {
+    height: 26px;
+    width: auto;
 }

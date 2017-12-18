@@ -71,10 +71,10 @@ export class DriveExplorer extends React.Component<{}, {}> {
                     var a = {};
                     if (data.files[i].mimeType == "application/vnd.google-apps.folder") {
                         //console.log(data.entries[i].type);
-                        a = { type: "folder", id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: "", lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "", downloadUrl: "" };
+                        a = { type: "folder", id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: "", lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "", downloadUrl: "", mimeType: data.files[i].mimeType, iconLink: data.files[i].iconLink };
                     }
                     else {
-                        a = { type: data.files[i].kind, id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: data.files[i].md5Checksum, lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "https://docs.google.com/viewer?srcid=" + data.files[i].id + "&pid=explorer&efh=false&a=v&chrome=false&embedded=true", downloadUrl: data.files[i].webContentLink };
+                        a = { type: data.files[i].kind, id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: data.files[i].md5Checksum, lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "https://docs.google.com/viewer?srcid=" + data.files[i].id + "&pid=explorer&efh=false&a=v&chrome=false&embedded=true", downloadUrl: data.files[i].webContentLink, mimeType: data.files[i].mimeType, iconLink: data.files[i].iconLink };
                     }
                     newData.push(a)
                 }
@@ -112,7 +112,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
         var querystring = this.state['query'];
         if (querystring == "") { this.searchRoot }
         else {
-            fetch("https://www.googleapis.com/drive/v3/files?q=name+contains+'" + this.state['query'] + "'&trashed=false&fields=files(kind,id,name,md5Checksum,modifiedTime,webViewLink,webContentLink,size)", {
+            fetch("https://www.googleapis.com/drive/v3/files?q=name+contains+'" + this.state['query'] + "'&trashed=false&fields=files", {
                 method: "GET",
                 headers:
                 {
@@ -133,11 +133,11 @@ export class DriveExplorer extends React.Component<{}, {}> {
                         if (data.files[i].kind == "drive#file") {
                             //console.log(data.entries[i].type);
                             a = {
-                                type: data.files[i].kind, id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: data.files[i].md5Checksum, lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "https://docs.google.com/viewer?srcid=" + data.files[i].id + "&pid=explorer&efh=false&a=v&chrome=false&embedded=true", downloadUrl: data.files[i].webContentLink
+                                type: data.files[i].kind, id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: data.files[i].md5Checksum, lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "https://docs.google.com/viewer?srcid=" + data.files[i].id + "&pid=explorer&efh=false&a=v&chrome=false&embedded=true", downloadUrl: data.files[i].webContentLink, mimeType: data.files[i].mimeType, iconLink: data.files[i].iconLink
                             }
                         }
                         else {
-                            a = { type: data.files[i].kind, id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: "", lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "", downloadUrl: "" }
+                            a = { type: data.files[i].kind, id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: "", lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "", downloadUrl: "", mimeType: data.files[i].mimeType, iconLink: data.files[i].iconLink}
                         }
                         newData.push(a)
                     }
@@ -209,10 +209,10 @@ export class DriveExplorer extends React.Component<{}, {}> {
                     var a = {};
                     if (data.files[i].mimeType == "application/vnd.google-apps.folder") {
                         //console.log(data.entries[i].type);
-                        a = { type: "folder", id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: "", lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "", downloadUrl: "" };
+                        a = { type: "folder", id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: "", lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "", downloadUrl: "", mimeType: data.files[i].mimeType, iconLink: data.files[i].iconLink };
                     }
                     else {
-                        a = { type: data.files[i].kind, id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: data.files[i].md5Checksum, lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "https://docs.google.com/viewer?srcid=" + data.files[i].id + "&pid=explorer&efh=false&a=v&chrome=false&embedded=true", downloadUrl: data.files[i].webContentLink };
+                        a = { type: data.files[i].kind, id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: data.files[i].md5Checksum, lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "https://docs.google.com/viewer?srcid=" + data.files[i].id + "&pid=explorer&efh=false&a=v&chrome=false&embedded=true", downloadUrl: data.files[i].webContentLink, mimeType: data.files[i].mimeType, iconLink: data.files[i].iconLink };
                     }
                     newData.push(a)
                 }
@@ -262,7 +262,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
             // this .map function is like a foreach loop on filesarray, gives us a row object which has all the values that are related to a file object
             //rows is the variable which is being inserted into the render function at its given function see {rows} in render method.
             var rows = this.state['filesarray'].map(function (row) {
-                return (<Row key={row.ID} id={row.ID} navHandler={this.navigate.bind(null, row)} filename={row.fileName} size={row.size} lastModified={row.lastModified} downloadUrl={row.downloadUrl}></Row>);
+                return (<Row key={row.ID} id={row.ID} navHandler={this.navigate.bind(null, row)} iconLink={row.iconLink} mimeType={row.mimeType} filename={row.fileName} size={row.size} lastModified={row.lastModified} downloadUrl={row.downloadUrl}></Row>);
             }.bind(this));
 
             var pathElements = this.state['pathCollection'].map(function (row) {

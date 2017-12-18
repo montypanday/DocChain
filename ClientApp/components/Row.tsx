@@ -10,7 +10,9 @@ export interface AppProps {
     downloadUrl: string,
     //isOpen: boolean
     navHandler: any
-    id:any
+    id: any
+    mimeType: any,
+    iconLink: any
 }
 
 export interface AppState {
@@ -72,17 +74,23 @@ export class Row extends React.Component<AppProps, AppState> {
 
             /* IMAGE TYPES */
             case 'png':
-                return "fa fa-file-image-o fa-2x"; 
+                return "fa fa-file-image-o fa-2x";
             case 'jpg':
                 return "fa fa-file-image-o fa-2x";
             case 'gif':
                 return "fa fa-file-image-o fa-2x";
+            case 'PNG':
+                return "fa fa-file-image-o fa-2x";
+            case 'JPG':
+                return "fa fa-file-image-o fa-2x";
+            case 'cs':
+                return "fa fa-file-code-o fa-2x";
 
             /* ARCHIVE TYPES */
             case 'zip':
                 return "fa fa-file-archive-o fa-2x";
 
-            /* DEFAULTS */               
+            /* DEFAULTS */
             case '':
                 return "fa fa-folder fa-2x";
             default:
@@ -116,11 +124,20 @@ export class Row extends React.Component<AppProps, AppState> {
     render() {
         var a = this.getFileExtension(this.props.filename);
         var iconClass = this.getIconClass(a);
+        var icon;
+        if (this.props.mimeType === "application/vnd.google-apps.spreadsheet" || this.props.mimeType === "application/vnd.google-apps.document" || this.props.mimeType === "application/vnd.google-apps.presentation" || this.props.mimeType === "application/vnd.google-apps.form"
+            || this.props.mimeType == "application/vnd.google-apps.map" || this.props.mimeType == "application/vnd.google-apps.site") {
+
+            icon = <span style={{ verticalAlign: 'middle', float: 'left', fontSize: '2em' }}><img src={this.props.iconLink} className="googleImage"></img></span>
+        }
+        else {
+            icon = <span className={iconClass} style={{ verticalAlign: 'middle', float: 'left', fontSize: '2em' }}></span>;
+        }
         return (
             <tr>
                 <td className="col-xs-6 " >
                     <a onClick={this.props.navHandler} style={{ cursor: 'pointer' }}>
-                        <span className={iconClass} style={{ verticalAlign: 'middle', float: 'left' }}></span>
+                        {icon}
                         <h5 style={{ float: 'left', paddingLeft: '15px' }}>{this.props.filename}</h5>
                     </a>
                 </td>
