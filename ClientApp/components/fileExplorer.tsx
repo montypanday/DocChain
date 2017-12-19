@@ -7,8 +7,8 @@ const getLocalizedMessage = (id, replacements) =>
     messages[id].replace(/{\s*(\w+)\s*}/g, (match, key) => replacements[key]);
 interface fileinterface { }
 export class fileExplorer extends React.Component<{}, fileinterface> {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = { currentCount: 0 };
     }
     handleClick() {

@@ -10,8 +10,8 @@ var imageStyle = {
 };
 
 export class LoadingGif extends React.Component<{}, {}> {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
     public render() {
         return (<div style= { imageStyle } > <img src="dist/loading.gif" /></div >);

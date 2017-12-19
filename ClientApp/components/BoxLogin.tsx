@@ -6,9 +6,8 @@ interface LoginState {
 }
 
 export class BoxLogin extends React.Component<{}, LoginState> {
-
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             loggedIn: false
         };
