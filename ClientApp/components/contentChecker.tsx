@@ -11,8 +11,8 @@ const getLocalizedMessage = (id, replacements) =>
 interface IPickerinterface { }
 
 export class contentChecker extends React.Component<{}, IPickerinterface> {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
     }
 
     // This function is called when onChoose event occurs on ContentPicker component.

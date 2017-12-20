@@ -2,8 +2,8 @@ import * as React from "react";
 import { Link, NavLink } from "react-router-dom";
 
 export class NavMenu extends React.Component<{}, {}> {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.updateNavBar = this.updateNavBar.bind(this);
         this.state = {
             boxSigned: false,
@@ -65,11 +65,6 @@ export class NavMenu extends React.Component<{}, {}> {
                         <li>
                             <NavLink to={"/faq"} activeClassName="active">
                                 <i className="fa fa-question-circle" aria-hidden="true"></i> FAQ
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={"/fileexplorer"} activeClassName="active">
-                                <i className="fa fa-question-circle" aria-hidden="true"></i> Box Explorer
                             </NavLink>
                         </li>
                         <li>

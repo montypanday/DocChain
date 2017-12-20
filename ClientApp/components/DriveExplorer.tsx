@@ -13,8 +13,8 @@ require('../css/ContexMenu.css');
 
 export class DriveExplorer extends React.Component<{}, {}> {
 
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.handleSearchBarChange = this.handleSearchBarChange.bind(this);
         this.performSearch = this.performSearch.bind(this);
         this.formatSizeUnits = this.formatSizeUnits.bind(this);
@@ -54,10 +54,10 @@ export class DriveExplorer extends React.Component<{}, {}> {
         fetch("https://www.googleapis.com/drive/v3/files?q='root'+in+parents&trashed=false&fields=files", {
             method: "GET",
             headers:
-                {
-                    'Authorization': 'Bearer ' + sessionStorage.getItem("google_access_token"),
-                    'Accept': 'application/json'
-                }
+            {
+                'Authorization': 'Bearer ' + sessionStorage.getItem("google_access_token"),
+                'Accept': 'application/json'
+            }
         })
             .then(response => {
                 if (!response.ok) { throw response }
@@ -115,10 +115,10 @@ export class DriveExplorer extends React.Component<{}, {}> {
             fetch("https://www.googleapis.com/drive/v3/files?q=name+contains+'" + this.state['query'] + "'&trashed=false&fields=files", {
                 method: "GET",
                 headers:
-                    {
-                        'Authorization': 'Bearer ' + sessionStorage.getItem("google_access_token"),
-                        'Accept': 'application/json'
-                    }
+                {
+                    'Authorization': 'Bearer ' + sessionStorage.getItem("google_access_token"),
+                    'Accept': 'application/json'
+                }
             })
                 .then(response => {
                     if (!response.ok) { throw response }
@@ -128,15 +128,18 @@ export class DriveExplorer extends React.Component<{}, {}> {
                     //console.log(data);
                     var newData = [];
                     for (var i = 0; i < data["files"].length; i++) {
+
                         var a = {};
-                        if (data.files[i].mimeType == "application/vnd.google-apps.folder") {
+                        if (data.files[i].kind == "drive#file") {
                             //console.log(data.entries[i].type);
-                            a = { type: "folder", id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: "", lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "", downloadUrl: "", mimeType: data.files[i].mimeType, iconLink: data.files[i].iconLink };
+                            a = {
+                                type: data.files[i].kind, id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: data.files[i].md5Checksum, lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "https://docs.google.com/viewer?srcid=" + data.files[i].id + "&pid=explorer&efh=false&a=v&chrome=false&embedded=true", downloadUrl: data.files[i].webContentLink, mimeType: data.files[i].mimeType, iconLink: data.files[i].iconLink
+                            }
                         }
                         else {
-                            a = { type: data.files[i].kind, id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: data.files[i].md5Checksum, lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "https://docs.google.com/viewer?srcid=" + data.files[i].id + "&pid=explorer&efh=false&a=v&chrome=false&embedded=true", downloadUrl: data.files[i].webContentLink, mimeType: data.files[i].mimeType, iconLink: data.files[i].iconLink };
+                            a = { type: data.files[i].kind, id: data.files[i].id, fileName: data.files[i].name, size: this.formatSizeUnits(data.files[i].size), hash: "", lastModified: (new Date(Date.parse(data.files[i].modifiedTime.toString()))).toUTCString(), embedLink: "", downloadUrl: "", mimeType: data.files[i].mimeType, iconLink: data.files[i].iconLink}
                         }
-                        newData.push(a);
+                        newData.push(a)
                     }
                     if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
                         this.setState({ filesarray: newData, loading: false });
@@ -169,7 +172,8 @@ export class DriveExplorer extends React.Component<{}, {}> {
         console.log(this.state['pathCollection']);
         console.log(coll);
         var index;
-        for (var i = 0; i < coll.length; i++) {
+        for (var i = 0; i < coll.length; i++)
+        {
             console.log(coll[i].fileId);
             if (coll[i].fileId == fileid) {
                 index = i;
@@ -185,13 +189,13 @@ export class DriveExplorer extends React.Component<{}, {}> {
 
     searchInFolder(fileID) {
         console.log("Searching in folder -> " + fileID);
-        fetch("https://www.googleapis.com/drive/v3/files?q='" + fileID + "'+in+parents&trashed=false&fields=files", {
+        fetch("https://www.googleapis.com/drive/v3/files?q='"+fileID+"'+in+parents&trashed=false&fields=files", {
             method: "GET",
             headers:
-                {
-                    'Authorization': 'Bearer ' + sessionStorage.getItem("google_access_token"),
-                    'Accept': 'application/json'
-                }
+            {
+                'Authorization': 'Bearer ' + sessionStorage.getItem("google_access_token"),
+                'Accept': 'application/json'
+            }
         })
             .then(response => {
                 if (!response.ok) { throw response }
@@ -233,10 +237,10 @@ export class DriveExplorer extends React.Component<{}, {}> {
         fetch("https://www.googleapis.com/auth/plus.me", {
             method: "GET",
             headers:
-                {
-                    'Authorization': 'Bearer ' + sessionStorage.getItem("google_access_token"),
-                    'Accept': 'application/json'
-                }
+            {
+                'Authorization': 'Bearer ' + sessionStorage.getItem("google_access_token"),
+                'Accept': 'application/json'
+            }
         })
             .then(response => {
                 if (!response.ok) { throw response }
@@ -263,7 +267,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
 
             var pathElements = this.state['pathCollection'].map(function (row) {
                 console.log(row);
-                return (<a key={row.fileID} onClick={() => this.navigateOut(row.fileId, row.Name)}>{row.Name}</a>);
+                return (<a key={row.fileID} onClick={() =>this.navigateOut(row.fileId,row.Name)}>{row.Name}</a>);
             }.bind(this));
 
             return (

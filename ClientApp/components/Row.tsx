@@ -23,7 +23,7 @@ export interface AppState {
 
 export class Row extends React.Component<AppProps, AppState> {
     constructor(props: AppProps) {
-        super(props);
+        super();
 
         this.state = {
 

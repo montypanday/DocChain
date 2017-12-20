@@ -11,8 +11,8 @@ export interface AppState {
 
 
 export class ContextMenu extends React.Component<AppProps, AppState> {
-    constructor(props) {
-        super(props);
+    constructor(props: AppProps) {
+        super();
     }
 
 
@@ -108,7 +108,7 @@ export class ContextMenu extends React.Component<AppProps, AppState> {
             <a href="#" className="list-group-item">Do Something</a>
             <a href="#" className="list-group-item">About Us</a>
         </div>
-
+                
     };
 }
 

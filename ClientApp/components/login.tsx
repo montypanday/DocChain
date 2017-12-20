@@ -6,8 +6,8 @@ interface LoginState {
 }
 
 export class Login extends React.Component<{}, LoginState> {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             loggedIn: false
         };

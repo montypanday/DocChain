@@ -10,9 +10,9 @@ export interface AppState {
 
 export class BreadCrumb extends React.Component<{ address }, {}> {
     address = "Home";
-    constructor(props) {
-        super(props);
-        this.address = props.address;
+    constructor(prop) {
+        super();
+        this.address = prop.address
         this.state = {
         }
     }

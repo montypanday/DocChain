@@ -9,8 +9,8 @@ interface Tutorial1State {
 }
 export class Tutorial1 extends React.Component<Tutorial1Prop, Tutorial1State> {
 
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             loggedIn: false
         };

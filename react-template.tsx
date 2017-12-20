@@ -8,7 +8,7 @@ export interface AppState {
 
 export default class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
-    super(props);
+    super();
 
         this.state = {
     }
@@ -17,7 +17,7 @@ export default class App extends React.Component<AppProps, AppState> {
   render() {
     return (
       <div>
-
+        
       </div>
     );
   }

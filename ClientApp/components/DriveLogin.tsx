@@ -7,8 +7,8 @@ interface LoginState {
 
 export class DriveLogin extends React.Component<{}, LoginState> {
 
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             loggedIn: false
         };

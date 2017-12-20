@@ -14,7 +14,7 @@ export interface AppState {
 
 export class Preview extends React.Component<AppProps, AppState> {
     constructor(props: AppProps) {
-        super(props);
+        super();
 
         this.state = {
             open: false
