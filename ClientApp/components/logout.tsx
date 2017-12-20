@@ -1,7 +1,7 @@
 ﻿import * as React from "react";
 export class Logout extends React.Component<{}, {}> {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
 
     render() {

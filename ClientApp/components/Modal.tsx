@@ -11,7 +11,7 @@ interface propTypes {
 
 export class Modal extends React.Component<PropTypes, {}> {
     constructor(props: PropTypes) {
-        super();
+        super(props);
         this.state = {
             children: Preview
         }

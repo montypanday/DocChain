@@ -159,14 +159,16 @@ namespace front_end.Controllers
 
         [Route("refreshGoogle")]
         [HttpGet]
-        public async Task<HttpResponseMessage> refreshGoogle(string accessToken, string refreshToken)
+        public async Task<HttpResponseMessage> RefreshGoogle(string accessToken, string refreshToken)
         {
             HttpClient httpClient = new HttpClient();
-            Dictionary<string, string> content = new Dictionary<string, string>();
-            content.Add("client_id", "900082198060-kdvsjc3ecm82gn48dl9083cg0gihggm1.apps.googleusercontent.com");
-            content.Add("client_secret", "i1EN7mH7usgONgINmnNKbOFi");
-            content.Add("refresh_token", refreshToken);
-            content.Add("grant_type", "refresh_token");
+            Dictionary<string, string> content = new Dictionary<string, string>
+            {
+                { "client_id", "900082198060-kdvsjc3ecm82gn48dl9083cg0gihggm1.apps.googleusercontent.com" },
+                { "client_secret", "i1EN7mH7usgONgINmnNKbOFi" },
+                { "refresh_token", refreshToken },
+                { "grant_type", "refresh_token" }
+            };
             FormUrlEncodedContent formContent =
                 new FormUrlEncodedContent(content);
 
