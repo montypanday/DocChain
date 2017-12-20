@@ -154,6 +154,7 @@ export class Row extends React.Component<AppProps, AppState> {
                             <li><a href="#"><i className="fa fa-trash-o dropDownIcon" aria-hidden="true"></i>Delete</a></li>
                             <li><a href="#"><i className="fa fa-pencil-square-o dropDownIcon" aria-hidden="true"></i>Rename</a></li>
                             <li><a href="#"><i className="fa fa-share dropDownIcon" aria-hidden="true"></i>Share</a></li>
+
                             {this.props.type != 'folder' && <li className="divider"></li>}
                             {this.props.type != 'folder' && <li><a href="#"><i className="fa fa-database dropDownIcon" aria-hidden="true"></i>Get Document Trail</a></li>}
                             {this.props.type != 'folder' && <li><a href="#"><i className="fa fa-play dropDownIcon" aria-hidden="true"></i>Start Trail</a></li>}
@@ -164,7 +165,7 @@ export class Row extends React.Component<AppProps, AppState> {
                         </ul>
                     </div>
                 </td>
-                <td className="col-xs-1 " style={{ verticalAlign: 'middle' }}><i className="fa fa-lock fa-2x"></i></td>
+                {this.props.type != 'folder' && <td className="col-xs-1 " style={{ verticalAlign: 'middle' }}><i className="fa fa-lock fa-2x"></i></td>}
                 <td className="col-xs-1 " style={{ verticalAlign: 'middle'}}>{this.props.size}</td>
                 <td className="col-xs-2 " style={{ verticalAlign: 'middle'}}>{this.props.lastModified}</td>
             </tr>

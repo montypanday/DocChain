@@ -163,26 +163,28 @@ export class DriveExplorer extends React.Component<{}, {}> {
         }
     }
 
-    navigateOut(fileid, name) {
-        console.log("fileid -> " + fileid + " " + name);
+    navigateOut(e) {
+        console.log(e);
+        console.log("fileid ->" + e.fileId);
+        console.log("name ->" + JSON.stringify(name));
+        //console.log("fileid -> " + fileid + " " + name);
         var coll = this.state['pathCollection'];
-        console.log(this.state['pathCollection']);
-        console.log(coll);
+        //console.log(this.state['pathCollection']);
+        //console.log(coll);
         var index;
         for (var i = 0; i < coll.length; i++) {
-            console.log(coll[i].fileId);
-            if (coll[i].fileId == fileid) {
+            //console.log(coll[i].fileId);
+            if (coll[i].fileId == e.fileId) {
                 index = i;
             }
         }
-        console.log("this is old Coll " + coll);
+        //console.log("this is old Coll " + coll);
         coll.length = index + 1;
-        console.log("this is coll ->" + coll);
+        //console.log("this is coll ->" + coll);
         this.setState({ pathCollection: coll });
 
-        this.searchInFolder(fileid);
+        this.searchInFolder(e.fileId);
     }
-
     searchInFolder(fileID) {
         console.log("Searching in folder -> " + fileID);
         fetch("https://www.googleapis.com/drive/v3/files?q='" + fileID + "'+in+parents&trashed=false&fields=files", {
@@ -261,11 +263,6 @@ export class DriveExplorer extends React.Component<{}, {}> {
                 return (<Row key={row.ID} id={row.ID} type={row.type} navHandler={this.navigate.bind(null, row)} iconLink={row.iconLink} mimeType={row.mimeType} filename={row.fileName} size={row.size} lastModified={row.lastModified} downloadUrl={row.downloadUrl}></Row>);
             }.bind(this));
 
-            var pathElements = this.state['pathCollection'].map(function (row) {
-                console.log(row);
-                return (<a key={row.fileID} onClick={() => this.navigateOut(row.fileId, row.Name)}>{row.Name}</a>);
-            }.bind(this));
-
             return (
                 <div className="well well-lg pull-down">
                     <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#f5f5f5' }}>
@@ -278,9 +275,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
                             </div>
                         </div>
                     </div>
-                    <div className="breadcrumb flat">
-                        {pathElements}
-                    </div>
+                    <BreadCrumb pathCollection={this.state['pathCollection']} navigateOutHandler={this.navigateOut.bind(this)} />
                     <ContextMenu root="rows" />
                     <table className="table table-striped table-hover table-responsive well header-fixed">
                         <thead>
@@ -301,10 +296,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
                             <Modal.Title id="contained-modal-title-lg">{this.state['PreviewFileName']}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-
-
                             <embed src={this.state["PreviewUrl"]}></embed>
-
                         </Modal.Body>
                         <Modal.Footer>
                             <Button onClick={this.closeModal}>Close</Button>
