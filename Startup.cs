@@ -16,6 +16,12 @@ namespace front_end
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+
+            if (env.IsDevelopment())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
+
             Configuration = builder.Build();
         }
 
@@ -42,6 +48,10 @@ namespace front_end
             {
                 loggerFactory.AddConsole(Configuration.GetSection("Logging"));
                 loggerFactory.AddDebug();
+                app.UseDeveloperExceptionPage();
+            }
+            if (env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
             }
 

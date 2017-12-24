@@ -4,26 +4,10 @@ import { Link, NavLink } from "react-router-dom";
 export class NavMenu extends React.Component<{}, {}> {
     constructor(props) {
         super(props);
-        this.updateNavBar = this.updateNavBar.bind(this);
         this.state = {
             boxSigned: false,
             googleSigned: false
         }
-    }
-    updateNavBar() {
-        console.log("updating Nav bar");
-        if (sessionStorage.getItem("box_access_token") != null && this.state["boxSigned"] == false)
-        {
-            this.setState({ boxSigned: true });
-        }
-        if (sessionStorage.getItem("google_access_token") != null && this.state['googleSigned'] == false)
-        {
-            this.setState({ googleSigned: true });
-        }
-    }
-
-    componentDidMount() {
-        setInterval(this.updateNavBar,500);
     }
     public render() {
         return <div className="main-nav">
@@ -45,23 +29,18 @@ export class NavMenu extends React.Component<{}, {}> {
                                 <i className="fa fa-home" aria-hidden="true"></i> Home
                             </NavLink>
                         </li>
-                        {this.state['boxSigned'] == true &&
-                                <li>
-                                    <NavLink to={"/explorer"} activeClassName="active">
-                                        <i className="fa fa-folder-open-o" aria-hidden="true"></i> Box
+                        <li>
+                            <NavLink to={"/explorer"} activeClassName="active">
+                                <i className="fa fa-folder-open-o" aria-hidden="true"></i> Box
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={"/driveExplorer"} activeClassName="active">
+                                <i className="fa fa-folder-open-o" aria-hidden="true"></i> Google Drive
                             </NavLink>
 
-                                </li>
-                        }
-                        {
-                            this.state['googleSigned'] == true &&
-                            <li>
-                                <NavLink to={"/driveExplorer"} activeClassName="active">
-                                    <i className="fa fa-folder-open-o" aria-hidden="true"></i> Google Drive
-                            </NavLink>
+                        </li>
 
-                            </li>
-                        }
                         <li>
                             <NavLink to={"/faq"} activeClassName="active">
                                 <i className="fa fa-question-circle" aria-hidden="true"></i> FAQ

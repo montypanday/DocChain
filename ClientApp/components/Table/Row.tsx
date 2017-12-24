@@ -1,7 +1,5 @@
 ﻿import * as React from 'react';
 import { render } from 'react-dom';
-//import { Preview } from '../components/filePreview';
-
 
 export interface AppProps {
     type: string,
@@ -14,32 +12,28 @@ export interface AppProps {
     id: any
     mimeType: any,
     iconLink: any,
-
 }
 
 export interface AppState {
-
 }
 
 export class Row extends React.Component<AppProps, AppState> {
     constructor(props: AppProps) {
         super(props);
-
         this.state = {
-
         }
     }
 
-    //toggleModal() {
-    //    this.setState({ isOpen: true });
-    //}
-
     getFileExtension(filename) {
-        return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
+        try {
+            return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
+        }
+        catch{
+            return "";
+        }
     }
 
-    getIconClass(extension)
-    {
+    getIconClass(extension) {
         switch (extension) {
 
             /*DOCUMENT TYPES*/
@@ -105,11 +99,11 @@ export class Row extends React.Component<AppProps, AppState> {
 
         var fileActionJson = {
             fileAction: {
-                "FileID" : "11111111",
+                "FileID": "11111111",
                 "FileHash": "256bit hexadecimal number",
                 "StoragePlatform": "Docchain Development",
-                "UserID" : "22222222",
-                "ActionType" : "Test Action"
+                "UserID": "22222222",
+                "ActionType": "Test Action"
             }
         }
 
@@ -123,7 +117,16 @@ export class Row extends React.Component<AppProps, AppState> {
         })
     }
 
+    shouldComponentUpdate(nextProps) {
+        const a = this.props.type !== nextProps.type;
+        const b = this.props.filename !== nextProps.filename;
+        const c = this.props.size !== nextProps.size;
+        const d = this.props.lastModified !== nextProps.lastModified;
+        return (a || b || c || d);
+    }
+
     render() {
+        console.log("Row was renderered again");
         var a = this.getFileExtension(this.props.filename);
         var iconClass = this.getIconClass(a);
         var icon;
@@ -146,7 +149,7 @@ export class Row extends React.Component<AppProps, AppState> {
                 </td>
                 <td className="col-xs-1 ">
                     <div className="dropdown">
-                        <button className="btn btn-default dropdown-toggle" style={{ verticalAlign: 'middle'}} type="button" data-toggle="dropdown">...
+                        <button className="btn btn-default dropdown-toggle" style={{ verticalAlign: 'middle' }} type="button" data-toggle="dropdown">...
                             </button>
                         <ul className="dropdown-menu">
                             <li><a href={this.props.downloadUrl} download><i className="fa fa-download dropDownIcon" aria-hidden="true"></i>Download</a></li>
@@ -166,8 +169,8 @@ export class Row extends React.Component<AppProps, AppState> {
                     </div>
                 </td>
                 {this.props.type != 'folder' && <td className="col-xs-1 " style={{ verticalAlign: 'middle' }}><i className="fa fa-lock fa-2x"></i></td>}
-                <td className="col-xs-1 " style={{ verticalAlign: 'middle'}}>{this.props.size}</td>
-                <td className="col-xs-2 " style={{ verticalAlign: 'middle'}}>{this.props.lastModified}</td>
+                <td className="col-xs-1 " style={{ verticalAlign: 'middle' }}>{this.props.size}</td>
+                <td className="col-xs-2 " style={{ verticalAlign: 'middle' }}>{this.props.lastModified}</td>
             </tr>
         );
     }

@@ -58,58 +58,6 @@ export class Login extends React.Component<{}, LoginState> {
     //    };
     //    window.Dropbox.choose(options);
     //}
-
-    refreshGoogleAccessToken() {
-        console.log("refreshGoogleAccessToken Triggerred");
-        if (sessionStorage.getItem("google_access_token") != null) {
-            //fetch("/api/Login/refreshGoogle?accessToken=" + sessionStorage.getItem("google_access_token") + "&refreshToken" + sessionStorage.getItem("google_refresh_token"))
-            //    .then(response => response.json()
-            //        .then(data => {
-            //            console.log("Google Access Token was refreshed");
-            //        }));
-            var details = {
-                client_id: '900082198060-kdvsjc3ecm82gn48dl9083cg0gihggm1.apps.googleusercontent.com',
-                client_secret: 'i1EN7mH7usgONgINmnNKbOFi',
-                refresh_token: "'" + sessionStorage.getItem("google_refresh_token").toString() + "'",
-                grant_type: 'refresh_token'
-            };
-            const a = new FormData();
-            a.append("client_id", "900082198060-kdvsjc3ecm82gn48dl9083cg0gihggm1.apps.googleusercontent.com")
-            a.append("client_secret", "i1EN7mH7usgONgINmnNKbOFi")
-            a.append("refresh_token", sessionStorage.getItem("google_refresh_token").toString())
-            a.append("grant_type", "refresh_token")
-            fetch('https://www.googleapis.com/oauth2/v4/token', {
-                method: 'POST',
-                headers: {
-
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Cache-Control': 'no-cache'
-                },
-                body: "client_id=900082198060-kdvsjc3ecm82gn48dl9083cg0gihggm1.apps.googleusercontent.com&client_secret=i1EN7mH7usgONgINmnNKbOFi&refresh_token=" + sessionStorage.getItem("google_refresh_token") + "&grant_type=refresh_token" // see the usage here
-            })
-        }
-
-    }
-    refreshBoxAccessToken() {
-        console.log("refreshAccessToken triggered");
-        if (sessionStorage.getItem("OAuthSession") != null) {
-            fetch("/api/Login/RefreshBox?previousSession=" + sessionStorage.getItem("OAuthSession"))
-                .then(response => response.json()
-                    .then(data => {
-                        console.log("Box Access Token was refreshed");
-                        sessionStorage.setItem("OAuthSession", JSON.stringify(data));
-                        sessionStorage.setItem("box_access_token", data.access_token);
-                        sessionStorage.setItem("box_refresh_token", data.refresh_token);
-                    }));
-        }
-    }
-    componentDidMount() {
-        // refresh Box session every 20 minutes.
-        this.refreshGoogleAccessToken();
-        setInterval(this.refreshBoxAccessToken, 1200000);
-
-        setInterval(this.refreshGoogleAccessToken, 1200000);
-    }
     render() {
         if (location.search != "") {
             const search = location.search;
@@ -127,9 +75,10 @@ export class Login extends React.Component<{}, LoginState> {
                         sessionStorage.setItem("google_refresh_token", data.refresh_token);
                     });
             } else {
-                fetch("/api/Login/get?authCode=" + AuthorizationCode)
+                fetch("/api/Login/get?authCode=" + AuthorizationCode, { credentials: 'same-origin' })
                     .then(response => response.json())
                     .then(data => {
+                        console.log(data);
                         sessionStorage.setItem("OAuthSession", JSON.stringify(data));
                         sessionStorage.setItem("box_access_token", data.access_token);
                         sessionStorage.setItem("box_refresh_token", data.refresh_token);

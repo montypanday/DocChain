@@ -17,6 +17,7 @@ export class SearchBar extends React.Component<AppProps, AppState> {
     }
 
     render() {
+        console.log("SearchBar was rendered");
         return (
             <div className="col-lg-6" style={{ padding: '0px'}}>
                 <div className="input-group">
