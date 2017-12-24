@@ -9,12 +9,15 @@ require('../css/breadcrumb.css');
 //import { Modal } from 'react-bootstrap';
 //import { Button } from 'react-bootstrap';
 import { ContextMenu } from '../components/ContextMenu';
+
 require('../css/ContexMenu.css');
 import { formatSizeUnits } from '../api/Helpers/FormatSize';
 import FilePreviewModal from '../components/Modals/FilePreviewModal';
 import TableHeading from '../components/Table/TableHeading';
 import { GRoot } from '../api/Google/GRoot';
 import { GSearch } from '../api/Google/GSearch';
+
+require('../css/ContextMenu.css');
 
 export class DriveExplorer extends React.Component<{}, {}> {
 
