@@ -1,0 +1,70 @@
+/* EXPLORER STYLING */
+.loadingGif {
+    text-align: center;
+    align-content: center;
+    font-family: 'europa', 'fira-sans-2', sans-serif;
+    font-style: normal;
+    position: fixed;
+    left: 0;
+    right: 0;
+}
+
+.pull-down {
+    margin-top: 55px;
+    margin-left: 5px;
+    margin-right: 5px;
+    position:fixed;
+    height: calc(100vh - 65px);
+}
+
+.table{
+    table-layout:fixed;
+}
+
+tr {
+    width: 100%;
+    display: inline-table;
+    table-layout: fixed;
+}
+
+tbody {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: calc(100vh - 250px);
+    position: absolute;
+    margin-right: 24px;
+}
+
+/* FILE ICON STYLING */
+.fa-lock{
+    color: steelblue;
+}
+
+.fa-file-pdf-o{
+    color: red;
+}
+
+.fa-file-powerpoint-o{
+    color: coral;
+}
+
+.fa-file-word-o{
+    color:dodgerblue;
+}
+
+.fa-file-image-o{
+    color: slategrey;
+}
+
+
+.fa-file-excel-o {
+    color: forestgreen;
+}
+
+.fa-folder {
+    color: #ffcc80;
+}
+
+.fa-file-archive-o {
+    color: #ffcc80;
+}

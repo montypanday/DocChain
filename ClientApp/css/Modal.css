@@ -1,0 +1,28 @@
+/* MODAL DISPLAY */
+
+.modal-dialog{
+    width: 75vw;
+    height: 90vh;
+}
+
+.modal-content{
+    height: 100%;
+}
+
+.modal-body{
+    width: 100%;
+    height: calc(100% - 120px);
+    padding: 15px;
+}
+
+.modal-body embed {
+    width: 100%;
+    height: 100%;
+}
+.googleImage {
+    height: 26px;
+    width: auto;
+}
+.dropDownIcon {
+    padding-right: 10px;
+}

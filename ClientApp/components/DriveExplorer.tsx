@@ -9,7 +9,7 @@ require('../css/breadcrumb.css');
 import { Modal } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { ContextMenu } from '../components/ContextMenu';
-require('../css/ContexMenu.css');
+require('../css/ContextMenu.css');
 
 export class DriveExplorer extends React.Component<{}, {}> {
 
