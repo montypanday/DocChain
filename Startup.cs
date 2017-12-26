@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace front_end
 {
@@ -34,11 +35,16 @@ namespace front_end
             //services.AddDistributedMemoryCache();
             services.AddMemoryCache();
             services.AddSession();
-            // Add framework services.
             services.AddMvc()
              .AddJsonOptions(
             options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-        );
+            );
+
+            // Register the Swagger generator, defining one or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "DocChain API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,18 +52,12 @@ namespace front_end
         {
             if (env.IsDevelopment())
             {
-                loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-                loggerFactory.AddDebug();
+                loggerFactory.AddDebug(LogLevel.Trace);
+                loggerFactory.AddFile("Logs/myapp-{Date}.txt");
                 app.UseDeveloperExceptionPage();
             }
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-            }
-
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
                 {
                     HotModuleReplacement = true,
@@ -68,6 +68,15 @@ namespace front_end
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseStaticFiles();
             app.UseSession();

@@ -83,9 +83,9 @@ export class DriveExplorer extends React.Component<{}, {}> {
         if (row.type === "folder") {
             console.log("Navigated into folder ->" + row);
             var newArray = this.state['pathCollection'];
-            newArray.push({ fileId: row.id, Name: row.fileName });
-            this.setState({ pathCollection: newArray });
-            this.searchInFolder(row.id);
+            var newArray2 = JSON.parse(JSON.stringify(newArray));
+            newArray2.push({ fileId: row.id, Name: row.fileName });
+            this.searchInFolder(row.id, newArray2);
         }
         if (row.type === "drive#file") {
             this.setState({ PreviewUrl: row.embedLink, PreviewFileName: row.fileName, showPreviewModal: true })
@@ -101,11 +101,11 @@ export class DriveExplorer extends React.Component<{}, {}> {
             }
         }
         coll.length = index + 1;
-        this.setState({ pathCollection: coll });
-        this.searchInFolder(e.fileId);
+        var coll2 = JSON.parse(JSON.stringify(coll));
+        this.searchInFolder(e.fileId, coll2);
     }
 
-    searchInFolder(fileID) {
+    searchInFolder(fileID, newArray) {
         console.log("Searching in folder -> " + fileID);
         fetch("https://www.googleapis.com/drive/v3/files?q='" + fileID + "'+in+parents&trashed=false&fields=files", {
             method: "GET",
@@ -136,7 +136,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
                 }
                 if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
 
-                    this.setState({ filesarray: newData, loading: false });
+                    this.setState({ filesarray: newData, loading: false, pathCollection: newArray });
                     //console.log("different data was received this time.")
                 }
             })
@@ -195,6 +195,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
                             </div>
                         </div>
                     </div>
+
 
 
                     <BreadCrumb pathCollection={this.state['pathCollection']} navigateOutHandler={this.navigateOut.bind(this)} />

@@ -34,6 +34,7 @@ namespace front_end.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         // GET api/<controller>/5
+        [Route("GetAsync")]
         [HttpGet]
         public async Task<Boolean> GetAsync(string hash)
         {
@@ -53,6 +54,7 @@ namespace front_end.Controllers
         /// <param name="id"></param>
         /// <param name="value"></param>
         // PUT api/<controller>/5
+        [Route("PostAsync")]
         [HttpPost]
         public async Task<Boolean> PostAsync(string hash)
         {

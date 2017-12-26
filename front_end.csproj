@@ -29,6 +29,10 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0-dev-00023" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="1.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="1.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="1.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Model\Model.csproj" />
@@ -39,6 +43,7 @@
     <None Remove="ClientApp\api\Box\GetPreviewLink.tsx" />
     <None Remove="ClientApp\api\Helpers\FormatSize.tsx" />
     <None Remove="ClientApp\api\SearchRoot.tsx" />
+    <None Remove="ClientApp\components\ErrorBoundary.tsx" />
     <None Remove="ClientApp\components\Modals\FilePreviewModal.tsx" />
     <None Remove="ClientApp\components\TableHeading.tsx" />
     <None Remove="yarn.lock" />
@@ -47,6 +52,7 @@
     <TypeScriptCompile Include="ClientApp\api\Box\GetPreviewLink.tsx" />
     <TypeScriptCompile Include="ClientApp\api\Box\SearchRoot.tsx" />
     <TypeScriptCompile Include="ClientApp\api\Helpers\FormatSize.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\ErrorBoundary.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Modals\FilePreviewModal.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Table\TableHeading.tsx" />
   </ItemGroup>

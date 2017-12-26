@@ -12,52 +12,6 @@ export class Login extends React.Component<{}, LoginState> {
             loggedIn: false
         };
     }
-    //launchOneDrive() {
-    //    console.log(window);
-    //    var odOptions = {
-    //        clientId: "2e5c31a7-72e0-4e93-9def-581432e66277",
-    //        action: "query",
-    //        multiSelect: true,
-    //        advanced: {},
-    //        success: function (files) { /* success handler */ },
-    //        cancel: function () { /* cancel handler */ },
-    //        error: function (e) { /* error handler */ }
-    //    };
-    //    window.OneDrive.open(odOptions);
-    //}
-
-    //launchDropBox() {
-    //    console.log(window.Dropbox);
-    //    const options = {
-
-    //        // Required. Called when a user selects an item in the Chooser.
-    //        success: function (files) {
-    //            alert("Here's the file link: " + files[0].link);
-    //        },
-
-    //        // Optional. Called when the user closes the dialog without selecting a file
-    //        // and does not include any parameters.
-    //        cancel: function () {
-
-    //        },
-
-    //        // Optional. "preview" (default) is a preview link to the document for sharing,
-    //        // "direct" is an expiring link to download the contents of the file. For more
-    //        // information about link types, see Link types below.
-    //        linkType: "preview", // or "direct"
-
-    //        // Optional. A value of false (default) limits selection to a single file, while
-    //        // true enables multiple file selection.
-    //        multiselect: false, // or true
-
-    //        // Optional. This is a list of file extensions. If specified, the user will
-    //        // only be able to select files with these extensions. You may also specify
-    //        // file types, such as "video" or "images" in the list. For more information,
-    //        // see File types below. By default, all extensions are allowed.
-    //        extensions: [".pdf", ".doc", ".docx"],
-    //    };
-    //    window.Dropbox.choose(options);
-    //}
     render() {
         if (location.search != "") {
             const search = location.search;
@@ -75,13 +29,10 @@ export class Login extends React.Component<{}, LoginState> {
                         sessionStorage.setItem("google_refresh_token", data.refresh_token);
                     });
             } else {
-                fetch("/api/Login/get?authCode=" + AuthorizationCode, { credentials: 'same-origin' })
-                    .then(response => response.json())
+                fetch("/api/Box/Authenticate/" + AuthorizationCode, { credentials: 'same-origin' })
+                    .then(response => response)
                     .then(data => {
-                        console.log(data);
-                        sessionStorage.setItem("OAuthSession", JSON.stringify(data));
-                        sessionStorage.setItem("box_access_token", data.access_token);
-                        sessionStorage.setItem("box_refresh_token", data.refresh_token);
+
                     });
             }
         }

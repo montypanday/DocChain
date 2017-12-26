@@ -10,7 +10,9 @@ using front_end.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace front_end.Controllers
@@ -19,33 +21,95 @@ namespace front_end.Controllers
     public class BoxController : Controller
     {
         public IConfiguration Configuration { get; set; }
+        IDataProtector _protector { get; set; }
+        private readonly ILogger _logger;
 
-        public BoxController(IConfiguration config)
+        public BoxController(IConfiguration config, IDataProtectionProvider provider, ILogger<BoxController> logger)
         {
             Configuration = config;
+            _protector = provider.CreateProtector(GetType().FullName);
+            _logger = logger;
         }
 
-        [Route("GetRoot")]
+        [Route("Authenticate/{authcode}")]
         [HttpGet]
-        public async Task<JsonResult> GetRoot()
+        public async Task<Boolean> Authenticate(string authcode)
+        {
+            BoxClient client = GetClient();
+            OAuthSession Oauth = await client.Auth.AuthenticateAsync(authcode);
+            CookieOptions options = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(1),
+                HttpOnly = true
+            };
+            Response.Cookies.Append("boxCred", _protector.Protect(JsonConvert.SerializeObject(Oauth)), options);
+            _logger.LogInformation("Authenticated user using Authorization code => " + authcode);
+            return true;
+        }
+
+
+        [Route("GetFolderItems/{id}")]
+        [HttpGet]
+        public async Task<JsonResult> GetFolderItems(string id)
         {
             var client = Initialise();
-            return await GetBoxFolderItems(client, "0");
+            _logger.LogInformation("Getting Folder items for folder => " + id);
+            return await GetBoxFolderItems(client, id);
         }
-
         [Route("GetPreview/{id}")]
         [HttpGet]
         public async Task<string> GetPreview(string id)
         {
             var client = Initialise();
+            _logger.LogInformation("Getting Preview Link for file => "+ id);
             return (await client.FilesManager.GetPreviewLinkAsync(id)).ToString();
         }
 
-        //public async Boolean Rename(string ID)
-        //{
+        [Route("Rename/{id}/{newName}")]
+        [HttpPost]
+        public async Task<Boolean> RenameFile(string id, string newName)
+        {
+            var client = Initialise();
+            BoxFile fileAfterRename = await client.FilesManager.UpdateInformationAsync(new BoxFileRequest() { Name = newName });
+            if (fileAfterRename.Name == newName)
+            {
+                
+                return true;
+            }
+            return false;
+        }
 
-        //}
+        [Route("GetSharedLink/{type}/{id}")]
+        [HttpGet]
+        public async Task<JsonResult> GetSharedLink(string type, string id)
+        {
+            var client = Initialise();
+            var request = new BoxSharedLinkRequest() { Access = BoxSharedLinkAccessType.open };
+            if (type == "file")
+            {
+                BoxFile file = await client.FilesManager.CreateSharedLinkAsync(id, request);
+                _logger.LogInformation("Getting Shared link for File =>" + id);
+                return Json(file);
+            }
+            var folder = await client.FoldersManager.CreateSharedLinkAsync(id, request);
+            _logger.LogInformation("Getting Shared link for Folder =>" + id);
+            return Json(folder);
+        }
 
+        [Route("Delete/{type}/{id}")]
+        [HttpDelete]
+        public async Task<Boolean> Delete(string type, string id)
+        {
+            var client = Initialise();
+            
+            if (type == "file")
+            {
+                _logger.LogInformation("Deleting File =>" + id);
+                return await client.FilesManager.DeleteAsync(id);
+            }
+            _logger.LogInformation("Deleting Folder =>" + id);
+            return await client.FoldersManager.DeleteAsync(id);
+        }
         //public async Boolean Delete(string ID)
         //{
 
@@ -64,19 +128,32 @@ namespace front_end.Controllers
 
         private BoxClient Initialise()
         {
+            _logger.LogDebug("A new client was initialised");
             string cookie = Request.Cookies["boxCred"];
-            return GetClient(cookie);
+            cookie = _protector.Unprotect(cookie);
+            _logger.LogInformation("Decrypting Cookie");
+            return GetClientFromCookie(cookie);
         }
 
         /// <summary>
-        /// GetClient returns BoxClient initialising it with credentials.
+        /// GetClient returns BoxClient initialising it with credentials using an OAuthSession from Cookie.
         /// </summary>
         /// <param name="Cookie"></param>
         /// <returns></returns>
-        private BoxClient GetClient(string Cookie)
+        private BoxClient GetClientFromCookie(string Cookie)
         {
+            _logger.LogInformation("Getting client from Cookie");
             OAuthSession oAuth = JsonConvert.DeserializeObject<OAuthSession>(Cookie);
             BoxClient client = new BoxClient(new BoxConfig(Configuration["BoxClientId"], Configuration["BoxClientSecret"], new Uri(Configuration["BoxRedirectURL"])), oAuth);
+            client.Auth.SessionAuthenticated += Auth_SessionAuthenticated;
+            client.Auth.SessionInvalidated += Auth_SessionInvalidated;
+            return client;
+        }
+
+        private BoxClient GetClient()
+        {
+            _logger.LogInformation("Initialising a Completely new BoxClient");
+            BoxClient client = new BoxClient(new BoxConfig(Configuration["BoxClientId"], Configuration["BoxClientSecret"], new Uri(Configuration["BoxRedirectURL"])));
             return client;
         }
 
@@ -88,6 +165,7 @@ namespace front_end.Controllers
         /// <returns></returns>
         private async Task<JsonResult> GetBoxFolderItems(BoxClient client, string ID)
         {
+            _logger.LogInformation("Filtering data according to what we need");
             var items = await client.FoldersManager.GetFolderItemsAsync(ID, 100000, 0,
                 new List<string>()
                 {
@@ -162,6 +240,24 @@ namespace front_end.Controllers
             cont.Size = boxFolder.Size.ToString();
             cont.LastModified = boxFolder.ModifiedAt.ToString();
             return cont;
+        }
+
+        private void Auth_SessionInvalidated(object sender, EventArgs e)
+        {
+            _logger.LogInformation("The session was invalidated, i will renew it myself");
+            //do nothing
+        }
+
+        private void Auth_SessionAuthenticated(object sender, SessionAuthenticatedEventArgs e)
+        {
+            
+            _logger.LogInformation("Don't worry! Access Token was renewed => "+ Json(e.Session));
+            CookieOptions options = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(1),
+                HttpOnly = true
+            };
+            Response.Cookies.Append("boxCred", _protector.Protect(JsonConvert.SerializeObject(e.Session)), options);
         }
     }
 }

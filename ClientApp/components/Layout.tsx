@@ -1,6 +1,7 @@
 import * as React from "react";
 import { NavMenu } from "./NavMenu";
 import { Alert } from 'react-bootstrap';
+import  ErrorBoundary  from '../components/ErrorBoundary';
 
 export interface LayoutProps {
     children?: React.ReactNode;
@@ -26,9 +27,9 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
         }
     }
 
-    componentDidCatch(error, errorInfo) {
-        this.setState({ Error: error, errorFound: true, errorInformation: errorInfo });
-    }
+    //componentDidCatch(error, errorInfo) {
+    //    this.setState({ Error: error, errorFound: true, errorInformation: errorInfo });
+    //}
 
     public render() {
         return <div className="container-fluid">
@@ -36,13 +37,12 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
                 <div >
                     <NavMenu />
                 </div>
+                <ErrorBoundary>
                 <div style={divstyle}>
                     { this.props.children }
-                </div>
+                    </div>
+                </ErrorBoundary>
             </div>
-            {this.state["errorFound"] && <Alert bsStyle="warning">
-                <strong> this.state["Error"] </strong> this.state["errorInformation"]
-            </Alert>}
         </div>;
     }
 }

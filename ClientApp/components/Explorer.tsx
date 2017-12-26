@@ -6,13 +6,15 @@ import { Row } from '../components/Table/Row';
 import { Link, NavLink, Redirect } from "react-router-dom";
 import { BreadCrumb } from '../components/breadCrumb';
 require('../css/breadcrumb.css');
-//import { Modal } from 'react-bootstrap';
-//import { Button } from 'react-bootstrap';
-import { searchRoot } from '../api/Box/SearchRoot';
+
 import { formatSizeUnits } from '../api/Helpers/FormatSize';
 import { getPreviewLink } from '../api/Box/GetPreviewLink';
 import FilePreviewModal from '../components/Modals/FilePreviewModal';
 import TableHeading from '../components/Table/TableHeading';
+import FileRenameModal from '../components/Modals/RenameFileModal';
+import DeleteModal from '../components/Modals/DeleteModal';
+import ShowShareLinkModal from '../components/Modals/ShowShareLinkModal';
+import { GetFolderItemsAsync } from '../api/Box/GetFolderItemsAsync';
 
 export class Explorer extends React.Component<{}, {}> {
 
@@ -21,48 +23,43 @@ export class Explorer extends React.Component<{}, {}> {
         this.handleSearchBarChange = this.handleSearchBarChange.bind(this);
         this.performSearch = this.performSearch.bind(this);
         this.navigate = this.navigate.bind(this);
+        this.navigateOut = this.navigateOut.bind(this);
         this.closePreviewModal = this.closePreviewModal.bind(this);
+        this.searchInFolder = this.searchInFolder.bind(this);
         this.state = {
             // This is space we will put the json response
             filesarray: {},
-
             // this is just true or false, determines whether the network request has finished, display a gif or a table
             loading: true,
-
             errorFound: false,
-
             errorMessage: "",
-
-            //isOpen: false,
-
             PreviewUrl: "",
-
             PreviewFileName: "",
-
             query: "",
-
             showPreviewModal: false,
-
             user: "",
+            showRenameModal: false,
+            showDeleteModal: false,
+            pathCollection: [{ fileId: "0", Name: "All Files" }]
         }
     }
 
     componentDidMount() {
-        searchRoot().then(newData => {
+        GetFolderItemsAsync("0").then(newData => {
             if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
                 this.setState({ filesarray: newData, loading: false });
                 //console.log("different data was received this time.")
             }
         });
-        this.getUser();
+        //this.getUser();
     }
 
     handleSearchBarChange(e) {
         console.log("searching => " + e.target.value);
         this.setState({ query: e.target.value });
-        if (this.state['query'] == "") {
-            searchRoot();
-        }
+        //if (this.state['query'] == "") {
+        //    searchRoot();
+        //}
     }
 
     performSearch(e) {
@@ -106,12 +103,14 @@ export class Explorer extends React.Component<{}, {}> {
         }
     }
     navigate(row, event) {
-
-        console.log(row);
         if (row.type == "folder") {
-
+            console.log("Navigated into folder ->" + row.fileName);
+            var newArray = this.state["pathCollection"];
+            var newArray2 = JSON.parse(JSON.stringify(newArray));
+            newArray2.push({ fileId: row.id, Name: row.fileName });
+            this.searchInFolder(row.id, newArray2);
+            return;
         }
-
         if (row.type == "file") {
             getPreviewLink(row.id).then(link => {
                 this.setState({ PreviewUrl: link, PreviewFileName: row.fileName, showPreviewModal: true })
@@ -120,8 +119,33 @@ export class Explorer extends React.Component<{}, {}> {
 
     }
 
+    navigateOut(e) {
+        var coll = this.state['pathCollection'];
+        var index;
+        for (var i = 0; i < coll.length; i++) {
+            if (coll[i].fileId == e.fileId) {
+                index = i;
+            }
+        }
+        coll.length = index + 1;
+        var coll2 = JSON.parse(JSON.stringify(coll));
+        this.searchInFolder(e.fileId, coll2);
+    }
+
+    searchInFolder(id, newArray) {
+        GetFolderItemsAsync(id).then(newData => {
+            if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
+                this.setState({ filesarray: newData, loading: false, pathCollection: newArray });
+            }
+        });
+    }
+
+
     closePreviewModal() {
         this.setState({ PreviewUrl: "", showPreviewModal: false, PreviewFileName: "" })
+    }
+    closeRenameFileModal() {
+
     }
 
     showPreview() {
@@ -172,19 +196,17 @@ export class Explorer extends React.Component<{}, {}> {
                             </div>
                         </div>
                     </div>
-                    <div className="breadcrumb flat">
-                        <a /*{this.searchRoot}*/>All Files</a>
-                        <a href="#">Compare</a>
-                        <a href="#">Order Confirmation</a>
-                        <a href="#" className="active">Checkout</a>
-                    </div>
+                    <BreadCrumb pathCollection={this.state["pathCollection"]} navigateOutHandler={this.navigateOut.bind(this)} />
                     <table className="table table-striped table-hover table-responsive well header-fixed">
-                        <TableHeading/>
+                        <TableHeading />
                         <tbody>
                             {rows}
                         </tbody>
                     </table>
                     {this.state["showPreviewModal"] && <FilePreviewModal PreviewFileName={this.state["PreviewFileName"]} PreviewUrl={this.state["PreviewUrl"]} closeModal={this.closePreviewModal}></FilePreviewModal>}
+                    {this.state["showRenameModal"] && <FileRenameModal RenameFileName={this.state["RenameFileName"]} closeRenameModal={this.closeRenameFileModal}></FileRenameModal>}
+                    {this.state["showDeleteModal"] && <DeleteModal></DeleteModal>}
+                    {this.state["showShareModal"] && <ShowShareLinkModal></ShowShareLinkModal>}
                 </div>
             );
         }

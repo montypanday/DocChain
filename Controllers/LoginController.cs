@@ -15,6 +15,7 @@ using Google.Apis.Auth.OAuth2.Flows;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace front_end.Controllers
 {
@@ -22,11 +23,14 @@ namespace front_end.Controllers
     [Route("api/[controller]")]
     public class LoginController : Controller
     {
-        public IConfiguration Configuration { get; set; }
 
-        public LoginController(IConfiguration config)
+        public IConfiguration Configuration { get; set; }
+        IDataProtector _protector { get; set; }
+
+        public LoginController(IConfiguration config,IDataProtectionProvider provider)
         {
             Configuration = config;
+            _protector = provider.CreateProtector(GetType().FullName);
         }
         [HttpGet("{id}")]
         public async Task<JsonResult> Get(string authCode)
@@ -37,22 +41,12 @@ namespace front_end.Controllers
             OAuthSession Oauth = await client.Auth.AuthenticateAsync(authCode);
             // Access token from that x object is returned to browser which is stored in cache and attached with each request which is made to BOX
 
-            //       Response.Cookies.Append(
-            //"COOKIE_NAME",
-            //"COOKIE_VALUE",
-            //new CookieOptions()
-            //{
-            //    Domain = "https://localhost:44374",
-            //    HttpOnly = false,
-            //    Secure = false
-            //}
-            //);
             CookieOptions options = new CookieOptions
             {
                 Expires = DateTime.Now.AddDays(1),
                 HttpOnly = true
             };
-            Response.Cookies.Append("boxCred", JsonConvert.SerializeObject(Oauth), options);
+            Response.Cookies.Append("boxCred", _protector.Protect(JsonConvert.SerializeObject(Oauth)), options);
             return Json(Oauth);
         }
         [Route("GetBoxFiles")]
@@ -132,6 +126,7 @@ namespace front_end.Controllers
             }
             return Json(list);
             //return (Json(items));
+
         }
 
         [Route("GetGoogleSession")]

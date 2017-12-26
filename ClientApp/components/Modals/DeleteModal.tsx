@@ -1,12 +1,11 @@
 ﻿import * as React from 'react';
 import { Modal } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
-require('./previewModal.css');
 
 export interface AppProps {
-    PreviewFileName: any,
-    PreviewUrl: any,
-    closeModal: any
+    //DeleteFileName: any,
+    //deleteHandler: any,
+    //closeDeleteModal: any
 }
 
 export interface AppState {
@@ -22,15 +21,14 @@ export default class FilePreviewModal extends React.Component<AppProps, AppState
 
     render() {
         return (
-            <Modal show={true} bsSize="large">
+            <Modal show={true}>
                 <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-lg">{this.props.PreviewFileName}</Modal.Title>
+                    <Modal.Title id="contained-modal-title-lg">Delete</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <embed src={this.props.PreviewUrl}></embed>
-                </Modal.Body>
+
                 <Modal.Footer>
-                    <Button bsStyle="primary" onClick={this.props.closeModal}>Close</Button>
+                    <Button bsStyle="primary" /*onClick={this.props.closeDeleteModal}*/>Delete</Button>
+                    <Button>Cancel</Button>
                 </Modal.Footer>
             </Modal>
         );

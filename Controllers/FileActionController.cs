@@ -18,13 +18,14 @@ namespace front_end.Controllers
         private FileActionService fileActionService = new FileActionService();
 
         // GET: /<controller>/
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
-        [HttpPost]
         [Route("LogAction")]
+        [HttpPost]
         public JsonResult LogAction([FromBody] JObject json)
         {
             FileAction fileAction;

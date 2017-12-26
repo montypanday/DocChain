@@ -5,13 +5,16 @@ export interface BreadCrumbProps {
     pathCollection: any;
     navigateOutHandler: any;
 }
+
+
 export class BreadCrumb extends React.Component<BreadCrumbProps, {}> {
     constructor(props) {
         super(props);
+        
     }
     shouldComponentUpdate(nextProps) {
-        const newChanges = this.props.pathCollection !== nextProps.pathCollection;
-        return newChanges;
+        const a = this.props.pathCollection !== nextProps.pathCollection;
+        return a;
     }
     render() {
         console.log("Breadcrumb was rendered");
