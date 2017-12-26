@@ -9,8 +9,6 @@ require('../css/breadcrumb.css');
 //import { Modal } from 'react-bootstrap';
 //import { Button } from 'react-bootstrap';
 import { ContextMenu } from '../components/ContextMenu';
-
-
 import { formatSizeUnits } from '../api/Helpers/FormatSize';
 import FilePreviewModal from '../components/Modals/FilePreviewModal';
 import TableHeading from '../components/Table/TableHeading';
