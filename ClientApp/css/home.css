@@ -8,6 +8,14 @@
     margin: 0;
 }
 
+.icon{
+    float: left;
+    vertical-align:middle;
+    margin-right:10px;
+    margin-top: -7px;
+}
+
+
 .welcome {
     font-size: 2vw;
     font-weight: 700;

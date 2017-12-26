@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { GDIcon } from '../components/SVGs/icon-GD';
+import { BOXIcon } from '../components/SVGs/icon-BOX';
 
 export class NavMenu extends React.Component<{}, {}> {
     constructor(props) {
@@ -33,7 +34,7 @@ export class NavMenu extends React.Component<{}, {}> {
                         </li>
                         <li>
                             <NavLink to={"/explorer"} activeClassName="active">
-                                <i className="fa fa-folder-open-o" aria-hidden="true"></i> Box                                
+                                <BOXIcon/> Box                                
                             </NavLink>
                         </li>
                         <li>

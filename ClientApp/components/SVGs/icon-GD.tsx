@@ -3,10 +3,12 @@
 export class GDIcon extends React.Component {
 
     public render() {
-        return <svg width="2em" height="2em" viewBox="0 0 1080 1080">
-            <path fill="rgb(255, 193, 7)" d="M362.667 128h298.667l298.667 512h-298.667z" />
-            <path fill="rgb(25, 118, 210)" d="M210.667 896l150.667-256h598.667l-149.333 256z" />
-            <path fill="rgb(76, 175, 80)" d="M64 642.667l146.667 253.333 301.333-512-149.333-256z" />
-        </svg>
+        return <div className="icon">
+            <svg viewBox="0 0 48 48" version="1.1" width="2em" height="2em">
+            <path fill="#FFC107" d="M 17 6 L 31 6 L 45 30 L 31 30 Z " />
+            <path fill="#1976D2" d="M 9.875 42 L 16.9375 30 L 45 30 L 38 42 Z " />
+            <path fill="#4CAF50" d="M 3 30.125 L 9.875 42 L 24 18 L 17 6 Z " />
+            </svg>
+        </div>
     }
 }
