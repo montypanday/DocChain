@@ -1,21 +1,21 @@
 ﻿/*MODAL DISPLAY*/
 
-.modal-dialog {
+.preview-dialog > div:first-child{
     width: 75vw;
     height: 90vh;
 }
 
-.modal-content {
+.preview-dialog > .modal-dialog > div:first-child {
     height: 100%;
 }
 
-.modal-body {
+.preview-body {
     width: 100%;
     height: calc(100% - 120px);
     padding: 15px;
 }
 
-    .modal-body embed {
+.preview-body embed {
         width: 100%;
         height: 100%;
     }
