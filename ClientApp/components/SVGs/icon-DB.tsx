@@ -1,4 +1,5 @@
 ﻿import * as React from "react";
+require('./icons.css');
 
 export class DBIcon extends React.Component {
 
