@@ -43,6 +43,7 @@ namespace front_end.Controllers
                 Expires = DateTime.Now.AddDays(1),
                 HttpOnly = true
             };
+            
             Response.Cookies.Append("boxCred", _protector.Protect(JsonConvert.SerializeObject(Oauth)), options);
             _logger.LogInformation("Authenticated user using Authorization code => " + code);
             return LocalRedirect("/explorer");
@@ -51,11 +52,23 @@ namespace front_end.Controllers
 
         [Route("GetFolderItems/{id}")]
         [HttpGet]
-        public async Task<JsonResult> GetFolderItems(string id)
+        public async Task<IActionResult> GetFolderItems(string id)
         {
-            var client = Initialise();
-            _logger.LogInformation("Getting Folder items for folder => " + id);
-            return await GetBoxFolderItems(client, id);
+            try
+            {
+                var client = Initialise();
+                _logger.LogInformation("Getting Folder items for folder => " + id);
+                return await GetBoxFolderItems(client, id);
+            }
+            catch (ArgumentNullException)
+            {
+                return StatusCode(401);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+            
         }
         [Route("GetPreview/{id}")]
         [HttpGet]
@@ -63,6 +76,8 @@ namespace front_end.Controllers
         {
             var client = Initialise();
             _logger.LogInformation("Getting Preview Link for file => "+ id);
+            
+            //log this preview in database.
             return (await client.FilesManager.GetPreviewLinkAsync(id)).ToString();
         }
 
@@ -131,6 +146,7 @@ namespace front_end.Controllers
         {
             _logger.LogDebug("A new client was initialised");
             string cookie = Request.Cookies["boxCred"];
+
             cookie = _protector.Unprotect(cookie);
             _logger.LogInformation("Decrypting Cookie");
             return GetClientFromCookie(cookie);
@@ -177,7 +193,7 @@ namespace front_end.Controllers
                     BoxFolder.FieldSize,
                     BoxFile.FieldSize,
                     BoxFolder.FieldModifiedAt,
-                    BoxFile.FieldModifiedAt
+                    BoxFile.FieldModifiedAt,
 
                     //BoxFolder.FieldCreatedAt,
                     //BoxFolder.FieldCreatedBy,
@@ -187,7 +203,7 @@ namespace front_end.Controllers
                     //BoxFile.FieldExtension,
                     //BoxFile.FieldExpiringEmbedLink,
                     //BoxFile.FieldPathCollection,
-                    //BoxFile.FieldSha1,
+                    BoxFile.FieldSha1,
                     //BoxFile.FieldSharedLink,
                 });
             Content[] list = new Content[items.TotalCount];
@@ -220,7 +236,7 @@ namespace front_end.Controllers
             cont.Id = boxFile.Id;
             cont.FileName = boxFile.Name;
             cont.Size = boxFile.Size.ToString();
-            //cont.Hash = boxFile.Sha1;
+            cont.Hash = boxFile.Sha1;
             cont.LastModified = boxFile.ModifiedAt.ToString();
             //cont.embedLink = boxFile.ExpiringEmbedLink.Url.ToString();
             //cont.DownloadUrl = downloadlink.ToString();
@@ -259,6 +275,19 @@ namespace front_end.Controllers
                 HttpOnly = true
             };
             Response.Cookies.Append("boxCred", _protector.Protect(JsonConvert.SerializeObject(e.Session)), options);
+        }
+
+        [Route("Logout")]
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            CookieOptions options = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(-1),
+                HttpOnly = true
+            };
+            Response.Cookies.Append("boxCred", "", options);
+            return StatusCode(200);
         }
     }
 }

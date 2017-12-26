@@ -25,7 +25,9 @@ export default class FilePreviewModal extends React.Component<AppProps, AppState
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-lg">Delete</Modal.Title>
                 </Modal.Header>
-
+                <Modal.Body>
+                    Are you sure you want to delete this item?
+                </Modal.Body>
                 <Modal.Footer>
                     <Button bsStyle="primary" /*onClick={this.props.closeDeleteModal}*/>Delete</Button>
                     <Button>Cancel</Button>

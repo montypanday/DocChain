@@ -15,7 +15,10 @@ import FileRenameModal from '../components/Modals/RenameFileModal';
 import DeleteModal from '../components/Modals/DeleteModal';
 import ShowShareLinkModal from '../components/Modals/ShowShareLinkModal';
 import { GetFolderItemsAsync } from '../api/Box/GetFolderItemsAsync';
-import ButtonToolBar  from '../components/Table/ButtonToolbar';
+import ButtonToolBar from '../components/Table/ButtonToolbar';
+import { Alert } from 'react-bootstrap';
+import { BoxLogin } from '../components/BoxLogin';
+import  AlertCollection  from '../components/Alerts/AlertCollection';
 
 export class Explorer extends React.Component<{}, {}> {
 
@@ -41,7 +44,8 @@ export class Explorer extends React.Component<{}, {}> {
             user: "",
             showRenameModal: false,
             showDeleteModal: false,
-            pathCollection: [{ fileId: "0", Name: "All Files" }]
+            pathCollection: [{ fileId: "0", Name: "All Files" }],
+            show401Alert: false
         }
     }
 
@@ -49,11 +53,14 @@ export class Explorer extends React.Component<{}, {}> {
      
             GetFolderItemsAsync("0").then(newData => {
                 if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                    this.setState({ filesarray: newData, loading: false });
+                    this.setState({ filesarray: newData, loading: false, show401Alert: false });
                     //console.log("different data was received this time.")
                 }
-        })
-                .catch(error => console.log(error));
+            })
+                .catch(function(error){
+                    console.log(error.status);
+                    this.setState({ loading: false, filesarray: [], show401Alert: true });
+                }.bind(this));
         //this.getUser();
     }
 
@@ -188,7 +195,7 @@ export class Explorer extends React.Component<{}, {}> {
             return (
                 <div className="well well-lg pull-down">
                     <div style={{ float: 'right' }} className="user-details">
-                        {this.state['user']}
+                        {/*this.state['user']*/}
                         <ButtonToolBar></ButtonToolBar>
                     </div>
                     <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#f5f5f5' }}>
@@ -202,13 +209,20 @@ export class Explorer extends React.Component<{}, {}> {
                         </div>
                     </div>
                     
-                    <BreadCrumb pathCollection={this.state["pathCollection"]} navigateOutHandler={this.navigateOut.bind(this)} />
-                    <table className="table table-striped table-hover table-responsive well header-fixed">
+                    {this.state["show401Alert"] &&
+                        <Alert bsStyle="warning">
+                            <strong>401 Unauthorized </strong> Please sign in first
+                        </Alert>}
+                    {this.state["show401Alert"] && <BoxLogin></BoxLogin>}
+
+                    {!this.state["show401Alert"] && <BreadCrumb pathCollection={this.state["pathCollection"]} navigateOutHandler={this.navigateOut.bind(this)} />}
+                    {!this.state["show401Alert"] && < table className="table table-striped table-hover table-responsive well header-fixed">
                         <TableHeading />
-                        <tbody>
-                            {rows}
-                        </tbody>
-                    </table>
+                    <tbody>
+                        {rows}
+                    </tbody>
+                    </table>}
+                    
                     {this.state["showPreviewModal"] && <FilePreviewModal PreviewFileName={this.state["PreviewFileName"]} PreviewUrl={this.state["PreviewUrl"]} closeModal={this.closePreviewModal}></FilePreviewModal>}
                     {this.state["showRenameModal"] && <FileRenameModal RenameFileName={this.state["RenameFileName"]} closeRenameModal={this.closeRenameFileModal}></FileRenameModal>}
                     {this.state["showDeleteModal"] && <DeleteModal></DeleteModal>}

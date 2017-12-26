@@ -1,4 +1,5 @@
 ﻿import { formatSizeUnits } from '../Helpers/FormatSize';
+
 export function GetFolderItemsAsync(id: string) {
     //this is the network call made everytime the page is reload, before the render method.
     return fetch("/api/Box/GetFolderItems/"+id, { credentials: 'same-origin' })

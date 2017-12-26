@@ -1,6 +1,7 @@
-﻿import { ButtonToolbar } from 'react-bootstrap';
-import * as React from 'react';
-import { Button } from 'react-bootstrap';
+﻿import * as React from 'react';
+import { render } from 'react-dom';
+import { ButtonToolbar } from 'react-bootstrap';
+import { Button, DropdownButton, MenuItem } from 'react-bootstrap';
 require('../Table/icon.css');
 
 export interface ButtonToolbarProps {
@@ -21,8 +22,9 @@ export default class ButtonToolBar extends React.Component<ButtonToolbarProps, B
         return (
             <div>
                 <ButtonToolbar>
+                   
                     {/* Indicates a successful or positive action */}
-                    <Button bsStyle="success" href="https://account.box.com/api/oauth2/authorize?response_type=code&client_id=3syx1zpgoraznjex526u78ozutwvgeby&state=security_token%3DKnhMJatFipTAnM0nHlZA"><i className="fa fa-sign-in" aria-hidden="true"></i>Login</Button>
+                    
                     {/* Indicates a dangerous or potentially negative action */}
                     <Button bsStyle="danger"><i className="fa fa-power-off" aria-hidden="true"></i>Logout</Button>
                 </ButtonToolbar>
