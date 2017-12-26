@@ -16,6 +16,7 @@ import DeleteModal from '../components/Modals/DeleteModal';
 import ShowShareLinkModal from '../components/Modals/ShowShareLinkModal';
 import { GetFolderItemsAsync } from '../api/Box/GetFolderItemsAsync';
 
+
 export class Explorer extends React.Component<{}, {}> {
 
     constructor(props) {
@@ -173,6 +174,7 @@ export class Explorer extends React.Component<{}, {}> {
     }
 
     public render() {
+        console.log("Explorer was rendered");
         if (this.state['loading'] === false) {
             //this.getUser();
             // this .map function is like a foreach loop on filesarray, gives us a row object which has all the values that are related to a file object

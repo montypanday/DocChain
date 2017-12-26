@@ -12,3 +12,320 @@
 2017-12-26T12:44:54.5171586+11:00 0HLAC08N6MFLS:00000002 [INF] Getting client from Cookie (e611f565)
 2017-12-26T12:44:54.5174604+11:00 0HLAC08N6MFLS:00000002 [INF] Getting Folder items for folder => 0 (9bb32ae9)
 2017-12-26T12:44:54.5175421+11:00 0HLAC08N6MFLS:00000002 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T12:49:04.8997977+11:00 0HLAC08N6MFM1:00000002 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T12:49:04.8999237+11:00 0HLAC08N6MFM1:00000002 [INF] Getting client from Cookie (e611f565)
+2017-12-26T12:49:04.9001397+11:00 0HLAC08N6MFM1:00000002 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T12:49:04.9002325+11:00 0HLAC08N6MFM1:00000002 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T12:50:16.8408369+11:00 0HLAC08N6MFM1:00000004 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T12:50:16.8409759+11:00 0HLAC08N6MFM1:00000004 [INF] Getting client from Cookie (e611f565)
+2017-12-26T12:50:16.8411672+11:00 0HLAC08N6MFM1:00000004 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T12:50:16.8412731+11:00 0HLAC08N6MFM1:00000004 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T13:04:19.5919904+11:00  [ERR] Hash: b615e01c503cdcc15a37
+Version: webpack 3.10.0
+Time: 2845ms
+                                   Asset      Size  Chunks                    Chunk Names
+                                 main.js   2.56 MB       0  [emitted]  [big]  main
+    0.aa62cef9fde8b461c55e.hot-update.js    6.3 kB       0  [emitted]         main
+    aa62cef9fde8b461c55e.hot-update.json  43 bytes          [emitted]         
+                             main.js.map   2.56 MB       0  [emitted]         main
+0.aa62cef9fde8b461c55e.hot-update.js.map    6.8 kB       0  [emitted]         main
+   [1] ./node_modules/react/index.js 190 bytes {0}
+  [10] delegated ./node_modules/node-libs-browser/node_modules/process/browser.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+  [76] delegated ./node_modules/react-router-dom/es/index.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+ [109] ./ClientApp/routes.tsx 4.33 kB {0} [built]
+ [186] ./node_modules/querystring-es3/index.js 127 bytes {0}
+ [294] multi react-hot-loader/patch event-source-polyfill webpack-hot-middleware/client?path=__webpack_hmr&dynamicPublicPath=true ./ClientApp/boot.tsx 64 bytes {0}
+ [295] ./node_modules/react-hot-loader/patch.js 40 bytes {0}
+ [408] ./node_modules/event-source-polyfill/src/eventsource.js 21.4 kB {0}
+ [409] (webpack)-hot-middleware/client.js?path=__webpack_hmr&dynamicPublicPath=true 7.35 kB {0}
+ [414] (webpack)-hot-middleware/client-overlay.js 2.21 kB {0}
+ [419] (webpack)-hot-middleware/process-update.js 4.33 kB {0}
+ [420] ./ClientApp/boot.tsx 1.97 kB {0} [built]
+ [421] ./ClientApp/css/site.css 1.02 kB {0}
+ [423] delegated ./node_modules/bootstrap/dist/js/npm.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+ [424] ./node_modules/react-hot-loader/index.js 40 bytes {0}
+    + 725 hidden modules
+
+ERROR in [at-loader] ./ClientApp/components/login.tsx:73:21 
+    TS2339: Property 'element' does not exist on type 'JSX.IntrinsicElements'.
+
+ERROR in [at-loader] ./ClientApp/components/login.tsx:78:21 
+    TS2339: Property 'element' does not exist on type 'JSX.IntrinsicElements'. (6b1815d9)
+2017-12-26T14:07:04.1366879+11:00  [ERR] Hash: dcd3336a6fe71bdd9f93
+Version: webpack 3.10.0
+Time: 2551ms
+                                   Asset       Size  Chunks                    Chunk Names
+                                 main.js    2.56 MB       0  [emitted]  [big]  main
+    0.062bdd66d183b7a0eca1.hot-update.js    1.32 kB       0  [emitted]         main
+    062bdd66d183b7a0eca1.hot-update.json   43 bytes          [emitted]         
+                             main.js.map    2.56 MB       0  [emitted]         main
+0.062bdd66d183b7a0eca1.hot-update.js.map  113 bytes       0  [emitted]         main
+   [9] delegated ./node_modules/node-libs-browser/node_modules/process/browser.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+  [13] delegated ./node_modules/react-dom/index.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+  [73] (webpack)/buildin/module.js 517 bytes {0}
+  [76] delegated ./node_modules/react-router-dom/es/index.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+ [109] ./ClientApp/routes.tsx 4.33 kB {0} [built]
+ [186] ./node_modules/querystring-es3/index.js 127 bytes {0}
+ [294] multi react-hot-loader/patch event-source-polyfill webpack-hot-middleware/client?path=__webpack_hmr&dynamicPublicPath=true ./ClientApp/boot.tsx 64 bytes {0}
+ [295] ./node_modules/react-hot-loader/patch.js 40 bytes {0}
+ [296] ./node_modules/react-hot-loader/lib/patch.js 209 bytes {0}
+ [408] ./node_modules/event-source-polyfill/src/eventsource.js 21.4 kB {0}
+ [409] (webpack)-hot-middleware/client.js?path=__webpack_hmr&dynamicPublicPath=true 7.35 kB {0}
+ [419] (webpack)-hot-middleware/process-update.js 4.33 kB {0}
+ [420] ./ClientApp/boot.tsx 1.97 kB {0} [built]
+ [421] ./ClientApp/css/site.css 1.02 kB {0}
+ [423] delegated ./node_modules/bootstrap/dist/js/npm.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+    + 726 hidden modules
+
+ERROR in [at-loader] ./ClientApp/components/login.tsx:3:31 
+    TS2306: File 'C:/Users/Monty/Documents/S326/SIT-374 Project Design/front_end/ClientApp/api/Box/RedirectToBox.tsx' is not a module. (09b157b0)
+2017-12-26T14:07:11.8892116+11:00  [ERR] Hash: b8efdaa00bb147539499
+Version: webpack 3.10.0
+Time: 2865ms
+                                   Asset       Size  Chunks                    Chunk Names
+                                 main.js    2.56 MB       0  [emitted]  [big]  main
+    0.dcd3336a6fe71bdd9f93.hot-update.js  343 bytes       0  [emitted]         main
+    dcd3336a6fe71bdd9f93.hot-update.json   43 bytes          [emitted]         
+                             main.js.map    2.56 MB       0  [emitted]         main
+0.dcd3336a6fe71bdd9f93.hot-update.js.map  113 bytes       0  [emitted]         main
+   [9] delegated ./node_modules/node-libs-browser/node_modules/process/browser.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+  [13] delegated ./node_modules/react-dom/index.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+  [73] (webpack)/buildin/module.js 517 bytes {0}
+  [76] delegated ./node_modules/react-router-dom/es/index.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+ [109] ./ClientApp/routes.tsx 4.33 kB {0} [built]
+ [186] ./node_modules/querystring-es3/index.js 127 bytes {0}
+ [294] multi react-hot-loader/patch event-source-polyfill webpack-hot-middleware/client?path=__webpack_hmr&dynamicPublicPath=true ./ClientApp/boot.tsx 64 bytes {0}
+ [295] ./node_modules/react-hot-loader/patch.js 40 bytes {0}
+ [296] ./node_modules/react-hot-loader/lib/patch.js 209 bytes {0}
+ [408] ./node_modules/event-source-polyfill/src/eventsource.js 21.4 kB {0}
+ [409] (webpack)-hot-middleware/client.js?path=__webpack_hmr&dynamicPublicPath=true 7.35 kB {0}
+ [419] (webpack)-hot-middleware/process-update.js 4.33 kB {0}
+ [420] ./ClientApp/boot.tsx 1.97 kB {0} [built]
+ [421] ./ClientApp/css/site.css 1.02 kB {0}
+ [423] delegated ./node_modules/bootstrap/dist/js/npm.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+    + 726 hidden modules
+
+ERROR in ./ClientApp/api/Box/RedirectToBox.tsx
+Module build failed: Error: ENOENT: no such file or directory, open 'C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\ClientApp\api\Box\RedirectToBox.tsx'
+ @ ./ClientApp/components/login.tsx 15:22-57
+ @ ./ClientApp/routes.tsx
+ @ ./ClientApp/boot.tsx
+ @ multi react-hot-loader/patch event-source-polyfill webpack-hot-middleware/client?path=__webpack_hmr&dynamicPublicPath=true ./ClientApp/boot.tsx
+
+ERROR in [at-loader] ./ClientApp/components/login.tsx:3:31 
+    TS2307: Cannot find module '../api/Box/RedirectToBox'. (383f6313)
+2017-12-26T14:07:31.6534839+11:00  [ERR] Hash: c06e664c07edc9e08d33
+Version: webpack 3.10.0
+Time: 1989ms
+                                   Asset      Size  Chunks                    Chunk Names
+                                 main.js   2.56 MB       0  [emitted]  [big]  main
+    0.b8efdaa00bb147539499.hot-update.js   6.12 kB       0  [emitted]         main
+    b8efdaa00bb147539499.hot-update.json  43 bytes          [emitted]         
+                             main.js.map   2.56 MB       0  [emitted]         main
+0.b8efdaa00bb147539499.hot-update.js.map   6.68 kB       0  [emitted]         main
+   [9] delegated ./node_modules/node-libs-browser/node_modules/process/browser.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+  [13] delegated ./node_modules/react-dom/index.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+  [73] (webpack)/buildin/module.js 517 bytes {0}
+  [76] delegated ./node_modules/react-router-dom/es/index.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+ [109] ./ClientApp/routes.tsx 4.33 kB {0} [built]
+ [186] ./node_modules/querystring-es3/index.js 127 bytes {0}
+ [294] multi react-hot-loader/patch event-source-polyfill webpack-hot-middleware/client?path=__webpack_hmr&dynamicPublicPath=true ./ClientApp/boot.tsx 64 bytes {0}
+ [295] ./node_modules/react-hot-loader/patch.js 40 bytes {0}
+ [296] ./node_modules/react-hot-loader/lib/patch.js 209 bytes {0}
+ [408] ./node_modules/event-source-polyfill/src/eventsource.js 21.4 kB {0}
+ [409] (webpack)-hot-middleware/client.js?path=__webpack_hmr&dynamicPublicPath=true 7.35 kB {0}
+ [419] (webpack)-hot-middleware/process-update.js 4.33 kB {0}
+ [420] ./ClientApp/boot.tsx 1.97 kB {0} [built]
+ [421] ./ClientApp/css/site.css 1.02 kB {0}
+ [423] delegated ./node_modules/bootstrap/dist/js/npm.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+    + 726 hidden modules
+
+ERROR in ./ClientApp/api/Box/RedirectToBox.tsx
+Module build failed: Error: ENOENT: no such file or directory, open 'C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\ClientApp\api\Box\RedirectToBox.tsx'
+ @ ./ClientApp/components/login.tsx 15:22-57
+ @ ./ClientApp/routes.tsx
+ @ ./ClientApp/boot.tsx
+ @ multi react-hot-loader/patch event-source-polyfill webpack-hot-middleware/client?path=__webpack_hmr&dynamicPublicPath=true ./ClientApp/boot.tsx
+
+ERROR in [at-loader] ./ClientApp/components/login.tsx:3:31 
+    TS2307: Cannot find module '../api/Box/RedirectToBox'. (2f133e27)
+2017-12-26T14:07:59.3959039+11:00  [ERR] Hash: 7c123e1e30755187d224
+Version: webpack 3.10.0
+Time: 2564ms
+                                   Asset      Size  Chunks                    Chunk Names
+                                 main.js   2.56 MB       0  [emitted]  [big]  main
+    0.c06e664c07edc9e08d33.hot-update.js   6.07 kB       0  [emitted]         main
+    c06e664c07edc9e08d33.hot-update.json  43 bytes          [emitted]         
+                             main.js.map   2.56 MB       0  [emitted]         main
+0.c06e664c07edc9e08d33.hot-update.js.map   6.61 kB       0  [emitted]         main
+   [9] delegated ./node_modules/node-libs-browser/node_modules/process/browser.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+  [13] delegated ./node_modules/react-dom/index.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+  [73] (webpack)/buildin/module.js 517 bytes {0}
+  [76] delegated ./node_modules/react-router-dom/es/index.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+ [109] ./ClientApp/routes.tsx 4.33 kB {0} [built]
+ [186] ./node_modules/querystring-es3/index.js 127 bytes {0}
+ [294] multi react-hot-loader/patch event-source-polyfill webpack-hot-middleware/client?path=__webpack_hmr&dynamicPublicPath=true ./ClientApp/boot.tsx 64 bytes {0}
+ [295] ./node_modules/react-hot-loader/patch.js 40 bytes {0}
+ [296] ./node_modules/react-hot-loader/lib/patch.js 209 bytes {0}
+ [408] ./node_modules/event-source-polyfill/src/eventsource.js 21.4 kB {0}
+ [409] (webpack)-hot-middleware/client.js?path=__webpack_hmr&dynamicPublicPath=true 7.35 kB {0}
+ [419] (webpack)-hot-middleware/process-update.js 4.33 kB {0}
+ [420] ./ClientApp/boot.tsx 1.97 kB {0} [built]
+ [421] ./ClientApp/css/site.css 1.02 kB {0}
+ [423] delegated ./node_modules/bootstrap/dist/js/npm.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+    + 725 hidden modules
+
+ERROR in [at-loader] ./ClientApp/components/login.tsx:18:9 
+    TS2304: Cannot find name 'RedirectToBox'. (93b545ef)
+2017-12-26T14:13:25.9111764+11:00 0HLAC1QBO59RV:00000002 [INF] Initialising a Completely new BoxClient (a5ba4355)
+2017-12-26T14:13:27.1170188+11:00 0HLAC1QBO59RV:00000002 [INF] Authenticated user using Authorization code => e9IKcM4THjsgA9TrVI5B54wALehQfbyU (f118ce3d)
+2017-12-26T14:16:18.8900662+11:00 0HLAC1RUKLJO6:00000002 [INF] Initialising a Completely new BoxClient (a5ba4355)
+2017-12-26T14:16:20.1150907+11:00 0HLAC1RUKLJO6:00000002 [INF] Authenticated user using Authorization code => K9hcZRoaYUKibdLsUOV2ULFcmsb2mViy (ed9cd30b)
+2017-12-26T14:16:20.1673660+11:00 0HLAC1RUKLJO6:00000002 [ERR] An unhandled exception has occurred while executing the request (cf926119)
+System.InvalidOperationException: The supplied URL is not local. A URL with an absolute path is considered local if it does not have a host/authority part. URLs using virtual paths ('~/') are also local.
+   at Microsoft.AspNetCore.Mvc.Internal.LocalRedirectResultExecutor.Execute(ActionContext context, LocalRedirectResult result)
+   at Microsoft.AspNetCore.Mvc.LocalRedirectResult.ExecuteResult(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeResultAsync>d__19.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResultFilterAsync>d__24.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResourceFilter>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeFilterPipelineAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeAsync>d__15.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.<Invoke>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.<Invoke>d__7.MoveNext()
+2017-12-26T14:18:09.6096382+11:00 0HLAC1SVTLAVU:00000002 [INF] Initialising a Completely new BoxClient (a5ba4355)
+2017-12-26T14:18:10.8523974+11:00 0HLAC1SVTLAVU:00000002 [INF] Authenticated user using Authorization code => hXCMm7Dt1HW0HdKlvt1XfDucO1tBoHBE (fb7e56eb)
+2017-12-26T14:18:10.9060189+11:00 0HLAC1SVTLAVU:00000002 [ERR] An unhandled exception has occurred while executing the request (cf926119)
+System.InvalidOperationException: The supplied URL is not local. A URL with an absolute path is considered local if it does not have a host/authority part. URLs using virtual paths ('~/') are also local.
+   at Microsoft.AspNetCore.Mvc.Internal.LocalRedirectResultExecutor.Execute(ActionContext context, LocalRedirectResult result)
+   at Microsoft.AspNetCore.Mvc.LocalRedirectResult.ExecuteResult(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeResultAsync>d__19.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResultFilterAsync>d__24.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResourceFilter>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeFilterPipelineAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeAsync>d__15.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.<Invoke>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.<Invoke>d__7.MoveNext()
+2017-12-26T14:20:22.0975765+11:00 0HLAC1U7FBELG:00000002 [INF] Initialising a Completely new BoxClient (a5ba4355)
+2017-12-26T14:20:23.3536846+11:00 0HLAC1U7FBELG:00000002 [INF] Authenticated user using Authorization code => qXQylT3y9M2R53Cxejdny8rHVp0CyIy8 (72cd40f6)
+2017-12-26T14:20:48.4125736+11:00 0HLAC1U7FBELJ:00000002 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T14:20:48.4144626+11:00 0HLAC1U7FBELJ:00000002 [INF] Getting client from Cookie (e611f565)
+2017-12-26T14:20:48.4179569+11:00 0HLAC1U7FBELJ:00000002 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T14:20:48.4219234+11:00 0HLAC1U7FBELJ:00000002 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T14:21:08.9424615+11:00 0HLAC1UQEUS05:00000001 [INF] Initialising a Completely new BoxClient (a5ba4355)
+2017-12-26T14:21:10.1723034+11:00 0HLAC1UQEUS05:00000001 [INF] Authenticated user using Authorization code => C0TCPix4OzLuqSZsqUBOt9AcA0yHlKzp (a906eb1e)
+2017-12-26T14:21:19.8569168+11:00 0HLAC1UQEUS05:00000004 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T14:21:19.8581559+11:00 0HLAC1UQEUS05:00000004 [INF] Getting client from Cookie (e611f565)
+2017-12-26T14:21:19.8620720+11:00 0HLAC1UQEUS05:00000004 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T14:21:19.8649402+11:00 0HLAC1UQEUS05:00000004 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T14:21:58.9047876+11:00 0HLAC1UQEUS08:00000002 [INF] Initialising a Completely new BoxClient (a5ba4355)
+2017-12-26T14:21:59.3966840+11:00 0HLAC1UQEUS08:00000002 [INF] Authenticated user using Authorization code => aijLhaBdLHyt21I03OglcPYDd7akfeXo (065574d5)
+2017-12-26T14:22:00.9438835+11:00 0HLAC1UQEUS05:00000007 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T14:22:00.9441620+11:00 0HLAC1UQEUS05:00000007 [INF] Getting client from Cookie (e611f565)
+2017-12-26T14:22:00.9448684+11:00 0HLAC1UQEUS05:00000007 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T14:22:00.9449593+11:00 0HLAC1UQEUS05:00000007 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T14:23:40.9672204+11:00 0HLAC1UQEUS07:00000007 [INF] Initialising a Completely new BoxClient (a5ba4355)
+2017-12-26T14:23:42.0216526+11:00 0HLAC1UQEUS07:00000007 [INF] Authenticated user using Authorization code => ivU7AfZaX6YJG6tb4cWu5wJSax9fimQw (170fe1fd)
+2017-12-26T14:23:43.0118083+11:00 0HLAC1UQEUS05:0000000D [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T14:23:43.0120985+11:00 0HLAC1UQEUS05:0000000D [INF] Getting client from Cookie (e611f565)
+2017-12-26T14:23:43.0123873+11:00 0HLAC1UQEUS05:0000000D [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T14:23:43.0124773+11:00 0HLAC1UQEUS05:0000000D [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T14:23:52.7845021+11:00 0HLAC1UQEUS0A:00000002 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T14:23:52.7845819+11:00 0HLAC1UQEUS0A:00000002 [INF] Getting client from Cookie (e611f565)
+2017-12-26T14:23:52.7847615+11:00 0HLAC1UQEUS0A:00000002 [INF] Getting Folder items for folder => 43571328743 (8bc75c02)
+2017-12-26T14:23:52.7848352+11:00 0HLAC1UQEUS0A:00000002 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T14:23:54.5111519+11:00 0HLAC1UQEUS07:0000000A [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T14:23:54.5112499+11:00 0HLAC1UQEUS07:0000000A [INF] Getting client from Cookie (e611f565)
+2017-12-26T14:23:54.5115321+11:00 0HLAC1UQEUS07:0000000A [INF] Getting Folder items for folder => 43733906381 (f8445073)
+2017-12-26T14:23:54.5116077+11:00 0HLAC1UQEUS07:0000000A [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T14:23:55.8554318+11:00 0HLAC1UQEUS05:0000000E [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T14:23:55.8556370+11:00 0HLAC1UQEUS05:0000000E [INF] Getting client from Cookie (e611f565)
+2017-12-26T14:23:55.8558866+11:00 0HLAC1UQEUS05:0000000E [INF] Getting Folder items for folder => 43733881909 (942d32e6)
+2017-12-26T14:23:55.8559566+11:00 0HLAC1UQEUS05:0000000E [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T14:23:57.2943856+11:00 0HLAC1UQEUS0A:00000003 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T14:23:57.2944803+11:00 0HLAC1UQEUS0A:00000003 [INF] Getting client from Cookie (e611f565)
+2017-12-26T14:23:57.2946795+11:00 0HLAC1UQEUS0A:00000003 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T14:23:57.2947471+11:00 0HLAC1UQEUS0A:00000003 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T14:25:33.8285036+11:00 0HLAC1UQEUS0D:00000001 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T14:25:33.8290149+11:00 0HLAC1UQEUS0D:00000001 [INF] Getting client from Cookie (e611f565)
+2017-12-26T14:25:33.8299573+11:00 0HLAC1UQEUS0D:00000001 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T14:25:33.8301578+11:00 0HLAC1UQEUS0D:00000001 [INF] Filtering data according to what we need (f607b25f)

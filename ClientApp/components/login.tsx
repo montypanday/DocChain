@@ -28,12 +28,6 @@ export class Login extends React.Component<{}, LoginState> {
                         sessionStorage.setItem("google_access_token", data.access_token);
                         sessionStorage.setItem("google_refresh_token", data.refresh_token);
                     });
-            } else {
-                fetch("/api/Box/Authenticate/" + AuthorizationCode, { credentials: 'same-origin' })
-                    .then(response => response)
-                    .then(data => {
-
-                    });
             }
         }
 

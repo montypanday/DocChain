@@ -31,20 +31,21 @@ namespace front_end.Controllers
             _logger = logger;
         }
 
-        [Route("Authenticate/{authcode}")]
+       
+        [Route("Authenticate")]
         [HttpGet]
-        public async Task<Boolean> Authenticate(string authcode)
+        public async Task<LocalRedirectResult> Authenticate(string code)
         {
             BoxClient client = GetClient();
-            OAuthSession Oauth = await client.Auth.AuthenticateAsync(authcode);
+            OAuthSession Oauth = await client.Auth.AuthenticateAsync(code);
             CookieOptions options = new CookieOptions
             {
                 Expires = DateTime.Now.AddDays(1),
                 HttpOnly = true
             };
             Response.Cookies.Append("boxCred", _protector.Protect(JsonConvert.SerializeObject(Oauth)), options);
-            _logger.LogInformation("Authenticated user using Authorization code => " + authcode);
-            return true;
+            _logger.LogInformation("Authenticated user using Authorization code => " + code);
+            return LocalRedirect("/explorer");
         }
 
 
