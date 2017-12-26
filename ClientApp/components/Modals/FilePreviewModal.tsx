@@ -22,11 +22,11 @@ export default class FilePreviewModal extends React.Component<AppProps, AppState
 
     render() {
         return (
-            <Modal show={true} bsSize="large">
+            <Modal show={true} bsSize="large" className="preview-dialog">
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-lg">{this.props.PreviewFileName}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className="preview-body">
                     <embed src={this.props.PreviewUrl}></embed>
                 </Modal.Body>
                 <Modal.Footer>
