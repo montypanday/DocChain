@@ -15,7 +15,7 @@ import FileRenameModal from '../components/Modals/RenameFileModal';
 import DeleteModal from '../components/Modals/DeleteModal';
 import ShowShareLinkModal from '../components/Modals/ShowShareLinkModal';
 import { GetFolderItemsAsync } from '../api/Box/GetFolderItemsAsync';
-
+import ButtonToolBar  from '../components/Table/ButtonToolbar';
 
 export class Explorer extends React.Component<{}, {}> {
 
@@ -46,12 +46,14 @@ export class Explorer extends React.Component<{}, {}> {
     }
 
     componentDidMount() {
-        GetFolderItemsAsync("0").then(newData => {
-            if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                this.setState({ filesarray: newData, loading: false });
-                //console.log("different data was received this time.")
-            }
-        });
+     
+            GetFolderItemsAsync("0").then(newData => {
+                if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
+                    this.setState({ filesarray: newData, loading: false });
+                    //console.log("different data was received this time.")
+                }
+        })
+                .catch(error => console.log(error));
         //this.getUser();
     }
 
@@ -187,6 +189,7 @@ export class Explorer extends React.Component<{}, {}> {
                 <div className="well well-lg pull-down">
                     <div style={{ float: 'right' }} className="user-details">
                         {this.state['user']}
+                        <ButtonToolBar></ButtonToolBar>
                     </div>
                     <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#f5f5f5' }}>
                         <div className="col-lg-6" style={{ padding: '0px' }}>
@@ -198,6 +201,7 @@ export class Explorer extends React.Component<{}, {}> {
                             </div>
                         </div>
                     </div>
+                    
                     <BreadCrumb pathCollection={this.state["pathCollection"]} navigateOutHandler={this.navigateOut.bind(this)} />
                     <table className="table table-striped table-hover table-responsive well header-fixed">
                         <TableHeading />

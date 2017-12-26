@@ -329,3 +329,923 @@ System.InvalidOperationException: The supplied URL is not local. A URL with an a
 2017-12-26T14:25:33.8290149+11:00 0HLAC1UQEUS0D:00000001 [INF] Getting client from Cookie (e611f565)
 2017-12-26T14:25:33.8299573+11:00 0HLAC1UQEUS0D:00000001 [INF] Getting Folder items for folder => 0 (9bb32ae9)
 2017-12-26T14:25:33.8301578+11:00 0HLAC1UQEUS0D:00000001 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T14:55:51.9019744+11:00  [ERR] Hash: 021019b84f2350ef12d2
+Version: webpack 3.10.0
+Time: 3232ms
+                                   Asset      Size  Chunks                    Chunk Names
+                                 main.js   2.56 MB       0  [emitted]  [big]  main
+    0.6f965b1a0e71d528e306.hot-update.js   15.8 kB       0  [emitted]         main
+    6f965b1a0e71d528e306.hot-update.json  43 bytes          [emitted]         
+                             main.js.map   2.57 MB       0  [emitted]         main
+0.6f965b1a0e71d528e306.hot-update.js.map   22.1 kB       0  [emitted]         main
+   [1] ./node_modules/react/index.js 190 bytes {0}
+  [10] delegated ./node_modules/node-libs-browser/node_modules/process/browser.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+  [73] (webpack)/buildin/module.js 517 bytes {0}
+  [76] delegated ./node_modules/react-router-dom/es/index.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+ [109] ./ClientApp/routes.tsx 4.33 kB {0} [built]
+ [186] ./node_modules/querystring-es3/index.js 127 bytes {0}
+ [294] multi react-hot-loader/patch event-source-polyfill webpack-hot-middleware/client?path=__webpack_hmr&dynamicPublicPath=true ./ClientApp/boot.tsx 64 bytes {0}
+ [295] ./node_modules/react-hot-loader/patch.js 40 bytes {0}
+ [408] ./node_modules/event-source-polyfill/src/eventsource.js 21.4 kB {0}
+ [409] (webpack)-hot-middleware/client.js?path=__webpack_hmr&dynamicPublicPath=true 7.35 kB {0}
+ [414] (webpack)-hot-middleware/client-overlay.js 2.21 kB {0}
+ [419] (webpack)-hot-middleware/process-update.js 4.33 kB {0}
+ [420] ./ClientApp/boot.tsx 1.97 kB {0} [built]
+ [421] ./ClientApp/css/site.css 1.02 kB {0}
+ [423] delegated ./node_modules/bootstrap/dist/js/npm.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+    + 726 hidden modules
+
+ERROR in [at-loader] ./ClientApp/components/Explorer.tsx:18:10 
+    TS2305: Module '"C:/Users/Monty/Documents/S326/SIT-374 Project Design/front_end/ClientApp/components/Table/ButtonToolbar"' has no exported member 'ButtonToolBar'. (814c828f)
+2017-12-26T14:56:23.4554115+11:00  [ERR] Hash: 021019b84f2350ef12d2
+Version: webpack 3.10.0
+Time: 1240ms
+      Asset     Size  Chunks         Chunk Names
+    main.js  2.56 MB       0  [big]  main
+main.js.map  2.57 MB       0         main
+   [1] ./node_modules/react/index.js 190 bytes {0}
+  [10] delegated ./node_modules/node-libs-browser/node_modules/process/browser.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+  [73] (webpack)/buildin/module.js 517 bytes {0}
+  [76] delegated ./node_modules/react-router-dom/es/index.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+ [109] ./ClientApp/routes.tsx 4.33 kB {0} [built]
+ [186] ./node_modules/querystring-es3/index.js 127 bytes {0}
+ [294] multi react-hot-loader/patch event-source-polyfill webpack-hot-middleware/client?path=__webpack_hmr&dynamicPublicPath=true ./ClientApp/boot.tsx 64 bytes {0}
+ [295] ./node_modules/react-hot-loader/patch.js 40 bytes {0}
+ [408] ./node_modules/event-source-polyfill/src/eventsource.js 21.4 kB {0}
+ [409] (webpack)-hot-middleware/client.js?path=__webpack_hmr&dynamicPublicPath=true 7.35 kB {0}
+ [414] (webpack)-hot-middleware/client-overlay.js 2.21 kB {0}
+ [419] (webpack)-hot-middleware/process-update.js 4.33 kB {0}
+ [420] ./ClientApp/boot.tsx 1.97 kB {0} [built]
+ [421] ./ClientApp/css/site.css 1.02 kB {0}
+ [423] delegated ./node_modules/bootstrap/dist/js/npm.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+    + 726 hidden modules
+
+ERROR in [at-loader] ./ClientApp/components/Explorer.tsx:18:10 
+    TS2305: Module '"C:/Users/Monty/Documents/S326/SIT-374 Project Design/front_end/ClientApp/components/Table/ButtonToolbar"' has no exported member 'ButtonToolBar'. (15e4924f)
+2017-12-26T14:56:32.2143799+11:00 0HLAC1UQEUS0F:00000001 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T14:56:32.2146351+11:00 0HLAC1UQEUS0F:00000001 [INF] Getting client from Cookie (e611f565)
+2017-12-26T14:56:32.2148772+11:00 0HLAC1UQEUS0F:00000001 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T14:56:32.2150685+11:00 0HLAC1UQEUS0F:00000001 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T14:56:32.3151467+11:00 0HLAC1UQEUS0G:00000002 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T14:56:32.3153188+11:00 0HLAC1UQEUS0G:00000002 [INF] Getting client from Cookie (e611f565)
+2017-12-26T14:56:32.3158521+11:00 0HLAC1UQEUS0G:00000002 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T14:56:32.3175932+11:00 0HLAC1UQEUS0G:00000002 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T14:57:55.8340095+11:00 0HLAC1UQEUS0J:00000001 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T14:57:55.8344103+11:00 0HLAC1UQEUS0J:00000001 [INF] Getting client from Cookie (e611f565)
+2017-12-26T14:57:55.8351773+11:00 0HLAC1UQEUS0J:00000001 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T14:57:55.8354068+11:00 0HLAC1UQEUS0J:00000001 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T15:00:31.3524161+11:00 0HLAC1UQEUS0L:00000004 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T15:00:31.3526690+11:00 0HLAC1UQEUS0L:00000004 [INF] Getting client from Cookie (e611f565)
+2017-12-26T15:00:31.3529414+11:00 0HLAC1UQEUS0L:00000004 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T15:00:31.3530445+11:00 0HLAC1UQEUS0L:00000004 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T15:00:58.9109053+11:00 0HLAC1UQEUS0L:00000007 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T15:00:58.9111278+11:00 0HLAC1UQEUS0L:00000007 [INF] Getting client from Cookie (e611f565)
+2017-12-26T15:00:58.9114022+11:00 0HLAC1UQEUS0L:00000007 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T15:00:58.9114810+11:00 0HLAC1UQEUS0L:00000007 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T15:03:56.0306291+11:00  [ERR] Hash: f49feca9ebf69c0cbd7e
+Version: webpack 3.10.0
+Time: 3397ms
+                                   Asset      Size  Chunks                    Chunk Names
+                                 main.js   2.56 MB       0  [emitted]  [big]  main
+    0.5e6d84634b35aa23919c.hot-update.js   2.89 kB       0  [emitted]         main
+    5e6d84634b35aa23919c.hot-update.json  43 bytes          [emitted]         
+                             main.js.map   2.56 MB       0  [emitted]         main
+0.5e6d84634b35aa23919c.hot-update.js.map   1.69 kB       0  [emitted]         main
+   [1] ./node_modules/react/index.js 190 bytes {0}
+  [10] delegated ./node_modules/node-libs-browser/node_modules/process/browser.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+  [73] (webpack)/buildin/module.js 517 bytes {0}
+  [76] delegated ./node_modules/react-router-dom/es/index.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+ [109] ./ClientApp/routes.tsx 4.33 kB {0} [built]
+ [186] ./node_modules/querystring-es3/index.js 127 bytes {0}
+ [294] multi react-hot-loader/patch event-source-polyfill webpack-hot-middleware/client?path=__webpack_hmr&dynamicPublicPath=true ./ClientApp/boot.tsx 64 bytes {0}
+ [295] ./node_modules/react-hot-loader/patch.js 40 bytes {0}
+ [408] ./node_modules/event-source-polyfill/src/eventsource.js 21.4 kB {0}
+ [409] (webpack)-hot-middleware/client.js?path=__webpack_hmr&dynamicPublicPath=true 7.35 kB {0}
+ [414] (webpack)-hot-middleware/client-overlay.js 2.21 kB {0}
+ [419] (webpack)-hot-middleware/process-update.js 4.33 kB {0}
+ [420] ./ClientApp/boot.tsx 1.97 kB {0} [built]
+ [421] ./ClientApp/css/site.css 1.02 kB {0}
+ [423] delegated ./node_modules/bootstrap/dist/js/npm.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+    + 726 hidden modules
+
+ERROR in [at-loader] ./ClientApp/components/Table/ButtonToolbar.tsx:26:49 
+    TS2559: Type '{ class: "fa fa-power-off"; }' has no properties in common with type 'DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>'. (68319832)
+2017-12-26T15:04:07.9377976+11:00 0HLAC1UQEUS0N:00000004 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T15:04:07.9381279+11:00 0HLAC1UQEUS0N:00000004 [INF] Getting client from Cookie (e611f565)
+2017-12-26T15:04:07.9385497+11:00 0HLAC1UQEUS0N:00000004 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T15:04:07.9389980+11:00 0HLAC1UQEUS0N:00000004 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T15:04:08.0179843+11:00 0HLAC1UQEUS0P:00000001 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T15:04:08.0183818+11:00 0HLAC1UQEUS0P:00000001 [INF] Getting client from Cookie (e611f565)
+2017-12-26T15:04:08.0186090+11:00 0HLAC1UQEUS0P:00000001 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T15:04:08.0187844+11:00 0HLAC1UQEUS0P:00000001 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T15:06:25.7543137+11:00 0HLAC1UQEUS0Q:00000001 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T15:06:25.7547177+11:00 0HLAC1UQEUS0Q:00000001 [INF] Getting client from Cookie (e611f565)
+2017-12-26T15:06:25.7557305+11:00 0HLAC1UQEUS0Q:00000001 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T15:06:25.7560879+11:00 0HLAC1UQEUS0Q:00000001 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T15:06:31.5224270+11:00 0HLAC1UQEUS0Q:00000005 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T15:06:31.5225852+11:00 0HLAC1UQEUS0Q:00000005 [INF] Getting client from Cookie (e611f565)
+2017-12-26T15:06:31.5227877+11:00 0HLAC1UQEUS0Q:00000005 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T15:06:31.5229906+11:00 0HLAC1UQEUS0Q:00000005 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T15:06:53.9117016+11:00 0HLAC1UQEUS0Q:00000009 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T15:06:53.9117968+11:00 0HLAC1UQEUS0Q:00000009 [INF] Getting client from Cookie (e611f565)
+2017-12-26T15:06:53.9122489+11:00 0HLAC1UQEUS0Q:00000009 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T15:06:53.9123366+11:00 0HLAC1UQEUS0Q:00000009 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T15:07:05.9636878+11:00 0HLAC1UQEUS0Q:0000000B [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T15:07:05.9637858+11:00 0HLAC1UQEUS0Q:0000000B [INF] Getting client from Cookie (e611f565)
+2017-12-26T15:07:05.9639770+11:00 0HLAC1UQEUS0Q:0000000B [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T15:07:05.9640942+11:00 0HLAC1UQEUS0Q:0000000B [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T15:08:08.6331169+11:00 0HLAC1UQEUS0S:00000001 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T15:08:08.6340146+11:00 0HLAC1UQEUS0S:00000001 [INF] Getting client from Cookie (e611f565)
+2017-12-26T15:08:08.6352108+11:00 0HLAC1UQEUS0S:00000001 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T15:08:08.6356204+11:00 0HLAC1UQEUS0S:00000001 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T15:08:13.6905956+11:00 0HLAC1UQEUS0S:00000004 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T15:08:13.6906861+11:00 0HLAC1UQEUS0S:00000004 [INF] Getting client from Cookie (e611f565)
+2017-12-26T15:08:13.6908625+11:00 0HLAC1UQEUS0S:00000004 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T15:08:13.6909245+11:00 0HLAC1UQEUS0S:00000004 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T15:09:38.8640318+11:00 0HLAC1UQEUS0U:00000003 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T15:09:38.8641265+11:00 0HLAC1UQEUS0U:00000003 [INF] Getting client from Cookie (e611f565)
+2017-12-26T15:09:38.8643015+11:00 0HLAC1UQEUS0U:00000003 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T15:09:38.8644405+11:00 0HLAC1UQEUS0U:00000003 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T15:10:08.0879958+11:00 0HLAC1UQEUS0V:00000002 [INF] Initialising a Completely new BoxClient (a5ba4355)
+2017-12-26T15:10:08.6781700+11:00 0HLAC1UQEUS0V:00000002 [INF] Authenticated user using Authorization code => S2bwuTeDMRrK46RK9hR0C9SmCXcbaH8G (fac00446)
+2017-12-26T15:10:09.4031165+11:00 0HLAC1UQEUS0V:00000004 [INF] Decrypting Cookie (a84c82bc)
+2017-12-26T15:10:09.4033843+11:00 0HLAC1UQEUS0V:00000004 [INF] Getting client from Cookie (e611f565)
+2017-12-26T15:10:09.4037197+11:00 0HLAC1UQEUS0V:00000004 [INF] Getting Folder items for folder => 0 (9bb32ae9)
+2017-12-26T15:10:09.4038107+11:00 0HLAC1UQEUS0V:00000004 [INF] Filtering data according to what we need (f607b25f)
+2017-12-26T15:11:10.1008381+11:00 0HLAC1UQEUS12:00000001 [ERR] An unhandled exception has occurred while executing the request (cf926119)
+System.ArgumentNullException: Value cannot be null.
+Parameter name: protectedData
+   at Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Unprotect(IDataProtector protector, String protectedData)
+   at front_end.Controllers.BoxController.Initialise() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 134
+   at front_end.Controllers.BoxController.<GetFolderItems>d__11.MoveNext() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 56
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeActionMethodAsync>d__12.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeNextActionFilterAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeInnerFilterAsync>d__14.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResourceFilter>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeFilterPipelineAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeAsync>d__15.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.<Invoke>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.<Invoke>d__7.MoveNext()
+2017-12-26T15:12:31.6291613+11:00 0HLAC1UQEUS14:00000001 [ERR] An unhandled exception has occurred while executing the request (cf926119)
+System.ArgumentNullException: Value cannot be null.
+Parameter name: protectedData
+   at Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Unprotect(IDataProtector protector, String protectedData)
+   at front_end.Controllers.BoxController.Initialise() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 134
+   at front_end.Controllers.BoxController.<GetFolderItems>d__11.MoveNext() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 56
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeActionMethodAsync>d__12.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeNextActionFilterAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeInnerFilterAsync>d__14.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResourceFilter>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeFilterPipelineAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeAsync>d__15.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.<Invoke>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.<Invoke>d__7.MoveNext()
+2017-12-26T15:12:33.7366120+11:00 0HLAC1UQEUS14:00000005 [ERR] An unhandled exception has occurred while executing the request (cf926119)
+System.ArgumentNullException: Value cannot be null.
+Parameter name: protectedData
+   at Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Unprotect(IDataProtector protector, String protectedData)
+   at front_end.Controllers.BoxController.Initialise() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 134
+   at front_end.Controllers.BoxController.<GetFolderItems>d__11.MoveNext() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 56
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeActionMethodAsync>d__12.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeNextActionFilterAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeInnerFilterAsync>d__14.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResourceFilter>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeFilterPipelineAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeAsync>d__15.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.<Invoke>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.<Invoke>d__7.MoveNext()
+2017-12-26T15:12:39.6332732+11:00 0HLAC1UQEUS16:00000002 [ERR] An unhandled exception has occurred while executing the request (cf926119)
+System.ArgumentNullException: Value cannot be null.
+Parameter name: protectedData
+   at Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Unprotect(IDataProtector protector, String protectedData)
+   at front_end.Controllers.BoxController.Initialise() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 134
+   at front_end.Controllers.BoxController.<GetFolderItems>d__11.MoveNext() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 56
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeActionMethodAsync>d__12.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeNextActionFilterAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeInnerFilterAsync>d__14.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResourceFilter>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeFilterPipelineAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeAsync>d__15.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.<Invoke>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.<Invoke>d__7.MoveNext()
+2017-12-26T15:13:07.7385141+11:00  [ERR] Hash: 88642d3f2f4e1acf94b7
+Version: webpack 3.10.0
+Time: 2578ms
+                                   Asset       Size  Chunks                    Chunk Names
+                                 main.js    2.53 MB       0  [emitted]  [big]  main
+    0.909e50c62cc5bd89139c.hot-update.js  569 bytes       0  [emitted]         main
+    909e50c62cc5bd89139c.hot-update.json   43 bytes          [emitted]         
+                             main.js.map    2.53 MB       0  [emitted]         main
+0.909e50c62cc5bd89139c.hot-update.js.map  113 bytes       0  [emitted]         main
+   [1] ./node_modules/react/index.js 190 bytes {0}
+  [10] delegated ./node_modules/node-libs-browser/node_modules/process/browser.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+  [13] delegated ./node_modules/react-dom/index.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+  [73] (webpack)/buildin/module.js 517 bytes {0}
+  [76] delegated ./node_modules/react-router-dom/es/index.js from dll-reference vendor_c57d7fb16113b6dc47e8 42 bytes {0} [built]
+ [186] ./node_modules/querystring-es3/index.js 127 bytes {0}
+ [294] multi react-hot-loader/patch event-source-polyfill webpack-hot-middleware/client?path=__webpack_hmr&dynamicPublicPath=true ./ClientApp/boot.tsx 64 bytes {0}
+ [295] ./node_modules/react-hot-loader/patch.js 40 bytes {0}
+ [296] ./node_modules/react-hot-loader/lib/patch.js 209 bytes {0}
+ [408] ./node_modules/event-source-polyfill/src/eventsource.js 21.4 kB {0}
+ [409] (webpack)-hot-middleware/client.js?path=__webpack_hmr&dynamicPublicPath=true 7.35 kB {0}
+ [412] ./node_modules/strip-ansi/index.js 161 bytes {0}
+ [414] (webpack)-hot-middleware/client-overlay.js 2.21 kB {0}
+ [419] (webpack)-hot-middleware/process-update.js 4.33 kB {0}
+ [420] ./ClientApp/boot.tsx 1.97 kB {0} [built]
+    + 720 hidden modules
+
+ERROR in ./ClientApp/components/Explorer.tsx
+Module parse failed: Unexpected token (65:25)
+You may need an appropriate loader to handle this file type.
+|             }); (63b846a6)
+2017-12-26T15:13:07.7386018+11:00  [ERR] 
+|         } (e0b0e88f)
+2017-12-26T15:13:07.7386336+11:00  [ERR] 
+|         catch (Exception = e) { (a2f6c2b4)
+2017-12-26T15:13:07.7386620+11:00  [ERR] 
+|             console.log("user is not logged in"); (f0fa3898)
+2017-12-26T15:13:07.7386872+11:00  [ERR] 
+|         } (e0b0e88f)
+2017-12-26T15:13:07.7387297+11:00  [ERR] 
+ @ ./ClientApp/routes.tsx 26:17-49
+ @ ./ClientApp/boot.tsx
+ @ multi react-hot-loader/patch event-source-polyfill webpack-hot-middleware/client?path=__webpack_hmr&dynamicPublicPath=true ./ClientApp/boot.tsx
+
+ERROR in [at-loader] ./ClientApp/components/Explorer.tsx:57:26 
+    TS1005: '=' expected. (5cf7cbee)
+2017-12-26T15:13:07.8865187+11:00 0HLAC1UQEUS17:00000003 [ERR] An unhandled exception has occurred while executing the request (cf926119)
+System.ArgumentNullException: Value cannot be null.
+Parameter name: protectedData
+   at Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Unprotect(IDataProtector protector, String protectedData)
+   at front_end.Controllers.BoxController.Initialise() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 134
+   at front_end.Controllers.BoxController.<GetFolderItems>d__11.MoveNext() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 56
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeActionMethodAsync>d__12.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeNextActionFilterAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeInnerFilterAsync>d__14.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResourceFilter>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeFilterPipelineAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeAsync>d__15.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.<Invoke>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.<Invoke>d__7.MoveNext()
+2017-12-26T15:13:31.5068225+11:00 0HLAC1UQEUS15:00000005 [ERR] An unhandled exception has occurred while executing the request (cf926119)
+System.ArgumentNullException: Value cannot be null.
+Parameter name: protectedData
+   at Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Unprotect(IDataProtector protector, String protectedData)
+   at front_end.Controllers.BoxController.Initialise() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 134
+   at front_end.Controllers.BoxController.<GetFolderItems>d__11.MoveNext() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 56
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeActionMethodAsync>d__12.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeNextActionFilterAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeInnerFilterAsync>d__14.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResourceFilter>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeFilterPipelineAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeAsync>d__15.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.<Invoke>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.<Invoke>d__7.MoveNext()
+2017-12-26T15:13:41.1274584+11:00 0HLAC1UQEUS15:00000007 [ERR] An unhandled exception has occurred while executing the request (cf926119)
+System.ArgumentNullException: Value cannot be null.
+Parameter name: protectedData
+   at Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Unprotect(IDataProtector protector, String protectedData)
+   at front_end.Controllers.BoxController.Initialise() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 134
+   at front_end.Controllers.BoxController.<GetFolderItems>d__11.MoveNext() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 56
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeActionMethodAsync>d__12.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeNextActionFilterAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeInnerFilterAsync>d__14.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResourceFilter>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeFilterPipelineAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeAsync>d__15.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.<Invoke>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.<Invoke>d__7.MoveNext()
+2017-12-26T15:13:57.5234469+11:00 0HLAC1UQEUS19:00000002 [ERR] An unhandled exception has occurred while executing the request (cf926119)
+System.ArgumentNullException: Value cannot be null.
+Parameter name: protectedData
+   at Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Unprotect(IDataProtector protector, String protectedData)
+   at front_end.Controllers.BoxController.Initialise() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 134
+   at front_end.Controllers.BoxController.<GetFolderItems>d__11.MoveNext() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 56
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeActionMethodAsync>d__12.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeNextActionFilterAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeInnerFilterAsync>d__14.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResourceFilter>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeFilterPipelineAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeAsync>d__15.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.<Invoke>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.<Invoke>d__7.MoveNext()
+2017-12-26T15:14:46.1488858+11:00 0HLAC1UQEUS19:00000004 [ERR] An unhandled exception has occurred while executing the request (cf926119)
+System.ArgumentNullException: Value cannot be null.
+Parameter name: protectedData
+   at Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Unprotect(IDataProtector protector, String protectedData)
+   at front_end.Controllers.BoxController.Initialise() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 134
+   at front_end.Controllers.BoxController.<GetFolderItems>d__11.MoveNext() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 56
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeActionMethodAsync>d__12.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeNextActionFilterAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeInnerFilterAsync>d__14.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResourceFilter>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeFilterPipelineAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeAsync>d__15.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.<Invoke>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.<Invoke>d__7.MoveNext()
+2017-12-26T15:14:55.8670293+11:00 0HLAC1UQEUS15:0000000C [ERR] An unhandled exception has occurred while executing the request (cf926119)
+System.ArgumentNullException: Value cannot be null.
+Parameter name: protectedData
+   at Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Unprotect(IDataProtector protector, String protectedData)
+   at front_end.Controllers.BoxController.Initialise() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 134
+   at front_end.Controllers.BoxController.<GetFolderItems>d__11.MoveNext() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 56
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeActionMethodAsync>d__12.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeNextActionFilterAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeInnerFilterAsync>d__14.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResourceFilter>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeFilterPipelineAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeAsync>d__15.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.<Invoke>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.<Invoke>d__7.MoveNext()
+2017-12-26T15:21:52.0820307+11:00 0HLAC1UQEUS1B:00000004 [ERR] An unhandled exception has occurred while executing the request (cf926119)
+System.ArgumentNullException: Value cannot be null.
+Parameter name: protectedData
+   at Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Unprotect(IDataProtector protector, String protectedData)
+   at front_end.Controllers.BoxController.Initialise() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 134
+   at front_end.Controllers.BoxController.<GetFolderItems>d__11.MoveNext() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 56
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeActionMethodAsync>d__12.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeNextActionFilterAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeInnerFilterAsync>d__14.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResourceFilter>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeFilterPipelineAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeAsync>d__15.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.<Invoke>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.<Invoke>d__7.MoveNext()
+2017-12-26T15:21:53.0435773+11:00 0HLAC1UQEUS1D:00000002 [ERR] An unhandled exception has occurred while executing the request (cf926119)
+System.ArgumentNullException: Value cannot be null.
+Parameter name: protectedData
+   at Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Unprotect(IDataProtector protector, String protectedData)
+   at front_end.Controllers.BoxController.Initialise() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 134
+   at front_end.Controllers.BoxController.<GetFolderItems>d__11.MoveNext() in C:\Users\Monty\Documents\S326\SIT-374 Project Design\front_end\Controllers\BoxController.cs:line 56
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeActionMethodAsync>d__12.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeNextActionFilterAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.<InvokeInnerFilterAsync>d__14.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeNextResourceFilter>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeFilterPipelineAsync>d__17.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.<InvokeAsync>d__15.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.<Invoke>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Session.SessionMiddleware.<Invoke>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.SpaServices.Webpack.ConditionalProxyMiddleware.<Invoke>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.<Invoke>d__7.MoveNext()
