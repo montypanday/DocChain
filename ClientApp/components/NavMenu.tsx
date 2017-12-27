@@ -2,6 +2,8 @@ import * as React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { GDIcon } from '../components/SVGs/icon-GD';
 import { BOXIcon } from '../components/SVGs/icon-BOX';
+import { ODIcon } from '../components/SVGs/icon-OD';
+import { DBIcon } from '../components/SVGs/icon-DB';
 
 export class NavMenu extends React.Component<{}, {}> {
     constructor(props) {
@@ -34,12 +36,24 @@ export class NavMenu extends React.Component<{}, {}> {
                         </li>
                         <li>
                             <NavLink to={"/explorer"} activeClassName="active">
-                                <BOXIcon/> Box                                
+                                <BOXIcon/> <div className="LinkText">Box</div>                                
                             </NavLink>
                         </li>
                         <li>
                             <NavLink to={"/driveExplorer"} activeClassName="active">
-                                <GDIcon /> Google Drive 
+                                <GDIcon /> <div className="LinkText">Google Drive</div>  
+                            </NavLink>
+
+                        </li>
+                        <li>
+                            <NavLink to={"/#"} activeClassName="active">
+                                <ODIcon /> <div className="LinkText">OneDrive</div> 
+                            </NavLink>
+
+                        </li>
+                        <li>
+                            <NavLink to={"/#"} activeClassName="active">
+                                <DBIcon /> <div className="LinkText">Dropbox</div> 
                             </NavLink>
 
                         </li>
