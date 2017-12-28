@@ -13,16 +13,23 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Database.Services;
+using Model;
+using Newtonsoft.Json.Linq;
+using System.Threading;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace front_end.Controllers
 {
     [Route("api/[controller]")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Await.Warning", "CS4014:Await.Warning")]
     public class BoxController : Controller
     {
         public IConfiguration Configuration { get; set; }
         IDataProtector _protector { get; set; }
         private readonly ILogger _logger;
+
+        private FileActionService fileActionService = new FileActionService();
 
         public BoxController(IConfiguration config, IDataProtectionProvider provider, ILogger<BoxController> logger)
         {
@@ -70,15 +77,18 @@ namespace front_end.Controllers
             }
             
         }
+
         [Route("GetPreview/{id}")]
         [HttpGet]
         public async Task<string> GetPreview(string id)
         {
             var client = Initialise();
-            _logger.LogInformation("Getting Preview Link for file => "+ id);
-            
-            //log this preview in database.
-            return (await client.FilesManager.GetPreviewLinkAsync(id)).ToString();
+            _logger.LogInformation("Getting Preview Link for file => " + id);
+
+            ////log this preview in database.
+            Task.Run(() => { RecordFileAction(client, id, "Preview"); });
+
+            return (await client.FilesManager.GetPreviewLinkAsync(id)).ToString();  
         }
 
         [Route("Rename/{id}/{newName}")]
@@ -89,7 +99,7 @@ namespace front_end.Controllers
             BoxFile fileAfterRename = await client.FilesManager.UpdateInformationAsync(new BoxFileRequest() { Name = newName });
             if (fileAfterRename.Name == newName)
             {
-                
+                Task.Run(() => { RecordFileAction(client, id, "Rename"); });
                 return true;
             }
             return false;
@@ -105,6 +115,10 @@ namespace front_end.Controllers
             {
                 BoxFile file = await client.FilesManager.CreateSharedLinkAsync(id, request);
                 _logger.LogInformation("Getting Shared link for File =>" + id);
+
+                //Logging action to Database
+                Task.Run(() => { RecordFileAction(client, id, "Share Link"); });
+
                 return Json(file);
             }
             var folder = await client.FoldersManager.CreateSharedLinkAsync(id, request);
@@ -121,6 +135,10 @@ namespace front_end.Controllers
             if (type == "file")
             {
                 _logger.LogInformation("Deleting File =>" + id);
+
+                //Logging action to the Database
+                Task.Run(() => { RecordFileAction(client, id, "Delete"); });
+
                 return await client.FilesManager.DeleteAsync(id);
             }
             _logger.LogInformation("Deleting Folder =>" + id);
@@ -203,7 +221,7 @@ namespace front_end.Controllers
                     //BoxFile.FieldExtension,
                     //BoxFile.FieldExpiringEmbedLink,
                     //BoxFile.FieldPathCollection,
-                    BoxFile.FieldSha1,
+                    //BoxFile.FieldSha1,
                     //BoxFile.FieldSharedLink,
                 });
             Content[] list = new Content[items.TotalCount];
@@ -288,6 +306,30 @@ namespace front_end.Controllers
             };
             Response.Cookies.Append("boxCred", "", options);
             return StatusCode(200);
+        }
+
+        private async Task<Content> GetBoxItem(BoxClient client, string ID)
+        {
+            _logger.LogInformation("Retrieving data needed to record the file action");
+            //String[] fields = new String[1] { BoxFile.FieldSha1 };
+            BoxFile boxFile = await client.FilesManager.GetInformationAsync(ID);
+            Content content = GetCustomFileObject(boxFile);
+            return content;
+        }
+
+        private void RecordFileAction(BoxClient client, string fileID, string actionType)
+        {
+            Content file = GetBoxItem(client, fileID).Result;
+            string userID = client.UsersManager.GetCurrentUserInformationAsync(new String[1] { "id" }).Result.Id;
+            FileAction action = new FileAction(
+                fileID,
+                file.Hash,
+                "Box",
+                userID,
+                "Preview",
+                DateTime.Now
+            );
+            fileActionService.RecordFileAction(action);
         }
     }
 }
