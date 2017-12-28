@@ -33,65 +33,60 @@ export class Row extends React.Component<AppProps, AppState> {
         }
     }
 
-    getIconClass(extension) {
-        switch (extension) {
+    getIconClass(extension, mimeType) {
 
-            /*DOCUMENT TYPES*/
-            case 'txt':
-                return "fa fa-file-text-o fa-2x";
-            case 'doc':
-                return "fa fa-file-word-o fa-2x";
-            case 'docx':
-                return "fa fa-file-word-o fa-2x";
-            case 'gdoc':
-                return "fa fa-file-word-o fa-2x";
-            case 'pdf':
-                return "fa fa-file-pdf-o fa-2x";
-
-            /* SPREADSHEET TYPES */
-            case 'xls':
-                return "fa fa-file-excel-o fa-2x";
-            case 'xlsx':
-                return "fa fa-file-excel-o fa-2x";
-            case 'gsheets':
-                return "fa fa-file-excel-o fa-2x";
-
-            /* PRESENTATION TYPES */
-            case 'ppt':
-                return "fa fa-file-powerpoint-o fa-2x";
-            case 'pptx':
-                return "fa fa-file-powerpoint-o fa-2x";
-            case 'gslides':
-                return "fa fa-file-powerpoint-o fa-2x";
-
-            /* AUDIO TYPES */
-            case 'm4a':
-                return "fa fa-file-audio-o fa-2x";
-
-            /* IMAGE TYPES */
-            case 'png':
-                return "fa fa-file-image-o fa-2x";
-            case 'jpg':
-                return "fa fa-file-image-o fa-2x";
-            case 'gif':
-                return "fa fa-file-image-o fa-2x";
-            case 'PNG':
-                return "fa fa-file-image-o fa-2x";
-            case 'JPG':
-                return "fa fa-file-image-o fa-2x";
-            case 'cs':
-                return "fa fa-file-code-o fa-2x";
-
-            /* ARCHIVE TYPES */
-            case 'zip':
-                return "fa fa-file-archive-o fa-2x";
-
-            /* DEFAULTS */
-            case '':
-                return "fa fa-folder fa-2x";
-            default:
-                return "fa fa-file fa-2x";
+        const FormatDictinary = {
+            "txt": "text-o",
+            "doc": "word-o",
+            "docs": "word-o",
+            "docx": "word-o",
+            "gdoc": "word-o",
+            "pdf": "pdf-o",
+            "xls": "excel-o",
+            "xlsx": "excel-o",
+            "gsheets": "excel-o",
+            "ppt": "powerpoint-o",
+            "pptx": "powerpoint-o",
+            "gslides": "powerpoint-o",
+            "m4a": "audio-o",
+            "png": "image-o",
+            "PNG": "image-o",
+            "JPG": "image-o",
+            "jpg": "image-o",
+            "JPEG": "image-o",
+            "jpeg": "image-o",
+            "gif": "image-o",
+            "GIF": "image-o",
+            "cs": "code-o",
+            "zip": "archive-o",
+            "flv": "video-o"
         }
+
+        const GoogleFormatDictionary = {
+            "application/vnd.google-apps.spreadsheet": "fa fa-2x fa-file-excel-o",
+            "application/vnd.google-apps.document": "fa fa-2x fa-file-word-o",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document": "fa fa-2x fa-file-word-o",
+            "application/vnd.google-apps.presentation": "fa fa-2x fa-file-powerpoint-o",
+            "application/vnd.google-apps.drawing": "fa fa-2x fa-picture-o",
+            "application/vnd.google-apps.map": "fa fa-2x fa-map-marker",
+            "application/vnd.google-apps.form": "fa fa-2x fa-wpforms",
+            "application/vnd.google-apps.site": "fa fa-2x fa-html5",
+            "image/jpeg": "fa fa-2x fa-file-picture-o"
+        }
+
+        if (FormatDictinary[extension]) {
+            return "fa fa-2x fa-file-" + FormatDictinary[extension];
+        }
+        if (extension === "" && mimeType === "") {
+            return "fa fa-folder fa-2x";
+        }
+        if (GoogleFormatDictionary[mimeType]) {
+            return GoogleFormatDictionary[mimeType];
+        }
+        if (mimeType == "application/vnd.google-apps.folder") {
+            return "fa fa-folder fa-2x";
+        }
+        return "fa fa-2x fa-file-o";
     }
 
     doSomething(e) {
@@ -128,17 +123,9 @@ export class Row extends React.Component<AppProps, AppState> {
     render() {
         console.log("Row was renderered again");
         var a = this.getFileExtension(this.props.filename);
-        var iconClass = this.getIconClass(a);
+        var iconClass = this.getIconClass(a, this.props.mimeType);
         var icon;
-        if (this.props.mimeType === "application/vnd.google-apps.spreadsheet" || this.props.mimeType === "application/vnd.google-apps.document" || this.props.mimeType === "application/vnd.google-apps.presentation" || this.props.mimeType === "application/vnd.google-apps.form"
-            || this.props.mimeType == "application/vnd.google-apps.map" || this.props.mimeType == "application/vnd.google-apps.site") {
-
-            icon = <span style={{ verticalAlign: 'middle', float: 'left', fontSize: '2em' }}><img src={this.props.iconLink} className="googleImage"></img></span>
-        }
-        else {
-            icon = <span className={iconClass} style={{ verticalAlign: 'middle', float: 'left', fontSize: '2em' }}></span>;
-        }
-
+        icon = <span className={iconClass} style={{ verticalAlign: 'middle', float: 'left', fontSize: '2em' }}></span>;
         return (
             <tr>
                 <td className="col-xs-6 " >
@@ -148,13 +135,13 @@ export class Row extends React.Component<AppProps, AppState> {
                     </a>
                 </td>
                 <td className="col-xs-1 ">
-                    <div className="dropdown">
+                    {this.props.id != "sharedWithMe" && <div className="dropdown">
                         <button className="btn btn-default dropdown-toggle" style={{ verticalAlign: 'middle' }} type="button" data-toggle="dropdown">...
                             </button>
                         <ul className="dropdown-menu">
                             <li><a href={this.props.downloadUrl} download><i className="fa fa-download dropDownIcon" aria-hidden="true"></i>Download</a></li>
                             {this.props.type != 'folder' && <li><a onClick={this.props.navHandler} ><i className="fa fa-eye dropDownIcon" aria-hidden="true"></i>Preview</a></li>}
-                            <li><a href="#"><i className="fa fa-trash-o dropDownIcon" aria-hidden="true"></i>Delete</a></li>
+                            {this.props.id != "sharedWithMe" && < li > <a href="#"><i className="fa fa-trash-o dropDownIcon" aria-hidden="true"></i>Delete</a></li>}
                             <li><a href="#"><i className="fa fa-pencil-square-o dropDownIcon" aria-hidden="true"></i>Rename</a></li>
                             <li><a href="#"><i className="fa fa-share dropDownIcon" aria-hidden="true"></i>Share</a></li>
 
@@ -166,7 +153,7 @@ export class Row extends React.Component<AppProps, AppState> {
                             {this.props.type != 'folder' && <li><a href="#"><i className="fa fa-link dropDownIcon" aria-hidden="true"></i>Embed Document</a></li>}
                             {this.props.type != 'folder' && <li><a href="#"><i className="fa fa-calendar-check-o dropDownIcon" aria-hidden="true"></i>Check File</a></li>}
                         </ul>
-                    </div>
+                    </div>}
                 </td>
                 {this.props.type != 'folder' && <td className="col-xs-1 " style={{ verticalAlign: 'middle' }}><i className="fa fa-lock fa-2x"></i></td>}
                 <td className="col-xs-1 " style={{ verticalAlign: 'middle' }}>{this.props.size}</td>

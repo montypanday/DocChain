@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Box.V2.Models.Request;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace front_end.Controllers
@@ -31,7 +32,6 @@ namespace front_end.Controllers
             _logger = logger;
         }
 
-       
         [Route("Authenticate")]
         [HttpGet]
         public async Task<LocalRedirectResult> Authenticate(string code)
@@ -40,10 +40,11 @@ namespace front_end.Controllers
             OAuthSession Oauth = await client.Auth.AuthenticateAsync(code);
             CookieOptions options = new CookieOptions
             {
+                Path ="/api/Box",
                 Expires = DateTime.Now.AddDays(1),
                 HttpOnly = true
             };
-            
+
             Response.Cookies.Append("boxCred", _protector.Protect(JsonConvert.SerializeObject(Oauth)), options);
             _logger.LogInformation("Authenticated user using Authorization code => " + code);
             return LocalRedirect("/explorer");
@@ -64,19 +65,29 @@ namespace front_end.Controllers
             {
                 return StatusCode(401);
             }
-            catch (Exception)
-            {
-                return StatusCode(500);
-            }
-            
+            //catch (Exception)
+            //{
+            //    return StatusCode(500);
+            //}
+
+        }
+
+        [Route("Search/{query}")]
+        [HttpGet]
+        public async Task<IActionResult> Search(string query)
+        {
+            var client = Initialise();
+            _logger.LogInformation("Searching with keyword -> " + query);
+            var boxCollection = await client.SearchManager.SearchAsync(query);
+            return Json(GetCustomCollection(boxCollection));
         }
         [Route("GetPreview/{id}")]
         [HttpGet]
         public async Task<string> GetPreview(string id)
         {
             var client = Initialise();
-            _logger.LogInformation("Getting Preview Link for file => "+ id);
-            
+            _logger.LogInformation("Getting Preview Link for file => " + id);
+
             //log this preview in database.
             return (await client.FilesManager.GetPreviewLinkAsync(id)).ToString();
         }
@@ -89,7 +100,7 @@ namespace front_end.Controllers
             BoxFile fileAfterRename = await client.FilesManager.UpdateInformationAsync(new BoxFileRequest() { Name = newName });
             if (fileAfterRename.Name == newName)
             {
-                
+
                 return true;
             }
             return false;
@@ -117,7 +128,7 @@ namespace front_end.Controllers
         public async Task<Boolean> Delete(string type, string id)
         {
             var client = Initialise();
-            
+
             if (type == "file")
             {
                 _logger.LogInformation("Deleting File =>" + id);
@@ -136,11 +147,24 @@ namespace front_end.Controllers
 
         //}
 
-        //public async string GetDownloadLink(string ID)
-        //{
+        [Route("Download/{type}/{id}")]
+        [HttpGet]
+        public async Task<Uri> DownloadFile(string id)
+        {
+            var client = Initialise();
+            return await client.FilesManager.GetDownloadUriAsync(id);
+        }
 
-
-        //}
+        [Route("NewFolder/{parentID}/{name}")]
+        [HttpGet]
+        public async Task<IActionResult> NewFolder(string parentID, string name)
+        {
+            if(parentID == "root") { parentID = "0"; }
+            var client = Initialise();
+            var resp = await client.FoldersManager.CreateAsync(
+                new BoxFolderRequest() { Name = name, Parent = new BoxRequestEntity() { Id = parentID  } });
+            return await GetBoxFolderItems(client, parentID);
+        }
 
         private BoxClient Initialise()
         {
@@ -174,6 +198,8 @@ namespace front_end.Controllers
             return client;
         }
 
+
+
         /// <summary>
         /// GetBoxFolderItems is used to get Box Folder items using FolderManager.GetFolderItemsAsync.
         /// </summary>
@@ -194,6 +220,8 @@ namespace front_end.Controllers
                     BoxFile.FieldSize,
                     BoxFolder.FieldModifiedAt,
                     BoxFile.FieldModifiedAt,
+                    
+                    
 
                     //BoxFolder.FieldCreatedAt,
                     //BoxFolder.FieldCreatedBy,
@@ -204,8 +232,14 @@ namespace front_end.Controllers
                     //BoxFile.FieldExpiringEmbedLink,
                     //BoxFile.FieldPathCollection,
                     BoxFile.FieldSha1,
-                    //BoxFile.FieldSharedLink,
+                    //BoxFile.FieldSharedLink
                 });
+           
+            return Json(GetCustomCollection(items));
+        }
+
+        private Content[] GetCustomCollection(BoxCollection<BoxItem> items)
+        {
             Content[] list = new Content[items.TotalCount];
             for (int i = 0; i < items.TotalCount; i++)
             {
@@ -221,9 +255,8 @@ namespace front_end.Controllers
                     list[i] = GetCustomFolderObject(boxFolder);
                 }
             }
-            return Json(list);
+            return list;
         }
-
         /// <summary>
         /// GetCustomFileObject returns custom content from BoxFile Object.
         /// </summary>
@@ -239,7 +272,7 @@ namespace front_end.Controllers
             cont.Hash = boxFile.Sha1;
             cont.LastModified = boxFile.ModifiedAt.ToString();
             //cont.embedLink = boxFile.ExpiringEmbedLink.Url.ToString();
-            //cont.DownloadUrl = downloadlink.ToString();
+            //cont.DownloadUrl = DownloadUrl;
             return cont;
         }
 
@@ -256,6 +289,7 @@ namespace front_end.Controllers
             cont.FileName = boxFolder.Name;
             cont.Size = boxFolder.Size.ToString();
             cont.LastModified = boxFolder.ModifiedAt.ToString();
+            //cont.DownloadUrl = DownloadUrl;
             return cont;
         }
 
@@ -267,8 +301,7 @@ namespace front_end.Controllers
 
         private void Auth_SessionAuthenticated(object sender, SessionAuthenticatedEventArgs e)
         {
-            
-            _logger.LogInformation("Don't worry! Access Token was renewed => "+ Json(e.Session));
+            _logger.LogInformation("Don't worry! Access Token was renewed => " + Json(e.Session));
             CookieOptions options = new CookieOptions
             {
                 Expires = DateTime.Now.AddDays(1),

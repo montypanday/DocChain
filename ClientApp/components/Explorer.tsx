@@ -6,19 +6,22 @@ import { Row } from '../components/Table/Row';
 import { Link, NavLink, Redirect } from "react-router-dom";
 import { BreadCrumb } from '../components/breadCrumb';
 require('../css/breadcrumb.css');
-
 import { formatSizeUnits } from '../api/Helpers/FormatSize';
 import { getPreviewLink } from '../api/Box/GetPreviewLink';
 import FilePreviewModal from '../components/Modals/FilePreviewModal';
 import TableHeading from '../components/Table/TableHeading';
 import FileRenameModal from '../components/Modals/RenameFileModal';
 import DeleteModal from '../components/Modals/DeleteModal';
+import NewFolderModal from '../components/Modals/NewFolderModal';
+
 import ShowShareLinkModal from '../components/Modals/ShowShareLinkModal';
 import { GetFolderItemsAsync } from '../api/Box/GetFolderItemsAsync';
 import ButtonToolBar from '../components/Table/ButtonToolbar';
 import { Alert } from 'react-bootstrap';
 import { BoxLogin } from '../components/BoxLogin';
-import  AlertCollection  from '../components/Alerts/AlertCollection';
+import AlertCollection from '../components/Alerts/AlertCollection';
+import { CreateNewFolder } from '../api/Box/CreateNewFolder';
+import { ToastContainer, toast } from 'react-toastify';
 
 export class Explorer extends React.Component<{}, {}> {
 
@@ -28,7 +31,10 @@ export class Explorer extends React.Component<{}, {}> {
         this.performSearch = this.performSearch.bind(this);
         this.navigate = this.navigate.bind(this);
         this.navigateOut = this.navigateOut.bind(this);
+        this.NewFolderHandler = this.NewFolderHandler.bind(this);
         this.closePreviewModal = this.closePreviewModal.bind(this);
+        this.CloseNewFolderModalHandler = this.CloseNewFolderModalHandler.bind(this);
+        this.createNewFolderHandler = this.createNewFolderHandler.bind(this);
         this.searchInFolder = this.searchInFolder.bind(this);
         this.state = {
             // This is space we will put the json response
@@ -45,33 +51,28 @@ export class Explorer extends React.Component<{}, {}> {
             showRenameModal: false,
             showDeleteModal: false,
             pathCollection: [{ fileId: "0", Name: "All Files" }],
-            show401Alert: false
+            show401Alert: false,
+            currentFolderID: "",
+            showNewFolderModal: false
         }
     }
-
     componentDidMount() {
-     
-            GetFolderItemsAsync("0").then(newData => {
-                if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                    this.setState({ filesarray: newData, loading: false, show401Alert: false });
-                    //console.log("different data was received this time.")
-                }
-            })
-                .catch(function(error){
-                    console.log(error.status);
-                    this.setState({ loading: false, filesarray: [], show401Alert: true });
-                }.bind(this));
-        //this.getUser();
+        GetFolderItemsAsync("0").then(newData => {
+            if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
+                this.setState({ filesarray: newData, loading: false, show401Alert: false, currentFolderID: "root" });
+                //console.log("different data was received this time.")
+                //NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
+            }
+        })
+            .catch(function (error) {
+                console.log(error.status);
+                this.setState({ loading: false, filesarray: [], show401Alert: true });
+            }.bind(this));
     }
-
     handleSearchBarChange(e) {
         console.log("searching => " + e.target.value);
         this.setState({ query: e.target.value });
-        //if (this.state['query'] == "") {
-        //    searchRoot();
-        //}
     }
-
     performSearch(e) {
         var querystring = this.state['query'];
         if (querystring == "") { /*this.searchRoot(); */ }
@@ -128,7 +129,6 @@ export class Explorer extends React.Component<{}, {}> {
         }
 
     }
-
     navigateOut(e) {
         var coll = this.state['pathCollection'];
         var index;
@@ -141,27 +141,37 @@ export class Explorer extends React.Component<{}, {}> {
         var coll2 = JSON.parse(JSON.stringify(coll));
         this.searchInFolder(e.fileId, coll2);
     }
-
     searchInFolder(id, newArray) {
         GetFolderItemsAsync(id).then(newData => {
             if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                this.setState({ filesarray: newData, loading: false, pathCollection: newArray });
+                this.setState({ filesarray: newData, loading: false, pathCollection: newArray, currentFolderID: id });
             }
         });
     }
-
-
+    NewFolderHandler(e) {
+        console.log("Let's open a modal to make new Folder");
+        this.setState({ showNewFolderModal: true });
+    }
+    CloseNewFolderModalHandler(e) {
+        console.log("Closing New Folder Handler");
+        this.setState({ showNewFolderModal: false });
+    }
+    createNewFolderHandler(newName) {
+        console.log("Creating New Folder with name -> " + newName);
+        CreateNewFolder(this.state["currentFolderID"], newName)
+            .then(newData => {
+                this.setState({ filesarray: newData, showNewFolderModal: false });
+                toast.success("Folder created successfully!", { hideProgressBar: true });
+            });
+    }
     closePreviewModal() {
         this.setState({ PreviewUrl: "", showPreviewModal: false, PreviewFileName: "" })
     }
     closeRenameFileModal() {
-
     }
-
     showPreview() {
         this.setState({ showingPreview: true });
     }
-
     getUser() {
         fetch("https://api.box.com/2.0/users/me", {
             method: "GET",
@@ -182,6 +192,8 @@ export class Explorer extends React.Component<{}, {}> {
             })
     }
 
+    notify = () => toast.success("Folder created successfully!", { hideProgressBar: true });
+
     public render() {
         console.log("Explorer was rendered");
         if (this.state['loading'] === false) {
@@ -194,21 +206,13 @@ export class Explorer extends React.Component<{}, {}> {
 
             return (
                 <div className="well well-lg pull-down">
+                    <ToastContainer position="bottom-right" />
                     <div style={{ float: 'right' }} className="user-details">
                         {/*this.state['user']*/}
-                        <ButtonToolBar></ButtonToolBar>
+                        <ButtonToolBar NewFolderHandler={this.NewFolderHandler}  ></ButtonToolBar>
                     </div>
-                    <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#f5f5f5' }}>
-                        <div className="col-lg-6" style={{ padding: '0px' }}>
-                            <div className="input-group">
-                                <input type="text" className="form-control" onChange={this.handleSearchBarChange} onKeyDown={this.performSearch} onKeyUp={this.performSearch} placeholder="Search for files and folders" />
-                                <span className="input-group-btn">
-                                    <button className="btn btn-default" type="button" onClick={this.performSearch}> Search</button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    
+                    <SearchBar changeHandler={e => { this.setState({ query: e.target.value }) }} searchHandler={this.performSearch}></SearchBar>
+
                     {this.state["show401Alert"] &&
                         <Alert bsStyle="warning">
                             <strong>401 Unauthorized </strong> Please sign in first
@@ -218,15 +222,16 @@ export class Explorer extends React.Component<{}, {}> {
                     {!this.state["show401Alert"] && <BreadCrumb pathCollection={this.state["pathCollection"]} navigateOutHandler={this.navigateOut.bind(this)} />}
                     {!this.state["show401Alert"] && < table className="table table-striped table-hover table-responsive well header-fixed">
                         <TableHeading />
-                    <tbody>
-                        {rows}
-                    </tbody>
+                        <tbody>
+                            {rows}
+                        </tbody>
                     </table>}
-                    
+
                     {this.state["showPreviewModal"] && <FilePreviewModal PreviewFileName={this.state["PreviewFileName"]} PreviewUrl={this.state["PreviewUrl"]} closeModal={this.closePreviewModal}></FilePreviewModal>}
                     {this.state["showRenameModal"] && <FileRenameModal RenameFileName={this.state["RenameFileName"]} closeRenameModal={this.closeRenameFileModal}></FileRenameModal>}
                     {this.state["showDeleteModal"] && <DeleteModal></DeleteModal>}
                     {this.state["showShareModal"] && <ShowShareLinkModal></ShowShareLinkModal>}
+                    {this.state["showNewFolderModal"] && <NewFolderModal closeHandler={this.CloseNewFolderModalHandler} createFolderHandler={this.createNewFolderHandler} ></NewFolderModal>}
                 </div>
             );
         }
