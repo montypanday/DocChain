@@ -23,7 +23,7 @@ CREATE TABLE `fileactions` (
   `FileID` varchar(20) DEFAULT NULL,
   `FileHash` varchar(64) DEFAULT NULL,
   `StoragePlatform` varchar(20) DEFAULT NULL,
-  `UserID` varchar(10) DEFAULT NULL,
+  `UserID` varchar(64) DEFAULT NULL,
   `ActionType` varchar(20) DEFAULT NULL,
   `ActionTime` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -35,7 +35,7 @@ CREATE TABLE `fileactions` (
 
 LOCK TABLES `fileactions` WRITE;
 /*!40000 ALTER TABLE `fileactions` DISABLE KEYS */;
-INSERT INTO `fileactions` VALUES ('00000001','99999998','docchain_dev','cool user','fun action','2017-12-03 16:37:14'),('00000001','99999998','docchain_dev','cool user','fun action','2017-12-03 16:38:56'),('00000001','99999998','docchain_dev','cool user','fun action','2017-12-03 16:39:32'),('00000002','99999997','docchain_dev','cool user','fun action','2017-12-10 10:06:43');
+INSERT INTO `fileactions` VALUES ('00000001','99999998','docchain_dev','cool user','fun action','2017-12-03 16:37:14'); 
 /*!40000 ALTER TABLE `fileactions` ENABLE KEYS */;
 UNLOCK TABLES;
 

@@ -1,0 +1,41 @@
+
+.icon {
+    float: left;
+    vertical-align: middle;
+    margin-right: 8px;
+    margin-top: -5px;
+}
+
+.GDIcon {
+    margin-top: -2px;
+}
+
+.DBIcon {
+    margin-top: -5px;
+}
+
+.ODIcon {
+    margin-top: -7px;
+}
+
+.LinkText{
+    float:left;
+    display:none;
+    transition: ease 1s; 
+}
+
+a:hover > .LinkText {
+    display: block;
+    overflow: auto;
+    clear: right;
+}
+
+.active > .LinkText {
+    display: block;
+    overflow: auto;
+    clear: right;
+}
+
+.active{
+    height:initial;
+}
