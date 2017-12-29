@@ -44,11 +44,13 @@
     <None Remove="ClientApp\api\Box\SearchRoot.tsx" />
     <None Remove="ClientApp\api\Helpers\FormatSize.tsx" />
     <None Remove="ClientApp\api\SearchRoot.tsx" />
+    <None Remove="ClientApp\components\Alerts\ErrorSplash.tsx" />
     <None Remove="ClientApp\components\ErrorBoundary.tsx" />
     <None Remove="ClientApp\components\iconGD.tsx" />
     <None Remove="ClientApp\components\Modals\FilePreviewModal.tsx" />
     <None Remove="ClientApp\components\SVGs\icon-BOX.tsx" />
     <None Remove="ClientApp\components\SVGs\icon-DB.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-NetError.tsx" />
     <None Remove="ClientApp\components\SVGs\icon-OD.tsx" />
     <None Remove="ClientApp\components\TableHeading.tsx" />
     <None Remove="yarn.lock" />
@@ -56,9 +58,11 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\api\Box\GetPreviewLink.tsx" />
     <TypeScriptCompile Include="ClientApp\api\Helpers\FormatSize.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Alerts\ErrorSplash.tsx" />
     <TypeScriptCompile Include="ClientApp\components\ErrorBoundary.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-BOX.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-DB.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-NetError.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-OD.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-GD.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Modals\FilePreviewModal.tsx" />

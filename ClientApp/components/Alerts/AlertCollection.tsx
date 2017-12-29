@@ -26,11 +26,11 @@ export default class AlertCollection extends React.Component<AlertCollectionProp
             ErrorMSG: "",
         }
     }
-
+                //this.setState key={errorDict.ErrorCode}... set state depending on the "Recieved Code"?
     render() {
         return (
-          <Alert bsStyle="danger">
-                    <h4>Oh snap! You got an error!</h4>
+            <Alert bsStyle={this.state["ErrorStatus"]}>
+                <h4>{this.state["ErrorMSG"]}</h4>
                 </Alert>
             
 
