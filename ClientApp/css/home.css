@@ -1,6 +1,6 @@
 .body {
     background-color: white;
-    font-family: 'europa', 'fira-sans-2', sans-serif;
+    font-family: 'europa', sans-serif;
     font-style: normal;
     color: rgba(104, 104, 104, 0.89);
     font-size: 16px;
@@ -178,7 +178,7 @@
 .loadingGif {
     text-align: center;
     align-content: center;
-    font-family: 'europa', 'fira-sans-2', sans-serif;
+    font-family: 'europa', sans-serif;
     font-style: normal;
     position: fixed;
     left: 0;

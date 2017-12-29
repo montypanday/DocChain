@@ -1,10 +1,6 @@
-/*custom font*/
-@import url(https://fonts.googleapis.com/css?family=Merriweather+Sans);
-
-
 .breadcrumb {
     text-align: center;
-    font-family: 'Merriweather Sans', arial, verdana;
+    font-family: 'europa', sans-serif;
     display: inline-block;
     /*box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.35);*/
     overflow: hidden;

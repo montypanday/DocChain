@@ -1,4 +1,5 @@
 ﻿import * as React from 'react';
+require('./TableHeading.css');
 
 export default class TableHeading extends React.Component<{}, {}> {
     constructor(props) {
