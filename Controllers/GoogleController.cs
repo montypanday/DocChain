@@ -92,25 +92,19 @@ namespace front_end.Controllers
         public IActionResult GetFolderItems(string id)
         {
             DriveService service = GetService();
+            _logger.LogInformation("Getting Folder items for Folder -> " + id);
             return GetGoogleFolderItems(service, id);
-
         }
-        private IActionResult GetGoogleFolderItems(DriveService service, string id)
+        
+        [Route("Search/{query}")]
+        [HttpGet]
+        public IActionResult Search(string query)
         {
+            var service = GetService();
             FilesResource.ListRequest request = service.Files.List();
             request.PageSize = 100;
             request.PrettyPrint = true;
-            if (id == "'sharedWithMe'")
-            {
-                request.Q = "sharedWithMe = true and trashed = false";
-            }
-            else
-            {
-                if(id == "root" || id == "''root''") { id = "'root'"; }
-                request.Q = id + " in parents and trashed = false";
-            }
-
-            //request.Fields = @"files(*)";
+            request.Q = "name contains '"+query+"' and trashed = false";
             request.Fields = @"files(id,name,kind,md5Checksum,modifiedTime,mimeType,iconLink,size)";
             IList<Google.Apis.Drive.v3.Data.File> files = request.Execute().Files;
             return Json(ConvertToSend(files));
@@ -123,7 +117,6 @@ namespace front_end.Controllers
             var service = GetService();
             var newFolder = new File()
             {
-                
                 Name = name,
                 Parents = new List<string>() { parentID },
                 MimeType = "application/vnd.google-apps.folder"
@@ -156,8 +149,25 @@ namespace front_end.Controllers
             return list;
         }
 
-        //[Route("GetFolderItems/{id}")]
+        private IActionResult GetGoogleFolderItems(DriveService service, string id)
+        {
+            FilesResource.ListRequest request = service.Files.List();
+            request.PageSize = 100;
+            request.PrettyPrint = true;
+            if (id == "'sharedWithMe'")
+            {
+                request.Q = "sharedWithMe = true and trashed = false";
+            }
+            else
+            {
+                if (id == "root" || id == "''root''") { id = "'root'"; }
+                request.Q = id + " in parents and trashed = false";
+            }
 
-
+            //request.Fields = @"files(*)";
+            request.Fields = @"files(id,name,kind,md5Checksum,modifiedTime,mimeType,iconLink,size)";
+            IList<Google.Apis.Drive.v3.Data.File> files = request.Execute().Files;
+            return Json(ConvertToSend(files));
+        }
     }
 }

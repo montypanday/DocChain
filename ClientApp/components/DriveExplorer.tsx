@@ -63,16 +63,10 @@ export class DriveExplorer extends React.Component<{}, {}> {
     }
 
     performSearch(e) {
-        console.log("Trying to Search");
-
-
-        var querystring = this.state["query"];
-        console.log("queryString -> " + querystring);
-        if (querystring == "") { this.searchRoot }
-        else {
-            GSearch(this.state['query']).then(newData => {
+        if (this.state["query"] !== "") {
+            GSearch(this.state["query"]).then(newData => {
                 if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                    this.setState({ filesarray: newData, loading: false });
+                    this.setState({ filesarray: newData, loading: false, pathCollection: [{ fileId: "root", Name: "All Files" }] });
                 }
             });
         }

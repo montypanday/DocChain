@@ -41,6 +41,7 @@
   <ItemGroup>
     <!-- Files not to show in IDE -->
     <None Remove="ClientApp\api\Box\GetPreviewLink.tsx" />
+    <None Remove="ClientApp\api\Box\SearchRoot.tsx" />
     <None Remove="ClientApp\api\Helpers\FormatSize.tsx" />
     <None Remove="ClientApp\api\SearchRoot.tsx" />
     <None Remove="ClientApp\components\ErrorBoundary.tsx" />
@@ -54,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\api\Box\GetPreviewLink.tsx" />
-    <TypeScriptCompile Include="ClientApp\api\Box\SearchRoot.tsx" />
     <TypeScriptCompile Include="ClientApp\api\Helpers\FormatSize.tsx" />
     <TypeScriptCompile Include="ClientApp\components\ErrorBoundary.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-BOX.tsx" />

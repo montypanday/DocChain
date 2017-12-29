@@ -22,6 +22,7 @@ import { BoxLogin } from '../components/BoxLogin';
 import AlertCollection from '../components/Alerts/AlertCollection';
 import { CreateNewFolder } from '../api/Box/CreateNewFolder';
 import { ToastContainer, toast } from 'react-toastify';
+import { Search } from '../api/Box/Search';
 
 export class Explorer extends React.Component<{}, {}> {
 
@@ -74,44 +75,14 @@ export class Explorer extends React.Component<{}, {}> {
         this.setState({ query: e.target.value });
     }
     performSearch(e) {
-        var querystring = this.state['query'];
-        if (querystring == "") { /*this.searchRoot(); */ }
-        else {
-            fetch("https://api.box.com/2.0/search?query=" + querystring + "&fields=name,size,id,type,sha1,path_collection,modified_at,shared_link,expiring_embed_link", {
-                method: "GET",
-                headers:
-                    {
-                        'Authorization': 'Bearer ' + sessionStorage.getItem("box_access_token"),
-                        'Accept': 'application/json'
-                    }
-            })
-                .then(response => {
-                    if (!response.ok) { throw response }
-                    return response.json()  //we only get here if there is no error)
-                })
-                .then(data => {
-
-                    var newData = [];
-                    for (var i = 0; i < data["entries"].length; i++) {
-
-                        var a = {};
-                        if (data.entries[i].type == "file") {
-
-                            a = { type: data.entries[i].type, id: data.entries[i].id, fileName: data.entries[i].name, size: formatSizeUnits(data.entries[i].size), hash: data.entries[i].sha1, lastModified: (new Date(Date.parse(data.entries[i].modified_at.toString()))).toUTCString(), embedLink: data.entries[i].expiring_embed_link.url, downloadUrl: "" }
-                        }
-                        else {
-                            a = { type: data.entries[i].type, id: data.entries[i].id, fileName: data.entries[i].name, size: formatSizeUnits(data.entries[i].size), hash: "", lastModified: (new Date(Date.parse(data.entries[i].modified_at.toString()))).toUTCString(), embedLink: "", downloadUrl: "" }
-                        }
-
-                        newData.push(a)
-
-                    }
-                    if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                        this.setState({ filesarray: newData, loading: false });
-                        //console.log("different data was received this time.")
-                    }
-                })
+        if (this.state["query"] !== "") {
+            Search(this.state["query"]).then(newData => {
+                if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
+                    this.setState({ filesarray: newData, loading: false, pathCollection: [{ fileId: "0", Name: "All Files" }] });
+                }
+            });
         }
+
     }
     navigate(row, event) {
         if (row.type == "folder") {
