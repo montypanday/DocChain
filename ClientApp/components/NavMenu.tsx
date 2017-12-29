@@ -5,6 +5,8 @@ import { BOXIcon } from '../components/SVGs/icon-BOX';
 import { ODIcon } from '../components/SVGs/icon-OD';
 import { DBIcon } from '../components/SVGs/icon-DB';
 
+require('../components/Navbar (WIP)/Navbar.css');
+
 export class NavMenu extends React.Component<{}, {}> {
     constructor(props) {
         super(props);

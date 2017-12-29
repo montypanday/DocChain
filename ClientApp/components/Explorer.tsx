@@ -5,7 +5,6 @@ import { SearchBar } from '../components/SearchBar';
 import { Row } from '../components/Table/Row';
 import { Link, NavLink, Redirect } from "react-router-dom";
 import { BreadCrumb } from '../components/breadCrumb';
-require('../css/breadcrumb.css');
 import { formatSizeUnits } from '../api/Helpers/FormatSize';
 import { getPreviewLink } from '../api/Box/GetPreviewLink';
 import FilePreviewModal from '../components/Modals/FilePreviewModal';
@@ -13,7 +12,6 @@ import TableHeading from '../components/Table/TableHeading';
 import FileRenameModal from '../components/Modals/RenameFileModal';
 import DeleteModal from '../components/Modals/DeleteModal';
 import NewFolderModal from '../components/Modals/NewFolderModal';
-
 import ShowShareLinkModal from '../components/Modals/ShowShareLinkModal';
 import { GetFolderItemsAsync } from '../api/Box/GetFolderItemsAsync';
 import ButtonToolBar from '../components/Table/ButtonToolbar';

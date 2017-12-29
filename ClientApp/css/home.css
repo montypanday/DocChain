@@ -8,12 +8,6 @@
     margin: 0;
 }
 
-.navbar-nav > li > a{
- padding-right: 10px;
- padding-left: 10px;
- height: 50px;
-}
-
 .welcome {
     font-size: 2vw;
     font-weight: 700;
@@ -209,38 +203,4 @@ tbody {
     height: calc(100vh - 250px);
     position: absolute;
     margin-right: 24px;
-}
-
-/* FILE ICON STYLING */
-.fa-lock{
-    color: steelblue;
-}
-
-.fa-file-pdf-o{
-    color: red;
-}
-
-.fa-file-powerpoint-o{
-    color: coral;
-}
-
-.fa-file-word-o{
-    color:dodgerblue;
-}
-
-.fa-file-image-o{
-    color: slategrey;
-}
-
-
-.fa-file-excel-o {
-    color: forestgreen;
-}
-
-.fa-folder {
-    color: #ffcc80;
-}
-
-.fa-file-archive-o {
-    color: #ffcc80;
 }

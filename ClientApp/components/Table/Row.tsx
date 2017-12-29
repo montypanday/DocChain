@@ -1,6 +1,8 @@
 ﻿import * as React from 'react';
 import { render } from 'react-dom';
 require('./Dropdown.css');
+require('./fa-icons.css');
+
 
 export interface AppProps {
     type: string,

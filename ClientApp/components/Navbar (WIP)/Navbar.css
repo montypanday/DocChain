@@ -1,0 +1,43 @@
+﻿.navbar-nav > li > a {
+    padding-right: 10px;
+    padding-left: 10px;
+    height: 50px;
+}
+
+
+.main-nav li .glyphicon {
+    margin-right: 10px;
+}
+
+/* Highlighting rules for nav menu items */
+.main-nav li a.active,
+.main-nav li a.active:hover,
+.main-nav li a.active:focus {
+    background-color: #4189C7;
+    color: white;
+}
+
+/* Keep the nav menu independent of scrolling and on top of other items */
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    font-family: 'europa', sans-serif;
+    font-style: normal;
+    color: rgba(104, 104, 104, 0.89);
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+/*
+@media (max-width: 767px) {
+    // On small screens, the nav menu spans the full width of the screen. Leave a space for it. 
+    body {
+        padding-top: 50px;
+    }
+}*/
+

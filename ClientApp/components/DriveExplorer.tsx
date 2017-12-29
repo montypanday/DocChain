@@ -5,7 +5,6 @@ import { SearchBar } from '../components/SearchBar';
 import { Row } from '../components/Table/Row';
 import { Link, NavLink, Redirect } from "react-router-dom";
 import { BreadCrumb } from '../components/breadCrumb';
-require('../css/breadcrumb.css');
 import { ContextMenu } from '../components/ContextMenu';
 import { formatSizeUnits } from '../api/Helpers/FormatSize';
 import FilePreviewModal from '../components/Modals/FilePreviewModal';
@@ -20,6 +19,7 @@ import DeleteModal from '../components/Modals/DeleteModal';
 import { ToastContainer, toast } from 'react-toastify';
 import { css } from 'glamor';
 import { GDelete } from '../api/Google/GDelete';
+
 require('../css/ContextMenu.css');
 
 export class DriveExplorer extends React.Component<{}, {}> {
