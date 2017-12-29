@@ -23,6 +23,7 @@ import AlertCollection from '../components/Alerts/AlertCollection';
 import { CreateNewFolder } from '../api/Box/CreateNewFolder';
 import { ToastContainer, toast } from 'react-toastify';
 import { Search } from '../api/Box/Search';
+import { Delete } from '../api/Box/Delete';
 
 export class Explorer extends React.Component<{}, {}> {
 
@@ -37,6 +38,9 @@ export class Explorer extends React.Component<{}, {}> {
         this.CloseNewFolderModalHandler = this.CloseNewFolderModalHandler.bind(this);
         this.createNewFolderHandler = this.createNewFolderHandler.bind(this);
         this.searchInFolder = this.searchInFolder.bind(this);
+        this.showDeleteModal = this.showDeleteModal.bind(this);
+        this.closeDeleteModal = this.closeDeleteModal.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
         this.state = {
             // This is space we will put the json response
             filesarray: {},
@@ -54,13 +58,16 @@ export class Explorer extends React.Component<{}, {}> {
             pathCollection: [{ fileId: "0", Name: "All Files" }],
             show401Alert: false,
             currentFolderID: "",
-            showNewFolderModal: false
+            showNewFolderModal: false,
+            ToBeDeletedName: "",
+            ToBeDeletedID: "",
+            ToBeDeletedType: ""
         }
     }
     componentDidMount() {
         GetFolderItemsAsync("0").then(newData => {
             if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                this.setState({ filesarray: newData, loading: false, show401Alert: false, currentFolderID: "root" });
+                this.setState({ filesarray: newData, loading: false, show401Alert: false, currentFolderID: "0" });
                 //console.log("different data was received this time.")
                 //NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
             }
@@ -162,17 +169,32 @@ export class Explorer extends React.Component<{}, {}> {
                 this.setState({ user: user });
             })
     }
+    closeDeleteModal() {
+        this.setState({ showDeleteModal: false, ToBeDeletedID: "", ToBeDeletedName: "", ToBeDeletedType: "" });
+    }
+    showDeleteModal(row, event) {
+        this.setState({ showDeleteModal: true, ToBeDeletedID: row.id, ToBeDeletedName: row.fileName, ToBeDeletedType: row.type });
+    }
+    deleteItem() {
+        console.log("id ->" + this.state["ToBeDeletedID"]);
+        console.log("type ->" + this.state["ToBeDeletedType"]);
+        Delete(this.state["ToBeDeletedType"], this.state["ToBeDeletedID"], this.state["currentFolderID"])
+            .then(newData => {
+                this.setState({ filesarray: newData, showDeleteModal: false, ToBeDeletedID: "", ToBeDeletedName: "", ToBeDeletedType: "" });
+                toast.success("Deleted successfully!", { hideProgressBar: true });
+            });
+    }
 
     notify = () => toast.success("Folder created successfully!", { hideProgressBar: true });
 
     public render() {
         console.log("Explorer was rendered");
+
         if (this.state['loading'] === false) {
             //this.getUser();
-            // this .map function is like a foreach loop on filesarray, gives us a row object which has all the values that are related to a file object
-            //rows is the variable which is being inserted into the render function at its given function see {rows} in render method.
+
             var rows = this.state['filesarray'].map(function (row) {
-                return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} mimeType="" iconLink="" filename={row.fileName} size={row.size} lastModified={row.lastModified} downloadUrl={row.downloadUrl}></Row>);
+                return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} mimeType="" iconLink="" filename={row.fileName} size={row.size} lastModified={row.lastModified} downloadUrl={row.downloadUrl} deleteHandler={this.showDeleteModal.bind(null, row)}></Row>);
             }.bind(this));
 
             return (
@@ -198,11 +220,20 @@ export class Explorer extends React.Component<{}, {}> {
                         </tbody>
                     </table>}
 
-                    {this.state["showPreviewModal"] && <FilePreviewModal PreviewFileName={this.state["PreviewFileName"]} PreviewUrl={this.state["PreviewUrl"]} closeModal={this.closePreviewModal}></FilePreviewModal>}
-                    {this.state["showRenameModal"] && <FileRenameModal RenameFileName={this.state["RenameFileName"]} closeRenameModal={this.closeRenameFileModal}></FileRenameModal>}
-                    {this.state["showDeleteModal"] && <DeleteModal></DeleteModal>}
-                    {this.state["showShareModal"] && <ShowShareLinkModal></ShowShareLinkModal>}
-                    {this.state["showNewFolderModal"] && <NewFolderModal closeHandler={this.CloseNewFolderModalHandler} createFolderHandler={this.createNewFolderHandler} ></NewFolderModal>}
+                    {this.state["showPreviewModal"] &&
+                        <FilePreviewModal PreviewFileName={this.state["PreviewFileName"]} PreviewUrl={this.state["PreviewUrl"]} closeModal={this.closePreviewModal}>
+                        </FilePreviewModal>}
+                    {this.state["showRenameModal"] &&
+                        <FileRenameModal RenameFileName={this.state["RenameFileName"]} closeRenameModal={this.closeRenameFileModal}>
+                        </FileRenameModal>}
+                    {this.state["showDeleteModal"] &&
+                        <DeleteModal fileName={this.state["ToBeDeletedName"]} id={this.state["ToBeDeletedId"]} type={this.state["ToBeDeletedType"]} closeHandler={this.closeDeleteModal} deleteActionHandler={this.deleteItem}>
+                        </DeleteModal>}
+                    {this.state["showShareModal"] &&
+                        <ShowShareLinkModal></ShowShareLinkModal>}
+                    {this.state["showNewFolderModal"] &&
+                        <NewFolderModal closeHandler={this.CloseNewFolderModalHandler} createFolderHandler={this.createNewFolderHandler} >
+                        </NewFolderModal>}
                 </div>
             );
         }

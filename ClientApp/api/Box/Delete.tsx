@@ -1,18 +1,20 @@
 ﻿import { formatSizeUnits } from '../Helpers/FormatSize';
 
-export function GetFolderItemsAsync(id: string) {
-    //this is the network call made everytime the page is reload, before the render method.
-    return fetch("/api/Box/GetFolderItems/"+id, { credentials: 'same-origin' })
+export function Delete(type: string, id: string, currentFolderID: string) {
+    return fetch("/api/Box/Delete/" + type + "/" + id + "/" + currentFolderID, { credentials: 'same-origin' })
         .then(response => {
-            if (!response.ok) { throw response; }
+            if (!response.ok) { alert(response.status + "=> " + response.statusText) }
             return response.json()  //we only get here if there is no error)
         })
         .then(data => {
+            //alert(data);
+            //console.log(data);
             var newData = [];
             for (var i = 0; i < data.length; i++) {
 
                 var a = {};
                 if (data[i].type == "file") {
+                    //console.log(data.entries[i].type);
                     a = {
                         type: data[i].type,
                         id: data[i].id,
@@ -41,4 +43,3 @@ export function GetFolderItemsAsync(id: string) {
             return newData;
         });
 }
-

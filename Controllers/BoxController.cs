@@ -20,6 +20,7 @@ using Database.Services;
 using Model;
 using Newtonsoft.Json.Linq;
 using System.Threading;
+using System.Net.Http;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -74,6 +75,10 @@ namespace front_end.Controllers
             catch (ArgumentNullException)
             {
                 return StatusCode(401);
+            }
+            catch (HttpRequestException)
+            {
+                return StatusCode(404);
             }
             //catch (Exception)
             //{
@@ -139,23 +144,24 @@ namespace front_end.Controllers
             return Json(folder);
         }
 
-        [Route("Delete/{type}/{id}")]
-        [HttpDelete]
-        public async Task<Boolean> Delete(string type, string id)
+        [Route("Delete/{type}/{id}/{currentFolderID}")]
+        [HttpGet]
+        public async Task<IActionResult> Delete(string type, string id, string currentFolderID)
         {
             var client = Initialise();
 
             if (type == "file")
             {
                 _logger.LogInformation("Deleting File =>" + id);
-
-                //Logging action to the Database
                 Task.Run(() => { RecordFileAction(client, id, "Delete"); });
-
-                return await client.FilesManager.DeleteAsync(id);
+                 await client.FilesManager.DeleteAsync(id);
+                return await GetBoxFolderItems(client, currentFolderID);
             }
             _logger.LogInformation("Deleting Folder =>" + id);
-            return await client.FoldersManager.DeleteAsync(id);
+             await client.FoldersManager.DeleteAsync(id,true);
+            
+            return await GetBoxFolderItems(client, currentFolderID);
+
         }
         //public async Boolean Delete(string ID)
         //{

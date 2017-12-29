@@ -20,15 +20,21 @@ export default class NewFolderModal extends React.Component<NewFolderModalProps,
 
         this.state = {
             InputValue: "",
-            errorFound: false
+            errorFound: false,
+            isLoading: false,
         }
     }
 
     validateNDCreate() {
+        this.setState({ isLoading: true });
         var patt = new RegExp("^[^.]+$");
         if (patt.test(this.state["InputValue"])) {
             console.log("Test Passed");
             this.props.createFolderHandler(this.state["InputValue"]);
+            setTimeout(() => {
+                // Completed of async action, set loading state back
+                this.setState({ isLoading: false });
+            }, 2000);
         }
         else {
             console.log("error was found");
@@ -39,11 +45,18 @@ export default class NewFolderModal extends React.Component<NewFolderModalProps,
     handleKeyPress = (event) => {
         if (event.key == 'Enter') {
             console.log("Enter was pressed");
-            document.getElementById("submission").click();
+            this.setState({ isLoading: true });
+            this.validateNDCreate();
+            setTimeout(() => {
+                // Completed of async action, set loading state back
+                this.setState({ isLoading: false });
+            }, 2000);
+
         }
     }
 
     render() {
+        let isLoading = this.state["isLoading"];
         return (
             <Modal show={true} bsSize="small" >
                 <Modal.Header closeButton>
@@ -60,8 +73,12 @@ export default class NewFolderModal extends React.Component<NewFolderModalProps,
                   
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button id="submission" onClick={this.validateNDCreate} bsStyle="primary" > Create </Button>
-                    <Button onClick={this.props.closeHandler} > Cancel </Button>
+                    <Button id="submission" disabled={isLoading} onClick={!isLoading ? this.validateNDCreate : null} bsStyle="primary" > 
+                        {isLoading ? 'Loading...' : 'Create'}
+                        </Button>
+                    <Button  onClick={this.props.closeHandler} > 
+                        Cancel
+                        </Button>
                 </Modal.Footer>
             </Modal>
         );

@@ -7,11 +7,11 @@ export interface AppProps {
     size: string,
     lastModified: string,
     downloadUrl: string,
-    //isOpen: boolean
     navHandler: any
     id: any
     mimeType: any,
     iconLink: any,
+    deleteHandler: any
 }
 
 export interface AppState {
@@ -141,7 +141,7 @@ export class Row extends React.Component<AppProps, AppState> {
                         <ul className="dropdown-menu">
                             <li><a href={this.props.downloadUrl} download><i className="fa fa-download dropDownIcon" aria-hidden="true"></i>Download</a></li>
                             {this.props.type != 'folder' && <li><a onClick={this.props.navHandler} ><i className="fa fa-eye dropDownIcon" aria-hidden="true"></i>Preview</a></li>}
-                            {this.props.id != "sharedWithMe" && < li > <a href="#"><i className="fa fa-trash-o dropDownIcon" aria-hidden="true"></i>Delete</a></li>}
+                            {this.props.id != "sharedWithMe" && < li > <a onClick={this.props.deleteHandler}><i className="fa fa-trash-o dropDownIcon" aria-hidden="true"></i>Delete</a></li>}
                             <li><a href="#"><i className="fa fa-pencil-square-o dropDownIcon" aria-hidden="true"></i>Rename</a></li>
                             <li><a href="#"><i className="fa fa-share dropDownIcon" aria-hidden="true"></i>Share</a></li>
 

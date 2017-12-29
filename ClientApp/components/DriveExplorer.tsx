@@ -16,7 +16,9 @@ import { GNavigateIntoFolder } from '../api/Google/GNavigateIntoFolder';
 import ButtonToolBar from '../components/Table/ButtonToolbar';
 import NewFolderModal from '../components/Modals/NewFolderModal';
 import { GCreateNewFolder } from '../api/Google/GCreateNewFolder';
-
+import DeleteModal from '../components/Modals/DeleteModal';
+import { ToastContainer, toast } from 'react-toastify';
+import { GDelete } from '../api/Google/GDelete';
 require('../css/ContextMenu.css');
 
 export class DriveExplorer extends React.Component<{}, {}> {
@@ -24,13 +26,15 @@ export class DriveExplorer extends React.Component<{}, {}> {
     constructor(props) {
         super(props);
         this.performSearch = this.performSearch.bind(this);
-        this.searchRoot = this.searchRoot.bind(this);
         this.navigate = this.navigate.bind(this);
         this.closePreviewModal = this.closePreviewModal.bind(this);
         this.navigateOut = this.navigateOut.bind(this);
         this.searchInFolder = this.searchInFolder.bind(this);
         this.NewFolderHandler = this.NewFolderHandler.bind(this);
         this.createNewFolderHandler = this.createNewFolderHandler.bind(this);
+        this.showDeleteModal = this.showDeleteModal.bind(this);
+        this.closeDeleteModal = this.closeDeleteModal.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
         this.state = {
             // This is space we will put the json response
             filesarray: {},
@@ -44,22 +48,20 @@ export class DriveExplorer extends React.Component<{}, {}> {
             showPreviewModal: false,
             pathCollection: [{ fileId: "root", Name: "All Files" }],
             currentFolderID: "",
-            showNewFolderModal: false
+            showNewFolderModal: false,
+            ToBeDeletedName: "",
+            ToBeDeletedID: "",
+            ToBeDeletedType: "",
+            showDeleteModal: false
         }
     }
 
-    searchRoot() {
-        console.log("Searching in Root Folder");
+    componentDidMount() {
         GRoot().then(newData => {
             if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                this.setState({ filesarray: newData, loading: false, currentFolderID: "root"});
+                this.setState({ filesarray: newData, loading: false, currentFolderID: "root" });
             }
         });
-    }
-
-    componentDidMount() {
-        console.log("Component Mounted -> Search Root Called");
-        this.searchRoot();
     }
 
     performSearch(e) {
@@ -153,19 +155,36 @@ export class DriveExplorer extends React.Component<{}, {}> {
         GCreateNewFolder(this.state["currentFolderID"], newName)
             .then(newData => {
                 this.setState({ filesarray: newData, showNewFolderModal: false });
+                toast.success("Folder created successfully!", { hideProgressBar: true });
             });
     }
 
+    closeDeleteModal() {
+        this.setState({ showDeleteModal: false, ToBeDeletedID: "", ToBeDeletedName: "", ToBeDeletedType: "" });
+    }
+    deleteItem() {
+        console.log("id ->" + this.state["ToBeDeletedID"]);
+        console.log("type ->" + this.state["ToBeDeletedType"]);
+        GDelete(this.state["ToBeDeletedID"], this.state["currentFolderID"])
+            .then(newData => {
+                this.setState({ filesarray: newData, showDeleteModal: false, ToBeDeletedID: "", ToBeDeletedName: "", ToBeDeletedType: "" });
+                toast.success("Deleted successfully!", { hideProgressBar: true });
+            });
+    }
+    showDeleteModal(row, event) {
+        this.setState({ showDeleteModal: true, ToBeDeletedID: row.id, ToBeDeletedName: row.fileName, ToBeDeletedType: row.type });
+    }
     public render() {
         if (this.state['loading'] === false) {
             // this .map function is like a foreach loop on filesarray, gives us a row object which has all the values that are related to a file object
             //rows is the variable which is being inserted into the render function at its given function see {rows} in render method.
             var rows = this.state['filesarray'].map(function (row) {
-                return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} iconLink={row.iconLink} mimeType={row.mimeType} filename={row.fileName} size={row.size} lastModified={row.lastModified} downloadUrl={row.downloadUrl}></Row>);
+                return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} iconLink={row.iconLink} mimeType={row.mimeType} filename={row.fileName} size={row.size} lastModified={row.lastModified} downloadUrl={row.downloadUrl} deleteHandler={this.showDeleteModal.bind(null, row)} ></Row>);
             }.bind(this));
 
             return (
                 <div className="well well-lg pull-down">
+                    <ToastContainer position="bottom-right" />
                     <div style={{ float: 'right' }} className="user-details">
                         <ButtonToolBar NewFolderHandler={this.NewFolderHandler}  ></ButtonToolBar>
                     </div>
@@ -180,6 +199,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
                     </table>
                     {this.state["showPreviewModal"] && <FilePreviewModal PreviewFileName={this.state["PreviewFileName"]} PreviewUrl={this.state["PreviewUrl"]} closeModal={this.closePreviewModal}></FilePreviewModal>}
                     {this.state["showNewFolderModal"] && <NewFolderModal closeHandler={this.CloseNewFolderModalHandler} createFolderHandler={this.createNewFolderHandler} ></NewFolderModal>}
+                    {this.state["showDeleteModal"] && <DeleteModal fileName={this.state["ToBeDeletedName"]} id={this.state["ToBeDeletedId"]} type={this.state["ToBeDeletedType"]} closeHandler={this.closeDeleteModal} deleteActionHandler={this.deleteItem}></DeleteModal>}
                 </div>
             );
         } else

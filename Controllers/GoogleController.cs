@@ -131,6 +131,15 @@ namespace front_end.Controllers
             return StatusCode(500);
         }
 
+        [Route("Delete/{id}/{currentFolderID}")]
+        [HttpGet]
+        public IActionResult Delete(string id, string currentFolderID)
+        {
+            var service = GetService();
+            var deleterequest = service.Files.Delete(id);
+            var verify = deleterequest.Execute();
+            return GetGoogleFolderItems(service, currentFolderID);
+        }
         private GoogleContent[] ConvertToSend(IList<Google.Apis.Drive.v3.Data.File> files)
         {
             GoogleContent[] list = new GoogleContent[files.Count];
