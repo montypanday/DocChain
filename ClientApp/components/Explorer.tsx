@@ -22,6 +22,7 @@ import { BoxLogin } from '../components/BoxLogin';
 import AlertCollection from '../components/Alerts/AlertCollection';
 import { CreateNewFolder } from '../api/Box/CreateNewFolder';
 import { ToastContainer, toast } from 'react-toastify';
+import { css } from 'glamor';
 import { Search } from '../api/Box/Search';
 import { Delete } from '../api/Box/Delete';
 
@@ -199,7 +200,7 @@ export class Explorer extends React.Component<{}, {}> {
 
             return (
                 <div className="well well-lg pull-down">
-                    <ToastContainer position="bottom-right" />
+                    <ToastContainer position="bottom-right" toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
                     <div style={{ float: 'right' }} className="user-details">
                         {/*this.state['user']*/}
                         <ButtonToolBar NewFolderHandler={this.NewFolderHandler}  ></ButtonToolBar>

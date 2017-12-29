@@ -18,6 +18,7 @@ import NewFolderModal from '../components/Modals/NewFolderModal';
 import { GCreateNewFolder } from '../api/Google/GCreateNewFolder';
 import DeleteModal from '../components/Modals/DeleteModal';
 import { ToastContainer, toast } from 'react-toastify';
+import { css } from 'glamor';
 import { GDelete } from '../api/Google/GDelete';
 require('../css/ContextMenu.css');
 
@@ -184,7 +185,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
 
             return (
                 <div className="well well-lg pull-down">
-                    <ToastContainer position="bottom-right" />
+                    <ToastContainer position="bottom-right" toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
                     <div style={{ float: 'right' }} className="user-details">
                         <ButtonToolBar NewFolderHandler={this.NewFolderHandler}  ></ButtonToolBar>
                     </div>
