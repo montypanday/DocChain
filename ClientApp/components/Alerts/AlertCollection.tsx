@@ -1,6 +1,12 @@
 ﻿import * as React from 'react';
 import { render } from 'react-dom';
-import { Alert , Button } from 'react-bootstrap';
+import { Alert, Button } from 'react-bootstrap';
+
+const errorDict = [
+    { ErrorCode: 404, ErrorStatus: "neutral", ErrorMSG: this.ErrorCode + ": Page not found" },
+    { ErrorCode: 500, ErrorStatus: "danger", ErrorMSG: this.ErrorCode + ": Internal server error, exception uncertain" },
+];
+
 
 export interface AlertCollectionProps {
     ReceivedCode:any
@@ -15,6 +21,9 @@ export default class AlertCollection extends React.Component<AlertCollectionProp
         super(props);
 
         this.state = {
+            ErrorCode: null,
+            ErrorStatus: "",
+            ErrorMSG: "",
         }
     }
 
