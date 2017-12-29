@@ -1,5 +1,6 @@
 ﻿import * as React from 'react';
 import { render } from 'react-dom';
+require('./Dropdown.css');
 
 export interface AppProps {
     type: string,
