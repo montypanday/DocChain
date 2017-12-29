@@ -4,6 +4,9 @@ import { GDIcon } from '../components/SVGs/icon-GD';
 import { BOXIcon } from '../components/SVGs/icon-BOX';
 import { ODIcon } from '../components/SVGs/icon-OD';
 import { DBIcon } from '../components/SVGs/icon-DB';
+import { HELPIcon } from '../components/SVGs/icon-HELP';
+import { LOGINIcon } from '../components/SVGs/icon-LOGIN';
+import { HOMEIcon } from '../components/SVGs/icon-HOME';
 
 require('../components/Navbar (WIP)/Navbar.css');
 
@@ -33,7 +36,7 @@ export class NavMenu extends React.Component<{}, {}> {
                     <ul className="nav navbar-nav">
                         <li>
                             <NavLink to={"/"} exact activeClassName="active">
-                                <i className="fa fa-home" aria-hidden="true"></i> Home
+                                <HOMEIcon/> Home
                             </NavLink>
                         </li>
                         <li>
@@ -62,7 +65,12 @@ export class NavMenu extends React.Component<{}, {}> {
 
                         <li>
                             <NavLink to={"/faq"} activeClassName="active">
-                                <i className="fa fa-question-circle" aria-hidden="true"></i> FAQ
+                                <HELPIcon/> FAQ
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={"/Login"} activeClassName="active">
+                                <LOGINIcon /> Account
                             </NavLink>
                         </li>
                         <li>
@@ -70,11 +78,7 @@ export class NavMenu extends React.Component<{}, {}> {
                                 <i className="fa fa-question-circle" aria-hidden="true"></i> Box Explorer
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to={"/Login"} activeClassName="active">
-                                <i className="fa fa-sign-in" aria-hidden="true"></i> Account
-                            </NavLink>
-                        </li>
+ 
                     </ul>
                 </div>
             </div>
