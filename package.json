@@ -36,7 +36,6 @@
   },
   "dependencies": {
     "prop-types": "^15.6.0",
-    "react-bootstrap": "^0.31.5",
-    "vivus": "^0.4.3"
+    "react-bootstrap": "^0.31.5"
   }
 }
