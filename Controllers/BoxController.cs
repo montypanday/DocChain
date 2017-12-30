@@ -1,6 +1,6 @@
-﻿using System;
+﻿#region Using Statements
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Box.V2;
 using Box.V2.Auth;
@@ -13,21 +13,14 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-
-using Box.V2.Models.Request;
-
 using Database.Services;
 using Model;
-using Newtonsoft.Json.Linq;
-using System.Threading;
 using System.Net.Http;
 using System.IO;
-using System.Text;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Hosting;
-using System.Security.Cryptography;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Box.V2.Exceptions;
+#endregion 
 
 namespace front_end.Controllers
 {
@@ -70,7 +63,7 @@ namespace front_end.Controllers
 
         [Route("Upload/{currentFolderID}")]
         [HttpPost]
-        public async Task<JsonResult> Upload(string currentFolderID)
+        public async Task<IActionResult> Upload(string currentFolderID)
         {
             var client = Initialise();
 
@@ -102,7 +95,15 @@ namespace front_end.Controllers
                         Name = filename,
                         Parent = new BoxRequestEntity() { Id = currentFolderID }
                     };
-                    newFile = await client.FilesManager.UploadAsync(req, fs);
+                    try
+                    {
+                        newFile = await client.FilesManager.UploadAsync(req, fs);
+                    }
+                    catch (BoxException exp)
+                    {
+                        return StatusCode(Convert.ToInt32(exp.StatusCode));
+                    }
+
                 }
             }
             return await GetBoxFolderItems(client, currentFolderID);
@@ -146,14 +147,21 @@ namespace front_end.Controllers
 
         [Route("GetPreview/{id}")]
         [HttpGet]
-        public async Task<string> GetPreview(string id)
+        public async Task<IActionResult> GetPreview(string id)
         {
             var client = Initialise();
             _logger.LogInformation("Getting Preview Link for file => " + id);
             ////log this preview in database.
             Task.Run(() => { RecordFileAction(client, id, "Preview"); });
+            try
+            {
+                return Json(await client.FilesManager.GetPreviewLinkAsync(id));
+            }
+            catch (BoxException exp)
+            {
+                return StatusCode(Convert.ToInt32(exp.StatusCode));
+            }
 
-            return (await client.FilesManager.GetPreviewLinkAsync(id)).ToString();
         }
 
         [Route("Rename/{id}/{newName}")]
