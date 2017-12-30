@@ -18,6 +18,18 @@
     margin-top: -7px;
 }
 
+.HELPIcon{
+    margin-top:0;
+}
+
+.LOGINIcon {
+    margin-top: 0;
+}
+
+.HOMEIcon{
+    margin-top:0;
+}
+
 .LinkText{
     float:left;
     display:none;

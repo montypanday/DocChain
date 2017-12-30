@@ -5,7 +5,6 @@ import { Tutorial3 } from "./tutorial3";
 import { Tutorial4 } from "./tutorial4";
 import { Tutorial5 } from "./tutorial5";
 const s = require("../css/home.css");
-require('./Modals/previewModal.css');
 
 interface HomeState {
     slideCount: number;

@@ -9,12 +9,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Database\**" />
+    <Compile Remove="Migration\**" />
     <Compile Remove="Model\**" />
     <Content Remove="Database\**" />
+    <Content Remove="Migration\**" />
     <Content Remove="Model\**" />
     <EmbeddedResource Remove="Database\**" />
+    <EmbeddedResource Remove="Migration\**" />
     <EmbeddedResource Remove="Model\**" />
     <None Remove="Database\**" />
+    <None Remove="Migration\**" />
     <None Remove="Model\**" />
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +54,9 @@
     <None Remove="ClientApp\components\Modals\FilePreviewModal.tsx" />
     <None Remove="ClientApp\components\SVGs\icon-BOX.tsx" />
     <None Remove="ClientApp\components\SVGs\icon-DB.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-HELP.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-HOME.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-LOGIN.tsx" />
     <None Remove="ClientApp\components\SVGs\icon-NetError.tsx" />
     <None Remove="ClientApp\components\SVGs\icon-OD.tsx" />
     <None Remove="ClientApp\components\TableHeading.tsx" />
@@ -61,6 +68,9 @@
     <TypeScriptCompile Include="ClientApp\components\Alerts\ErrorSplash.tsx" />
     <TypeScriptCompile Include="ClientApp\components\ErrorBoundary.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-BOX.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-HELP.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-LOGIN.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-HOME.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-DB.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-NetError.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-OD.tsx" />
@@ -70,9 +80,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Update="Microsoft.NETCore.App" Version="2.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Migration\" />
   </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->

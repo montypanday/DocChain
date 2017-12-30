@@ -5,7 +5,6 @@ import { SearchBar } from '../components/SearchBar';
 import { Row } from '../components/Table/Row';
 import { Link, NavLink, Redirect } from "react-router-dom";
 import { BreadCrumb } from '../components/breadCrumb';
-require('../css/breadcrumb.css');
 import { formatSizeUnits } from '../api/Helpers/FormatSize';
 import { getPreviewLink } from '../api/Box/GetPreviewLink';
 import FilePreviewModal from '../components/Modals/FilePreviewModal';
@@ -13,7 +12,6 @@ import TableHeading from '../components/Table/TableHeading';
 import FileRenameModal from '../components/Modals/RenameFileModal';
 import DeleteModal from '../components/Modals/DeleteModal';
 import NewFolderModal from '../components/Modals/NewFolderModal';
-
 import ShowShareLinkModal from '../components/Modals/ShowShareLinkModal';
 import { GetFolderItemsAsync } from '../api/Box/GetFolderItemsAsync';
 import ButtonToolBar from '../components/Table/ButtonToolbar';
@@ -22,6 +20,7 @@ import { BoxLogin } from '../components/BoxLogin';
 import AlertCollection from '../components/Alerts/AlertCollection';
 import { CreateNewFolder } from '../api/Box/CreateNewFolder';
 import { ToastContainer, toast } from 'react-toastify';
+import { css } from 'glamor';
 import { Search } from '../api/Box/Search';
 import { Delete } from '../api/Box/Delete';
 import Dropzone from 'react-dropzone'
@@ -248,7 +247,9 @@ export class Explorer extends React.Component<{}, {}> {
 
             return (
                 <div className="well well-lg pull-down">
-                    <ToastContainer position="bottom-right" />
+
+
+                    <ToastContainer position="bottom-right" toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
 
                     <div style={{ float: 'right' }} className="user-details">
                         {/*this.state['user']*/}

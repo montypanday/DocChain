@@ -2,8 +2,12 @@
 import { render } from 'react-dom';
 import { ButtonToolbar } from 'react-bootstrap';
 import { Button, DropdownButton, MenuItem } from 'react-bootstrap';
+
 require('../Table/icon.css');
 require('../Table/input.css');
+
+require('./ButtonToolbar.css');
+
 
 export interface ButtonToolbarProps {
     NewFolderHandler: any,
@@ -46,7 +50,7 @@ export default class ButtonToolBar extends React.Component<ButtonToolbarProps, B
                             <li><a onClick={this.props.NewFolderHandler} > New Folder</a></li>
                         </ul>
                     </div>
-                    <Button bsStyle="danger"><i className="fa fa-power-off" aria-hidden="true"></i>Logout</Button>
+                    <Button bsStyle="danger"><i className="fa fa-power-off power-icon" aria-hidden="true"></i>Logout</Button>
                 </ButtonToolbar>
             </div>
         );
