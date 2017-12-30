@@ -7,7 +7,7 @@ export function Upload(currentFolderID: string, formData: any) {
         method: 'POST',
         body: formData
     }).then(response => {
-        if (!response.ok) { alert(response.status + "=> " + response.statusText) }
+        if (!response.ok) { throw response; }
         return response.json()  //we only get here if there is no error)
     }).then(data => {
         var newData = [];

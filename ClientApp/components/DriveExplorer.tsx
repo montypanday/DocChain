@@ -19,6 +19,7 @@ import DeleteModal from '../components/Modals/DeleteModal';
 import { ToastContainer, toast } from 'react-toastify';
 import { css } from 'glamor';
 import { GDelete } from '../api/Google/GDelete';
+import { Upload } from '../api/Google/Upload';
 
 require('../css/ContextMenu.css');
 
@@ -36,6 +37,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
         this.showDeleteModal = this.showDeleteModal.bind(this);
         this.closeDeleteModal = this.closeDeleteModal.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
+        this.FileUploadHandler = this.FileUploadHandler.bind(this);
         this.state = {
             // This is space we will put the json response
             filesarray: {},
@@ -75,7 +77,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
         }
 
     }
-    //"https://docs.google.com/viewer?url="+
+    
     navigate(row, event) {
         // this is to navigate into folders
         var res = row.embedLink.toString();
@@ -147,10 +149,12 @@ export class DriveExplorer extends React.Component<{}, {}> {
         console.log("Let's open a modal to make new Folder");
         this.setState({ showNewFolderModal: true });
     }
+
     CloseNewFolderModalHandler(e) {
         console.log("Closing New Folder Handler");
         this.setState({ showNewFolderModal: false });
     }
+
     createNewFolderHandler(newName) {
         console.log("Creating New Folder with name -> " + newName);
         GCreateNewFolder(this.state["currentFolderID"], newName)
@@ -163,6 +167,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
     closeDeleteModal() {
         this.setState({ showDeleteModal: false, ToBeDeletedID: "", ToBeDeletedName: "", ToBeDeletedType: "" });
     }
+
     deleteItem() {
         console.log("id ->" + this.state["ToBeDeletedID"]);
         console.log("type ->" + this.state["ToBeDeletedType"]);
@@ -172,9 +177,48 @@ export class DriveExplorer extends React.Component<{}, {}> {
                 toast.success("Deleted successfully!", { hideProgressBar: true });
             });
     }
+
     showDeleteModal(row, event) {
         this.setState({ showDeleteModal: true, ToBeDeletedID: row.id, ToBeDeletedName: row.fileName, ToBeDeletedType: row.type });
     }
+
+    FileUploadHandler(files) {
+        toast.dismiss();
+        var toastIndex;
+        toastIndex = toast.info("Uploading " + files.length + " files", { autoClose: false, hideProgressBar: true });
+        var formData = new FormData();
+        var fileList = files;
+        for (var x = 0; x < fileList.length; x++) {
+            console.log(fileList.item(x));
+            formData.append('file' + x, fileList.item(x));
+        }
+        var a = ""
+        if (files.length == 1) {
+            a = "file";
+        }
+        else { a = "files"; }
+        Upload(this.state["currentFolderID"], formData)
+            .then(newData => {
+                if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
+                    this.setState({ filesarray: newData, loading: false });
+                    toast.update(toastIndex, {
+                        autoClose: 5000, hideProgressBar: true, type: "success", render: "Successfully Uploaded " + files.length + " " + a
+                    });
+                }
+            }).catch(function (error) {
+                console.log(error);
+
+                if (error.status == 409) {
+                    toast.update(toastIndex, {
+                        autoClose: false, hideProgressBar: true, type: "warning", render: "Cannot Upload File because a file with same name exists"
+                    });
+                }
+                else {
+                    alert(error);
+                }
+            }.bind(this));
+    }
+
     public render() {
         if (this.state['loading'] === false) {
             // this .map function is like a foreach loop on filesarray, gives us a row object which has all the values that are related to a file object
@@ -187,7 +231,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
                 <div className="well well-lg pull-down">
                     <ToastContainer position="bottom-right" toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
                     <div style={{ float: 'right' }} className="user-details">
-                        <ButtonToolBar NewFolderHandler={this.NewFolderHandler} uploadHandler=""  ></ButtonToolBar>
+                        <ButtonToolBar NewFolderHandler={this.NewFolderHandler} uploadHandler={this.FileUploadHandler} ></ButtonToolBar>
                     </div>
                     <SearchBar changeHandler={e => { this.setState({ query: e.target.value }) }} searchHandler={this.performSearch}></SearchBar>
                     <BreadCrumb pathCollection={this.state['pathCollection']} navigateOutHandler={this.navigateOut.bind(this)} />

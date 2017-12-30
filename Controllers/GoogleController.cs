@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using front_end.Models;
 using Google.Apis.Auth.OAuth2;
@@ -95,7 +97,43 @@ namespace front_end.Controllers
             _logger.LogInformation("Getting Folder items for Folder -> " + id);
             return GetGoogleFolderItems(service, id);
         }
-        
+
+        [Route("Upload/{currentFolderID}")]
+        [HttpPost]
+        public IActionResult Upload(string currentFolderID)
+        {
+            var service = GetService();
+
+            var files = Request.Form.Files;
+            foreach (var file in files)
+            {
+                var filename = ContentDispositionHeaderValue
+                                .Parse(file.ContentDisposition)
+                                .FileName
+                                .Trim('"');
+
+                int bufferSize = 4096;
+                using (FileStream fs = System.IO.File.Create(filename, bufferSize, FileOptions.DeleteOnClose))
+                {
+                    file.CopyTo(fs);
+                    var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+                    {
+                        Name = filename,
+                        Parents = new List<string>() { currentFolderID }
+                    };
+                    FilesResource.CreateMediaUpload request;
+
+                    request = service.Files.Create(fileMetadata, fs, file.ContentType);
+                    request.Fields = "id";
+                    //request.ProgressChanged += Upload_ProgressChanged;
+                    //request.ResponseReceived += Upload_ResponseReceived;
+                    request.Upload();
+                }
+            }
+            return GetGoogleFolderItems(service, currentFolderID);
+
+        }
+
         [Route("Search/{query}")]
         [HttpGet]
         public IActionResult Search(string query)
@@ -104,7 +142,7 @@ namespace front_end.Controllers
             FilesResource.ListRequest request = service.Files.List();
             request.PageSize = 100;
             request.PrettyPrint = true;
-            request.Q = "name contains '"+query+"' and trashed = false";
+            request.Q = "name contains '" + query + "' and trashed = false";
             request.Fields = @"files(id,name,kind,md5Checksum,modifiedTime,mimeType,iconLink,size)";
             IList<Google.Apis.Drive.v3.Data.File> files = request.Execute().Files;
             return Json(ConvertToSend(files));
@@ -115,7 +153,7 @@ namespace front_end.Controllers
         public IActionResult NewFolder(string parentID, string name)
         {
             var service = GetService();
-            var newFolder = new File()
+            var newFolder = new Google.Apis.Drive.v3.Data.File()
             {
                 Name = name,
                 Parents = new List<string>() { parentID },
@@ -140,6 +178,7 @@ namespace front_end.Controllers
             var verify = deleterequest.Execute();
             return GetGoogleFolderItems(service, currentFolderID);
         }
+
         private GoogleContent[] ConvertToSend(IList<Google.Apis.Drive.v3.Data.File> files)
         {
             GoogleContent[] list = new GoogleContent[files.Count];
@@ -170,6 +209,10 @@ namespace front_end.Controllers
             else
             {
                 if (id == "root" || id == "''root''") { id = "'root'"; }
+                else
+                {
+                    id = "'" + id + "'";
+                }
                 request.Q = id + " in parents and trashed = false";
             }
 

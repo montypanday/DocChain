@@ -1,25 +1,32 @@
 ﻿import { formatSizeUnits } from '../Helpers/FormatSize';
-export function GRoot() {
-    return fetch("api/Google/GetFolderItems/root", { credentials: 'same-origin' })
-        .then(response => {
-            if (!response.ok) { throw response }
-            return response.json()  //we only get here if there is no error)
-        })
+
+
+export function Upload(currentFolderID: string, formData: any) {
+    return fetch('api/Google/Upload/' + currentFolderID, {
+        credentials: 'same-origin',
+        method: 'POST',
+        body: formData
+    }).then(response => {
+        if (!response.ok) { throw response }
+        return response.json()  //we only get here if there is no error)
+    })
         .then(data => {
             //console.log(data);
             var newData = [];
-            newData.push({
-                type: "folder",
-                id: "sharedWithMe",
-                fileName: "Shared with Me",
-                size: "-",
-                hash: "",
-                lastModified: "N/A",
-                embedLink: "",
-                downloadUrl: "",
-                mimeType: "application/vnd.google-apps.folder",
-                iconLink: ""
-            });
+            if (currentFolderID == 'root') {
+                newData.push({
+                    type: "folder",
+                    id: "sharedWithMe",
+                    fileName: "Shared with Me",
+                    size: "-",
+                    hash: "",
+                    lastModified: "N/A",
+                    embedLink: "",
+                    downloadUrl: "",
+                    mimeType: "application/vnd.google-apps.folder",
+                    iconLink: ""
+                });
+            }
             for (var i = 0; i < data.length; i++) {
                 var a = {};
                 if (data[i].mimeType == "application/vnd.google-apps.folder") {

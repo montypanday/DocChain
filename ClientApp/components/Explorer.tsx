@@ -42,7 +42,7 @@ export class Explorer extends React.Component<{}, {}> {
         this.showDeleteModal = this.showDeleteModal.bind(this);
         this.closeDeleteModal = this.closeDeleteModal.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
-        this.onDrop = this.onDrop.bind(this);
+
         this.FileUploadHandler = this.FileUploadHandler.bind(this);
         this.state = {
             // This is space we will put the json response
@@ -73,6 +73,7 @@ export class Explorer extends React.Component<{}, {}> {
             filesToBeSent: [],
         }
     }
+
     componentDidMount() {
         GetFolderItemsAsync("0").then(newData => {
             if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
@@ -86,10 +87,12 @@ export class Explorer extends React.Component<{}, {}> {
                 this.setState({ loading: false, filesarray: [], show401Alert: true });
             }.bind(this));
     }
+
     handleSearchBarChange(e) {
         console.log("searching => " + e.target.value);
         this.setState({ query: e.target.value });
     }
+
     performSearch(e) {
         if (this.state["query"] !== "") {
             Search(this.state["query"]).then(newData => {
@@ -100,6 +103,7 @@ export class Explorer extends React.Component<{}, {}> {
         }
 
     }
+
     navigate(row, event) {
         if (row.type == "folder") {
             console.log("Navigated into folder ->" + row.fileName);
@@ -112,10 +116,21 @@ export class Explorer extends React.Component<{}, {}> {
         if (row.type == "file") {
             getPreviewLink(row.id).then(link => {
                 this.setState({ PreviewUrl: link, PreviewFileName: row.fileName, showPreviewModal: true })
-            });
+            }).catch(function (error) {
+                console.log(error);
+                toast.dismiss();
+                if (error.status == 415) {
+                    var a = toast.error("File Preview for this file format is not supported yet", { hideProgressBar: true, position: "bottom-right", onClose: () => toast.dismiss(a) });
+                }
+                else {
+                    alert(error);
+                }
+
+            }.bind(this));
         }
 
     }
+
     navigateOut(e) {
         var coll = this.state['pathCollection'];
         var index;
@@ -128,6 +143,7 @@ export class Explorer extends React.Component<{}, {}> {
         var coll2 = JSON.parse(JSON.stringify(coll));
         this.searchInFolder(e.fileId, coll2);
     }
+
     searchInFolder(id, newArray) {
         GetFolderItemsAsync(id).then(newData => {
             if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
@@ -135,14 +151,17 @@ export class Explorer extends React.Component<{}, {}> {
             }
         });
     }
+
     NewFolderHandler(e) {
         console.log("Let's open a modal to make new Folder");
         this.setState({ showNewFolderModal: true });
     }
+
     CloseNewFolderModalHandler(e) {
         console.log("Closing New Folder Handler");
         this.setState({ showNewFolderModal: false });
     }
+
     createNewFolderHandler(newName) {
         console.log("Creating New Folder with name -> " + newName);
         CreateNewFolder(this.state["currentFolderID"], newName)
@@ -151,14 +170,18 @@ export class Explorer extends React.Component<{}, {}> {
                 toast.success("Folder created successfully!", { hideProgressBar: true });
             });
     }
+
     closePreviewModal() {
         this.setState({ PreviewUrl: "", showPreviewModal: false, PreviewFileName: "" })
     }
+
     closeRenameFileModal() {
     }
+
     showPreview() {
         this.setState({ showingPreview: true });
     }
+
     getUser() {
         fetch("https://api.box.com/2.0/users/me", {
             method: "GET",
@@ -178,12 +201,15 @@ export class Explorer extends React.Component<{}, {}> {
                 this.setState({ user: user });
             })
     }
+
     closeDeleteModal() {
         this.setState({ showDeleteModal: false, ToBeDeletedID: "", ToBeDeletedName: "", ToBeDeletedType: "" });
     }
+
     showDeleteModal(row, event) {
         this.setState({ showDeleteModal: true, ToBeDeletedID: row.id, ToBeDeletedName: row.fileName, ToBeDeletedType: row.type });
     }
+
     deleteItem() {
         console.log("id ->" + this.state["ToBeDeletedID"]);
         console.log("type ->" + this.state["ToBeDeletedType"]);
@@ -195,30 +221,11 @@ export class Explorer extends React.Component<{}, {}> {
     }
 
     notify = () => toast.success("Folder created successfully!", { hideProgressBar: true });
-    onDrop(acceptedFiles) {
-        console.log('Accepted files: ', acceptedFiles[0].name);
-        //var filesToBeSent = this.state.filesToBeSent;
-        //filesToBeSent.push(acceptedFiles);
-        //this.setState({ filesToBeSent });
-    }
 
-    //     <Dropzone onDrop={(files) => this.onDrop(files)}>
-    //    <button> Upload Files</button>
-    //</Dropzone>
     FileUploadHandler(files) {
-        var file;
-        for (var i = 0; i < files.length; i++) {
-
-            // get item
-            file = files.item(i);
-            //or
-            file = files[i];
-
-            console.log(file.name);
-            toast.info("Uploading " + file.name);
-        }
-        this.setState({ ToBeUploadedFiles: files })
-
+        var toastIndex;
+        toast.dismiss();
+        toastIndex = toast.info("Uploading " + files.length + " files", { autoClose: false, hideProgressBar: true });
         var formData = new FormData();
 
         var fileList = files;
@@ -226,13 +233,31 @@ export class Explorer extends React.Component<{}, {}> {
             console.log(fileList.item(x));
             formData.append('file' + x, fileList.item(x));
         }
-
+        var a = ""
+        if (files.length == 1) {
+            a = "file";
+        }
+        else { a = "files"; }
         Upload(this.state["currentFolderID"], formData)
             .then(newData => {
                 if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                    this.setState({ filesarray: newData, loading: false});
+                    this.setState({ filesarray: newData, loading: false });
+                    toast.update(toastIndex, {
+                        autoClose: 5000, hideProgressBar: true, type: "success", render: "Successfully Uploaded " + files.length + " " + a
+                    });
                 }
-            });
+            }).catch(function (error) {
+                console.log(error);
+
+                if (error.status == 409) {
+                    toast.update(toastIndex, {
+                        autoClose: false, hideProgressBar: true, type: "warning", render: "Cannot Upload File because a file with same name exists"
+                    });
+                }
+                else {
+                    alert(error);
+                }
+            }.bind(this));
     }
 
     public render() {
@@ -249,7 +274,7 @@ export class Explorer extends React.Component<{}, {}> {
                 <div className="well well-lg pull-down">
 
 
-                    <ToastContainer position="bottom-right" toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
+                    <ToastContainer position="bottom-right" hideProgressBar={true} pauseOnHover={true} newestOnTop={true} toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
 
                     <div style={{ float: 'right' }} className="user-details">
                         {/*this.state['user']*/}
