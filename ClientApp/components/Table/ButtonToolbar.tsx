@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { ButtonToolbar } from 'react-bootstrap';
 import { Button, DropdownButton, MenuItem } from 'react-bootstrap';
 
-require('../Table/icon.css');
+require('../Table/fa-icons.css');
 require('../Table/input.css');
 
 require('./ButtonToolbar.css');
