@@ -5,8 +5,9 @@ import { Tutorial3 } from "./tutorial3";
 import { Tutorial4 } from "./tutorial4";
 import { Tutorial5 } from "./tutorial5";
 const s = require("../css/home.css");
-require('./Modals/previewModal.css');
 
+//import ErrorSplash from '../components/Alerts/ErrorSplash';
+//import EmptyFolder from '../components/Alerts/EmptyFolder';
 
 interface HomeState {
     slideCount: number;

@@ -52,6 +52,7 @@ namespace front_end
         {
             if (env.IsDevelopment())
             {
+                //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
                 loggerFactory.AddDebug(LogLevel.Trace);
                 loggerFactory.AddFile("Logs/myapp-{Date}.txt");
                 app.UseDeveloperExceptionPage();

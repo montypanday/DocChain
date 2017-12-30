@@ -9,17 +9,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Database\**" />
+    <Compile Remove="Migration\**" />
     <Compile Remove="Model\**" />
     <Content Remove="Database\**" />
+    <Content Remove="Migration\**" />
     <Content Remove="Model\**" />
     <EmbeddedResource Remove="Database\**" />
+    <EmbeddedResource Remove="Migration\**" />
     <EmbeddedResource Remove="Model\**" />
     <None Remove="Database\**" />
+    <None Remove="Migration\**" />
     <None Remove="Model\**" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Box.V2.Core" Version="3.3.0" />
-    <PackageReference Include="Google.Apis.Drive.v3" Version="1.32.0.1072" />
+    <PackageReference Include="Google.Apis.Drive.v3" Version="1.32.0.1079" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.0.0" />
@@ -41,24 +45,38 @@
   <ItemGroup>
     <!-- Files not to show in IDE -->
     <None Remove="ClientApp\api\Box\GetPreviewLink.tsx" />
+    <None Remove="ClientApp\api\Box\SearchRoot.tsx" />
     <None Remove="ClientApp\api\Helpers\FormatSize.tsx" />
     <None Remove="ClientApp\api\SearchRoot.tsx" />
+    <None Remove="ClientApp\components\Alerts\EmptyFolder.tsx" />
+    <None Remove="ClientApp\components\Alerts\ErrorSplash.tsx" />
     <None Remove="ClientApp\components\ErrorBoundary.tsx" />
     <None Remove="ClientApp\components\iconGD.tsx" />
     <None Remove="ClientApp\components\Modals\FilePreviewModal.tsx" />
     <None Remove="ClientApp\components\SVGs\icon-BOX.tsx" />
     <None Remove="ClientApp\components\SVGs\icon-DB.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-EmptyFolder.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-HELP.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-HOME.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-LOGIN.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-NetError.tsx" />
     <None Remove="ClientApp\components\SVGs\icon-OD.tsx" />
     <None Remove="ClientApp\components\TableHeading.tsx" />
     <None Remove="yarn.lock" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\api\Box\GetPreviewLink.tsx" />
-    <TypeScriptCompile Include="ClientApp\api\Box\SearchRoot.tsx" />
     <TypeScriptCompile Include="ClientApp\api\Helpers\FormatSize.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Alerts\EmptyFolder.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Alerts\ErrorSplash.tsx" />
     <TypeScriptCompile Include="ClientApp\components\ErrorBoundary.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-BOX.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-HELP.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-LOGIN.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-HOME.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-DB.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-EmptyFolder.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-NetError.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-OD.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-GD.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Modals\FilePreviewModal.tsx" />
@@ -66,9 +84,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Update="Microsoft.NETCore.App" Version="2.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Migration\" />
   </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->

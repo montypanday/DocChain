@@ -5,20 +5,26 @@ import { SearchBar } from '../components/SearchBar';
 import { Row } from '../components/Table/Row';
 import { Link, NavLink, Redirect } from "react-router-dom";
 import { BreadCrumb } from '../components/breadCrumb';
-require('../css/breadcrumb.css');
-
 import { formatSizeUnits } from '../api/Helpers/FormatSize';
 import { getPreviewLink } from '../api/Box/GetPreviewLink';
 import FilePreviewModal from '../components/Modals/FilePreviewModal';
 import TableHeading from '../components/Table/TableHeading';
 import FileRenameModal from '../components/Modals/RenameFileModal';
 import DeleteModal from '../components/Modals/DeleteModal';
+import NewFolderModal from '../components/Modals/NewFolderModal';
 import ShowShareLinkModal from '../components/Modals/ShowShareLinkModal';
 import { GetFolderItemsAsync } from '../api/Box/GetFolderItemsAsync';
 import ButtonToolBar from '../components/Table/ButtonToolbar';
 import { Alert } from 'react-bootstrap';
 import { BoxLogin } from '../components/BoxLogin';
-import  AlertCollection  from '../components/Alerts/AlertCollection';
+import AlertCollection from '../components/Alerts/AlertCollection';
+import { CreateNewFolder } from '../api/Box/CreateNewFolder';
+import { ToastContainer, toast } from 'react-toastify';
+import { css } from 'glamor';
+import { Search } from '../api/Box/Search';
+import { Delete } from '../api/Box/Delete';
+import Dropzone from 'react-dropzone'
+import { Upload } from '../api/Box/Upload';
 
 export class Explorer extends React.Component<{}, {}> {
 
@@ -28,8 +34,16 @@ export class Explorer extends React.Component<{}, {}> {
         this.performSearch = this.performSearch.bind(this);
         this.navigate = this.navigate.bind(this);
         this.navigateOut = this.navigateOut.bind(this);
+        this.NewFolderHandler = this.NewFolderHandler.bind(this);
         this.closePreviewModal = this.closePreviewModal.bind(this);
+        this.CloseNewFolderModalHandler = this.CloseNewFolderModalHandler.bind(this);
+        this.createNewFolderHandler = this.createNewFolderHandler.bind(this);
         this.searchInFolder = this.searchInFolder.bind(this);
+        this.showDeleteModal = this.showDeleteModal.bind(this);
+        this.closeDeleteModal = this.closeDeleteModal.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
+        this.onDrop = this.onDrop.bind(this);
+        this.FileUploadHandler = this.FileUploadHandler.bind(this);
         this.state = {
             // This is space we will put the json response
             filesarray: {},
@@ -45,72 +59,46 @@ export class Explorer extends React.Component<{}, {}> {
             showRenameModal: false,
             showDeleteModal: false,
             pathCollection: [{ fileId: "0", Name: "All Files" }],
-            show401Alert: false
+            show401Alert: false,
+            currentFolderID: "",
+            showNewFolderModal: false,
+            ToBeDeletedName: "",
+            ToBeDeletedID: "",
+            ToBeDeletedType: "",
+            ToBeUploadedFiles: {},
+
+
+
+            filesPreview: [],
+            filesToBeSent: [],
         }
     }
-
     componentDidMount() {
-     
-            GetFolderItemsAsync("0").then(newData => {
-                if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                    this.setState({ filesarray: newData, loading: false, show401Alert: false });
-                    //console.log("different data was received this time.")
-                }
-            })
-                .catch(function(error){
-                    console.log(error.status);
-                    this.setState({ loading: false, filesarray: [], show401Alert: true });
-                }.bind(this));
-        //this.getUser();
+        GetFolderItemsAsync("0").then(newData => {
+            if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
+                this.setState({ filesarray: newData, loading: false, show401Alert: false, currentFolderID: "0" });
+                //console.log("different data was received this time.")
+                //NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
+            }
+        })
+            .catch(function (error) {
+                console.log(error.status);
+                this.setState({ loading: false, filesarray: [], show401Alert: true });
+            }.bind(this));
     }
-
     handleSearchBarChange(e) {
         console.log("searching => " + e.target.value);
         this.setState({ query: e.target.value });
-        //if (this.state['query'] == "") {
-        //    searchRoot();
-        //}
     }
-
     performSearch(e) {
-        var querystring = this.state['query'];
-        if (querystring == "") { /*this.searchRoot(); */ }
-        else {
-            fetch("https://api.box.com/2.0/search?query=" + querystring + "&fields=name,size,id,type,sha1,path_collection,modified_at,shared_link,expiring_embed_link", {
-                method: "GET",
-                headers:
-                    {
-                        'Authorization': 'Bearer ' + sessionStorage.getItem("box_access_token"),
-                        'Accept': 'application/json'
-                    }
-            })
-                .then(response => {
-                    if (!response.ok) { throw response }
-                    return response.json()  //we only get here if there is no error)
-                })
-                .then(data => {
-
-                    var newData = [];
-                    for (var i = 0; i < data["entries"].length; i++) {
-
-                        var a = {};
-                        if (data.entries[i].type == "file") {
-
-                            a = { type: data.entries[i].type, id: data.entries[i].id, fileName: data.entries[i].name, size: formatSizeUnits(data.entries[i].size), hash: data.entries[i].sha1, lastModified: (new Date(Date.parse(data.entries[i].modified_at.toString()))).toUTCString(), embedLink: data.entries[i].expiring_embed_link.url, downloadUrl: "" }
-                        }
-                        else {
-                            a = { type: data.entries[i].type, id: data.entries[i].id, fileName: data.entries[i].name, size: formatSizeUnits(data.entries[i].size), hash: "", lastModified: (new Date(Date.parse(data.entries[i].modified_at.toString()))).toUTCString(), embedLink: "", downloadUrl: "" }
-                        }
-
-                        newData.push(a)
-
-                    }
-                    if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                        this.setState({ filesarray: newData, loading: false });
-                        //console.log("different data was received this time.")
-                    }
-                })
+        if (this.state["query"] !== "") {
+            Search(this.state["query"]).then(newData => {
+                if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
+                    this.setState({ filesarray: newData, loading: false, pathCollection: [{ fileId: "0", Name: "All Files" }] });
+                }
+            });
         }
+
     }
     navigate(row, event) {
         if (row.type == "folder") {
@@ -128,7 +116,6 @@ export class Explorer extends React.Component<{}, {}> {
         }
 
     }
-
     navigateOut(e) {
         var coll = this.state['pathCollection'];
         var index;
@@ -141,27 +128,37 @@ export class Explorer extends React.Component<{}, {}> {
         var coll2 = JSON.parse(JSON.stringify(coll));
         this.searchInFolder(e.fileId, coll2);
     }
-
     searchInFolder(id, newArray) {
         GetFolderItemsAsync(id).then(newData => {
             if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                this.setState({ filesarray: newData, loading: false, pathCollection: newArray });
+                this.setState({ filesarray: newData, loading: false, pathCollection: newArray, currentFolderID: id });
             }
         });
     }
-
-
+    NewFolderHandler(e) {
+        console.log("Let's open a modal to make new Folder");
+        this.setState({ showNewFolderModal: true });
+    }
+    CloseNewFolderModalHandler(e) {
+        console.log("Closing New Folder Handler");
+        this.setState({ showNewFolderModal: false });
+    }
+    createNewFolderHandler(newName) {
+        console.log("Creating New Folder with name -> " + newName);
+        CreateNewFolder(this.state["currentFolderID"], newName)
+            .then(newData => {
+                this.setState({ filesarray: newData, showNewFolderModal: false });
+                toast.success("Folder created successfully!", { hideProgressBar: true });
+            });
+    }
     closePreviewModal() {
         this.setState({ PreviewUrl: "", showPreviewModal: false, PreviewFileName: "" })
     }
     closeRenameFileModal() {
-
     }
-
     showPreview() {
         this.setState({ showingPreview: true });
     }
-
     getUser() {
         fetch("https://api.box.com/2.0/users/me", {
             method: "GET",
@@ -181,34 +178,85 @@ export class Explorer extends React.Component<{}, {}> {
                 this.setState({ user: user });
             })
     }
+    closeDeleteModal() {
+        this.setState({ showDeleteModal: false, ToBeDeletedID: "", ToBeDeletedName: "", ToBeDeletedType: "" });
+    }
+    showDeleteModal(row, event) {
+        this.setState({ showDeleteModal: true, ToBeDeletedID: row.id, ToBeDeletedName: row.fileName, ToBeDeletedType: row.type });
+    }
+    deleteItem() {
+        console.log("id ->" + this.state["ToBeDeletedID"]);
+        console.log("type ->" + this.state["ToBeDeletedType"]);
+        Delete(this.state["ToBeDeletedType"], this.state["ToBeDeletedID"], this.state["currentFolderID"])
+            .then(newData => {
+                this.setState({ filesarray: newData, showDeleteModal: false, ToBeDeletedID: "", ToBeDeletedName: "", ToBeDeletedType: "" });
+                toast.success("Deleted successfully!", { hideProgressBar: true });
+            });
+    }
+
+    notify = () => toast.success("Folder created successfully!", { hideProgressBar: true });
+    onDrop(acceptedFiles) {
+        console.log('Accepted files: ', acceptedFiles[0].name);
+        //var filesToBeSent = this.state.filesToBeSent;
+        //filesToBeSent.push(acceptedFiles);
+        //this.setState({ filesToBeSent });
+    }
+
+    //     <Dropzone onDrop={(files) => this.onDrop(files)}>
+    //    <button> Upload Files</button>
+    //</Dropzone>
+    FileUploadHandler(files) {
+        var file;
+        for (var i = 0; i < files.length; i++) {
+
+            // get item
+            file = files.item(i);
+            //or
+            file = files[i];
+
+            console.log(file.name);
+            toast.info("Uploading " + file.name);
+        }
+        this.setState({ ToBeUploadedFiles: files })
+
+        var formData = new FormData();
+
+        var fileList = files;
+        for (var x = 0; x < fileList.length; x++) {
+            console.log(fileList.item(x));
+            formData.append('file' + x, fileList.item(x));
+        }
+
+        Upload(this.state["currentFolderID"], formData)
+            .then(newData => {
+                if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
+                    this.setState({ filesarray: newData, loading: false});
+                }
+            });
+    }
 
     public render() {
         console.log("Explorer was rendered");
+
         if (this.state['loading'] === false) {
             //this.getUser();
-            // this .map function is like a foreach loop on filesarray, gives us a row object which has all the values that are related to a file object
-            //rows is the variable which is being inserted into the render function at its given function see {rows} in render method.
+
             var rows = this.state['filesarray'].map(function (row) {
-                return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} mimeType="" iconLink="" filename={row.fileName} size={row.size} lastModified={row.lastModified} downloadUrl={row.downloadUrl}></Row>);
+                return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} mimeType="" iconLink="" filename={row.fileName} size={row.size} lastModified={row.lastModified} downloadUrl={row.downloadUrl} deleteHandler={this.showDeleteModal.bind(null, row)}></Row>);
             }.bind(this));
 
             return (
                 <div className="well well-lg pull-down">
+
+
+                    <ToastContainer position="bottom-right" toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
+
                     <div style={{ float: 'right' }} className="user-details">
                         {/*this.state['user']*/}
-                        <ButtonToolBar></ButtonToolBar>
+                        <ButtonToolBar NewFolderHandler={this.NewFolderHandler} uploadHandler={this.FileUploadHandler} ></ButtonToolBar>
                     </div>
-                    <div style={{ width: '100%', minHeight: '50px', backgroundColor: '#f5f5f5' }}>
-                        <div className="col-lg-6" style={{ padding: '0px' }}>
-                            <div className="input-group">
-                                <input type="text" className="form-control" onChange={this.handleSearchBarChange} onKeyDown={this.performSearch} onKeyUp={this.performSearch} placeholder="Search for files and folders" />
-                                <span className="input-group-btn">
-                                    <button className="btn btn-default" type="button" onClick={this.performSearch}> Search</button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    
+                    <SearchBar changeHandler={e => { this.setState({ query: e.target.value }) }} searchHandler={this.performSearch}></SearchBar>
+
                     {this.state["show401Alert"] &&
                         <Alert bsStyle="warning">
                             <strong>401 Unauthorized </strong> Please sign in first
@@ -218,15 +266,25 @@ export class Explorer extends React.Component<{}, {}> {
                     {!this.state["show401Alert"] && <BreadCrumb pathCollection={this.state["pathCollection"]} navigateOutHandler={this.navigateOut.bind(this)} />}
                     {!this.state["show401Alert"] && < table className="table table-striped table-hover table-responsive well header-fixed">
                         <TableHeading />
-                    <tbody>
-                        {rows}
-                    </tbody>
+                        <tbody>
+                            {rows}
+                        </tbody>
                     </table>}
-                    
-                    {this.state["showPreviewModal"] && <FilePreviewModal PreviewFileName={this.state["PreviewFileName"]} PreviewUrl={this.state["PreviewUrl"]} closeModal={this.closePreviewModal}></FilePreviewModal>}
-                    {this.state["showRenameModal"] && <FileRenameModal RenameFileName={this.state["RenameFileName"]} closeRenameModal={this.closeRenameFileModal}></FileRenameModal>}
-                    {this.state["showDeleteModal"] && <DeleteModal></DeleteModal>}
-                    {this.state["showShareModal"] && <ShowShareLinkModal></ShowShareLinkModal>}
+
+                    {this.state["showPreviewModal"] &&
+                        <FilePreviewModal PreviewFileName={this.state["PreviewFileName"]} PreviewUrl={this.state["PreviewUrl"]} closeModal={this.closePreviewModal}>
+                        </FilePreviewModal>}
+                    {this.state["showRenameModal"] &&
+                        <FileRenameModal RenameFileName={this.state["RenameFileName"]} closeRenameModal={this.closeRenameFileModal}>
+                        </FileRenameModal>}
+                    {this.state["showDeleteModal"] &&
+                        <DeleteModal fileName={this.state["ToBeDeletedName"]} id={this.state["ToBeDeletedId"]} type={this.state["ToBeDeletedType"]} closeHandler={this.closeDeleteModal} deleteActionHandler={this.deleteItem}>
+                        </DeleteModal>}
+                    {this.state["showShareModal"] &&
+                        <ShowShareLinkModal></ShowShareLinkModal>}
+                    {this.state["showNewFolderModal"] &&
+                        <NewFolderModal closeHandler={this.CloseNewFolderModalHandler} createFolderHandler={this.createNewFolderHandler} >
+                        </NewFolderModal>}
                 </div>
             );
         }

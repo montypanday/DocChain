@@ -1,14 +1,26 @@
 ﻿import { formatSizeUnits } from '../Helpers/FormatSize';
 
-export function GSearch(query: string) {
-    //this is the network call made everytime the page is reload, before the render method.
-    return fetch("/api/Google/Search/" + query, { credentials: 'same-origin' })
+export function GCreateNewFolder(parentID: string, newName: string) {
+    return fetch("/api/Google/NewFolder/" + parentID + "/" + newName, { credentials: 'same-origin' })
         .then(response => {
-            if (!response.ok) { throw response; }
-            return response.json()  //we only get here if there is no error)
+            if (!response.ok) { throw response }
+            return response.json();  //we only get here if there is no error)
         })
         .then(data => {
+            //console.log(data);
             var newData = [];
+            newData.push({
+                type: "folder",
+                id: "sharedWithMe",
+                fileName: "Shared with Me",
+                size: "-",
+                hash: "",
+                lastModified: "N/A",
+                embedLink: "",
+                downloadUrl: "",
+                mimeType: "application/vnd.google-apps.folder",
+                iconLink: ""
+            });
             for (var i = 0; i < data.length; i++) {
                 var a = {};
                 if (data[i].mimeType == "application/vnd.google-apps.folder") {

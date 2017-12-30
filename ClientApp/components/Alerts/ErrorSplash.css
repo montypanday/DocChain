@@ -1,0 +1,14 @@
+﻿.errorIcon{
+    display:block;
+    margin:auto;
+    text-align:center;
+}
+
+.splash{
+    position:center;
+    padding-top:200px;
+}
+
+.splash p{
+    text-align:center;
+}

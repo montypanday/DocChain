@@ -1,6 +1,7 @@
 ﻿﻿import * as React from "react";
 import { render } from "react-dom";
-require("../css/breadcrumb.css");
+require("../components/Breadcrumb (WIP)/breadcrumb.css");
+
 export interface BreadCrumbProps {
     pathCollection: any;
     navigateOutHandler: any;

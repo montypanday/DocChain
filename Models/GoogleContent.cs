@@ -5,13 +5,10 @@ using System.Threading.Tasks;
 
 namespace front_end.Models
 {
-    public class Content
+    public class GoogleContent
     {
-        public Content()
-        {
-
-        }
-        public Content(string type, string id, string fileName, string size, string hash, string modifiedat)
+        public GoogleContent(){}
+        public GoogleContent(string type, string id, string fileName, string size, string hash, string modifiedat, string iconLink, string mimeType)
         {
             this.Type = type;
             this.Id = id;
@@ -19,6 +16,8 @@ namespace front_end.Models
             this.Size = size;
             this.Hash = hash;
             this.LastModified = modifiedat;
+            this.IconLink = iconLink;
+            this.MimeType = mimeType;
         }
         public string Type { get; set; }
         // in Google, type is called kind and is always drive#file.
@@ -43,16 +42,8 @@ namespace front_end.Models
         // To be verified for Box.
         // Box calls it modified_at, Drive calls it modifiedByMeDate
 
-        public string EmbedLink { get; set; }
-        //This link can be used to embed the file in a iframe.
-        //Search for the iframe tag, iframe tag can also be used inside a bootstrap modal, search for examples
-        //Called expiring_embed_link in box and embedLink in Drive.
+        public string IconLink { get; set; }
 
-        public string DownloadUrl { get; set; }
-
-
-
-
-
+        public string MimeType { get; set; }
     }
 }

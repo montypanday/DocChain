@@ -31,10 +31,12 @@
     "url-loader": "0.5.8",
     "webpack": "3.10.0",
     "webpack-hot-middleware": "2.21.0",
-    "immutability-helper": "2.6.2"
+    "immutability-helper": "2.6.2",
+    "react-toastify": "3.2.1"
   },
   "dependencies": {
     "prop-types": "^15.6.0",
-    "react-bootstrap": "^0.31.5"
+    "react-bootstrap": "^0.31.5",
+    "react-dropzone": "4.2.3"
   }
 }
