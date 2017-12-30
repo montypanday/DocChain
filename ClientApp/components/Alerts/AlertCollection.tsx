@@ -21,9 +21,9 @@ export default class AlertCollection extends React.Component<AlertCollectionProp
         super(props);
 
         this.state = {
-            ErrorCode: null,
-            ErrorStatus: "",
-            ErrorMSG: "",
+            ErrorCode: null, //a number
+            ErrorStatus: "", //this determines the style of the alert
+            ErrorMSG: "", //this is the text rendered to the user
         }
     }
                 //this.setState key={errorDict.ErrorCode}... set state depending on the "Recieved Code"?
