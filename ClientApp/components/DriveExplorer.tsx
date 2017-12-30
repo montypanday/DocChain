@@ -186,7 +186,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
                 <div className="well well-lg pull-down">
                     <ToastContainer position="bottom-right" />
                     <div style={{ float: 'right' }} className="user-details">
-                        <ButtonToolBar NewFolderHandler={this.NewFolderHandler}  ></ButtonToolBar>
+                        <ButtonToolBar NewFolderHandler={this.NewFolderHandler} uploadHandler=""  ></ButtonToolBar>
                     </div>
                     <SearchBar changeHandler={e => { this.setState({ query: e.target.value }) }} searchHandler={this.performSearch}></SearchBar>
                     <BreadCrumb pathCollection={this.state['pathCollection']} navigateOutHandler={this.navigateOut.bind(this)} />

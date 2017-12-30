@@ -24,6 +24,8 @@ import { CreateNewFolder } from '../api/Box/CreateNewFolder';
 import { ToastContainer, toast } from 'react-toastify';
 import { Search } from '../api/Box/Search';
 import { Delete } from '../api/Box/Delete';
+import Dropzone from 'react-dropzone'
+import { Upload } from '../api/Box/Upload';
 
 export class Explorer extends React.Component<{}, {}> {
 
@@ -41,6 +43,8 @@ export class Explorer extends React.Component<{}, {}> {
         this.showDeleteModal = this.showDeleteModal.bind(this);
         this.closeDeleteModal = this.closeDeleteModal.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
+        this.onDrop = this.onDrop.bind(this);
+        this.FileUploadHandler = this.FileUploadHandler.bind(this);
         this.state = {
             // This is space we will put the json response
             filesarray: {},
@@ -61,7 +65,13 @@ export class Explorer extends React.Component<{}, {}> {
             showNewFolderModal: false,
             ToBeDeletedName: "",
             ToBeDeletedID: "",
-            ToBeDeletedType: ""
+            ToBeDeletedType: "",
+            ToBeUploadedFiles: {},
+
+
+
+            filesPreview: [],
+            filesToBeSent: [],
         }
     }
     componentDidMount() {
@@ -186,6 +196,45 @@ export class Explorer extends React.Component<{}, {}> {
     }
 
     notify = () => toast.success("Folder created successfully!", { hideProgressBar: true });
+    onDrop(acceptedFiles) {
+        console.log('Accepted files: ', acceptedFiles[0].name);
+        //var filesToBeSent = this.state.filesToBeSent;
+        //filesToBeSent.push(acceptedFiles);
+        //this.setState({ filesToBeSent });
+    }
+
+    //     <Dropzone onDrop={(files) => this.onDrop(files)}>
+    //    <button> Upload Files</button>
+    //</Dropzone>
+    FileUploadHandler(files) {
+        var file;
+        for (var i = 0; i < files.length; i++) {
+
+            // get item
+            file = files.item(i);
+            //or
+            file = files[i];
+
+            console.log(file.name);
+            toast.info("Uploading " + file.name);
+        }
+        this.setState({ ToBeUploadedFiles: files })
+
+        var formData = new FormData();
+
+        var fileList = files;
+        for (var x = 0; x < fileList.length; x++) {
+            console.log(fileList.item(x));
+            formData.append('file' + x, fileList.item(x));
+        }
+
+        Upload(this.state["currentFolderID"], formData)
+            .then(newData => {
+                if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
+                    this.setState({ filesarray: newData, loading: false});
+                }
+            });
+    }
 
     public render() {
         console.log("Explorer was rendered");
@@ -200,9 +249,10 @@ export class Explorer extends React.Component<{}, {}> {
             return (
                 <div className="well well-lg pull-down">
                     <ToastContainer position="bottom-right" />
+
                     <div style={{ float: 'right' }} className="user-details">
                         {/*this.state['user']*/}
-                        <ButtonToolBar NewFolderHandler={this.NewFolderHandler}  ></ButtonToolBar>
+                        <ButtonToolBar NewFolderHandler={this.NewFolderHandler} uploadHandler={this.FileUploadHandler} ></ButtonToolBar>
                     </div>
                     <SearchBar changeHandler={e => { this.setState({ query: e.target.value }) }} searchHandler={this.performSearch}></SearchBar>
 

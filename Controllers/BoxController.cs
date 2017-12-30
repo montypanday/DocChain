@@ -21,6 +21,11 @@ using Model;
 using Newtonsoft.Json.Linq;
 using System.Threading;
 using System.Net.Http;
+using System.IO;
+using System.Text;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Hosting;
+using System.Security.Cryptography;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -33,14 +38,16 @@ namespace front_end.Controllers
         public IConfiguration Configuration { get; set; }
         IDataProtector _protector { get; set; }
         private readonly ILogger _logger;
+        private IHostingEnvironment hostingEnv;
 
         private FileActionService fileActionService = new FileActionService();
 
-        public BoxController(IConfiguration config, IDataProtectionProvider provider, ILogger<BoxController> logger)
+        public BoxController(IConfiguration config, IDataProtectionProvider provider, ILogger<BoxController> logger, IHostingEnvironment env)
         {
             Configuration = config;
             _protector = provider.CreateProtector(GetType().FullName);
             _logger = logger;
+            this.hostingEnv = env;
         }
 
         [Route("Authenticate")]
@@ -51,7 +58,7 @@ namespace front_end.Controllers
             OAuthSession Oauth = await client.Auth.AuthenticateAsync(code);
             CookieOptions options = new CookieOptions
             {
-                Path ="/api/Box",
+                Path = "/api/Box",
                 Expires = DateTime.Now.AddDays(1),
                 HttpOnly = true
             };
@@ -61,6 +68,46 @@ namespace front_end.Controllers
             return LocalRedirect("/explorer");
         }
 
+        [Route("Upload/{currentFolderID}")]
+        [HttpPost]
+        public async Task<JsonResult> Upload(string currentFolderID)
+        {
+            var client = Initialise();
+
+            var files = Request.Form.Files;
+            foreach (var file in files)
+            {
+                var filename = ContentDispositionHeaderValue
+                                .Parse(file.ContentDisposition)
+                                .FileName
+                                .Trim('"');
+                //filename = hostingEnv.WebRootPath + $@"\{filename}";
+                //size += file.Length;
+                //using (FileStream fs = System.IO.File.Create(filename))
+                //{
+                //    file.CopyTo(fs);
+                //    fs.Flush();
+                //}
+
+                BoxFile newFile;
+
+                // Create request object with name and parent folder the file should be uploaded to
+
+                int bufferSize = 4096;
+                using (FileStream fs = System.IO.File.Create(filename, bufferSize, FileOptions.DeleteOnClose))
+                {
+                    file.CopyTo(fs);
+                    BoxFileRequest req = new BoxFileRequest()
+                    {
+                        Name = filename,
+                        Parent = new BoxRequestEntity() { Id = currentFolderID }
+                    };
+                    newFile = await client.FilesManager.UploadAsync(req, fs);
+                }
+            }
+            return await GetBoxFolderItems(client, currentFolderID);
+
+        }
 
         [Route("GetFolderItems/{id}")]
         [HttpGet]
@@ -106,7 +153,7 @@ namespace front_end.Controllers
             ////log this preview in database.
             Task.Run(() => { RecordFileAction(client, id, "Preview"); });
 
-            return (await client.FilesManager.GetPreviewLinkAsync(id)).ToString();  
+            return (await client.FilesManager.GetPreviewLinkAsync(id)).ToString();
         }
 
         [Route("Rename/{id}/{newName}")]
@@ -154,12 +201,12 @@ namespace front_end.Controllers
             {
                 _logger.LogInformation("Deleting File =>" + id);
                 Task.Run(() => { RecordFileAction(client, id, "Delete"); });
-                 await client.FilesManager.DeleteAsync(id);
+                await client.FilesManager.DeleteAsync(id);
                 return await GetBoxFolderItems(client, currentFolderID);
             }
             _logger.LogInformation("Deleting Folder =>" + id);
-             await client.FoldersManager.DeleteAsync(id,true);
-            
+            await client.FoldersManager.DeleteAsync(id, true);
+
             return await GetBoxFolderItems(client, currentFolderID);
 
         }
@@ -185,10 +232,10 @@ namespace front_end.Controllers
         [HttpGet]
         public async Task<IActionResult> NewFolder(string parentID, string name)
         {
-            if(parentID == "root") { parentID = "0"; }
+            if (parentID == "root") { parentID = "0"; }
             var client = Initialise();
             var resp = await client.FoldersManager.CreateAsync(
-                new BoxFolderRequest() { Name = name, Parent = new BoxRequestEntity() { Id = parentID  } });
+                new BoxFolderRequest() { Name = name, Parent = new BoxRequestEntity() { Id = parentID } });
             return await GetBoxFolderItems(client, parentID);
         }
 
@@ -265,7 +312,7 @@ namespace front_end.Controllers
                     //BoxFile.FieldSharedLink,
 
                 });
-           
+
             return Json(GetCustomCollection(items));
         }
 
@@ -335,6 +382,7 @@ namespace front_end.Controllers
             _logger.LogInformation("Don't worry! Access Token was renewed => " + Json(e.Session));
             CookieOptions options = new CookieOptions
             {
+                Path = "/api/Box",
                 Expires = DateTime.Now.AddDays(1),
                 HttpOnly = true
             };
@@ -347,6 +395,7 @@ namespace front_end.Controllers
         {
             CookieOptions options = new CookieOptions
             {
+                Path = "/api/Box",
                 Expires = DateTime.Now.AddDays(-1),
                 HttpOnly = true
             };
