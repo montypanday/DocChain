@@ -5,18 +5,20 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Database.Services;
 using front_end.Models;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Auth.OAuth2.Flows;
 using Google.Apis.Auth.OAuth2.Responses;
 using Google.Apis.Drive.v3;
-using Google.Apis.Drive.v3.Data;
+using DriveData = Google.Apis.Drive.v3.Data;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Model;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -176,6 +178,9 @@ namespace front_end.Controllers
             var service = GetService();
             var deleterequest = service.Files.Delete(id);
             var verify = deleterequest.Execute();
+
+            RecordFileAction(id, "Delete");
+
             return GetGoogleFolderItems(service, currentFolderID);
         }
 
@@ -218,8 +223,36 @@ namespace front_end.Controllers
 
             //request.Fields = @"files(*)";
             request.Fields = @"files(id,name,kind,md5Checksum,modifiedTime,mimeType,iconLink,size)";
-            IList<Google.Apis.Drive.v3.Data.File> files = request.Execute().Files;
+            IList<DriveData.File> files = request.Execute().Files;
             return Json(ConvertToSend(files));
+        }
+
+        private DriveData.File GetDriveFile(string id)
+        {
+            DriveService service = GetService();
+            FilesResource.GetRequest request = service.Files.Get(id);
+            request.Fields = @"files(id,name,kind,md5Checksum,modifiedTime,mimeType,iconLink,size)";
+            DriveData.File file = request.Execute();
+            return file;
+        }
+
+        private void RecordFileAction(string fileID, string actionType)
+        {
+            DriveService service = GetService();
+            FileActionService fileActionService = new FileActionService();
+
+            DriveData.File file = GetDriveFile(fileID);
+            string userID = service.About.Get().Execute().User.EmailAddress;
+
+            FileAction action = new FileAction(
+                fileID,
+                file.Md5Checksum,
+                "Google Drive",
+                userID,
+                actionType,
+                DateTime.Now);
+
+            fileActionService.RecordFileAction(action);
         }
     }
 }
