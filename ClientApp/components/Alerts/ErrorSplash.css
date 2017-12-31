@@ -6,7 +6,7 @@
 
 .splash{
     position:center;
-   
+    margin-top:100px;  
 }
 
 .splash p{
@@ -14,7 +14,7 @@
 }
 
 .inTbody {
-    padding-top: calc((100vh/2) - 250px);
+    padding-top: calc((100vh/2) - 220px);
     padding-bottom: 5px;
     width:100%;
 }
