@@ -33,8 +33,6 @@ namespace front_end.Controllers
         private readonly ILogger _logger;
         private IHostingEnvironment hostingEnv;
 
-        private FileActionService fileActionService = new FileActionService();
-
         public BoxController(IConfiguration config, IDataProtectionProvider provider, ILogger<BoxController> logger, IHostingEnvironment env)
         {
             Configuration = config;
@@ -422,6 +420,7 @@ namespace front_end.Controllers
 
         private void RecordFileAction(BoxClient client, string fileID, string actionType)
         {
+            FileActionService fileActionService = new FileActionService();
             Content file = GetBoxItem(client, fileID).Result;
             string userID = client.UsersManager.GetCurrentUserInformationAsync(new String[1] { "id" }).Result.Id;
             FileAction action = new FileAction(
