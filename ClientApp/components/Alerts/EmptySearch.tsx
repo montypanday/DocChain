@@ -5,7 +5,7 @@ require('./ErrorSplash.css');
 export default class EmptySearch extends React.Component {
 
     public render() {
-        return <div className="splash">
+        return <div className="splash inTbody">
             <EmptySearchIcon />
             <p>Your search returned no results.</p>
         </div>

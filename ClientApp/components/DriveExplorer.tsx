@@ -264,7 +264,10 @@ export class DriveExplorer extends React.Component<{}, {}> {
                                 {rows}
                             </tbody>
                             :
-                            <EmptyFolder />}
+                            < tbody >
+                                <EmptyFolder />
+                            </tbody>
+                        }
                     </table>
                     {this.state["showPreviewModal"] && <FilePreviewModal PreviewFileName={this.state["PreviewFileName"]} PreviewUrl={this.state["PreviewUrl"]} closeModal={this.closePreviewModal}></FilePreviewModal>}
                     {this.state["showNewFolderModal"] && <NewFolderModal closeHandler={this.CloseNewFolderModalHandler} createFolderHandler={this.createNewFolderHandler} ></NewFolderModal>}

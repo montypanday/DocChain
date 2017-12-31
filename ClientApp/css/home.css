@@ -183,12 +183,12 @@
     margin-top: 55px;
     margin-left: 5px;
     margin-right: 5px;
-    position:fixed;
+    position: fixed;
     height: calc(100vh - 65px);
 }
 
-.table{
-    table-layout:fixed;
+.table {
+    table-layout: fixed;
 }
 
 tr {

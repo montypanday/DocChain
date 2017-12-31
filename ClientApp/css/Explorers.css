@@ -1,4 +1,4 @@
-/* EXPLORER STYLING */
+/*/* EXPLORER STYLING 
 .loadingGif {
     text-align: center;
     align-content: center;
@@ -33,7 +33,7 @@ tbody {
     height: calc(100vh - 250px);
     position: absolute;
     margin-right: 24px;
-}
+}*/
 
 /* FILE ICON STYLING */
 .fa-lock{

@@ -312,7 +312,10 @@ export class Explorer extends React.Component<{}, {}> {
                                 {rows}
                             </tbody>
                             :
-                            <EmptyFolder/>}
+                            < tbody >
+                                <EmptyFolder />
+                            </tbody>
+                            }
                     </table>}
 
                     {this.state["showPreviewModal"] &&

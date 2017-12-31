@@ -6,9 +6,19 @@
 
 .splash{
     position:center;
-    padding-top:200px;
+   
 }
 
 .splash p{
     text-align:center;
+}
+
+.inTbody {
+    padding-top: calc((100vh/2) - 250px);
+    padding-bottom: 5px;
+    width:100%;
+}
+
+tbody{
+    width: 100%;
 }
