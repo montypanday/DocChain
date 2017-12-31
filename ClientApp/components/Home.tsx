@@ -8,6 +8,7 @@ const s = require("../css/home.css");
 
 //import ErrorSplash from '../components/Alerts/ErrorSplash';
 //import EmptyFolder from '../components/Alerts/EmptyFolder';
+//import EmptySearch from '../components/Alerts/EmptySearch';
 
 interface HomeState {
     slideCount: number;
