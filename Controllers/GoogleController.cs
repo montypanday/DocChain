@@ -177,7 +177,9 @@ namespace front_end.Controllers
         {
             var service = GetService();
             var deleterequest = service.Files.Delete(id);
-            RecordFileAction(id, "Delete");
+            
+            Task.Run(() => { RecordFileAction(id, "Delete"); });
+
             var verify = deleterequest.Execute();
 
 
