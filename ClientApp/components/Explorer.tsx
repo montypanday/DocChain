@@ -25,6 +25,7 @@ import { Search } from '../api/Box/Search';
 import { Delete } from '../api/Box/Delete';
 import Dropzone from 'react-dropzone'
 import { Upload } from '../api/Box/Upload';
+import EmptyFolder from '../components/Alerts/EmptyFolder';
 
 export class Explorer extends React.Component<{}, {}> {
 
@@ -66,9 +67,7 @@ export class Explorer extends React.Component<{}, {}> {
             ToBeDeletedID: "",
             ToBeDeletedType: "",
             ToBeUploadedFiles: {},
-
-
-
+            FolderEmpty: false,
             filesPreview: [],
             filesToBeSent: [],
         }
@@ -77,9 +76,12 @@ export class Explorer extends React.Component<{}, {}> {
     componentDidMount() {
         GetFolderItemsAsync("0").then(newData => {
             if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                this.setState({ filesarray: newData, loading: false, show401Alert: false, currentFolderID: "0" });
-                //console.log("different data was received this time.")
-                //NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
+                let isEmpty = false;
+                if (newData.length == 0) {
+                    isEmpty = true;
+                }
+                this.setState({ filesarray: newData, loading: false, show401Alert: false, currentFolderID: "0", FolderEmpty: isEmpty });
+                
             }
         })
             .catch(function (error) {
@@ -115,6 +117,7 @@ export class Explorer extends React.Component<{}, {}> {
         }
         if (row.type == "file") {
             getPreviewLink(row.id).then(link => {
+                console.log(link);
                 this.setState({ PreviewUrl: link, PreviewFileName: row.fileName, showPreviewModal: true })
             }).catch(function (error) {
                 console.log(error);
@@ -147,7 +150,11 @@ export class Explorer extends React.Component<{}, {}> {
     searchInFolder(id, newArray) {
         GetFolderItemsAsync(id).then(newData => {
             if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                this.setState({ filesarray: newData, loading: false, pathCollection: newArray, currentFolderID: id });
+                let isEmpty = false;
+                if (newData.length == 0) {
+                    isEmpty = true;
+                }
+                this.setState({ filesarray: newData, loading: false, pathCollection: newArray, currentFolderID: id, FolderEmpty: isEmpty});
             }
         });
     }
@@ -215,7 +222,11 @@ export class Explorer extends React.Component<{}, {}> {
         console.log("type ->" + this.state["ToBeDeletedType"]);
         Delete(this.state["ToBeDeletedType"], this.state["ToBeDeletedID"], this.state["currentFolderID"])
             .then(newData => {
-                this.setState({ filesarray: newData, showDeleteModal: false, ToBeDeletedID: "", ToBeDeletedName: "", ToBeDeletedType: "" });
+                let isEmpty = false;
+                if (newData.length == 0) {
+                    isEmpty = true;
+                }
+                this.setState({ filesarray: newData, showDeleteModal: false, ToBeDeletedID: "", ToBeDeletedName: "", ToBeDeletedType: "", FolderEmpty: isEmpty });
                 toast.success("Deleted successfully!", { hideProgressBar: true });
             });
     }
@@ -241,7 +252,11 @@ export class Explorer extends React.Component<{}, {}> {
         Upload(this.state["currentFolderID"], formData)
             .then(newData => {
                 if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                    this.setState({ filesarray: newData, loading: false });
+                    let isEmpty = false;
+                    if (newData.length == 0) {
+                        isEmpty = true;
+                    }
+                    this.setState({ filesarray: newData, loading: false, FolderEmpty: isEmpty });
                     toast.update(toastIndex, {
                         autoClose: 5000, hideProgressBar: true, type: "success", render: "Successfully Uploaded " + files.length + " " + a
                     });
@@ -273,6 +288,7 @@ export class Explorer extends React.Component<{}, {}> {
             return (
                 <div className="well well-lg pull-down">
 
+                    
 
                     <ToastContainer position="bottom-right" hideProgressBar={true} pauseOnHover={true} newestOnTop={true} toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
 
@@ -291,9 +307,12 @@ export class Explorer extends React.Component<{}, {}> {
                     {!this.state["show401Alert"] && <BreadCrumb pathCollection={this.state["pathCollection"]} navigateOutHandler={this.navigateOut.bind(this)} />}
                     {!this.state["show401Alert"] && < table className="table table-striped table-hover table-responsive well header-fixed">
                         <TableHeading />
-                        <tbody>
-                            {rows}
-                        </tbody>
+                        {!this.state["FolderEmpty"] ? 
+                            < tbody >
+                                {rows}
+                            </tbody>
+                            :
+                            <EmptyFolder/>}
                     </table>}
 
                     {this.state["showPreviewModal"] &&

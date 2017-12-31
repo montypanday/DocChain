@@ -27,15 +27,19 @@ export default class ButtonToolBar extends React.Component<ButtonToolbarProps, B
 
         }
     }
+    shouldComponentUpdate(nextProps) {
+        return false;
+    }
 
 
     render() {
+        console.log("Button Toolbar was rendered again");
         return (
 
             <ButtonToolbar>
                 <div className="btn-group">
                     <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i className="fa fa-upload"></i>
+                        <i style={{ paddingRight: '4px' }} className="fa fa-upload"></i>
                         Upload <span className="caret"></span>
                     </button>
                     <ul className="dropdown-menu">

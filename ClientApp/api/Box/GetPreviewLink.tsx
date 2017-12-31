@@ -4,6 +4,6 @@
             if (!response.ok) {
                 throw response;
             }
-            return response.text()  //we only get here if there is no error)
+            return response.json()  //we only get here if there is no error)
         });
 }

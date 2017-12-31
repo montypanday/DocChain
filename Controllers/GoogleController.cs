@@ -202,7 +202,7 @@ namespace front_end.Controllers
             FilesResource.ListRequest request = service.Files.List();
             request.PageSize = 100;
             request.PrettyPrint = true;
-            if (id == "'sharedWithMe'")
+            if (id == "'sharedWithMe'" || id == "sharedWithMe")
             {
                 request.Q = "sharedWithMe = true and trashed = false";
             }

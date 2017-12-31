@@ -52,6 +52,7 @@ export class Row extends React.Component<AppProps, AppState> {
             "pptx": "powerpoint-o",
             "gslides": "powerpoint-o",
             "m4a": "audio-o",
+            "mp4": "audio-o",
             "mp3": "audio-o",
             "png": "image-o",
             "PNG": "image-o",

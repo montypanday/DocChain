@@ -20,7 +20,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { css } from 'glamor';
 import { GDelete } from '../api/Google/GDelete';
 import { Upload } from '../api/Google/Upload';
-
+import EmptyFolder from '../components/Alerts/EmptyFolder';
 require('../css/ContextMenu.css');
 
 export class DriveExplorer extends React.Component<{}, {}> {
@@ -55,14 +55,19 @@ export class DriveExplorer extends React.Component<{}, {}> {
             ToBeDeletedName: "",
             ToBeDeletedID: "",
             ToBeDeletedType: "",
-            showDeleteModal: false
+            showDeleteModal: false,
+            FolderEmpty: false,
         }
     }
 
     componentDidMount() {
         GRoot().then(newData => {
             if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                this.setState({ filesarray: newData, loading: false, currentFolderID: "root" });
+                let isEmpty = false;
+                if (newData.length == 0) {
+                    isEmpty = true;
+                }
+                this.setState({ filesarray: newData, loading: false, currentFolderID: "root", FolderEmpty: isEmpty });
             }
         });
     }
@@ -77,7 +82,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
         }
 
     }
-    
+
     navigate(row, event) {
         // this is to navigate into folders
         var res = row.embedLink.toString();
@@ -112,7 +117,11 @@ export class DriveExplorer extends React.Component<{}, {}> {
         console.log("Searching in folder -> " + fileID);
         GNavigateIntoFolder(fileID).then(newData => {
             if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                this.setState({ filesarray: newData, loading: false, pathCollection: newArray, currentFolderID: fileID });
+                let isEmpty = false;
+                if (newData.length == 0) {
+                    isEmpty = true;
+                }
+                this.setState({ filesarray: newData, loading: false, pathCollection: newArray, currentFolderID: fileID, FolderEmpty: isEmpty });
             }
         });
     }
@@ -159,7 +168,11 @@ export class DriveExplorer extends React.Component<{}, {}> {
         console.log("Creating New Folder with name -> " + newName);
         GCreateNewFolder(this.state["currentFolderID"], newName)
             .then(newData => {
-                this.setState({ filesarray: newData, showNewFolderModal: false });
+                let isEmpty = false;
+                if (newData.length == 0) {
+                    isEmpty = true;
+                }
+                this.setState({ filesarray: newData, showNewFolderModal: false, FolderEmpty: isEmpty });
                 toast.success("Folder created successfully!", { hideProgressBar: true });
             });
     }
@@ -173,7 +186,11 @@ export class DriveExplorer extends React.Component<{}, {}> {
         console.log("type ->" + this.state["ToBeDeletedType"]);
         GDelete(this.state["ToBeDeletedID"], this.state["currentFolderID"])
             .then(newData => {
-                this.setState({ filesarray: newData, showDeleteModal: false, ToBeDeletedID: "", ToBeDeletedName: "", ToBeDeletedType: "" });
+                let isEmpty = false;
+                if (newData.length == 0) {
+                    isEmpty = true;
+                }
+                this.setState({ filesarray: newData, showDeleteModal: false, ToBeDeletedID: "", ToBeDeletedName: "", ToBeDeletedType: "", FolderEmpty: isEmpty });
                 toast.success("Deleted successfully!", { hideProgressBar: true });
             });
     }
@@ -200,7 +217,11 @@ export class DriveExplorer extends React.Component<{}, {}> {
         Upload(this.state["currentFolderID"], formData)
             .then(newData => {
                 if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                    this.setState({ filesarray: newData, loading: false });
+                    let isEmpty = false;
+                    if (newData.length == 0) {
+                        isEmpty = true;
+                    }
+                    this.setState({ filesarray: newData, loading: false, FolderEmpty: isEmpty });
                     toast.update(toastIndex, {
                         autoClose: 5000, hideProgressBar: true, type: "success", render: "Successfully Uploaded " + files.length + " " + a
                     });
@@ -235,12 +256,15 @@ export class DriveExplorer extends React.Component<{}, {}> {
                     </div>
                     <SearchBar changeHandler={e => { this.setState({ query: e.target.value }) }} searchHandler={this.performSearch}></SearchBar>
                     <BreadCrumb pathCollection={this.state['pathCollection']} navigateOutHandler={this.navigateOut.bind(this)} />
-                    <ContextMenu root="rows" />
+                    
                     <table className="table table-striped table-hover table-responsive well header-fixed">
                         <TableHeading />
-                        <tbody id="rows">
-                            {rows}
-                        </tbody>
+                        {!this.state["FolderEmpty"] ?
+                            < tbody >
+                                {rows}
+                            </tbody>
+                            :
+                            <EmptyFolder />}
                     </table>
                     {this.state["showPreviewModal"] && <FilePreviewModal PreviewFileName={this.state["PreviewFileName"]} PreviewUrl={this.state["PreviewUrl"]} closeModal={this.closePreviewModal}></FilePreviewModal>}
                     {this.state["showNewFolderModal"] && <NewFolderModal closeHandler={this.CloseNewFolderModalHandler} createFolderHandler={this.createNewFolderHandler} ></NewFolderModal>}
