@@ -49,6 +49,7 @@
     <None Remove="ClientApp\api\Helpers\FormatSize.tsx" />
     <None Remove="ClientApp\api\SearchRoot.tsx" />
     <None Remove="ClientApp\components\Alerts\EmptyFolder.tsx" />
+    <None Remove="ClientApp\components\Alerts\EmptySearch.tsx" />
     <None Remove="ClientApp\components\Alerts\ErrorSplash.tsx" />
     <None Remove="ClientApp\components\ErrorBoundary.tsx" />
     <None Remove="ClientApp\components\iconGD.tsx" />
@@ -56,6 +57,7 @@
     <None Remove="ClientApp\components\SVGs\icon-BOX.tsx" />
     <None Remove="ClientApp\components\SVGs\icon-DB.tsx" />
     <None Remove="ClientApp\components\SVGs\icon-EmptyFolder.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-EmptySearch.tsx" />
     <None Remove="ClientApp\components\SVGs\icon-HELP.tsx" />
     <None Remove="ClientApp\components\SVGs\icon-HOME.tsx" />
     <None Remove="ClientApp\components\SVGs\icon-LOGIN.tsx" />
@@ -67,10 +69,12 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\api\Box\GetPreviewLink.tsx" />
     <TypeScriptCompile Include="ClientApp\api\Helpers\FormatSize.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Alerts\EmptySearch.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Alerts\EmptyFolder.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Alerts\ErrorSplash.tsx" />
     <TypeScriptCompile Include="ClientApp\components\ErrorBoundary.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-BOX.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-EmptySearch.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-HELP.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-LOGIN.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-HOME.tsx" />
