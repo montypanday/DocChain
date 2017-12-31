@@ -96,6 +96,7 @@ namespace front_end.Controllers
                     try
                     {
                         newFile = await client.FilesManager.UploadAsync(req, fs);
+                        Task.Run(() => { RecordFileAction(client, newFile.Id, "Upload"); });
                     }
                     catch (BoxException exp)
                     {
@@ -231,6 +232,7 @@ namespace front_end.Controllers
         public async Task<Uri> DownloadFile(string id)
         {
             var client = Initialise();
+            Task.Run(() => { RecordFileAction(client, id, "Download"); });
             return await client.FilesManager.GetDownloadUriAsync(id);
         }
 
@@ -428,7 +430,7 @@ namespace front_end.Controllers
                 file.Hash,
                 "Box",
                 userID,
-                "Preview",
+                actionType,
                 DateTime.Now
             );
             fileActionService.RecordFileAction(action);

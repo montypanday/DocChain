@@ -130,6 +130,8 @@ namespace front_end.Controllers
                     //request.ProgressChanged += Upload_ProgressChanged;
                     //request.ResponseReceived += Upload_ResponseReceived;
                     request.Upload();
+                    
+                    Task.Run(() => { RecordFileAction(request.ResponseBody.Id, "Upload"); });
                 }
             }
             return GetGoogleFolderItems(service, currentFolderID);
@@ -176,12 +178,10 @@ namespace front_end.Controllers
         public IActionResult Delete(string id, string currentFolderID)
         {
             var service = GetService();
-            var deleterequest = service.Files.Delete(id);
-            
             Task.Run(() => { RecordFileAction(id, "Delete"); });
 
+            var deleterequest = service.Files.Delete(id);
             var verify = deleterequest.Execute();
-
 
             return GetGoogleFolderItems(service, currentFolderID);
         }
