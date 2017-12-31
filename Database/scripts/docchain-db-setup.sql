@@ -20,7 +20,7 @@
 --
 
 CREATE TABLE `fileactions` (
-  `FileID` varchar(20) DEFAULT NULL,
+  `FileID` varchar(64) DEFAULT NULL,
   `FileHash` varchar(64) DEFAULT NULL,
   `StoragePlatform` varchar(20) DEFAULT NULL,
   `UserID` varchar(64) DEFAULT NULL,

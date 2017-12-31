@@ -177,9 +177,9 @@ namespace front_end.Controllers
         {
             var service = GetService();
             var deleterequest = service.Files.Delete(id);
+            RecordFileAction(id, "Delete");
             var verify = deleterequest.Execute();
 
-            RecordFileAction(id, "Delete");
 
             return GetGoogleFolderItems(service, currentFolderID);
         }
@@ -231,7 +231,6 @@ namespace front_end.Controllers
         {
             DriveService service = GetService();
             FilesResource.GetRequest request = service.Files.Get(id);
-            request.Fields = @"files(id,name,kind,md5Checksum,modifiedTime,mimeType,iconLink,size)";
             DriveData.File file = request.Execute();
             return file;
         }
@@ -242,7 +241,9 @@ namespace front_end.Controllers
             FileActionService fileActionService = new FileActionService();
 
             DriveData.File file = GetDriveFile(fileID);
-            string userID = service.About.Get().Execute().User.EmailAddress;
+            AboutResource.GetRequest request = service.About.Get();
+            request.Fields = "user(emailAddress)";
+            string userID = request.Execute().User.EmailAddress;
 
             FileAction action = new FileAction(
                 fileID,
