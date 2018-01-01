@@ -8,6 +8,8 @@ const s = require("../css/home.css");
 
 //import ErrorSplash from '../components/Alerts/ErrorSplash';
 //import EmptyFolder from '../components/Alerts/EmptyFolder';
+//import EmptySearch from '../components/Alerts/EmptySearch';
+//import LostConnect from '../components/Alerts/LostConnect';
 
 interface HomeState {
     slideCount: number;
@@ -46,7 +48,6 @@ export class Home extends React.Component<HomeProperties, HomeState> {
 
     public render() {
         return <div className="body">
-
             {this.state.slideCount === 1 ? <Tutorial1 handler={this.handler} /> : null}
             {this.state.slideCount === 2 ? <Tutorial2 handler={this.handler} decHandler={this.decHandler} /> : null}
             {this.state.slideCount === 3 ? <Tutorial3 handler={this.handler} decHandler={this.decHandler} /> : null}

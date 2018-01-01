@@ -307,13 +307,15 @@ export class Explorer extends React.Component<{}, {}> {
                     {!this.state["show401Alert"] && <BreadCrumb pathCollection={this.state["pathCollection"]} navigateOutHandler={this.navigateOut.bind(this)} />}
                     {!this.state["show401Alert"] && < table className="table table-striped table-hover table-responsive well header-fixed">
                         <TableHeading />
-                        {!this.state["FolderEmpty"] ?
-                            <tbody>
-                                {rows}
-                            </tbody>
-                            :
-                            <EmptyFolder />}
-                    </table>}
+                        <tbody>
+                            {!this.state["FolderEmpty"] ?
+                                { rows }
+                                :
+                                <EmptyFolder />
+                            }
+
+
+                        </tbody></table>}
 
                     {this.state["showPreviewModal"] &&
                         <FilePreviewModal PreviewFileName={this.state["PreviewFileName"]} PreviewUrl={this.state["PreviewUrl"]} closeModal={this.closePreviewModal}>
