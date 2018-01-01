@@ -11,30 +11,25 @@ namespace Database
         static void Main(string[] args)
         {
             ConnectionProvider connection = new ConnectionProvider();
-            if (connection.Open())
-            {
-                Console.WriteLine("Connected");
 
-                FileAction fakeAction = new FileAction("00000003", "99999996", "docchain_dev", "cool user", "fun action", DateTime.Now);
+            TrackedFileService fileTracker = new TrackedFileService();
 
-                FileActionService fileService = new FileActionService();
-                //fileService.RecordFileAction(fakeAction);
+            if (fileTracker.TrackFile("testFile", "testPlatform"))
+                System.Diagnostics.Debug.WriteLine("Tracked");
+            else
+                System.Diagnostics.Debug.WriteLine("Track Failed");
 
-                SortedList<DateTime, FileAction> actions = fileService.GetUserActions("cool user");
-                foreach (KeyValuePair<DateTime, FileAction> action in actions)
-                {
-                    Console.WriteLine(action.Key.ToString() + " " + action.Value.FileID + " " + action.Value.ActionType);
-                }
+            if (fileTracker.CheckIfTracked("testFile", "testPlatform"))
+                System.Diagnostics.Debug.WriteLine("File is tacked");
+            else
+                System.Diagnostics.Debug.WriteLine("File is not tracked or query failed");
 
-                //string json = "{\"fileAction\" : {FileID: \"11111111\", FileHash: \"256bit hexadecimal number\",StoragePlatform: \"Docchain Development\",UserID: \"22222222\",ActionType: \"Test Action\"}}";
-                //FileAction jsonAction = new FileAction(json);
-                //fileService.RecordFileAction(jsonAction);
+            //if (fileTracker.UntrackFile("testFile", "testPlatform"))
+            //    System.Diagnostics.Debug.WriteLine("Untracked");
+            //else
+            //    System.Diagnostics.Debug.WriteLine("Untrack Failed");
 
-            } else
-
-                {
-                    Console.WriteLine("No good");
-                }
+            Console.WriteLine("No good");
         }
     }
 }
