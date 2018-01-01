@@ -81,7 +81,7 @@ export class Explorer extends React.Component<{}, {}> {
                     isEmpty = true;
                 }
                 this.setState({ filesarray: newData, loading: false, show401Alert: false, currentFolderID: "0", FolderEmpty: isEmpty });
-                
+
             }
         })
             .catch(function (error) {
@@ -154,7 +154,7 @@ export class Explorer extends React.Component<{}, {}> {
                 if (newData.length == 0) {
                     isEmpty = true;
                 }
-                this.setState({ filesarray: newData, loading: false, pathCollection: newArray, currentFolderID: id, FolderEmpty: isEmpty});
+                this.setState({ filesarray: newData, loading: false, pathCollection: newArray, currentFolderID: id, FolderEmpty: isEmpty });
             }
         });
     }
@@ -287,9 +287,6 @@ export class Explorer extends React.Component<{}, {}> {
 
             return (
                 <div className="well well-lg pull-down">
-
-                    
-
                     <ToastContainer position="bottom-right" hideProgressBar={true} pauseOnHover={true} newestOnTop={true} toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
 
                     <div style={{ float: 'right' }} className="user-details">
@@ -307,16 +304,13 @@ export class Explorer extends React.Component<{}, {}> {
                     {!this.state["show401Alert"] && <BreadCrumb pathCollection={this.state["pathCollection"]} navigateOutHandler={this.navigateOut.bind(this)} />}
                     {!this.state["show401Alert"] && < table className="table table-striped table-hover table-responsive well header-fixed">
                         <TableHeading />
-                        {!this.state["FolderEmpty"] ? 
-                            < tbody >
-                                {rows}
-                            </tbody>
-                            :
-                            < tbody >
+                        <tbody>
+                            {!this.state["FolderEmpty"] ?
+                                 rows 
+                                :
                                 <EmptyFolder />
-                            </tbody>
                             }
-                    </table>}
+                     </tbody></table>}
 
                     {this.state["showPreviewModal"] &&
                         <FilePreviewModal PreviewFileName={this.state["PreviewFileName"]} PreviewUrl={this.state["PreviewUrl"]} closeModal={this.closePreviewModal}>
