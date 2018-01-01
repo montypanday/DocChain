@@ -287,9 +287,6 @@ export class Explorer extends React.Component<{}, {}> {
 
             return (
                 <div className="well well-lg pull-down">
-
-
-
                     <ToastContainer position="bottom-right" hideProgressBar={true} pauseOnHover={true} newestOnTop={true} toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
 
                     <div style={{ float: 'right' }} className="user-details">
@@ -309,13 +306,11 @@ export class Explorer extends React.Component<{}, {}> {
                         <TableHeading />
                         <tbody>
                             {!this.state["FolderEmpty"] ?
-                                { rows }
+                                 rows 
                                 :
                                 <EmptyFolder />
                             }
-
-
-                        </tbody></table>}
+                     </tbody></table>}
 
                     {this.state["showPreviewModal"] &&
                         <FilePreviewModal PreviewFileName={this.state["PreviewFileName"]} PreviewUrl={this.state["PreviewUrl"]} closeModal={this.closePreviewModal}>
