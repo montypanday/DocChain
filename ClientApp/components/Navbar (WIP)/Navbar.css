@@ -1,4 +1,7 @@
-﻿.navbar-nav > li > a {
+﻿/*CSS RELATED TO THE ICONS AND LINKTEXT FOR BOX/GDRIVE/ONEDRIVE ETC IS IN THE components/SVGs/icons.css*/
+
+
+.navbar-nav > li > a {
     padding-right: 10px;
     padding-left: 10px;
     height: 50px;
