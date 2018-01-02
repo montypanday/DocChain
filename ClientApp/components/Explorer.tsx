@@ -26,6 +26,7 @@ import { Delete } from '../api/Box/Delete';
 import Dropzone from 'react-dropzone'
 import { Upload } from '../api/Box/Upload';
 import EmptyFolder from '../components/Alerts/EmptyFolder';
+require('../css/Explorers.css');
 
 export class Explorer extends React.Component<{}, {}> {
 

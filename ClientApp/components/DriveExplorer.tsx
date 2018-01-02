@@ -22,6 +22,7 @@ import { GDelete } from '../api/Google/GDelete';
 import { Upload } from '../api/Google/Upload';
 import EmptyFolder from '../components/Alerts/EmptyFolder';
 require('../css/ContextMenu.css');
+require('../css/Explorers.css');
 
 export class DriveExplorer extends React.Component<{}, {}> {
 
