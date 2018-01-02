@@ -38,13 +38,11 @@
 
 a:hover > .LinkText {
     display: block;
-    overflow: auto;
     clear: right;
 }
 
 .active > .LinkText {
     display: block;
-    overflow: auto;
     clear: right;
 }
 
