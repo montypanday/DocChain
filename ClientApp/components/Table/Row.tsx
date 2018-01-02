@@ -160,7 +160,9 @@ export class Row extends React.Component<AppProps, AppState> {
                         </ul>
                     </div>}
                 </td>
-                {this.props.type != 'folder' && <td className="col-xs-1 " style={{ verticalAlign: 'middle' }}><i className="fa fa-lock fa-2x"></i></td>}
+                <td className="col-xs-1 " style={{ verticalAlign: 'middle' }}>
+                    {this.props.type != 'folder' && <i className="fa fa-lock fa-2x"></i>}
+                </td>
                 <td className="col-xs-1 " style={{ verticalAlign: 'middle' }}>{this.props.size}</td>
                 <td className="col-xs-2 " style={{ verticalAlign: 'middle' }}>{this.props.lastModified}</td>
             </tr>
