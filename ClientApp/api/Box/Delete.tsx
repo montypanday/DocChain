@@ -1,4 +1,4 @@
-﻿import { Converter } from '../Helpers/Box Helpers/Converter';
+﻿
 
 
 export function Delete(type: string, id: string, currentFolderID: string) {
@@ -10,7 +10,7 @@ export function Delete(type: string, id: string, currentFolderID: string) {
             }
             return response.json()  //we only get here if there is no error)
         })
-        .then(data => {
-            return Converter(data);
-        });
+        //.then(data => {
+        //    return Converter(data);
+        //});
 }

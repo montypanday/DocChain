@@ -1,5 +1,7 @@
 ﻿import * as React from 'react';
 import { render } from 'react-dom';
+import { formatSizeUnits } from './FormatSize';
+
 require('./Dropdown.css');
 require('./fa-icons.css');
 
@@ -9,11 +11,11 @@ export interface AppProps {
     filename: string,
     size: string,
     lastModified: string,
-    downloadUrl: string,
+    
     navHandler: any
     id: any
     mimeType: any,
-    iconLink: any,
+   
     deleteHandler: any
 }
 
@@ -63,6 +65,13 @@ export class Row extends React.Component<AppProps, AppState> {
             "gif": "image-o",
             "GIF": "image-o",
             "cs": "code-o",
+            "js": "code-o",
+            "css": "code-o",
+            "php": "code-o",
+            "sql": "code-o",
+            "config": "code-o",
+            "html": "code-o",
+            "xml": "code-o",
             "zip": "archive-o",
             "flv": "video-o"
         }
@@ -144,7 +153,7 @@ export class Row extends React.Component<AppProps, AppState> {
                         <button className="btn btn-default dropdown-toggle" style={{ verticalAlign: 'middle' }} type="button" data-toggle="dropdown">...
                             </button>
                         <ul className="dropdown-menu">
-                            <li><a href={this.props.downloadUrl} download><i className="fa fa-download dropDownIcon" aria-hidden="true"></i>Download</a></li>
+                            <li><a href="#" download><i className="fa fa-download dropDownIcon" aria-hidden="true"></i>Download</a></li>
                             {this.props.type != 'folder' && <li><a onClick={this.props.navHandler} ><i className="fa fa-eye dropDownIcon" aria-hidden="true"></i>Preview</a></li>}
                             {this.props.id != "sharedWithMe" && < li > <a onClick={this.props.deleteHandler}><i className="fa fa-trash-o dropDownIcon" aria-hidden="true"></i>Delete</a></li>}
                             <li><a href="#"><i className="fa fa-pencil-square-o dropDownIcon" aria-hidden="true"></i>Rename</a></li>
@@ -161,7 +170,7 @@ export class Row extends React.Component<AppProps, AppState> {
                     </div>}
                 </td>
                 {this.props.type != 'folder' && <td className="col-xs-1 " style={{ verticalAlign: 'middle' }}><i className="fa fa-lock fa-2x"></i></td>}
-                <td className="col-xs-1 " style={{ verticalAlign: 'middle' }}>{this.props.size}</td>
+                <td className="col-xs-1 " style={{ verticalAlign: 'middle' }}>{formatSizeUnits(this.props.size)}</td>
                 <td className="col-xs-2 " style={{ verticalAlign: 'middle' }}>{this.props.lastModified}</td>
             </tr>
         );

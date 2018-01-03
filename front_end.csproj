@@ -46,7 +46,6 @@
     <!-- Files not to show in IDE -->
     <None Remove="ClientApp\api\Box\GetPreviewLink.tsx" />
     <None Remove="ClientApp\api\Box\SearchRoot.tsx" />
-    <None Remove="ClientApp\api\Helpers\FormatSize.tsx" />
     <None Remove="ClientApp\api\SearchRoot.tsx" />
     <None Remove="ClientApp\components\Alerts\EmptyFolder.tsx" />
     <None Remove="ClientApp\components\Alerts\EmptySearch.tsx" />
@@ -70,7 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\api\Box\GetPreviewLink.tsx" />
-    <TypeScriptCompile Include="ClientApp\api\Helpers\FormatSize.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Table\FormatSize.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Alerts\EmptySearch.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Alerts\EmptyFolder.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Alerts\LostConnect.tsx" />

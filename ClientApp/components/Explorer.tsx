@@ -1,30 +1,14 @@
 ﻿import * as React from 'react';
 import { render } from 'react-dom';
-import { LoadingGif } from '../components/loadingGif';
-import { SearchBar } from '../components/SearchBar';
-import { Row } from '../components/Table/Row';
+import { ButtonToolBar, Row, TableHeading } from './Table';
 import { Link, NavLink, Redirect } from "react-router-dom";
-import { BreadCrumb } from '../components/breadCrumb';
-import { formatSizeUnits } from '../api/Helpers/FormatSize';
-import { getPreviewLink } from '../api/Box/GetPreviewLink';
-import FilePreviewModal from '../components/Modals/FilePreviewModal';
-import TableHeading from '../components/Table/TableHeading';
-import FileRenameModal from '../components/Modals/RenameFileModal';
-import DeleteModal from '../components/Modals/DeleteModal';
-import NewFolderModal from '../components/Modals/NewFolderModal';
-import ShowShareLinkModal from '../components/Modals/ShowShareLinkModal';
-import { GetFolderItemsAsync } from '../api/Box/GetFolderItemsAsync';
-import ButtonToolBar from '../components/Table/ButtonToolbar';
+import { LoadingGif, SearchBar, BreadCrumb, BoxLogin } from '../components';
+import { FilePreviewModal, DeleteModal, NewFolderModal, ShowShareLinkModal, RenameFileModal } from './Modals';
+import { Search, Delete, Upload, GetFolderItemsAsync, getPreviewLink, CreateNewFolder } from '../api/Box';
 import { Alert } from 'react-bootstrap';
-import { BoxLogin } from '../components/BoxLogin';
 import AlertCollection from '../components/Alerts/AlertCollection';
-import { CreateNewFolder } from '../api/Box/CreateNewFolder';
 import { ToastContainer, toast } from 'react-toastify';
 import { css } from 'glamor';
-import { Search } from '../api/Box/Search';
-import { Delete } from '../api/Box/Delete';
-import Dropzone from 'react-dropzone'
-import { Upload } from '../api/Box/Upload';
 import EmptyFolder from '../components/Alerts/EmptyFolder';
 
 export class Explorer extends React.Component<{}, {}> {
@@ -75,72 +59,52 @@ export class Explorer extends React.Component<{}, {}> {
 
     componentDidMount() {
         GetFolderItemsAsync("0").then(newData => {
-            if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                let isEmpty = false;
-                if (newData.length == 0) {
-                    isEmpty = true;
-                }
-                this.setState({ filesarray: newData, loading: false, show401Alert: false, currentFolderID: "0", FolderEmpty: isEmpty });
-
-            }
+            let isEmpty = newData.length == 0 ? true : false;
+            this.setState({ filesarray: newData, loading: false, show401Alert: false, currentFolderID: "0", FolderEmpty: isEmpty });
         })
             .catch(function (error) {
-                console.log(error.status);
                 this.setState({ loading: false, filesarray: [], show401Alert: true });
             }.bind(this));
     }
 
     handleSearchBarChange(e) {
-        console.log("searching => " + e.target.value);
         this.setState({ query: e.target.value });
     }
 
     performSearch(e) {
-        if (this.state["query"] !== "") {
-            Search(this.state["query"]).then(newData => {
-                if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                    this.setState({ filesarray: newData, loading: false, pathCollection: [{ fileId: "0", Name: "All Files" }] });
-                }
-            });
-        }
-
+        this.state["query"] !== "" && Search(this.state["query"]).then(newData => {
+            this.setState({ filesarray: newData, loading: false, pathCollection: [{ fileId: "0", Name: "All Files" }] });
+        });
     }
 
     navigate(row, event) {
-        if (row.type == "folder") {
-            console.log("Navigated into folder ->" + row.fileName);
-            var newArray = this.state["pathCollection"];
-            var newArray2 = JSON.parse(JSON.stringify(newArray));
-            newArray2.push({ fileId: row.id, Name: row.fileName });
-            this.searchInFolder(row.id, newArray2);
-            return;
-        }
-        if (row.type == "file") {
-            getPreviewLink(row.id).then(link => {
-                console.log(link);
-                this.setState({ PreviewUrl: link, PreviewFileName: row.fileName, showPreviewModal: true })
-            }).catch(function (error) {
-                console.log(error);
-                toast.dismiss();
-                if (error.status == 415) {
-                    var a = toast.error("File Preview for this file format is not supported yet", { hideProgressBar: true, position: "bottom-right", onClose: () => toast.dismiss(a) });
-                }
-                else {
-                    alert(error);
-                }
-
-            }.bind(this));
-        }
-
+        var ToastIndex, newArray2;
+        row.type == "folder" ?
+            (
+                newArray2 = JSON.parse(JSON.stringify(this.state["pathCollection"])),
+                newArray2.push({ fileId: row.id, Name: row.fileName }),
+                this.searchInFolder(row.id, newArray2)
+            ) :
+            (
+                getPreviewLink(row.id).then(link => {
+                    this.setState({ PreviewUrl: link, PreviewFileName: row.fileName, showPreviewModal: true })
+                }).catch(function (error) {
+                    console.log(error);
+                    toast.dismiss();
+                    error.status == 415 ?
+                        (
+                            ToastIndex = toast.error("File Preview for this file format is not supported yet", { hideProgressBar: true, position: "bottom-right", onClose: () => toast.dismiss(ToastIndex) })
+                        ) :
+                        (alert(error))
+                }.bind(this))
+            )
     }
 
     navigateOut(e) {
         var coll = this.state['pathCollection'];
         var index;
         for (var i = 0; i < coll.length; i++) {
-            if (coll[i].fileId == e.fileId) {
-                index = i;
-            }
+            (coll[i].fileId == e.fileId) && (index = i);
         }
         coll.length = index + 1;
         var coll2 = JSON.parse(JSON.stringify(coll));
@@ -149,28 +113,20 @@ export class Explorer extends React.Component<{}, {}> {
 
     searchInFolder(id, newArray) {
         GetFolderItemsAsync(id).then(newData => {
-            if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                let isEmpty = false;
-                if (newData.length == 0) {
-                    isEmpty = true;
-                }
-                this.setState({ filesarray: newData, loading: false, pathCollection: newArray, currentFolderID: id, FolderEmpty: isEmpty });
-            }
+            let isEmpty = newData.length == 0 ? true : false;
+            this.setState({ filesarray: newData, loading: false, pathCollection: newArray, currentFolderID: id, FolderEmpty: isEmpty });
         });
     }
 
     NewFolderHandler(e) {
-        console.log("Let's open a modal to make new Folder");
         this.setState({ showNewFolderModal: true });
     }
 
     CloseNewFolderModalHandler(e) {
-        console.log("Closing New Folder Handler");
         this.setState({ showNewFolderModal: false });
     }
 
     createNewFolderHandler(newName) {
-        console.log("Creating New Folder with name -> " + newName);
         CreateNewFolder(this.state["currentFolderID"], newName)
             .then(newData => {
                 this.setState({ filesarray: newData, showNewFolderModal: false });
@@ -218,14 +174,9 @@ export class Explorer extends React.Component<{}, {}> {
     }
 
     deleteItem() {
-        console.log("id ->" + this.state["ToBeDeletedID"]);
-        console.log("type ->" + this.state["ToBeDeletedType"]);
         Delete(this.state["ToBeDeletedType"], this.state["ToBeDeletedID"], this.state["currentFolderID"])
             .then(newData => {
-                let isEmpty = false;
-                if (newData.length == 0) {
-                    isEmpty = true;
-                }
+                let isEmpty = newData.length == 0 ? true : false;
                 this.setState({ filesarray: newData, showDeleteModal: false, ToBeDeletedID: "", ToBeDeletedName: "", ToBeDeletedType: "", FolderEmpty: isEmpty });
                 toast.success("Deleted successfully!", { hideProgressBar: true });
             });
@@ -234,33 +185,22 @@ export class Explorer extends React.Component<{}, {}> {
     notify = () => toast.success("Folder created successfully!", { hideProgressBar: true });
 
     FileUploadHandler(files) {
-        var toastIndex;
+        var toastIndex, placeholder, formData, fileList;
         toast.dismiss();
-        toastIndex = toast.info("Uploading " + files.length + " files", { autoClose: false, hideProgressBar: true });
-        var formData = new FormData();
-
-        var fileList = files;
+        placeholder = files.length == 1 ? "file" : "files";
+        toastIndex = toast.info("Uploading " + files.length + " " + placeholder, { autoClose: false, hideProgressBar: true });
+        formData = new FormData();  1
+        fileList = files;
         for (var x = 0; x < fileList.length; x++) {
-            console.log(fileList.item(x));
             formData.append('file' + x, fileList.item(x));
         }
-        var a = ""
-        if (files.length == 1) {
-            a = "file";
-        }
-        else { a = "files"; }
         Upload(this.state["currentFolderID"], formData)
             .then(newData => {
-                if (JSON.stringify(newData) != JSON.stringify(this.state['filesarray'])) {
-                    let isEmpty = false;
-                    if (newData.length == 0) {
-                        isEmpty = true;
-                    }
-                    this.setState({ filesarray: newData, loading: false, FolderEmpty: isEmpty });
-                    toast.update(toastIndex, {
-                        autoClose: 5000, hideProgressBar: true, type: "success", render: "Successfully Uploaded " + files.length + " " + a
-                    });
-                }
+                let isEmpty = newData.length == 0 ? true : false;
+                this.setState({ filesarray: newData, loading: false, FolderEmpty: isEmpty });
+                toast.update(toastIndex, {
+                    autoClose: 5000, hideProgressBar: true, type: "success", render: "Successfully Uploaded " + files.length + " " + placeholder
+                });
             }).catch(function (error) {
                 console.log(error);
 
@@ -279,10 +219,9 @@ export class Explorer extends React.Component<{}, {}> {
         console.log("Explorer was rendered");
 
         if (this.state['loading'] === false) {
-            //this.getUser();
 
             var rows = this.state['filesarray'].map(function (row) {
-                return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} mimeType="" iconLink="" filename={row.fileName} size={row.size} lastModified={row.lastModified} downloadUrl={row.downloadUrl} deleteHandler={this.showDeleteModal.bind(null, row)}></Row>);
+                return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} mimeType="" filename={row.fileName} size={row.size} lastModified={row.lastModified}  deleteHandler={this.showDeleteModal.bind(null, row)}></Row>);
             }.bind(this));
 
             return (
@@ -300,24 +239,23 @@ export class Explorer extends React.Component<{}, {}> {
                             <strong>401 Unauthorized </strong> Please sign in first
                         </Alert>}
                     {this.state["show401Alert"] && <BoxLogin></BoxLogin>}
-
                     {!this.state["show401Alert"] && <BreadCrumb pathCollection={this.state["pathCollection"]} navigateOutHandler={this.navigateOut.bind(this)} />}
                     {!this.state["show401Alert"] && < table className="table table-striped table-hover table-responsive well header-fixed">
                         <TableHeading />
                         <tbody>
                             {!this.state["FolderEmpty"] ?
-                                 rows 
+                                rows
                                 :
                                 <EmptyFolder />
                             }
-                     </tbody></table>}
+                        </tbody></table>}
 
                     {this.state["showPreviewModal"] &&
                         <FilePreviewModal PreviewFileName={this.state["PreviewFileName"]} PreviewUrl={this.state["PreviewUrl"]} closeModal={this.closePreviewModal}>
                         </FilePreviewModal>}
                     {this.state["showRenameModal"] &&
-                        <FileRenameModal RenameFileName={this.state["RenameFileName"]} closeRenameModal={this.closeRenameFileModal}>
-                        </FileRenameModal>}
+                        <RenameFileModal RenameFileName={this.state["RenameFileName"]} closeRenameModal={this.closeRenameFileModal}>
+                    </RenameFileModal>}
                     {this.state["showDeleteModal"] &&
                         <DeleteModal fileName={this.state["ToBeDeletedName"]} id={this.state["ToBeDeletedId"]} type={this.state["ToBeDeletedType"]} closeHandler={this.closeDeleteModal} deleteActionHandler={this.deleteItem}>
                         </DeleteModal>}

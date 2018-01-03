@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -130,7 +129,7 @@ namespace front_end.Controllers
                     //request.ProgressChanged += Upload_ProgressChanged;
                     //request.ResponseReceived += Upload_ResponseReceived;
                     request.Upload();
-                    
+
                     Task.Run(() => { RecordFileAction(request.ResponseBody.Id, "Upload"); });
                 }
             }
@@ -186,20 +185,20 @@ namespace front_end.Controllers
             return GetGoogleFolderItems(service, currentFolderID);
         }
 
-        private GoogleContent[] ConvertToSend(IList<Google.Apis.Drive.v3.Data.File> files)
+        private Content[] ConvertToSend(IList<Google.Apis.Drive.v3.Data.File> files)
         {
-            GoogleContent[] list = new GoogleContent[files.Count];
+            Content[] list = new Content[files.Count];
             for (int i = 0; i < files.Count; i++)
             {
-                list[i] = new GoogleContent(
-                    files[i].Kind,
-                    files[i].Id,
-                    files[i].Name,
-                    files[i].Size.GetValueOrDefault().ToString(),
-                    files[i].Md5Checksum,
-                    files[i].ModifiedTime.ToString(),
-                    files[i].IconLink,
-                    files[i].MimeType);
+                Content cont = new Content();
+                cont.Type = files[i].MimeType == "application/vnd.google-apps.folder" ? "folder" : "file";
+                cont.Id = files[i].Id;
+                cont.FileName = files[i].Name;
+                cont.Size = files[i].Size.GetValueOrDefault().ToString();
+                cont.Hash = files[i].Md5Checksum;
+                cont.LastModified = files[i].ModifiedTime.ToString();
+                cont.MimeType = files[i].MimeType;
+                list[i] = cont;
             }
             return list;
         }
@@ -224,7 +223,7 @@ namespace front_end.Controllers
             }
 
             //request.Fields = @"files(*)";
-            request.Fields = @"files(id,name,kind,md5Checksum,modifiedTime,mimeType,iconLink,size)";
+            request.Fields = @"files(id,name,kind,md5Checksum,modifiedTime,mimeType,size)";
             IList<DriveData.File> files = request.Execute().Files;
             return Json(ConvertToSend(files));
         }
@@ -257,5 +256,13 @@ namespace front_end.Controllers
 
             fileActionService.RecordFileAction(action);
         }
+
+        [Route("GetPreview/{id}")]
+        [HttpGet]
+        public IActionResult GetPreview(string id)
+        {
+            return Json("https://docs.google.com/viewer?srcid=" + id + "&pid=explorer&efh=false&a=v&chrome=false&embedded=true");
+        }
+
     }
 }

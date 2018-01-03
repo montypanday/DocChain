@@ -72,14 +72,6 @@ namespace front_end.Controllers
                                 .Parse(file.ContentDisposition)
                                 .FileName
                                 .Trim('"');
-                //filename = hostingEnv.WebRootPath + $@"\{filename}";
-                //size += file.Length;
-                //using (FileStream fs = System.IO.File.Create(filename))
-                //{
-                //    file.CopyTo(fs);
-                //    fs.Flush();
-                //}
-
                 BoxFile newFile;
 
                 // Create request object with name and parent folder the file should be uploaded to
@@ -301,8 +293,7 @@ namespace front_end.Controllers
                     BoxFile.FieldSize,
                     BoxFolder.FieldModifiedAt,
                     BoxFile.FieldModifiedAt,
-                    
-                    
+                   
 
                     //BoxFolder.FieldCreatedAt,
                     //BoxFolder.FieldCreatedBy,
@@ -357,8 +348,6 @@ namespace front_end.Controllers
             cont.Size = boxFile.Size.ToString();
             cont.Hash = boxFile.Sha1;
             cont.LastModified = boxFile.ModifiedAt.ToString();
-            //cont.embedLink = boxFile.ExpiringEmbedLink.Url.ToString();
-            //cont.DownloadUrl = DownloadUrl;
             return cont;
         }
 

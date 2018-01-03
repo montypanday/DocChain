@@ -1,5 +1,4 @@
-﻿import { Converter } from '../Helpers/Box Helpers/Converter';
-
+﻿
 export function Search(query: string) {
     //this is the network call made everytime the page is reload, before the render method.
     return fetch("/api/Box/Search/" + query, { credentials: 'same-origin' })
@@ -7,8 +6,8 @@ export function Search(query: string) {
             if (!response.ok) { throw response; }
             return response.json()  //we only get here if there is no error)
         })
-        .then(data => {
-            return Converter(data);
-        });
+        //.then(data => {
+        //    return Converter(data);
+        //});
 }
 

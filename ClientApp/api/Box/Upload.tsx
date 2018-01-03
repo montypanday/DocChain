@@ -1,5 +1,4 @@
-﻿import { Converter } from '../Helpers/Box Helpers/Converter';
-
+﻿
 
 export function Upload(currentFolderID: string, formData: any) {
     return fetch('api/Box/Upload/' + currentFolderID, {
@@ -9,7 +8,8 @@ export function Upload(currentFolderID: string, formData: any) {
     }).then(response => {
         if (!response.ok) { throw response; }
         return response.json()  //we only get here if there is no error)
-    }).then(data => {
-        return Converter(data);
-    });
+    })
+        //.then(data => {
+        //    return Converter(data);
+        //});
 }

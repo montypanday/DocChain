@@ -1,4 +1,4 @@
-﻿import { Converter } from '../Helpers/Box Helpers/Converter';
+﻿
 
 export function GetFolderItemsAsync(id: string) {
     //this is the network call made everytime the page is reload, before the render method.
@@ -7,8 +7,8 @@ export function GetFolderItemsAsync(id: string) {
             if (!response.ok) { throw response; }
             return response.json()  //we only get here if there is no error)
         })
-        .then(data => {
-            return Converter(data);
-        });
+        //.then(data => {
+        //    return Converter(data);
+        //});
 }
 

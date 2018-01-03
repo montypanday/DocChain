@@ -43,12 +43,10 @@ namespace front_end.Models
         // To be verified for Box.
         // Box calls it modified_at, Drive calls it modifiedByMeDate
 
-        public string EmbedLink { get; set; }
-        //This link can be used to embed the file in a iframe.
-        //Search for the iframe tag, iframe tag can also be used inside a bootstrap modal, search for examples
-        //Called expiring_embed_link in box and embedLink in Drive.
+       
 
-        public string DownloadUrl { get; set; }
+     
+        public string MimeType { get; set; }
 
 
 

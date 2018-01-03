@@ -1,4 +1,4 @@
-﻿import { Converter } from '../Helpers/Box Helpers/Converter';
+﻿
 
 export function CreateNewFolder(parentID: string, newName: string) {
     return fetch("/api/Box/NewFolder/" + parentID + "/" + newName, { credentials: 'same-origin' })
@@ -7,9 +7,9 @@ export function CreateNewFolder(parentID: string, newName: string) {
                 alert(response.status + "=> " + response.statusText);
                 throw response;
             }
-            return response.json()  //we only get here if there is no error)
+            return response.json();  //we only get here if there is no error)
         })
-        .then(data => {
-            return Converter(data);
-        });
+        //.then(data => {
+        //    return Converter(data);
+        //});
 }
