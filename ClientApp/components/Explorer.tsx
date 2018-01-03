@@ -10,6 +10,7 @@ import AlertCollection from '../components/Alerts/AlertCollection';
 import { ToastContainer, toast } from 'react-toastify';
 import { css } from 'glamor';
 import EmptyFolder from '../components/Alerts/EmptyFolder';
+require('../css/Explorers.css');
 
 export class Explorer extends React.Component<{}, {}> {
 

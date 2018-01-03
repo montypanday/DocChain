@@ -23,6 +23,7 @@ namespace Database
                 Password = "Lincd"
             };
             connection = new MySqlConnection(connectionString.ToString());
+            Open();
         }
 
         public IDbConnection Get()
@@ -30,7 +31,7 @@ namespace Database
             return connection;
         }
 
-        public bool Open()
+        private bool Open()
         {
             try
             {
@@ -53,7 +54,7 @@ namespace Database
             }
         }
 
-        public bool Close()
+        private bool Close()
         {
             try
             {
@@ -65,6 +66,13 @@ namespace Database
                 Console.WriteLine(e.Message);
                 return false;
             }
+        }
+        
+
+        //Closing the database connection before the object is cleaned up by garbage collection
+        ~ConnectionProvider()
+        {
+            Close();
         }
     }
 }

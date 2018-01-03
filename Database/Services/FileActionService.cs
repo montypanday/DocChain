@@ -15,9 +15,7 @@ namespace Database.Services
         {
             try
             {
-                connection.Open();
                 connection.Get().Insert(action);
-                connection.Get().Close();
             }
             catch (MySqlException e)
             {
@@ -29,9 +27,7 @@ namespace Database.Services
         {
             try
             {
-                connection.Open();
                 connection.Get().Insert(actions);
-                connection.Get().Close();
             }
             catch (MySqlException e)
             {
@@ -45,7 +41,6 @@ namespace Database.Services
 
             try
             {
-                connection.Open();
                 string sql = "SELECT * FROM fileactions WHERE userid = @UserID";
                 var actions = connection.Get().Query<FileAction>(sql, new { UserID = userID }).AsList<FileAction>();
                 actions.ForEach(action => sortedActions.Add(action.ActionTime, action));
@@ -54,8 +49,6 @@ namespace Database.Services
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
-
-            connection.Get().Close();
             return sortedActions;
         }
     }
