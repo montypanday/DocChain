@@ -2,8 +2,8 @@
 import { render } from 'react-dom';
 import { formatSizeUnits } from './FormatSize';
 
-//require('./Dropdown.css');
-//require('./fa-icons.css');
+require('./Dropdown.css');
+require('./fa-icons.css');
 
 
 export interface AppProps {
