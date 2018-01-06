@@ -41,24 +41,32 @@ export class NavMenu extends React.Component<{}, {}> {
                         </li>
                         <li>
                             <NavLink to={"/explorer"} activeClassName="active">
-                                <BOXIcon/> <div className="LinkText">Box</div>                                
+                                <BOXIcon />
+                                <div className="LinkText"><div className="visible-md-block visible-lg-block">Box</div></div>
+                                <div className="visible-xs-block">Box</div>
                             </NavLink>
                         </li>
                         <li>
                             <NavLink to={"/driveExplorer"} activeClassName="active">
-                                <GDIcon /> <div className="LinkText">Google Drive</div>  
+                                <GDIcon />
+                                <div className="LinkText"><div className="visible-md-block visible-lg-block">Google Drive</div></div>
+                                <div className="visible-xs-block">Google Drive</div>
                             </NavLink>
 
                         </li>
                         <li>
                             <NavLink to={"/#"} activeClassName="active">
-                                <ODIcon /> <div className="LinkText">OneDrive</div> 
+                                <ODIcon />
+                                <div className="LinkText"><div className="visible-md-block visible-lg-block">OneDrive</div></div>
+                                <div className="visible-xs-block">OneDrive</div>
                             </NavLink>
 
                         </li>
                         <li>
                             <NavLink to={"/#"} activeClassName="active">
-                                <DBIcon /> <div className="LinkText">Dropbox</div> 
+                                <DBIcon />
+                                <div className="LinkText"><div className="visible-md-block visible-lg-block">Dropbox</div></div>
+                                <div className="visible-xs-block">Dropbox</div>
                             </NavLink>
 
                         </li>
@@ -85,3 +93,6 @@ export class NavMenu extends React.Component<{}, {}> {
         </div>;
     }
 }
+
+
+
