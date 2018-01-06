@@ -9,6 +9,7 @@ import {  GSearch, GNavigateIntoFolder, GDelete, Upload, GetPreview, GCreateNewF
 import { ToastContainer, toast } from 'react-toastify';
 import { css } from 'glamor';
 import EmptyFolder from '../components/Alerts/EmptyFolder';
+import * as utility from '../components/utility';
 require('../css/ContextMenu.css');
 require('../css/Explorers.css');
 
@@ -78,15 +79,9 @@ export class DriveExplorer extends React.Component<{}, {}> {
     }
 
     navigateOut(e) {
-        var coll = this.state['pathCollection'];
-        var index;
-        for (var i = 0; i < coll.length; i++) {
-            (coll[i].fileId == e.fileId) && (index = i);
-        }
-        coll.length = index + 1;
-        var coll2 = JSON.parse(JSON.stringify(coll));
-        this.searchInFolder(e.fileId, coll2);
+        this.searchInFolder(e.fileId, utility.navigateOutOmitArray(e.fileId, this.state['pathCollection']));
     }
+
 
     searchInFolder(fileID, newArray) {
         console.log("Searching in folder -> " + fileID);
