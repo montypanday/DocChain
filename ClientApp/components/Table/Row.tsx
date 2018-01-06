@@ -11,11 +11,9 @@ export interface AppProps {
     filename: string,
     size: string,
     lastModified: string,
-    
-    navHandler: any
-    id: any
+    navHandler: any,
+    id: any,
     mimeType: any,
-   
     deleteHandler: any
 }
 

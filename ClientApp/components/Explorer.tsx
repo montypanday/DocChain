@@ -10,6 +10,7 @@ import AlertCollection from '../components/Alerts/AlertCollection';
 import { ToastContainer, toast } from 'react-toastify';
 import { css } from 'glamor';
 import EmptyFolder from '../components/Alerts/EmptyFolder';
+import * as utility from '../components/utility';
 require('../css/Explorers.css');
 
 export class Explorer extends React.Component<{}, {}> {
@@ -102,14 +103,7 @@ export class Explorer extends React.Component<{}, {}> {
     }
 
     navigateOut(e) {
-        var coll = this.state['pathCollection'];
-        var index;
-        for (var i = 0; i < coll.length; i++) {
-            (coll[i].fileId == e.fileId) && (index = i);
-        }
-        coll.length = index + 1;
-        var coll2 = JSON.parse(JSON.stringify(coll));
-        this.searchInFolder(e.fileId, coll2);
+        this.searchInFolder(e.fileId, utility.navigateOutOmitArray(e.fileId, this.state['pathCollection']));
     }
 
     searchInFolder(id, newArray) {
@@ -190,7 +184,7 @@ export class Explorer extends React.Component<{}, {}> {
         toast.dismiss();
         placeholder = files.length == 1 ? "file" : "files";
         toastIndex = toast.info("Uploading " + files.length + " " + placeholder, { autoClose: false, hideProgressBar: true });
-        formData = new FormData();  1
+        formData = new FormData(); 1
         fileList = files;
         for (var x = 0; x < fileList.length; x++) {
             formData.append('file' + x, fileList.item(x));
@@ -222,7 +216,7 @@ export class Explorer extends React.Component<{}, {}> {
         if (this.state['loading'] === false) {
 
             var rows = this.state['filesarray'].map(function (row) {
-                return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} mimeType="" filename={row.fileName} size={row.size} lastModified={row.lastModified}  deleteHandler={this.showDeleteModal.bind(null, row)}></Row>);
+                return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} mimeType="" filename={row.fileName} size={row.size} lastModified={row.lastModified} deleteHandler={this.showDeleteModal.bind(null, row)}></Row>);
             }.bind(this));
 
             return (
@@ -256,7 +250,7 @@ export class Explorer extends React.Component<{}, {}> {
                         </FilePreviewModal>}
                     {this.state["showRenameModal"] &&
                         <RenameFileModal RenameFileName={this.state["RenameFileName"]} closeRenameModal={this.closeRenameFileModal}>
-                    </RenameFileModal>}
+                        </RenameFileModal>}
                     {this.state["showDeleteModal"] &&
                         <DeleteModal fileName={this.state["ToBeDeletedName"]} id={this.state["ToBeDeletedId"]} type={this.state["ToBeDeletedType"]} closeHandler={this.closeDeleteModal} deleteActionHandler={this.deleteItem}>
                         </DeleteModal>}
