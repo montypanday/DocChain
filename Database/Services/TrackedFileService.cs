@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Database.Services
 {
-    class TrackedFileService
+    public class TrackedFileService
     {
         private ConnectionProvider connection = new ConnectionProvider();
 

@@ -216,7 +216,7 @@ export class Explorer extends React.Component<{}, {}> {
         if (this.state['loading'] === false) {
 
             var rows = this.state['filesarray'].map(function (row) {
-                return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} mimeType="" filename={row.fileName} size={row.size} lastModified={row.lastModified} deleteHandler={this.showDeleteModal.bind(null, row)}></Row>);
+                return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} mimeType="" filename={row.fileName} size={row.size} lastModified={row.lastModified} deleteHandler={this.showDeleteModal.bind(null, row)} platform={"Box"}></Row>);
             }.bind(this));
 
             return (

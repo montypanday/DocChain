@@ -1,6 +1,7 @@
 ﻿import * as React from 'react';
 import { render } from 'react-dom';
 import { formatSizeUnits } from './FormatSize';
+import { CheckIfTracked } from '../../api/Chain/FileTracker';
 
 require('./Dropdown.css');
 require('./fa-icons.css');
@@ -14,7 +15,8 @@ export interface AppProps {
     navHandler: any,
     id: any,
     mimeType: any,
-    deleteHandler: any
+    deleteHandler: any,
+    platform: string
 }
 
 export interface AppState {
@@ -24,6 +26,7 @@ export class Row extends React.Component<AppProps, AppState> {
     constructor(props: AppProps) {
         super(props);
         this.state = {
+            isTracked: false
         }
     }
 
@@ -122,6 +125,18 @@ export class Row extends React.Component<AppProps, AppState> {
             },
             body: JSON.stringify(fileActionJson)
         })
+    }
+
+    componentDidMount() {
+        var isTracked = CheckIfTracked(this.props.id, this.props.platform)
+            .then(body => {
+                this.setState({ isTracked: body });
+                console.log("Row tracked: " + this.state["isTracked"]);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        this.setState({ isTracked: isTracked });
     }
 
     shouldComponentUpdate(nextProps) {

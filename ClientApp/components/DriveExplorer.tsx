@@ -174,7 +174,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
             // this .map function is like a foreach loop on filesarray, gives us a row object which has all the values that are related to a file object
             //rows is the variable which is being inserted into the render function at its given function see {rows} in render method.
             var rows = this.state['filesarray'].map(function (row) {
-                return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} mimeType={row.mimeType} filename={row.fileName} size={row.size} lastModified={row.lastModified} deleteHandler={this.showDeleteModal.bind(null, row)} ></Row>);
+                return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} mimeType={row.mimeType} filename={row.fileName} size={row.size} lastModified={row.lastModified} deleteHandler={this.showDeleteModal.bind(null, row)} platform={"Drive"}></Row>);
             }.bind(this));
 
             return (
