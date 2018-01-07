@@ -58,21 +58,20 @@ export class Faq extends React.Component<FAQProp, FAQState> {
                             </div>
                         </div>
 
-
                         <div className="faqHeader" style={big_font}>Main Function</div>
                         <div className="panel panel-default">
                             <div className="panel-heading">
                                 <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                    how to login?
+                                    How to login?
                         </a></h4>
                             </div>
                             <div id="collapseThree" className="panel-collapse collapse">
                                 <div className="panel-body">
                                     <strong>LINCD.com</strong> provide link service to 4 cloud storage providers: OneDrive, Google Drive, Dropbox, Box.
                           <ul>
-                                        <li>Click the Login and choose your storage providers.</li>
+                                        <li>Go to the <strong>"Account"</strong> page and choose your cloud storage providers.</li>
                                         <li>Follow the guide and permit the <strong>LINCD.com</strong>'s requirement of managing files in your storage.</li>
-                                        <li>Turn to the <strong>File Explorer</strong>.</li>
+                                        <li>Page will turn to Explorer of your cloud drive</li>
                                     </ul>
                                 </div>
                             </div>
