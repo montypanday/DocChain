@@ -6,6 +6,9 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
+using Database.Services;
+
+
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace front_end.Controllers
@@ -65,6 +68,36 @@ namespace front_end.Controllers
                 return true;
             }
             return false;
+        }
+
+        [Route("CheckIfTracked")]
+        [HttpGet]
+        public Boolean CheckIfTracked(string fileID, string platform)
+        {
+            TrackedFileService fileTracker = new TrackedFileService();
+
+            bool isTracked = fileTracker.CheckIfTracked(fileID, platform);
+            return isTracked;
+        }
+
+        [Route("TrackFile")]
+        [HttpPost]
+        public Boolean TrackFile(string fileID, string platform)
+        {
+            TrackedFileService fileTracker = new TrackedFileService();
+
+            bool request = fileTracker.TrackFile(fileID, platform);
+            return request;
+        }
+
+        [Route("UntrackFile")]
+        [HttpPost]
+        public Boolean UntrackFile(string fileID, string platform)
+        {
+            TrackedFileService fileTracker = new TrackedFileService();
+
+            bool request = fileTracker.TrackFile(fileID, platform);
+            return request;
         }
 
         /// <summary>

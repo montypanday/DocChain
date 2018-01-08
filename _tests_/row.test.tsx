@@ -7,7 +7,7 @@ import * as renderer from 'react-test-renderer';
 
 test('Link changes the class when hovered', () => {
     const testnavHandler = jest.fn();
-    const test_delete_hanler = jest.fn();
+    const test_delete_handler = jest.fn();
     const component = renderer.create(
         <Row filename="sample folder"
             id="43970020269"
@@ -17,16 +17,17 @@ test('Link changes the class when hovered', () => {
             type="folder"
             key="43970020269"
             navHandler={testnavHandler}
-            deleteHandler={test_delete_hanler}
+
             renameHandler=""
-            shareLinkHandler="" 
+            shareLinkHandler=""
+
+            deleteHandler={test_delete_handler}
+            platform={"testPlatform"}
+
         ></Row>,
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
-
-
-
 
     //// manually trigger the callback
     //tree.props.onMouseEnter();

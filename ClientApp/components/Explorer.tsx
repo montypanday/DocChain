@@ -244,15 +244,17 @@ export class Explorer extends React.Component<{}, {}> {
         console.log("Explorer was rendered");
 
         if (this.state['loading'] === false) {
-            var rows;
+         var rows;
             if (this.state["SearchEmpty"]) {
                 rows = <EmptySearch />;
             }
             else {
                 rows = this.state['filesarray'].map(function (row) {
-                    return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} mimeType="" filename={row.fileName} size={row.size} lastModified={row.lastModified} renameHandler={this.renameHandler.bind(null, row)} shareLinkHandler={this.shareLinkHandler.bind(null, row)} deleteHandler={this.showDeleteModal.bind(null, row)}></Row>);
+                    return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} mimeType="" filename={row.fileName} size={row.size} lastModified={row.lastModified} shareLinkHandler={this.shareLinkHandler.bind(null, row)} renameHandler={this.renameHandler.bind(null, row)} deleteHandler={this.showDeleteModal.bind(null, row)} platform={"Box"}></Row>);
                 }.bind(this));
             }
+
+
 
             return (
                 <div className="well well-lg pull-down">

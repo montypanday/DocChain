@@ -241,7 +241,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
             }
             else {
                 rows = this.state['filesarray'].map(function (row) {
-                    return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} mimeType={row.mimeType} filename={row.fileName} size={row.size} lastModified={row.lastModified} deleteHandler={this.showDeleteModal.bind(null, row)} shareLinkHandler="" renameHandler={this.renameHandler.bind(null, row)}></Row>);
+                    return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} mimeType={row.mimeType} filename={row.fileName} size={row.size} lastModified={row.lastModified} platform={"Drive"} deleteHandler={this.showDeleteModal.bind(null, row)} shareLinkHandler="" renameHandler={this.renameHandler.bind(null, row)}></Row>);
                 }.bind(this));
 
             }
