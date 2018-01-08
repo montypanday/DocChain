@@ -1,4 +1,5 @@
-﻿import * as React from 'react';
+﻿
+import * as React from 'react';
 import { Modal } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { FormGroup, FormControl } from 'react-bootstrap';
@@ -66,7 +67,7 @@ export default class NewFolderModal extends React.Component<NewFolderModalProps,
                     
                         <FormGroup>
                             <div className="input-group">
-                                <FormControl onChange={e => { this.setState({ InputValue: e.target.value }) }} onKeyPress={this.handleKeyPress.bind(this)} type="text" placeholder="Folder Name" />
+                                <FormControl onChange={e => { this.setState({ InputValue: e.target.value }) }} onKeyPress={this.handleKeyPress.bind(this)} type="text" autoFocus placeholder="Folder Name" />
                             </div>
                         </FormGroup>
                         {this.state["errorFound"] && <Alert bsStyle="warning" > <strong>Bad Name </strong>It cannot be empty and not have an extension</Alert>}

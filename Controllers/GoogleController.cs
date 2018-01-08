@@ -185,6 +185,51 @@ namespace front_end.Controllers
             return GetGoogleFolderItems(service, currentFolderID);
         }
 
+        [Route("GetPreview/{id}")]
+        [HttpGet]
+        public IActionResult GetPreview(string id)
+        {
+            return Json("https://docs.google.com/viewer?srcid=" + id + "&pid=explorer&efh=false&a=v&chrome=false&embedded=true");
+        }
+
+        [Route("Rename/{newName}/{uid}/{currentFolderID}/{type}")]
+        [HttpGet]
+        public IActionResult Rename(string newName, string uid, string currentFolderID, string type)
+        {
+
+            var service = GetService();
+            DriveData.File file = new DriveData.File()
+            { 
+                Name = newName
+            };
+            //if (type == "file")
+            //{
+            var request = service.Files.Update(file, uid);
+            var response = request.Execute();
+            return GetGoogleFolderItems(service, currentFolderID);
+            //BoxFile fileAfterRename = await client.FilesManager.UpdateInformationAsync(new BoxFileRequest() { Id = uid, Name = newName });
+            //}
+            //else if (type == "folder")
+            //{
+            //    //BoxFolder boxFolder = await client.FoldersManager.UpdateInformationAsync(new BoxFolderRequest() { Id = uid, Name = newName });
+            //}
+
+            //Task.Run(() => { RecordFileAction(client, uid, "Rename"); });
+            //return await GetBoxFolderItems(client, currentFolderID);
+
+        }
+
+        [Route("GetSharedLink/{type}/{id}")]
+        [HttpGet]
+        public IActionResult GetSharedLink(string type, string id)
+        {
+            var service = GetService();
+            var request = service.Files.Get(id);
+            var response = request.Execute();
+            return Json(response);
+
+        }
+
         private Content[] ConvertToSend(IList<Google.Apis.Drive.v3.Data.File> files)
         {
             Content[] list = new Content[files.Count];
@@ -257,12 +302,7 @@ namespace front_end.Controllers
             fileActionService.RecordFileAction(action);
         }
 
-        [Route("GetPreview/{id}")]
-        [HttpGet]
-        public IActionResult GetPreview(string id)
-        {
-            return Json("https://docs.google.com/viewer?srcid=" + id + "&pid=explorer&efh=false&a=v&chrome=false&embedded=true");
-        }
+
 
     }
 }

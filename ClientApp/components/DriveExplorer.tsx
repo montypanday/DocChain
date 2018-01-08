@@ -5,11 +5,13 @@ import { ContextMenu } from '../components/ContextMenu';
 import { LoadingGif, SearchBar, BreadCrumb, BoxLogin } from '../components';
 import { FilePreviewModal, DeleteModal, NewFolderModal, ShowShareLinkModal, RenameFileModal } from './Modals';
 import { ButtonToolBar, Row, TableHeading } from './Table';
-import {  GSearch, GNavigateIntoFolder, GDelete, Upload, GetPreview, GCreateNewFolder } from '../api/Google';
+import { GSearch, GNavigateIntoFolder, GDelete, Upload, GetPreview, GCreateNewFolder, GRename } from '../api/Google';
 import { ToastContainer, toast } from 'react-toastify';
 import { css } from 'glamor';
 import EmptyFolder from '../components/Alerts/EmptyFolder';
 import * as utility from '../components/utility';
+
+import { EmptySearch } from '../components/Alerts/EmptySearch';
 require('../css/ContextMenu.css');
 require('../css/Explorers.css');
 
@@ -27,7 +29,11 @@ export class DriveExplorer extends React.Component<{}, {}> {
         this.showDeleteModal = this.showDeleteModal.bind(this);
         this.closeDeleteModal = this.closeDeleteModal.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
+        this.renameHandler = this.renameHandler.bind(this);
+        this.closeRenameFileModal = this.closeRenameFileModal.bind(this);
+        this.submitRename = this.submitRename.bind(this);
         this.FileUploadHandler = this.FileUploadHandler.bind(this);
+        this.getSharedWithMeFolder = this.getSharedWithMeFolder.bind(this);
         this.state = {
             // This is space we will put the json response
             filesarray: {},
@@ -35,32 +41,63 @@ export class DriveExplorer extends React.Component<{}, {}> {
             loading: true,
             errorFound: false,
             errorMessage: "",
+
             PreviewUrl: "",
             PreviewFileName: "",
-            query: "",
             showPreviewModal: false,
+
+            query: "",
+
             pathCollection: [{ fileId: "root", Name: "All Files" }],
+
             currentFolderID: "",
             showNewFolderModal: false,
+
             ToBeDeletedName: "",
             ToBeDeletedID: "",
             ToBeDeletedType: "",
             showDeleteModal: false,
+
             FolderEmpty: false,
+
+            showRenameModal: false,
+            toBeRenameId: false,
+            toBeRenameType: "",
+            OldName: "",
+
+            SearchEmpty: false
+
+        }
+    }
+
+    getSharedWithMeFolder() {
+        return {
+            type: "folder",
+            id: "sharedWithMe",
+            fileName: "Shared with Me",
+            size: "-",
+            hash: "",
+            lastModified: "N/A",
+            embedLink: "",
+            downloadUrl: "",
+            mimeType: "application/vnd.google-apps.folder",
+            iconLink: ""
         }
     }
 
     componentDidMount() {
         GNavigateIntoFolder('root').then(newData => {
+            newData.unshift(this.getSharedWithMeFolder());
             let isEmpty = newData.length == 0 ? true : false;
-            this.setState({ filesarray: newData, loading: false, currentFolderID: "root", FolderEmpty: isEmpty });
+            this.setState({ filesarray: newData, loading: false, currentFolderID: "root", FolderEmpty: isEmpty, SearchEmpty: false });
         });
     }
 
     performSearch(e) {
         this.state["query"] !== "" &&
             GSearch(this.state["query"]).then(newData => {
-                this.setState({ filesarray: newData, loading: false, pathCollection: [{ fileId: "root", Name: "All Files" }] });
+                let isSearchEmpty = newData.length == 0 ? true : false;
+                this.setState({ filesarray: newData, loading: false, SearchEmpty: isSearchEmpty, pathCollection: [{ fileId: "root", Name: "All Files" }] });
             });
     }
 
@@ -86,8 +123,10 @@ export class DriveExplorer extends React.Component<{}, {}> {
     searchInFolder(fileID, newArray) {
         console.log("Searching in folder -> " + fileID);
         GNavigateIntoFolder(fileID).then(newData => {
+            this.setState({ currentFolderID: fileID });
+            this.state["currentFolderID"] == "root" && newData.unshift(this.getSharedWithMeFolder());
             let isEmpty = newData.length == 0 ? true : false;
-            this.setState({ filesarray: newData, loading: false, pathCollection: newArray, currentFolderID: fileID, FolderEmpty: isEmpty });
+            this.setState({ filesarray: newData, loading: false, pathCollection: newArray, FolderEmpty: isEmpty, SearchEmpty: false });
         });
     }
 
@@ -112,7 +151,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
         GCreateNewFolder(this.state["currentFolderID"], newName)
             .then(newData => {
                 let isEmpty = newData.length == 0 ? true : false;
-                this.setState({ filesarray: newData, showNewFolderModal: false, FolderEmpty: isEmpty });
+                this.setState({ filesarray: newData, showNewFolderModal: false, FolderEmpty: isEmpty, SearchEmpty: false});
                 toast.success("Folder created successfully!", { hideProgressBar: true });
             });
     }
@@ -151,7 +190,7 @@ export class DriveExplorer extends React.Component<{}, {}> {
         Upload(this.state["currentFolderID"], formData)
             .then(newData => {
                 let isEmpty = newData.length == 0 ? true : false;
-                this.setState({ filesarray: newData, loading: false, FolderEmpty: isEmpty });
+                this.setState({ filesarray: newData, loading: false, FolderEmpty: isEmpty, SearchEmpty: false });
                 toast.update(toastIndex, {
                     autoClose: 5000, hideProgressBar: true, type: "success", render: "Successfully Uploaded " + files.length + " " + a
                 });
@@ -169,13 +208,45 @@ export class DriveExplorer extends React.Component<{}, {}> {
             }.bind(this));
     }
 
+    closeRenameFileModal() {
+        this.setState({ showRenameModal: false, toBeRenameId: "", OldName: "", toBeRenameType: "" });
+    }
+
+    submitRename(newName) {
+        //console.log("Rename will happen here ==>>>>>> "+newName.toString());
+        GRename(this.state["toBeRenameId"], newName, this.state["currentFolderID"], this.state["toBeRenameType"])
+            .then(newData => {
+                this.setState({ filesarray: newData, showRenameModal: false });
+                toast.success("Item Renamed Successfully!", { hideProgressBar: true });
+
+            })
+            .catch(function (error) {
+                this.setState({ toBeRenameId: "", showRenameModal: false, OldName: "", toBeRenameType: "" });
+                toast.error("Rename Failed");
+            }.bind(this));
+    }
+
+    renameHandler(row, event) {
+        //Rename()
+        console.log(row);
+        this.setState({ showRenameModal: true, toBeRenameId: row.id, OldName: row.fileName, toBeRenameType: row.type });
+    }
+
     public render() {
+
         if (this.state['loading'] === false) {
+            var rows;
+            if (this.state["SearchEmpty"]) {
+                rows = <EmptySearch />;
+            }
+            else {
+                rows = this.state['filesarray'].map(function (row) {
+                    return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} mimeType={row.mimeType} filename={row.fileName} size={row.size} lastModified={row.lastModified} deleteHandler={this.showDeleteModal.bind(null, row)} shareLinkHandler="" renameHandler={this.renameHandler.bind(null, row)}></Row>);
+                }.bind(this));
+
+            }
             // this .map function is like a foreach loop on filesarray, gives us a row object which has all the values that are related to a file object
             //rows is the variable which is being inserted into the render function at its given function see {rows} in render method.
-            var rows = this.state['filesarray'].map(function (row) {
-                return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} mimeType={row.mimeType} filename={row.fileName} size={row.size} lastModified={row.lastModified} deleteHandler={this.showDeleteModal.bind(null, row)} ></Row>);
-            }.bind(this));
 
             return (
                 <div className="well well-lg pull-down">
@@ -196,12 +267,15 @@ export class DriveExplorer extends React.Component<{}, {}> {
                             }
                         </tbody>
                     </table>
+                    {this.state["showRenameModal"] &&
+                        <RenameFileModal oldFileName={this.state["OldName"]} newFileNameHandler={this.submitRename} closeRenameModal={this.closeRenameFileModal}>
+                        </RenameFileModal>}
                     {this.state["showPreviewModal"] && <FilePreviewModal PreviewFileName={this.state["PreviewFileName"]} PreviewUrl={this.state["PreviewUrl"]} closeModal={this.closePreviewModal}></FilePreviewModal>}
                     {this.state["showNewFolderModal"] && <NewFolderModal closeHandler={this.CloseNewFolderModalHandler} createFolderHandler={this.createNewFolderHandler} ></NewFolderModal>}
                     {this.state["showDeleteModal"] && <DeleteModal fileName={this.state["ToBeDeletedName"]} id={this.state["ToBeDeletedId"]} type={this.state["ToBeDeletedType"]} closeHandler={this.closeDeleteModal} deleteActionHandler={this.deleteItem}></DeleteModal>}
                 </div>
             );
-        } else
+        } else {
             // determine if that loading is finished and render accordinglyf
             return (
                 <div className="loadingGif">
@@ -209,5 +283,6 @@ export class DriveExplorer extends React.Component<{}, {}> {
                     <p>Loading...</p>
                 </div>
             );
+        }
     }
 }

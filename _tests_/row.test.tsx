@@ -1,4 +1,6 @@
-﻿import * as React from 'react';
+﻿
+
+import * as React from 'react';
 import { Row } from '../ClientApp/components/Table/Row';
 import * as renderer from 'react-test-renderer';
 
@@ -16,10 +18,13 @@ test('Link changes the class when hovered', () => {
             key="43970020269"
             navHandler={testnavHandler}
             deleteHandler={test_delete_hanler}
+            renameHandler=""
+            shareLinkHandler="" 
         ></Row>,
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
+
 
 
 

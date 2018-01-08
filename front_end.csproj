@@ -7,6 +7,9 @@
     <StartupObject>front_end.Program</StartupObject>
     <UserSecretsId>8e341a53-9148-4882-bb14-172c1bb76120</UserSecretsId>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp2.0\front_end.xml</DocumentationFile>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Database\**" />
     <Compile Remove="Migration\**" />

@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.Swagger;
+using System.IO;
 
 namespace front_end
 {
@@ -44,6 +46,11 @@ namespace front_end
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "DocChain API", Version = "v1" });
+
+                // this code adds swagger descriptions using summary tags.
+                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                var xmlPath = Path.Combine(basePath, "front_end.xml");
+                c.IncludeXmlComments(xmlPath);
             });
         }
 

@@ -1,4 +1,5 @@
-﻿import * as React from 'react';
+﻿
+import * as React from 'react';
 import { Modal } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 
@@ -44,7 +45,7 @@ export default class FilePreviewModal extends React.Component<AppProps, AppState
                     Are you sure you want to delete this item?
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button bsStyle="primary" disabled={isLoading} onClick={!isLoading ? this.handleClick : null}>
+                    <Button bsStyle="primary" disabled={isLoading} autoFocus onClick={!isLoading ? this.handleClick : null}>
                         {isLoading ? 'Loading...' : 'Delete'}
                         
                         </Button>

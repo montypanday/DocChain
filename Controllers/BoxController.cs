@@ -20,7 +20,9 @@ using System.IO;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Hosting;
 using Box.V2.Exceptions;
-#endregion 
+using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Net;
+#endregion
 
 namespace front_end.Controllers
 {
@@ -41,24 +43,45 @@ namespace front_end.Controllers
             this.hostingEnv = env;
         }
 
+        /// <summary>
+        /// Authenticates the user, exchange authorization code with access and refresh token and produce encrypted cookie.
+        /// </summary>
+        /// <param name="code"></param>
+        ///  <response code="400">Error model</response>
         [Route("Authenticate")]
         [HttpGet]
-        public async Task<LocalRedirectResult> Authenticate(string code)
+        public async Task<IActionResult> Authenticate(string code)
         {
-            BoxClient client = GetClient();
-            OAuthSession Oauth = await client.Auth.AuthenticateAsync(code);
-            CookieOptions options = new CookieOptions
+            try
             {
-                Path = "/api/Box",
-                Expires = DateTime.Now.AddDays(1),
-                HttpOnly = true
-            };
+                BoxClient client = GetClient();
+                OAuthSession Oauth = await client.Auth.AuthenticateAsync(code);
+                CookieOptions options = new CookieOptions
+                {
+                    Path = "/api/Box",
+                    Expires = DateTime.Now.AddDays(1),
+                    HttpOnly = true
+                };
 
-            Response.Cookies.Append("boxCred", _protector.Protect(JsonConvert.SerializeObject(Oauth)), options);
-            _logger.LogInformation("Authenticated user using Authorization code => " + code);
-            return LocalRedirect("/explorer");
+                Response.Cookies.Append("boxCred", _protector.Protect(JsonConvert.SerializeObject(Oauth)), options);
+                _logger.LogInformation("Authenticated user using Authorization code => " + code);
+                return LocalRedirect("/explorer");
+            }
+            catch (BoxException exp)
+            {
+                var a = new { code = exp.StatusCode, message = JsonConvert.DeserializeObject(exp.Message) };
+                return Json(a);
+            }
         }
 
+
+        /// <summary>
+        /// Upload received files and give back updated files inside the current folder.
+        /// </summary>
+        /// <param name="currentFolderID"></param>
+        /// <returns></returns>
+        [Produces("application/json")]
+        [SwaggerResponse((int)(HttpStatusCode.OK), Type = typeof(Content[]))]
         [Route("Upload/{currentFolderID}")]
         [HttpPost]
         public async Task<IActionResult> Upload(string currentFolderID)
@@ -101,6 +124,12 @@ namespace front_end.Controllers
 
         }
 
+        /// <summary>
+        /// Get files and folders inside the folder with given id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Produces("application/json")]
         [Route("GetFolderItems/{id}")]
         [HttpGet]
         public async Task<IActionResult> GetFolderItems(string id)
@@ -126,6 +155,12 @@ namespace front_end.Controllers
 
         }
 
+        /// <summary>
+        /// Run a search query to search for files and folders.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        [Produces("application/json")]
         [Route("Search/{query}")]
         [HttpGet]
         public async Task<IActionResult> Search(string query)
@@ -136,6 +171,12 @@ namespace front_end.Controllers
             return Json(GetCustomCollection(boxCollection));
         }
 
+        /// <summary>
+        /// Get Preview Link for the file with given id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Produces("application/json")]
         [Route("GetPreview/{id}")]
         [HttpGet]
         public async Task<IActionResult> GetPreview(string id)
@@ -155,20 +196,47 @@ namespace front_end.Controllers
 
         }
 
-        [Route("Rename/{id}/{newName}")]
-        [HttpPost]
-        public async Task<Boolean> RenameFile(string id, string newName)
+        /// <summary>
+        /// Rename the file/folder and give back updates items in the currently open folder.
+        /// </summary>
+        /// <param name="newName"></param>
+        /// <param name="uid"></param>
+        /// <param name="currentFolderID"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        [Produces("application/json")]
+        [Route("Rename/{newName}/{uid}/{currentFolderID}/{type}")]
+        [HttpGet]
+        public async Task<IActionResult> Rename(string newName, string uid, string currentFolderID, string type)
         {
-            var client = Initialise();
-            BoxFile fileAfterRename = await client.FilesManager.UpdateInformationAsync(new BoxFileRequest() { Name = newName });
-            if (fileAfterRename.Name == newName)
+            try
             {
-                Task.Run(() => { RecordFileAction(client, id, "Rename"); });
-                return true;
+                var client = Initialise();
+                if (type == "file")
+                {
+                    BoxFile fileAfterRename = await client.FilesManager.UpdateInformationAsync(new BoxFileRequest() { Id = uid, Name = newName });
+                }
+                else if(type == "folder")
+                {
+                    BoxFolder boxFolder = await client.FoldersManager.UpdateInformationAsync(new BoxFolderRequest() { Id = uid, Name = newName });
+                }
+
+                Task.Run(() => { RecordFileAction(client, uid, "Rename"); });
+                return await GetBoxFolderItems(client, currentFolderID);
             }
-            return false;
+            catch (BoxException exp)
+            {
+                return StatusCode(Convert.ToInt32(exp.StatusCode));
+            }
         }
 
+        /// <summary>
+        /// Get Shared link for a file/folder.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Produces("application/json")]
         [Route("GetSharedLink/{type}/{id}")]
         [HttpGet]
         public async Task<JsonResult> GetSharedLink(string type, string id)
@@ -183,13 +251,21 @@ namespace front_end.Controllers
                 //Logging action to Database
                 Task.Run(() => { RecordFileAction(client, id, "Share Link"); });
 
-                return Json(file);
+                return Json(file.SharedLink.Url);
             }
             var folder = await client.FoldersManager.CreateSharedLinkAsync(id, request);
             _logger.LogInformation("Getting Shared link for Folder =>" + id);
-            return Json(folder);
+            return Json(folder.SharedLink.Url);
         }
 
+        /// <summary>
+        /// Delete a file/folder and give back updated items in currently open folder.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="id"></param>
+        /// <param name="currentFolderID"></param>
+        /// <returns></returns>
+        [Produces("application/json")]
         [Route("Delete/{type}/{id}/{currentFolderID}")]
         [HttpGet]
         public async Task<IActionResult> Delete(string type, string id, string currentFolderID)
@@ -209,25 +285,29 @@ namespace front_end.Controllers
             return await GetBoxFolderItems(client, currentFolderID);
 
         }
-        //public async Boolean Delete(string ID)
-        //{
 
-        //}
-
-        //public async JsonResult Share(string ID)
-        //{
-
-        //}
-
+        /// <summary>
+        /// Download the file with the given id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("Download/{type}/{id}")]
         [HttpGet]
         public async Task<Uri> DownloadFile(string id)
         {
             var client = Initialise();
             Task.Run(() => { RecordFileAction(client, id, "Download"); });
+            //TODO: download file as a stream rather than a URL link.
             return await client.FilesManager.GetDownloadUriAsync(id);
         }
 
+        /// <summary>
+        /// Create a new folder with the given name inside the given folder id.
+        /// </summary>
+        /// <param name="parentID"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        [Produces("application/json")]
         [Route("NewFolder/{parentID}/{name}")]
         [HttpGet]
         public async Task<IActionResult> NewFolder(string parentID, string name)
@@ -237,6 +317,24 @@ namespace front_end.Controllers
             var resp = await client.FoldersManager.CreateAsync(
                 new BoxFolderRequest() { Name = name, Parent = new BoxRequestEntity() { Id = parentID } });
             return await GetBoxFolderItems(client, parentID);
+        }
+
+        /// <summary>
+        /// Log out the user by deleting the Cookie.
+        /// </summary>
+        /// <returns></returns>
+        [Route("Logout")]
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            CookieOptions options = new CookieOptions
+            {
+                Path = "/api/Box",
+                Expires = DateTime.Now.AddDays(-1),
+                HttpOnly = true
+            };
+            Response.Cookies.Append("boxCred", "", options);
+            return StatusCode(200);
         }
 
         private BoxClient Initialise()
@@ -293,7 +391,7 @@ namespace front_end.Controllers
                     BoxFile.FieldSize,
                     BoxFolder.FieldModifiedAt,
                     BoxFile.FieldModifiedAt,
-                   
+
 
                     //BoxFolder.FieldCreatedAt,
                     //BoxFolder.FieldCreatedBy,
@@ -384,20 +482,6 @@ namespace front_end.Controllers
                 HttpOnly = true
             };
             Response.Cookies.Append("boxCred", _protector.Protect(JsonConvert.SerializeObject(e.Session)), options);
-        }
-
-        [Route("Logout")]
-        [HttpGet]
-        public IActionResult Logout()
-        {
-            CookieOptions options = new CookieOptions
-            {
-                Path = "/api/Box",
-                Expires = DateTime.Now.AddDays(-1),
-                HttpOnly = true
-            };
-            Response.Cookies.Append("boxCred", "", options);
-            return StatusCode(200);
         }
 
         private async Task<Content> GetBoxItem(BoxClient client, string ID)

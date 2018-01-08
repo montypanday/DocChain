@@ -5,4 +5,6 @@ import { GDelete } from './GDelete';
 import { Upload } from './Upload';
 import { GetPreview } from './GetPreview';
 import { GCreateNewFolder } from './GCreateNewFolder';
-export { GSearch, GNavigateIntoFolder, GDelete, Upload, GetPreview, GCreateNewFolder }
+import { GRename } from './GRename';
+
+export { GSearch, GNavigateIntoFolder, GDelete, Upload, GetPreview, GCreateNewFolder, GRename }

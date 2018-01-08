@@ -2,7 +2,7 @@
 import { EmptySearchIcon } from '../SVGs/icon-EmptySearch';
 require('./ErrorSplash.css');
 
-export default class EmptySearch extends React.Component {
+export class EmptySearch extends React.Component {
 
     public render() {
         return <div className="splash inTbody">

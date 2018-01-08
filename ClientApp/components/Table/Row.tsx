@@ -2,8 +2,8 @@
 import { render } from 'react-dom';
 import { formatSizeUnits } from './FormatSize';
 
-require('./Dropdown.css');
-require('./fa-icons.css');
+//require('./Dropdown.css');
+//require('./fa-icons.css');
 
 
 export interface AppProps {
@@ -14,7 +14,9 @@ export interface AppProps {
     navHandler: any,
     id: any,
     mimeType: any,
-    deleteHandler: any
+    deleteHandler: any,
+    renameHandler: any,
+    shareLinkHandler:any
 }
 
 export interface AppState {
@@ -154,8 +156,8 @@ export class Row extends React.Component<AppProps, AppState> {
                             <li><a href="#" download><i className="fa fa-download dropDownIcon" aria-hidden="true"></i>Download</a></li>
                             {this.props.type != 'folder' && <li><a onClick={this.props.navHandler} ><i className="fa fa-eye dropDownIcon" aria-hidden="true"></i>Preview</a></li>}
                             {this.props.id != "sharedWithMe" && < li > <a onClick={this.props.deleteHandler}><i className="fa fa-trash-o dropDownIcon" aria-hidden="true"></i>Delete</a></li>}
-                            <li><a href="#"><i className="fa fa-pencil-square-o dropDownIcon" aria-hidden="true"></i>Rename</a></li>
-                            <li><a href="#"><i className="fa fa-share dropDownIcon" aria-hidden="true"></i>Share</a></li>
+                            <li><a onClick={this.props.renameHandler}><i className="fa fa-pencil-square-o dropDownIcon" aria-hidden="true"></i>Rename</a></li>
+                            <li><a onClick={this.props.shareLinkHandler}><i className="fa fa-share dropDownIcon" aria-hidden="true"></i>Share</a></li>
 
                             {this.props.type != 'folder' && <li className="divider"></li>}
                             {this.props.type != 'folder' && <li><a href="#"><i className="fa fa-database dropDownIcon" aria-hidden="true"></i>Get Document Trail</a></li>}

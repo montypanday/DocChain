@@ -1,7 +1,8 @@
-﻿export function Rename(id:string, newName: string) {
-    return fetch("api/Box/Rename/" + id + "/" + newName, { credentials: 'same-origin' })
+﻿export function Rename(id: string, newName: string, currentFolderID: string, toBeRenameType:string) {
+    return fetch("api/Box/Rename/" + newName + "/" + id + "/" + currentFolderID + "/" + toBeRenameType, { credentials: 'same-origin' })
         .then(response => {
-            if (!response.ok) { alert(response.status + "=> " + response.statusText) }
-            return response.text()  //we only get here if there is no error)
+            if (!response.ok) { throw response; }
+            
+            return response.json(); //we only get here if there is no error)
         });
 }

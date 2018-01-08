@@ -4,10 +4,7 @@ export function Search(query: string) {
     return fetch("/api/Box/Search/" + query, { credentials: 'same-origin' })
         .then(response => {
             if (!response.ok) { throw response; }
-            return response.json()  //we only get here if there is no error)
-        })
-        //.then(data => {
-        //    return Converter(data);
-        //});
+            return response.json();  //we only get here if there is no error)
+        });
 }
 

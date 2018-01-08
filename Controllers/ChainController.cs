@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,10 +23,7 @@ namespace front_end.Controllers
         /// </summary>
         public IConfiguration Configuration { get => _configuration; set => _configuration = value; }
 
-        public ChainController(IConfiguration config)
-        {
-            Configuration = config;
-        }
+        public ChainController(IConfiguration config) => Configuration = config;
 
         /// <summary>
         /// Get method is used to verify something exist in Blockchain.
@@ -63,7 +60,7 @@ namespace front_end.Controllers
             HttpContent content = new StringContent("jsonstring");
             HttpClient client = GetHTTPClient();
             HttpResponseMessage response = await client.PutAsync(Configuration["ChainURL"] + hash, content);
-            if(response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
                 return true;
             }
