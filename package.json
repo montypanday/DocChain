@@ -51,7 +51,6 @@
   },
   "jest": {
     "verbose": true,
-    
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },

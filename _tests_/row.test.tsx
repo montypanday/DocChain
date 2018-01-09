@@ -1,11 +1,9 @@
-﻿
-
-import * as React from 'react';
-import { Row } from '../ClientApp/components/Table/Row';
-import * as renderer from 'react-test-renderer';
+﻿import * as React from "react";
+import { Row } from "../ClientApp/components/Table/Row";
+import * as renderer from "react-test-renderer";
 
 
-test('Link changes the class when hovered', () => {
+test("Link changes the class when hovered", () => {
     const testnavHandler = jest.fn();
     const test_delete_handler = jest.fn();
     const component = renderer.create(

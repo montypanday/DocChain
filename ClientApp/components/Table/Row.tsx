@@ -1,30 +1,31 @@
-﻿import * as React from 'react';
-import { render } from 'react-dom';
-import { formatSizeUnits } from './FormatSize';
-import { CheckIfTracked } from '../../api/Chain/FileTracker';
+﻿import * as React from "react";
+import { render } from "react-dom";
+import { formatSizeUnits } from "./FormatSize";
+import { CheckIfTracked } from "../../api/Chain/FileTracker";
 
 //require('./Dropdown.css');
 //require('./fa-icons.css');
 
 
 export interface AppProps {
-    type: string,
-    filename: string,
-    size: string,
-    lastModified: string,
-    navHandler: any,
-    id: any,
-    mimeType: any,
-    deleteHandler: any,
+    type: string;
+    filename: string;
+    size: string;
+    lastModified: string;
+    navHandler: any;
+    id: any;
+    mimeType: any;
+    deleteHandler: any;
 
-    renameHandler: any,
-    shareLinkHandler:any
+    renameHandler: any;
+    shareLinkHandler: any;
 
-    platform: string
+    platform: string;
 
 }
 
 export interface AppState {
+    isTracked: any
 }
 
 export class Row extends React.Component<AppProps, AppState> {
@@ -32,14 +33,13 @@ export class Row extends React.Component<AppProps, AppState> {
         super(props);
         this.state = {
             isTracked: false
-        }
+        };
     }
 
     getFileExtension(filename) {
         try {
             return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
-        }
-        catch{
+        } catch {
             return "";
         }
     }
@@ -80,7 +80,7 @@ export class Row extends React.Component<AppProps, AppState> {
             "xml": "code-o",
             "zip": "archive-o",
             "flv": "video-o"
-        }
+        };
 
         const GoogleFormatDictionary = {
             "application/vnd.google-apps.spreadsheet": "fa fa-2x fa-file-excel-o",
@@ -92,7 +92,7 @@ export class Row extends React.Component<AppProps, AppState> {
             "application/vnd.google-apps.form": "fa fa-2x fa-wpforms",
             "application/vnd.google-apps.site": "fa fa-2x fa-html5",
             "image/jpeg": "fa fa-2x fa-file-picture-o"
-        }
+        };
 
         if (FormatDictinary[extension]) {
             return "fa fa-2x fa-file-" + FormatDictinary[extension];
@@ -120,27 +120,27 @@ export class Row extends React.Component<AppProps, AppState> {
                 "UserID": "22222222",
                 "ActionType": "Test Action"
             }
-        }
+        };
 
-        fetch('https://localhost:44374/api/FileAction/LogAction', {
-            method: 'POST',
+        fetch("https://localhost:44374/api/FileAction/LogAction", {
+            method: "POST",
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
+                "Accept": "application/json",
+                "Content-Type": "application/json",
             },
             body: JSON.stringify(fileActionJson)
-        })
+        });
     }
 
     componentDidMount() {
         var isTracked = CheckIfTracked(this.props.id, this.props.platform)
             .then(body => {
                 this.setState({ isTracked: body });
-                console.log("Row tracked: " + this.state["isTracked"]);
+                console.log("Row tracked: " + this.state.isTracked);
             })
             .catch(error => {
                 console.log(error);
-            })
+            });
         this.setState({ isTracked: isTracked });
     }
 
@@ -157,43 +157,43 @@ export class Row extends React.Component<AppProps, AppState> {
         var a = this.getFileExtension(this.props.filename);
         var iconClass = this.getIconClass(a, this.props.mimeType);
         var icon;
-        icon = <span className={iconClass} style={{ verticalAlign: 'middle', float: 'left', fontSize: '2em' }}></span>;
+        icon = <span className={iconClass} style={{ verticalAlign: "middle", float: "left", fontSize: "2em" }}></span>;
         return (
             <tr>
                 <td className="col-xs-6 " >
-                    <a onClick={this.props.navHandler} style={{ cursor: 'pointer' }}>
+                    <a onClick={this.props.navHandler} style={{ cursor: "pointer" }}>
                         {icon}
-                        <h5 style={{ float: 'left', paddingLeft: '15px' }}>{this.props.filename}</h5>
+                        <h5 style={{ float: "left", paddingLeft: "15px" }}>{this.props.filename}</h5>
                     </a>
                 </td>
                 <td className="col-xs-1 ">
                     {this.props.id != "sharedWithMe" && <div className="dropdown">
-                        <button className="btn btn-default dropdown-toggle" style={{ verticalAlign: 'middle' }} type="button" data-toggle="dropdown">...
+                        <button className="btn btn-default dropdown-toggle" style={{ verticalAlign: "middle" }} type="button" data-toggle="dropdown">...
                             </button>
                         <ul className="dropdown-menu">
                             <li><a href="#" download><i className="fa fa-download dropDownIcon" aria-hidden="true"></i>Download</a></li>
-                            {this.props.type != 'folder' && <li><a onClick={this.props.navHandler} ><i className="fa fa-eye dropDownIcon" aria-hidden="true"></i>Preview</a></li>}
+                            {this.props.type != "folder" && <li><a onClick={this.props.navHandler} ><i className="fa fa-eye dropDownIcon" aria-hidden="true"></i>Preview</a></li>}
                             {this.props.id != "sharedWithMe" && < li > <a onClick={this.props.deleteHandler}><i className="fa fa-trash-o dropDownIcon" aria-hidden="true"></i>Delete</a></li>}
                             <li><a onClick={this.props.renameHandler}><i className="fa fa-pencil-square-o dropDownIcon" aria-hidden="true"></i>Rename</a></li>
                             <li><a onClick={this.props.shareLinkHandler}><i className="fa fa-share dropDownIcon" aria-hidden="true"></i>Share</a></li>
 
-                            {this.props.type != 'folder' && <li className="divider"></li>}
-                            {this.props.type != 'folder' && <li><a href="#"><i className="fa fa-database dropDownIcon" aria-hidden="true"></i>Get Document Trail</a></li>}
-                            {this.props.type != 'folder' && <li><a href="#"><i className="fa fa-play dropDownIcon" aria-hidden="true"></i>Start Trail</a></li>}
-                            {this.props.type != 'folder' && <li><a href="#"><i className="fa fa-stop dropDownIcon" aria-hidden="true"></i>Stop Trail</a></li>}
-                            {this.props.type != 'folder' && <li><a href="#"><i className="fa fa-certificate dropDownIcon" aria-hidden="true"></i>Get DocChain Certificate</a></li>}
-                            {this.props.type != 'folder' && <li><a href="#"><i className="fa fa-link dropDownIcon" aria-hidden="true"></i>Embed Document</a></li>}
-                            {this.props.type != 'folder' && <li><a href="#"><i className="fa fa-calendar-check-o dropDownIcon" aria-hidden="true"></i>Check File</a></li>}
+                            {this.props.type != "folder" && <li className="divider"></li>}
+                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-database dropDownIcon" aria-hidden="true"></i>Get Document Trail</a></li>}
+                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-play dropDownIcon" aria-hidden="true"></i>Start Trail</a></li>}
+                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-stop dropDownIcon" aria-hidden="true"></i>Stop Trail</a></li>}
+                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-certificate dropDownIcon" aria-hidden="true"></i>Get DocChain Certificate</a></li>}
+                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-link dropDownIcon" aria-hidden="true"></i>Embed Document</a></li>}
+                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-calendar-check-o dropDownIcon" aria-hidden="true"></i>Check File</a></li>}
                         </ul>
                     </div>}
                 </td>
 
-                <td className="col-xs-1 " style={{ verticalAlign: 'middle' }}>
-                    {this.props.type != 'folder' && <i className="fa fa-lock fa-2x"></i>}
+                <td className="col-xs-1 " style={{ verticalAlign: "middle" }}>
+                    {this.props.type != "folder" && <i className="fa fa-lock fa-2x"></i>}
                 </td>
-                <td className="col-xs-1 " style={{ verticalAlign: 'middle' }}>{formatSizeUnits(this.props.size)}</td>
+                <td className="col-xs-1 " style={{ verticalAlign: "middle" }}>{formatSizeUnits(this.props.size)}</td>
 
-                <td className="col-xs-2 " style={{ verticalAlign: 'middle' }}>{this.props.lastModified}</td>
+                <td className="col-xs-2 " style={{ verticalAlign: "middle" }}>{this.props.lastModified}</td>
             </tr>
         );
     }

@@ -11,7 +11,7 @@ export interface BreadCrumbProps {
 export class BreadCrumb extends React.Component<BreadCrumbProps, {}> {
     constructor(props) {
         super(props);
-        
+
     }
     shouldComponentUpdate(nextProps) {
         const a = this.props.pathCollection !== nextProps.pathCollection;

@@ -8,13 +8,51 @@ import { Search, Delete, Upload, GetFolderItemsAsync, getPreviewLink, CreateNewF
 import { Alert } from "react-bootstrap";
 import AlertCollection from "../components/Alerts/AlertCollection";
 import { ToastContainer, toast } from "react-toastify";
-import { css } from 'glamor';
-import EmptyFolder from '../components/Alerts/EmptyFolder';
-import * as utility from '../components/utility';
-import { EmptySearch } from '../components/Alerts/EmptySearch';
-require('../css/Explorers.css');
+import { css } from "glamor";
+import EmptyFolder from "../components/Alerts/EmptyFolder";
+import * as utility from "../components/utility";
+import { EmptySearch } from "../components/Alerts/EmptySearch";
+require("../css/Explorers.css");
 
-export class Explorer extends React.Component<{}, {}> {
+interface ExplorerState {
+    // This is space we will put the json response
+    filesarray: any,
+    // this is just true or false, determines whether the network request has finished, display a gif or a table
+    loading: any,
+    errorFound: any,
+    errorMessage: any,
+
+    PreviewUrl: any,
+    PreviewFileName: any,
+    showPreviewModal: any,
+
+    query: any,
+    user: any,
+
+    showRenameModal: any,
+    toBeRenameId: any,
+    toBeRenameType: any,
+    OldName: any,
+
+    showDeleteModal: any,
+    pathCollection: any,
+    show401Alert: any,
+    currentFolderID: any,
+    showNewFolderModal: any,
+    ToBeDeletedName: any,
+    ToBeDeletedID: any,
+    ToBeDeletedType: any,
+    ToBeUploadedFiles: any,
+    FolderEmpty: any,
+    filesPreview: any,
+    filesToBeSent: any,
+    SearchEmpty: any,
+    showShareModal: any,
+
+    tempShareURL: any
+}
+
+export class Explorer extends React.Component<{}, ExplorerState> {
     constructor(props) {
         super(props);
         this.handleSearchBarChange = this.handleSearchBarChange.bind(this);
@@ -72,7 +110,7 @@ export class Explorer extends React.Component<{}, {}> {
             showShareModal: false,
 
             tempShareURL: ""
-        }
+        };
     }
 
     componentDidMount() {
@@ -88,7 +126,7 @@ export class Explorer extends React.Component<{}, {}> {
     handleSearchBarChange(e) { this.setState({ query: e.target.value }); }
 
     performSearch(e) {
-        this.state["query"] !== "" && Search(this.state["query"]).then(newData => {
+        this.state.query !== "" && Search(this.state.query).then(newData => {
             let isSearchEmpty = newData.length == 0 ? true : false;
             this.setState({ filesarray: newData, loading: false, SearchEmpty: isSearchEmpty, pathCollection: [{ fileId: "0", Name: "All Files" }] });
         });
@@ -98,13 +136,13 @@ export class Explorer extends React.Component<{}, {}> {
         var ToastIndex, newArray2;
         row.type == "folder" ?
             (
-                newArray2 = JSON.parse(JSON.stringify(this.state["pathCollection"])),
+                newArray2 = JSON.parse(JSON.stringify(this.state.pathCollection)),
                 newArray2.push({ fileId: row.id, Name: row.fileName }),
                 this.searchInFolder(row.id, newArray2)
             ) :
             (
                 getPreviewLink(row.id).then(link => {
-                    this.setState({ PreviewUrl: link, PreviewFileName: row.fileName, showPreviewModal: true })
+                    this.setState({ PreviewUrl: link, PreviewFileName: row.fileName, showPreviewModal: true });
                 }).catch(function (error) {
                     console.log(error);
                     toast.dismiss();
@@ -112,13 +150,13 @@ export class Explorer extends React.Component<{}, {}> {
                         (
                             ToastIndex = toast.error("File Preview for this file format is not supported yet", { hideProgressBar: true, position: "bottom-right", onClose: () => toast.dismiss(ToastIndex) })
                         ) :
-                        (alert(error))
+                        (alert(error));
                 }.bind(this))
-            )
+            );
     }
 
     navigateOut(e) {
-        this.searchInFolder(e.fileId, utility.navigateOutOmitArray(e.fileId, this.state['pathCollection']));
+        this.searchInFolder(e.fileId, utility.navigateOutOmitArray(e.fileId, this.state.pathCollection));
     }
 
     searchInFolder(id, newArray) {
@@ -133,35 +171,35 @@ export class Explorer extends React.Component<{}, {}> {
     CloseNewFolderModalHandler(e) { this.setState({ showNewFolderModal: false }); }
 
     createNewFolderHandler(newName) {
-        CreateNewFolder(this.state["currentFolderID"], newName)
+        CreateNewFolder(this.state.currentFolderID, newName)
             .then(newData => {
                 this.setState({ filesarray: newData, showNewFolderModal: false });
                 toast.success("Folder created successfully!", { hideProgressBar: true });
             });
     }
 
-    closePreviewModal() { this.setState({ PreviewUrl: "", showPreviewModal: false, PreviewFileName: "" }) }
+    closePreviewModal() { this.setState({ PreviewUrl: "", showPreviewModal: false, PreviewFileName: "" }); }
 
-    showPreview() { this.setState({ showingPreview: true }); }
+    showPreview() { this.setState({ showPreviewModal: true }); }
 
     getUser() {
         fetch("https://api.box.com/2.0/users/me", {
             method: "GET",
             headers:
                 {
-                    'Authorization': 'Bearer ' + sessionStorage.getItem("box_access_token"),
-                    'Accept': 'application/json'
+                    "Authorization": "Bearer " + sessionStorage.getItem("box_access_token"),
+                    "Accept": "application/json"
                 }
         })
             .then(response => {
-                if (!response.ok) { throw response }
-                return response.json()  //we only get here if there is no error)
+                if (!response.ok) { throw response; }
+                return response.json();  //we only get here if there is no error)
             })
             .then(data => {
-                var user = data['name']
-                console.log(user)
+                var user = data.name;
+                console.log(user);
                 this.setState({ user: user });
-            })
+            });
     }
 
     closeDeleteModal() { this.setState({ showDeleteModal: false, ToBeDeletedID: "", ToBeDeletedName: "", ToBeDeletedType: "" }); }
@@ -174,15 +212,15 @@ export class Explorer extends React.Component<{}, {}> {
             })
             .catch(function (error) {
                 toast.error("Operation Failed: Could not get Share Link!");
-            }.bind(this))
+            }.bind(this));
     }
 
-    closeShareModal() {this.setState({ showShareModal: false, tempShareURL: "" }); }
+    closeShareModal() { this.setState({ showShareModal: false, tempShareURL: "" }); }
 
     showDeleteModal(row, event) { this.setState({ showDeleteModal: true, ToBeDeletedID: row.id, ToBeDeletedName: row.fileName, ToBeDeletedType: row.type }); }
 
     deleteItem() {
-        Delete(this.state["ToBeDeletedType"], this.state["ToBeDeletedID"], this.state["currentFolderID"])
+        Delete(this.state.ToBeDeletedType, this.state.ToBeDeletedID, this.state.currentFolderID)
             .then(newData => {
                 let isEmpty = newData.length == 0 ? true : false;
                 this.setState({ filesarray: newData, showDeleteModal: false, ToBeDeletedID: "", ToBeDeletedName: "", ToBeDeletedType: "", FolderEmpty: isEmpty, SearchEmpty: false });
@@ -194,7 +232,7 @@ export class Explorer extends React.Component<{}, {}> {
 
     submitRename(newName) {
         //console.log("Rename will happen here ==>>>>>> "+newName.toString());
-        Rename(this.state["toBeRenameId"], newName, this.state["currentFolderID"], this.state["toBeRenameType"])
+        Rename(this.state.toBeRenameId, newName, this.state.currentFolderID, this.state.toBeRenameType)
             .then(newData => {
                 this.setState({ filesarray: newData, showRenameModal: false });
                 toast.success("Item Renamed Successfully!", { hideProgressBar: true });
@@ -214,12 +252,12 @@ export class Explorer extends React.Component<{}, {}> {
         toast.dismiss();
         placeholder = files.length == 1 ? "file" : "files";
         toastIndex = toast.info("Uploading " + files.length + " " + placeholder, { autoClose: false, hideProgressBar: true });
-        formData = new FormData(); 1
+        formData = new FormData(); 1;
         fileList = files;
         for (var x = 0; x < fileList.length; x++) {
-            formData.append('file' + x, fileList.item(x));
+            formData.append("file" + x, fileList.item(x));
         }
-        Upload(this.state["currentFolderID"], formData)
+        Upload(this.state.currentFolderID, formData)
             .then(newData => {
                 let isEmpty = newData.length == 0 ? true : false;
                 this.setState({ filesarray: newData, loading: false, FolderEmpty: isEmpty, SearchEmpty: false });
@@ -233,8 +271,7 @@ export class Explorer extends React.Component<{}, {}> {
                     toast.update(toastIndex, {
                         autoClose: false, hideProgressBar: true, type: "warning", render: "Cannot Upload File because a file with same name exists"
                     });
-                }
-                else {
+                } else {
                     alert(error);
                 }
             }.bind(this));
@@ -243,64 +280,59 @@ export class Explorer extends React.Component<{}, {}> {
     public render() {
         console.log("Explorer was rendered");
 
-        if (this.state['loading'] === false) {
-         var rows;
-            if (this.state["SearchEmpty"]) {
+        if (this.state.loading === false) {
+            var rows;
+            if (this.state.SearchEmpty) {
                 rows = <EmptySearch />;
-            }
-            else {
-                rows = this.state['filesarray'].map(function (row) {
+            } else {
+                rows = this.state.filesarray.map(function (row) {
                     return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} mimeType="" filename={row.fileName} size={row.size} lastModified={row.lastModified} shareLinkHandler={this.shareLinkHandler.bind(null, row)} renameHandler={this.renameHandler.bind(null, row)} deleteHandler={this.showDeleteModal.bind(null, row)} platform={"Box"}></Row>);
                 }.bind(this));
             }
-
-
 
             return (
                 <div className="well well-lg pull-down">
                     <ToastContainer position="bottom-right" hideProgressBar={true} pauseOnHover={true} newestOnTop={true} toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
 
-                    <div style={{ float: 'right' }} className="user-details">
+                    <div style={{ float: "right" }} className="user-details">
                         {/*this.state['user']*/}
                         <ButtonToolBar NewFolderHandler={this.NewFolderHandler} uploadHandler={this.FileUploadHandler} ></ButtonToolBar>
                     </div>
-                    <SearchBar changeHandler={e => { this.setState({ query: e.target.value }) }} searchHandler={this.performSearch}></SearchBar>
+                    <SearchBar changeHandler={e => { this.setState({ query: e.target.value }); }} searchHandler={this.performSearch}></SearchBar>
 
-                    {this.state["show401Alert"] &&
+                    {this.state.show401Alert &&
                         <Alert bsStyle="warning">
                             <strong>401 Unauthorized </strong> Please sign in first
                         </Alert>}
-                    {this.state["show401Alert"] && <BoxLogin></BoxLogin>}
-                    {!this.state["show401Alert"] && <BreadCrumb pathCollection={this.state["pathCollection"]} navigateOutHandler={this.navigateOut.bind(this)} />}
-                    {!this.state["show401Alert"] && < table className="table table-striped table-hover table-responsive well header-fixed">
+                    {this.state.show401Alert && <BoxLogin></BoxLogin>}
+                    {!this.state.show401Alert && <BreadCrumb pathCollection={this.state.pathCollection} navigateOutHandler={this.navigateOut.bind(this)} />}
+                    {!this.state.show401Alert && < table className="table table-striped table-hover table-responsive well header-fixed">
                         <TableHeading />
                         <tbody>
-                            {!this.state["FolderEmpty"] ?
+                            {!this.state.FolderEmpty ?
                                 rows
                                 :
                                 <EmptyFolder />
                             }
                         </tbody></table>}
 
-                    {this.state["showPreviewModal"] &&
-                        <FilePreviewModal PreviewFileName={this.state["PreviewFileName"]} PreviewUrl={this.state["PreviewUrl"]} closeModal={this.closePreviewModal}>
+                    {this.state.showPreviewModal &&
+                        <FilePreviewModal PreviewFileName={this.state.PreviewFileName} PreviewUrl={this.state.PreviewUrl} closeModal={this.closePreviewModal}>
                         </FilePreviewModal>}
-                    {this.state["showRenameModal"] &&
-                        <RenameFileModal oldFileName={this.state["OldName"]} newFileNameHandler={this.submitRename} closeRenameModal={this.closeRenameFileModal}>
+                    {this.state.showRenameModal &&
+                        <RenameFileModal oldFileName={this.state.OldName} newFileNameHandler={this.submitRename} closeRenameModal={this.closeRenameFileModal}>
                         </RenameFileModal>}
-                    {this.state["showDeleteModal"] &&
-                        <DeleteModal fileName={this.state["ToBeDeletedName"]} id={this.state["ToBeDeletedId"]} type={this.state["ToBeDeletedType"]} closeHandler={this.closeDeleteModal} deleteActionHandler={this.deleteItem}>
+                    {this.state.showDeleteModal &&
+                        <DeleteModal fileName={this.state.ToBeDeletedName} id={this.state.ToBeDeletedID} type={this.state.ToBeDeletedType} closeHandler={this.closeDeleteModal} deleteActionHandler={this.deleteItem}>
                         </DeleteModal>}
-                    {this.state["showShareModal"] &&
-                        <ShowShareLinkModal url={this.state["tempShareURL"]} closeHandler={this.closeShareModal} ></ShowShareLinkModal>}
-                    {this.state["showNewFolderModal"] &&
+                    {this.state.showShareModal &&
+                        <ShowShareLinkModal url={this.state.tempShareURL} closeHandler={this.closeShareModal} ></ShowShareLinkModal>}
+                    {this.state.showNewFolderModal &&
                         <NewFolderModal closeHandler={this.CloseNewFolderModalHandler} createFolderHandler={this.createNewFolderHandler} >
                         </NewFolderModal>}
                 </div>
             );
-        }
-        // determine if that loading is finished and render accordingly
-        else {
+        } else {
             return (
                 <div className="loadingGif">
                     <LoadingGif />

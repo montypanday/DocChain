@@ -9,6 +9,6 @@ export class NetError extends React.Component {
                 <line fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" stroke-miterlimit="10" x1="39" y1="41" x2="25" y2="27" />
                 <line fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" stroke-miterlimit="10" x1="25" y1="41" x2="39" y2="27" />
             </svg>
-        </div>
+        </div>;
     }
 }

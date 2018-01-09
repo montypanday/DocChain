@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 
@@ -19,7 +16,7 @@ namespace front_end.Middleware
 
         public Task Invoke(HttpContext httpContext)
         {
-
+            // TODO: ANUSHI: Make a list of possible exceptions which may occur, are the default messages user friendly, if not they can be caught here and modified.
             return _next(httpContext);
         }
     }

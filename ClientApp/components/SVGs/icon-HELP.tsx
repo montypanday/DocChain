@@ -1,5 +1,5 @@
 ﻿import * as React from "react";
-require('./icons.css');
+require("./icons.css");
 
 export class HELPIcon extends React.Component {
 
@@ -11,6 +11,6 @@ export class HELPIcon extends React.Component {
                 <path fill="#fff" d="M612,306C612,137.004,474.995,0,306,0C137.004,0,0,137.004,0,306c0,168.995,137.004,306,306,306                    C474.995,612,612,474.995,612,306z M27.818,306C27.818,152.36,152.36,27.818,306,27.818S584.182,152.36,584.182,306			S459.64,584.182,306,584.182S27.818,459.64,27.818,306z"/>
                 <rect fill="#fff" x="274.51" y="415.214" width="40.559" height="42.367" />
             </svg>
-        </div>
+        </div>;
     }
 }

@@ -26,15 +26,26 @@ using System.Net;
 
 namespace front_end.Controllers
 {
+    /// <summary>
+    /// This Controller handles all communication with Box SDK.
+    /// </summary>
     [Route("api/[controller]")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Await.Warning", "CS4014:Await.Warning")]
     public class BoxController : Controller
     {
-        public IConfiguration Configuration { get; set; }
+        private IConfiguration Configuration { get; set; }
         IDataProtector _protector { get; set; }
         private readonly ILogger _logger;
         private IHostingEnvironment hostingEnv;
 
+
+        /// <summary>
+        /// Constructor to load Configuration, logger, environment and DataProvider.
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="provider"></param>
+        /// <param name="logger"></param>
+        /// <param name="env"></param>
         public BoxController(IConfiguration config, IDataProtectionProvider provider, ILogger<BoxController> logger, IHostingEnvironment env)
         {
             Configuration = config;
@@ -111,6 +122,8 @@ namespace front_end.Controllers
                     try
                     {
                         newFile = await client.FilesManager.UploadAsync(req, fs);
+
+                        // VERIFY: MATT: Can you get the details for client from the client object, like name, email etc.
                         Task.Run(() => { RecordFileAction(client, newFile.Id, "Upload"); });
                     }
                     catch (BoxException exp)
@@ -130,6 +143,7 @@ namespace front_end.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [Produces("application/json")]
+        [SwaggerResponse((int)(HttpStatusCode.OK), Type = typeof(Content[]))]
         [Route("GetFolderItems/{id}")]
         [HttpGet]
         public async Task<IActionResult> GetFolderItems(string id)
@@ -161,6 +175,7 @@ namespace front_end.Controllers
         /// <param name="query"></param>
         /// <returns></returns>
         [Produces("application/json")]
+        [SwaggerResponse((int)(HttpStatusCode.OK), Type = typeof(Content[]))]
         [Route("Search/{query}")]
         [HttpGet]
         public async Task<IActionResult> Search(string query)
@@ -205,6 +220,7 @@ namespace front_end.Controllers
         /// <param name="type"></param>
         /// <returns></returns>
         [Produces("application/json")]
+        [SwaggerResponse((int)(HttpStatusCode.OK), Type = typeof(Content[]))]
         [Route("Rename/{newName}/{uid}/{currentFolderID}/{type}")]
         [HttpGet]
         public async Task<IActionResult> Rename(string newName, string uid, string currentFolderID, string type)
@@ -266,6 +282,7 @@ namespace front_end.Controllers
         /// <param name="currentFolderID"></param>
         /// <returns></returns>
         [Produces("application/json")]
+        [SwaggerResponse((int)(HttpStatusCode.OK), Type = typeof(Content[]))]
         [Route("Delete/{type}/{id}/{currentFolderID}")]
         [HttpGet]
         public async Task<IActionResult> Delete(string type, string id, string currentFolderID)
@@ -297,7 +314,7 @@ namespace front_end.Controllers
         {
             var client = Initialise();
             Task.Run(() => { RecordFileAction(client, id, "Download"); });
-            //TODO: download file as a stream rather than a URL link.
+            //TODO: MONTY: Download file as a stream rather than a URL link.
             return await client.FilesManager.GetDownloadUriAsync(id);
         }
 
@@ -308,6 +325,7 @@ namespace front_end.Controllers
         /// <param name="name"></param>
         /// <returns></returns>
         [Produces("application/json")]
+        [SwaggerResponse((int)(HttpStatusCode.OK), Type = typeof(Content[]))]
         [Route("NewFolder/{parentID}/{name}")]
         [HttpGet]
         public async Task<IActionResult> NewFolder(string parentID, string name)

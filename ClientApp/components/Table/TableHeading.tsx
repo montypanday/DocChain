@@ -1,12 +1,12 @@
-﻿import * as React from 'react';
-require('./TableHeading.css');
+﻿import * as React from "react";
+require("./TableHeading.css");
 
 export default class TableHeading extends React.Component<{}, {}> {
     constructor(props) {
         super(props);
 
         this.state = {
-        }
+        };
     }
     shouldComponentUpdate(nextProps) {
         return false;

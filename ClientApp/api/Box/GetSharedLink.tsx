@@ -1,5 +1,5 @@
 ﻿export function getSharedLink(id: string, type: string) {
-    return fetch("/api/Box/GetSharedLink/" + type + "/" + id, { credentials: 'same-origin' })
+    return fetch("/api/Box/GetSharedLink/" + type + "/" + id, { credentials: "same-origin" })
         .then(response => {
             if (!response.ok) {
                 throw response;

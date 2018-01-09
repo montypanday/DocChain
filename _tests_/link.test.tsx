@@ -1,8 +1,8 @@
-﻿import * as React from 'react';
-import Link from '../ClientApp/components/Link';
-import * as renderer from 'react-test-renderer';
+﻿import * as React from "react";
+import Link from "../ClientApp/components/Link";
+import * as renderer from "react-test-renderer";
 
-test('Link changes the class when hovered', () => {
+test("Link changes the class when hovered", () => {
     const component = renderer.create(
         <Link page="http://www.facebook.com">Facebook</Link>,
     );

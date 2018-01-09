@@ -1,15 +1,15 @@
-﻿﻿import * as React from 'react';
-import { render } from 'react-dom';
+﻿﻿import * as React from "react";
+import { render } from "react-dom";
 import * as ReactDOM from "react-dom";
 
 export interface AppProps {
-    root: string
+    root: string;
 }
 
 export interface AppState {
 }
 
-
+// TODO: ROY: Is this Context Menu used anywhere, make it to detect a right click event on a Row and see how to trigger event using a prop handler, like it is done in rename, delete etc.
 export class ContextMenu extends React.Component<AppProps, AppState> {
     constructor(props) {
         super(props);
@@ -18,22 +18,22 @@ export class ContextMenu extends React.Component<AppProps, AppState> {
 
     state = {
         visible: false,
-    }
+    };
 
     componentDidMount() {
         const root = document.getElementById(this.props.root);
 
-        root.addEventListener('contextmenu', this._handleContextMenu);
-        document.addEventListener('click', this._handleClick);
-        document.addEventListener('scroll', this._handleScroll);
-    };
+        root.addEventListener("contextmenu", this._handleContextMenu);
+        document.addEventListener("click", this._handleClick);
+        document.addEventListener("scroll", this._handleScroll);
+    }
 
     componentWillUnmount() {
         const root = document.getElementById(this.props.root);
 
-        root.removeEventListener('contextmenu', this._handleContextMenu);
-        root.removeEventListener('click', this._handleClick);
-        root.removeEventListener('scroll', this._handleScroll);
+        root.removeEventListener("contextmenu", this._handleContextMenu);
+        root.removeEventListener("click", this._handleClick);
+        root.removeEventListener("scroll", this._handleScroll);
     }
 
     _handleContextMenu = (event) => {
@@ -80,21 +80,21 @@ export class ContextMenu extends React.Component<AppProps, AppState> {
 
         //alert(contextMenu.style.top);
 
-    };
+    }
 
     _handleClick = (event) => {
         const { visible } = this.state;
         const root = document.getElementById(this.props.root);
         const wasOutside = !(event.target.contains === root);
 
-        if (wasOutside && visible) this.setState({ visible: false, });
-    };
+        if (wasOutside && visible) { this.setState({ visible: false, }); }
+    }
 
     _handleScroll = () => {
         const { visible } = this.state;
 
-        if (visible) this.setState({ visible: false, });
-    };
+        if (visible) { this.setState({ visible: false, }); }
+    }
 
     render() {
         const { visible } = this.state;
@@ -107,8 +107,8 @@ export class ContextMenu extends React.Component<AppProps, AppState> {
             <a href="#" className="list-group-item">JavaScript</a>
             <a href="#" className="list-group-item">Do Something</a>
             <a href="#" className="list-group-item">About Us</a>
-        </div>
+        </div>;
 
-    };
+    }
 }
 

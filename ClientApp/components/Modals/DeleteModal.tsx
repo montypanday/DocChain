@@ -1,17 +1,18 @@
-﻿
-import * as React from 'react';
-import { Modal } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+
+import * as React from "react";
+import { Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 export interface AppProps {
-    id: any,
-    fileName: any,
-    type: any,
-    deleteActionHandler: any,
-    closeHandler: any
+    id: any;
+    fileName: any;
+    type: any;
+    deleteActionHandler: any;
+    closeHandler: any;
 }
 
 export interface AppState {
+    isLoading:any
 }
 
 export default class FilePreviewModal extends React.Component<AppProps, AppState> {
@@ -21,7 +22,7 @@ export default class FilePreviewModal extends React.Component<AppProps, AppState
 
         this.state = {
             isLoading: false,
-        }
+        };
     }
     handleClick() {
         this.setState({ isLoading: true });
@@ -34,7 +35,7 @@ export default class FilePreviewModal extends React.Component<AppProps, AppState
         }, 2000);
     }
     render() {
-        let isLoading = this.state["isLoading"];
+        let isLoading = this.state.isLoading;
         return (
             <Modal show={true}>
                 <Modal.Header closeButton>
@@ -46,8 +47,8 @@ export default class FilePreviewModal extends React.Component<AppProps, AppState
                 </Modal.Body>
                 <Modal.Footer>
                     <Button bsStyle="primary" disabled={isLoading} autoFocus onClick={!isLoading ? this.handleClick : null}>
-                        {isLoading ? 'Loading...' : 'Delete'}
-                        
+                        {isLoading ? "Loading..." : "Delete"}
+
                         </Button>
                     <Button onClick={this.props.closeHandler}>Cancel
                         </Button>

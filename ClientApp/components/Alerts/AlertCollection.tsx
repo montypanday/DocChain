@@ -1,6 +1,6 @@
-﻿import * as React from 'react';
-import { render } from 'react-dom';
-import { Alert, Button } from 'react-bootstrap';
+﻿import * as React from "react";
+import { render } from "react-dom";
+import { Alert, Button } from "react-bootstrap";
 
 const errorDict = [
     { ErrorCode: 404, ErrorStatus: "neutral", ErrorMSG: this.ErrorCode + ": Page not found" },
@@ -9,11 +9,14 @@ const errorDict = [
 
 
 export interface AlertCollectionProps {
-    ReceivedCode:any
+    ReceivedCode:any;
 }
 
 export interface AlertCollectionState {
-    
+    ErrorStatus: any,
+    ErrorMSG: any,
+    ErrorCode:any
+
 }
 
 export default class AlertCollection extends React.Component<AlertCollectionProps, AlertCollectionState> {
@@ -24,17 +27,17 @@ export default class AlertCollection extends React.Component<AlertCollectionProp
             ErrorCode: null, //a number
             ErrorStatus: "", //this determines the style of the alert
             ErrorMSG: "", //this is the text rendered to the user
-        }
+        };
     }
                 //this.setState key={errorDict.ErrorCode}... set state depending on the "Recieved Code"?
     render() {
         return (
-            <Alert bsStyle={this.state["ErrorStatus"]}>
-                <h4>{this.state["ErrorMSG"]}</h4>
+            <Alert bsStyle={this.state.ErrorStatus}>
+                <h4>{this.state.ErrorMSG}</h4>
                 </Alert>
-            
 
-            
+
+
         );
     }
 }

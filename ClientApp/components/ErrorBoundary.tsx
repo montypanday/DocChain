@@ -1,7 +1,7 @@
-﻿import * as React from 'react';
+﻿import * as React from "react";
 
 export interface EBState {
-    hasError: boolean
+    hasError: boolean;
     //Error: any
 }
 export interface EBProps {
@@ -21,7 +21,7 @@ export default class ErrorBoundary extends React.Component<EBProps, EBState> {
     }
 
     render() {
-        if (this.state["hasError"]) {
+        if (this.state.hasError) {
             // You can render any custom fallback UI
             return (<h1>Something went wrong</h1>);
         }

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { NavMenu } from "./NavMenu";
-import { Alert } from 'react-bootstrap';
-import  ErrorBoundary  from '../components/ErrorBoundary';
+import { Alert } from "react-bootstrap";
+import  ErrorBoundary  from "../components/ErrorBoundary";
 
 export interface LayoutProps {
     children?: React.ReactNode;
@@ -12,9 +12,9 @@ var divstyle = {
 };
 
 export interface LayoutState {
-    errorFound: boolean,
-    Error: any,
-    errorInformation: any
+    errorFound: boolean;
+    Error: any;
+    errorInformation: any;
 }
 
 export class Layout extends React.Component<LayoutProps, LayoutState> {
@@ -24,7 +24,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
             Error :"",
             errorFound: false,
             errorInformation: ""
-        }
+        };
     }
 
     //componentDidCatch(error, errorInfo) {

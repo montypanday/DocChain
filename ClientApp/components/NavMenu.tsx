@@ -1,14 +1,14 @@
 import * as React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { GDIcon } from '../components/SVGs/icon-GD';
-import { BOXIcon } from '../components/SVGs/icon-BOX';
-import { ODIcon } from '../components/SVGs/icon-OD';
-import { DBIcon } from '../components/SVGs/icon-DB';
-import { HELPIcon } from '../components/SVGs/icon-HELP';
-import { LOGINIcon } from '../components/SVGs/icon-LOGIN';
-import { HOMEIcon } from '../components/SVGs/icon-HOME';
+import { GDIcon } from "../components/SVGs/icon-GD";
+import { BOXIcon } from "../components/SVGs/icon-BOX";
+import { ODIcon } from "../components/SVGs/icon-OD";
+import { DBIcon } from "../components/SVGs/icon-DB";
+import { HELPIcon } from "../components/SVGs/icon-HELP";
+import { LOGINIcon } from "../components/SVGs/icon-LOGIN";
+import { HOMEIcon } from "../components/SVGs/icon-HOME";
 
-require('../components/Navbar (WIP)/Navbar.css');
+require("../components/Navbar (WIP)/Navbar.css");
 
 export class NavMenu extends React.Component<{}, {}> {
     constructor(props) {
@@ -16,7 +16,7 @@ export class NavMenu extends React.Component<{}, {}> {
         this.state = {
             boxSigned: false,
             googleSigned: false
-        }
+        };
     }
     public render() {
         console.log("NavMenu was rendered");
@@ -86,7 +86,6 @@ export class NavMenu extends React.Component<{}, {}> {
                                 <i className="fa fa-question-circle" aria-hidden="true"></i> Box Explorer
                             </NavLink>
                         </li>
- 
                     </ul>
                 </div>
             </div>

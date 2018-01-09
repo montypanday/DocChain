@@ -1,12 +1,12 @@
-﻿import * as React from 'react';
-import { Modal } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
-require('./previewModal.css');
+﻿import * as React from "react";
+import { Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+require("./previewModal.css");
 
 export interface AppProps {
-    PreviewFileName: any,
-    PreviewUrl: any,
-    closeModal: any
+    PreviewFileName: any;
+    PreviewUrl: any;
+    closeModal: any;
 }
 
 export interface AppState {
@@ -17,7 +17,7 @@ export default class FilePreviewModal extends React.Component<AppProps, AppState
         super(props);
 
         this.state = {
-        }
+        };
     }
 
     render() {
