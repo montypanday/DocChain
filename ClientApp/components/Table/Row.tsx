@@ -6,7 +6,6 @@ import { CheckIfTracked } from "../../api/Chain/FileTracker";
 //require('./Dropdown.css');
 //require('./fa-icons.css');
 
-
 export interface AppProps {
     type: string;
     filename: string;
@@ -16,6 +15,7 @@ export interface AppProps {
     id: any;
     mimeType: any;
     deleteHandler: any;
+    downloadHandler: any,
 
     renameHandler: any;
     shareLinkHandler: any;
@@ -44,7 +44,6 @@ export class Row extends React.Component<AppProps, AppState> {
     }
 
     getIconClass(extension, mimeType) {
-
         const FormatDictinary = {
             "txt": "text-o",
             "doc": "word-o",
@@ -176,7 +175,7 @@ export class Row extends React.Component<AppProps, AppState> {
                         <button className="btn btn-default dropdown-toggle" style={{ verticalAlign: "middle" }} type="button" data-toggle="dropdown">...
                             </button>
                         <ul className="dropdown-menu">
-                            <li><a href="#" download><i className="fa fa-download dropDownIcon" aria-hidden="true"></i>Download</a></li>
+                            <li><a onClick={this.props.downloadHandler}><i className="fa fa-download dropDownIcon" aria-hidden="true"></i>Download</a></li>
                             {this.props.type != "folder" && <li><a onClick={this.props.navHandler} ><i className="fa fa-eye dropDownIcon" aria-hidden="true"></i>Preview</a></li>}
                             {this.props.id != "sharedWithMe" && < li > <a onClick={this.props.deleteHandler}><i className="fa fa-trash-o dropDownIcon" aria-hidden="true"></i>Delete</a></li>}
                             <li><a onClick={this.props.renameHandler}><i className="fa fa-pencil-square-o dropDownIcon" aria-hidden="true"></i>Rename</a></li>

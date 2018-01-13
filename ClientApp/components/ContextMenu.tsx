@@ -15,7 +15,6 @@ export class ContextMenu extends React.Component<AppProps, AppState> {
         super(props);
     }
 
-
     state = {
         visible: false,
     };
@@ -79,7 +78,6 @@ export class ContextMenu extends React.Component<AppProps, AppState> {
         //contextMenu.style.top = `${clickY + 5}px`;
 
         //alert(contextMenu.style.top);
-
     }
 
     _handleClick = (event) => {
@@ -101,14 +99,12 @@ export class ContextMenu extends React.Component<AppProps, AppState> {
 
         return (visible || null) &&
 
-        <div className="list-group contextMenu" id="contextMenu">
-            <a href="#" className="list-group-item"><i className="fa fa-download" aria-hidden="true"></i>Download</a>
-            <a href="#" className="list-group-item">Preview</a>
-            <a href="#" className="list-group-item">JavaScript</a>
-            <a href="#" className="list-group-item">Do Something</a>
-            <a href="#" className="list-group-item">About Us</a>
-        </div>;
-
+            <div className="list-group contextMenu" id="contextMenu">
+                <a href="#" className="list-group-item"><i className="fa fa-download" aria-hidden="true"></i>Download</a>
+                <a href="#" className="list-group-item">Preview</a>
+                <a href="#" className="list-group-item">JavaScript</a>
+                <a href="#" className="list-group-item">Do Something</a>
+                <a href="#" className="list-group-item">About Us</a>
+            </div>;
     }
 }
-

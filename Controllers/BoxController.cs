@@ -1,28 +1,30 @@
 ﻿#region Using Statements
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+
 using Box.V2;
 using Box.V2.Auth;
 using Box.V2.Config;
+using Box.V2.Exceptions;
 using Box.V2.Models;
+using Database.Services;
 using front_end.Models;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Database.Services;
 using Model;
-using System.Net.Http;
-using System.IO;
-using System.Net.Http.Headers;
-using Microsoft.AspNetCore.Hosting;
-using Box.V2.Exceptions;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Net;
-#endregion
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+
+#endregion Using Statements
 
 namespace front_end.Controllers
 {
@@ -34,10 +36,9 @@ namespace front_end.Controllers
     public class BoxController : Controller
     {
         private IConfiguration Configuration { get; set; }
-        IDataProtector _protector { get; set; }
+        private IDataProtector _protector { get; set; }
         private readonly ILogger _logger;
         private IHostingEnvironment hostingEnv;
-
 
         /// <summary>
         /// Constructor to load Configuration, logger, environment and DataProvider.
@@ -85,7 +86,6 @@ namespace front_end.Controllers
             }
         }
 
-
         /// <summary>
         /// Upload received files and give back updated files inside the current folder.
         /// </summary>
@@ -130,11 +130,9 @@ namespace front_end.Controllers
                     {
                         return StatusCode(Convert.ToInt32(exp.StatusCode));
                     }
-
                 }
             }
             return await GetBoxFolderItems(client, currentFolderID);
-
         }
 
         /// <summary>
@@ -166,7 +164,6 @@ namespace front_end.Controllers
             //{
             //    return StatusCode(500);
             //}
-
         }
 
         /// <summary>
@@ -208,7 +205,6 @@ namespace front_end.Controllers
             {
                 return StatusCode(Convert.ToInt32(exp.StatusCode));
             }
-
         }
 
         /// <summary>
@@ -232,7 +228,7 @@ namespace front_end.Controllers
                 {
                     BoxFile fileAfterRename = await client.FilesManager.UpdateInformationAsync(new BoxFileRequest() { Id = uid, Name = newName });
                 }
-                else if(type == "folder")
+                else if (type == "folder")
                 {
                     BoxFolder boxFolder = await client.FoldersManager.UpdateInformationAsync(new BoxFolderRequest() { Id = uid, Name = newName });
                 }
@@ -300,7 +296,6 @@ namespace front_end.Controllers
             await client.FoldersManager.DeleteAsync(id, true);
 
             return await GetBoxFolderItems(client, currentFolderID);
-
         }
 
         /// <summary>
@@ -308,14 +303,15 @@ namespace front_end.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [Route("Download/{type}/{id}")]
+        [Route("Download/{id}")]
         [HttpGet]
-        public async Task<Uri> DownloadFile(string id)
+        public async Task<FileStreamResult> Download(string id)
         {
             var client = Initialise();
+            var stream = await client.FilesManager.DownloadStreamAsync(id);
+            var information = await client.FilesManager.GetInformationAsync(id);
             Task.Run(() => { RecordFileAction(client, id, "Download"); });
-            //TODO: MONTY: Download file as a stream rather than a URL link.
-            return await client.FilesManager.GetDownloadUriAsync(id);
+            return new FileStreamResult(stream, GetMimeTypeByWindowsRegistry(information.Name));
         }
 
         /// <summary>
@@ -387,8 +383,6 @@ namespace front_end.Controllers
             return client;
         }
 
-
-
         /// <summary>
         /// GetBoxFolderItems is used to get Box Folder items using FolderManager.GetFolderItemsAsync.
         /// </summary>
@@ -410,7 +404,6 @@ namespace front_end.Controllers
                     BoxFolder.FieldModifiedAt,
                     BoxFile.FieldModifiedAt,
 
-
                     //BoxFolder.FieldCreatedAt,
                     //BoxFolder.FieldCreatedBy,
                     //BoxFolder.FieldOwnedBy,
@@ -425,7 +418,6 @@ namespace front_end.Controllers
 
                     //BoxFile.FieldSha1,
                     //BoxFile.FieldSharedLink,
-
                 });
 
             return Json(GetCustomCollection(items));
@@ -450,6 +442,7 @@ namespace front_end.Controllers
             }
             return list;
         }
+
         /// <summary>
         /// GetCustomFileObject returns custom content from BoxFile Object.
         /// </summary>
@@ -525,6 +518,15 @@ namespace front_end.Controllers
                 DateTime.Now
             );
             fileActionService.RecordFileAction(action);
+        }
+
+        private string GetMimeTypeByWindowsRegistry(string fileNameOrExtension)
+        {
+            string mimeType = "application/unknown";
+            string ext = (fileNameOrExtension.Contains(".")) ? System.IO.Path.GetExtension(fileNameOrExtension).ToLower() : "." + fileNameOrExtension;
+            Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext);
+            if (regKey != null && regKey.GetValue("Content Type") != null) mimeType = regKey.GetValue("Content Type").ToString();
+            return mimeType;
         }
     }
 }

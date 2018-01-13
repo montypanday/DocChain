@@ -2,7 +2,6 @@
 import { Row } from "../ClientApp/components/Table/Row";
 import * as renderer from "react-test-renderer";
 
-
 test("Link changes the class when hovered", () => {
     const testnavHandler = jest.fn();
     const test_delete_handler = jest.fn();
@@ -15,7 +14,7 @@ test("Link changes the class when hovered", () => {
             type="folder"
             key="43970020269"
             navHandler={testnavHandler}
-
+            downloadHandler=""
             renameHandler=""
             shareLinkHandler=""
 

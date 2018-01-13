@@ -4,7 +4,7 @@ import { ButtonToolBar, Row, TableHeading } from "./Table";
 import { Link, NavLink, Redirect } from "react-router-dom";
 import { LoadingGif, SearchBar, BreadCrumb, BoxLogin } from "../components";
 import { FilePreviewModal, DeleteModal, NewFolderModal, ShowShareLinkModal, RenameFileModal } from "./Modals";
-import { Search, Delete, Upload, GetFolderItemsAsync, getPreviewLink, CreateNewFolder, Rename, getSharedLink } from "../api/Box";
+import { Search, Delete, Upload, GetFolderItemsAsync, getPreviewLink, CreateNewFolder, Rename, getSharedLink, Download } from "../api/Box_Utilities";
 import { Alert } from "react-bootstrap";
 import AlertCollection from "../components/Alerts/AlertCollection";
 import { ToastContainer, toast } from "react-toastify";
@@ -13,6 +13,7 @@ import EmptyFolder from "../components/Alerts/EmptyFolder";
 import * as utility from "../components/utility";
 import { EmptySearch } from "../components/Alerts/EmptySearch";
 require("../css/Explorers.css");
+import { saveAs } from "file-saver";
 
 interface ExplorerState {
     // This is space we will put the json response
@@ -72,6 +73,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
         this.submitRename = this.submitRename.bind(this);
         this.shareLinkHandler = this.shareLinkHandler.bind(this);
         this.closeShareModal = this.closeShareModal.bind(this);
+        this.download = this.download.bind(this);
 
         this.FileUploadHandler = this.FileUploadHandler.bind(this);
         this.state = {
@@ -243,7 +245,27 @@ export class Explorer extends React.Component<{}, ExplorerState> {
             }.bind(this));
     }
 
-    renameHandler(row, event) { this.setState({ showRenameModal: true, toBeRenameId: row.id, OldName: row.fileName, toBeRenameType: row.type }); }
+    download(row, event) {
+        console.log(row);
+        var toastIndex = toast.info("Downloading " + row.fileName, { autoClose: false, hideProgressBar: true });
+        Download(row.id).then(blobb => {
+            console.log(blobb);
+            saveAs(blobb, row.fileName);
+            toast.update(toastIndex, {
+                autoClose: 5000, hideProgressBar: true, type: "success", render: "Download complete: " + row.fileName
+            });
+        })
+            .catch(function (error) {
+                console.log(error);
+                toast.update(toastIndex, {
+                    autoClose: 5000, hideProgressBar: true, type: "error", render: "Download Failed: " + row.fileName
+                });
+            });
+    }
+
+    renameHandler(row, event) {
+        this.setState({ showRenameModal: true, toBeRenameId: row.id, OldName: row.fileName, toBeRenameType: row.type });
+    }
 
     notify = () => toast.success("Folder created successfully!", { hideProgressBar: true });
 
@@ -286,7 +308,21 @@ export class Explorer extends React.Component<{}, ExplorerState> {
                 rows = <EmptySearch />;
             } else {
                 rows = this.state.filesarray.map(function (row) {
-                    return (<Row key={row.id} id={row.id} type={row.type} navHandler={this.navigate.bind(null, row)} mimeType="" filename={row.fileName} size={row.size} lastModified={row.lastModified} shareLinkHandler={this.shareLinkHandler.bind(null, row)} renameHandler={this.renameHandler.bind(null, row)} deleteHandler={this.showDeleteModal.bind(null, row)} platform={"Box"}></Row>);
+                    return (<Row
+                        key={row.id}
+                        id={row.id}
+                        type={row.type}
+                        navHandler={this.navigate.bind(null, row)}
+                        downloadHandler={this.download.bind(null, row)}
+                        mimeType=""
+                        filename={row.fileName}
+                        size={row.size}
+                        lastModified={row.lastModified}
+                        shareLinkHandler={this.shareLinkHandler.bind(null, row)}
+                        renameHandler={this.renameHandler.bind(null, row)}
+                        deleteHandler={this.showDeleteModal.bind(null, row)}
+                        platform={"Box"}>
+                    </Row>);
                 }.bind(this));
             }
 
