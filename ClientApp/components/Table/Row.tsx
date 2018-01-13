@@ -184,8 +184,8 @@ export class Row extends React.Component<AppProps, AppState> {
 
                             {this.props.type != "folder" && <li className="divider"></li>}
                             {this.props.type != "folder" && <li><a href="#"><i className="fa fa-database dropDownIcon" aria-hidden="true"></i>Get Document Trail</a></li>}
-                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-play dropDownIcon" aria-hidden="true"></i>Start Trail</a></li>}
-                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-stop dropDownIcon" aria-hidden="true"></i>Stop Trail</a></li>}
+                            {/*{this.props.type != "folder" && <li><a href="#"><i className="fa fa-play dropDownIcon" aria-hidden="true"></i>Start Trail</a></li>}
+                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-stop dropDownIcon" aria-hidden="true"></i>Stop Trail</a></li>}*/}
                             {this.props.type != "folder" && <li><a href="#"><i className="fa fa-certificate dropDownIcon" aria-hidden="true"></i>Get DocChain Certificate</a></li>}
                             {this.props.type != "folder" && <li><a href="#"><i className="fa fa-link dropDownIcon" aria-hidden="true"></i>Embed Document</a></li>}
                             {this.props.type != "folder" && <li><a href="#"><i className="fa fa-calendar-check-o dropDownIcon" aria-hidden="true"></i>Check File</a></li>}
