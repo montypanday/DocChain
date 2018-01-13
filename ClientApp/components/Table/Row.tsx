@@ -24,15 +24,15 @@ export interface AppProps {
 }
 
 export interface AppState {
-    isTracked: any
+    isTracked: any;
 }
 
 export class Row extends React.Component<AppProps, AppState> {
     constructor(props: AppProps) {
         super(props);
         this.state = {
-            isTracked: false
-        };
+            isTracked: true,
+        }
     }
 
     getFileExtension(filename) {
@@ -131,6 +131,20 @@ export class Row extends React.Component<AppProps, AppState> {
     }
 
     componentDidMount() {
+
+    }
+
+    shouldComponentUpdate(nextProps) {
+        const a = this.props.type !== nextProps.type;
+        const b = this.props.filename !== nextProps.filename;
+        const c = this.props.size !== nextProps.size;
+        const d = this.props.lastModified !== nextProps.lastModified;
+        return (a || b || c || d);
+    }
+
+    //This method is method is no longer being used, was created to query the database to check whether or not a file was being tracked, and set the row state accordingly. 
+    //Keeping it here in case we need similar functionality in the future.
+    checkIfTracked() {
         var isTracked = CheckIfTracked(this.props.id, this.props.platform)
             .then(body => {
                 this.setState({ isTracked: body });
@@ -140,14 +154,6 @@ export class Row extends React.Component<AppProps, AppState> {
                 console.log(error);
             });
         this.setState({ isTracked: isTracked });
-    }
-
-    shouldComponentUpdate(nextProps) {
-        const a = this.props.type !== nextProps.type;
-        const b = this.props.filename !== nextProps.filename;
-        const c = this.props.size !== nextProps.size;
-        const d = this.props.lastModified !== nextProps.lastModified;
-        return (a || b || c || d);
     }
 
     render() {
