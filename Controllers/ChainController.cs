@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Database.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-
-using Database.Services;
-
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,12 +24,16 @@ namespace front_end.Controllers
         /// </summary>
         public IConfiguration Configuration { get => _configuration; set => _configuration = value; }
 
+        /// <summary>
+        /// Manages all communication with Blockchain API.
+        /// </summary>
+        /// <param name="config"></param>
         public ChainController(IConfiguration config) => Configuration = config;
 
         /// <summary>
         /// Get method is used to verify something exist in Blockchain.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="hash"></param>
         /// <returns></returns>
         // GET api/<controller>/5
         [Route("GetAsync")]
@@ -51,8 +53,7 @@ namespace front_end.Controllers
         /// <summary>
         /// Put method is used to put data into the Blockchain.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="value"></param>
+        /// <param name="hash"></param>
         // PUT api/<controller>/5
         [Route("PostAsync")]
         [HttpPost]

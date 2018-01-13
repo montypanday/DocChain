@@ -3,13 +3,11 @@ import { render } from "react-dom";
 import { ButtonToolbar } from "react-bootstrap";
 import { Button, DropdownButton, MenuItem } from "react-bootstrap";
 
-
 require("../Table/fa-icons.css");
 
 require("../Table/input.css");
 
 require("./ButtonToolbar.css");
-
 
 export interface ButtonToolbarProps {
     NewFolderHandler: any;
@@ -24,13 +22,11 @@ export default class ButtonToolBar extends React.Component<ButtonToolbarProps, B
         super(props);
 
         this.state = {
-
         };
     }
     shouldComponentUpdate(nextProps) {
         return false;
     }
-
 
     render() {
         console.log("Button Toolbar was rendered again");

@@ -1,35 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using Database.Services;
+﻿using Database.Services;
 using front_end.Models;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Auth.OAuth2.Flows;
 using Google.Apis.Auth.OAuth2.Responses;
 using Google.Apis.Drive.v3;
-using DriveData = Google.Apis.Drive.v3.Data;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using Model;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using DriveData = Google.Apis.Drive.v3.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace front_end.Controllers
 {
+    /// <summary>
+    /// GoogleController manages all communication with Google Drive SDK.
+    /// </summary>
     [Route("api/[controller]")]
     public class GoogleController : Controller
     {
+        /// <summary>
+        /// Configuration is used to access User credentials during development.
+        /// </summary>
         public IConfiguration Configuration { get; set; }
-        IDataProtector _protector { get; set; }
+
+        /// <summary>
+        /// _protector protects/encrypt data, any data protected by it can only be Unprotected by the same protector instance.
+        /// </summary>
+        private IDataProtector _protector { get; set; }
+
+        /// <summary>
+        /// Used to Log in console and file.
+        /// </summary>
         private readonly ILogger _logger;
 
+        /// <summary>
+        /// Initialise Google Controller.
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="provider"></param>
+        /// <param name="logger"></param>
         public GoogleController(IConfiguration config, IDataProtectionProvider provider, ILogger<BoxController> logger)
         {
             Configuration = config;
@@ -37,8 +57,16 @@ namespace front_end.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Reads Client Secrets from Configuration.
+        /// </summary>
+        /// <returns></returns>
         private ClientSecrets GetClientSecrets() => new ClientSecrets() { ClientId = Configuration["GoogleClientID"], ClientSecret = Configuration["GoogleClientSecret"] };
 
+        /// <summary>
+        /// Returns UserCredential after reading and Decrypting Cookie.
+        /// </summary>
+        /// <returns></returns>
         private UserCredential GetUserCredentials()
         {
             string Cookie = Request.Cookies["GoogleCred"];
@@ -54,6 +82,11 @@ namespace front_end.Controllers
                 ),
                 "user", tokenResponse);
         }
+
+        /// <summary>
+        /// Creates DriveService after reading UserCredentials from encryted Cookie.
+        /// </summary>
+        /// <returns></returns>
         private DriveService GetService()
         {
             UserCredential credential = GetUserCredentials();
@@ -64,6 +97,11 @@ namespace front_end.Controllers
             });
         }
 
+        /// <summary>
+        /// Authenticate is used to exchange Google authorization code with Google access token and refresh token which is then stored in encryted cookie.
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         [Route("Authenticate")]
         [HttpGet]
         public async Task<LocalRedirectResult> Authenticate(string code)
@@ -90,6 +128,11 @@ namespace front_end.Controllers
             return LocalRedirect("/driveExplorer");
         }
 
+        /// <summary>
+        /// GetFolderItems accepts folder id and returns folder items.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("GetFolderItems/{id}")]
         [HttpGet]
         public IActionResult GetFolderItems(string id)
@@ -99,6 +142,11 @@ namespace front_end.Controllers
             return GetGoogleFolderItems(service, id);
         }
 
+        /// <summary>
+        /// Upload accepts files sent in a POST request, which are uploaded inside a folder using a given folder id.
+        /// </summary>
+        /// <param name="currentFolderID"></param>
+        /// <returns></returns>
         [Route("Upload/{currentFolderID}")]
         [HttpPost]
         public IActionResult Upload(string currentFolderID)
@@ -134,9 +182,31 @@ namespace front_end.Controllers
                 }
             }
             return GetGoogleFolderItems(service, currentFolderID);
-
         }
 
+        /// <summary>
+        /// Downloads and returns the file/folder as stream.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Route("Download/{id}")]
+        [HttpGet]
+        public IActionResult Download(string id)
+        {
+            var service = GetService();
+            var request_1 = service.Files.Get(id);
+            var file = request_1.Execute();
+            var request_2 = service.Files.Get(id);
+            var stream = new MemoryStream();
+            request_2.Download(stream);
+            return new FileStreamResult(stream,file.MimeType);
+        }
+
+        /// <summary>
+        /// Search runs a search query using the given string and returns the results.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         [Route("Search/{query}")]
         [HttpGet]
         public IActionResult Search(string query)
@@ -151,6 +221,12 @@ namespace front_end.Controllers
             return Json(ConvertToSend(files));
         }
 
+        /// <summary>
+        /// NewFolder is used to create a new folder with the given name and parent folder id.
+        /// </summary>
+        /// <param name="parentID"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [Route("NewFolder/{parentID}/{name}")]
         [HttpGet]
         public IActionResult NewFolder(string parentID, string name)
@@ -172,6 +248,12 @@ namespace front_end.Controllers
             return StatusCode(500);
         }
 
+        /// <summary>
+        /// Deletes a file or folder using the given id and returns the contents of its parent folder which updates the UI.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="currentFolderID"></param>
+        /// <returns></returns>
         [Route("Delete/{id}/{currentFolderID}")]
         [HttpGet]
         public IActionResult Delete(string id, string currentFolderID)
@@ -185,6 +267,11 @@ namespace front_end.Controllers
             return GetGoogleFolderItems(service, currentFolderID);
         }
 
+        /// <summary>
+        /// Get Preview is used to get a preview link
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("GetPreview/{id}")]
         [HttpGet]
         public IActionResult GetPreview(string id)
@@ -192,14 +279,21 @@ namespace front_end.Controllers
             return Json("https://docs.google.com/viewer?srcid=" + id + "&pid=explorer&efh=false&a=v&chrome=false&embedded=true");
         }
 
+        /// <summary>
+        /// Renames the file using the given newName and returns the contents of its parent folder.
+        /// </summary>
+        /// <param name="newName"></param>
+        /// <param name="uid"></param>
+        /// <param name="currentFolderID"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
         [Route("Rename/{newName}/{uid}/{currentFolderID}/{type}")]
         [HttpGet]
         public IActionResult Rename(string newName, string uid, string currentFolderID, string type)
         {
-
             var service = GetService();
             DriveData.File file = new DriveData.File()
-            { 
+            {
                 Name = newName
             };
             //if (type == "file")
@@ -216,9 +310,14 @@ namespace front_end.Controllers
 
             //Task.Run(() => { RecordFileAction(client, uid, "Rename"); });
             //return await GetBoxFolderItems(client, currentFolderID);
-
         }
 
+        /// <summary>
+        /// Returns a URl link for sharing a file or folder.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("GetSharedLink/{type}/{id}")]
         [HttpGet]
         public IActionResult GetSharedLink(string type, string id)
@@ -227,9 +326,13 @@ namespace front_end.Controllers
             var request = service.Files.Get(id);
             var response = request.Execute();
             return Json(response);
-
         }
 
+        /// <summary>
+        /// Maps and filters received data.
+        /// </summary>
+        /// <param name="files"></param>
+        /// <returns></returns>
         private Content[] ConvertToSend(IList<Google.Apis.Drive.v3.Data.File> files)
         {
             Content[] list = new Content[files.Count];
@@ -248,6 +351,12 @@ namespace front_end.Controllers
             return list;
         }
 
+        /// <summary>
+        /// Get Folder items using service and folder id.
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private IActionResult GetGoogleFolderItems(DriveService service, string id)
         {
             FilesResource.ListRequest request = service.Files.List();
@@ -273,6 +382,11 @@ namespace front_end.Controllers
             return Json(ConvertToSend(files));
         }
 
+        /// <summary>
+        /// Return a DriveData.File using the specified id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private DriveData.File GetDriveFile(string id)
         {
             DriveService service = GetService();
@@ -301,8 +415,5 @@ namespace front_end.Controllers
 
             fileActionService.RecordFileAction(action);
         }
-
-
-
     }
 }
