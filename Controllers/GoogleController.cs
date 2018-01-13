@@ -54,6 +54,7 @@ namespace front_end.Controllers
                 ),
                 "user", tokenResponse);
         }
+
         private DriveService GetService()
         {
             UserCredential credential = GetUserCredentials();
@@ -129,8 +130,7 @@ namespace front_end.Controllers
                     //request.ProgressChanged += Upload_ProgressChanged;
                     //request.ResponseReceived += Upload_ResponseReceived;
                     request.Upload();
-
-                    Task.Run(() => { RecordFileAction(request.ResponseBody.Id, "Upload"); });
+                    RecordFileAction(GetDriveFile(request.ResponseBody.Id), service, "Upload");
                 }
             }
             return GetGoogleFolderItems(service, currentFolderID);
@@ -176,11 +176,13 @@ namespace front_end.Controllers
         [HttpGet]
         public IActionResult Delete(string id, string currentFolderID)
         {
+            DriveData.File fileData = GetDriveFile(id); //Need to retrieve this before deleting in order to record the action
             var service = GetService();
-            Task.Run(() => { RecordFileAction(id, "Delete"); });
 
             var deleterequest = service.Files.Delete(id);
             var verify = deleterequest.Execute();
+
+            RecordFileAction(fileData, service, "Delete");
 
             return GetGoogleFolderItems(service, currentFolderID);
         }
@@ -189,6 +191,9 @@ namespace front_end.Controllers
         [HttpGet]
         public IActionResult GetPreview(string id)
         {
+            DriveService service = GetService();
+            string userID = GetUserID(service);
+            RecordFileAction(GetDriveFile(id), service, "Preview");
             return Json("https://docs.google.com/viewer?srcid=" + id + "&pid=explorer&efh=false&a=v&chrome=false&embedded=true");
         }
 
@@ -206,6 +211,10 @@ namespace front_end.Controllers
             //{
             var request = service.Files.Update(file, uid);
             var response = request.Execute();
+            System.Diagnostics.Debug.WriteLine(uid + " " + file);
+            //string userID = GetUserID(service);
+            //Task.Run(() => { RecordFileAction(uid, userID, "Rename"); });
+            RecordFileAction(GetDriveFile(uid), service, "Rename");
             return GetGoogleFolderItems(service, currentFolderID);
             //BoxFile fileAfterRename = await client.FilesManager.UpdateInformationAsync(new BoxFileRequest() { Id = uid, Name = newName });
             //}
@@ -214,7 +223,6 @@ namespace front_end.Controllers
             //    //BoxFolder boxFolder = await client.FoldersManager.UpdateInformationAsync(new BoxFolderRequest() { Id = uid, Name = newName });
             //}
 
-            //Task.Run(() => { RecordFileAction(client, uid, "Rename"); });
             //return await GetBoxFolderItems(client, currentFolderID);
 
         }
@@ -226,8 +234,8 @@ namespace front_end.Controllers
             var service = GetService();
             var request = service.Files.Get(id);
             var response = request.Execute();
+            RecordFileAction(GetDriveFile(id), service, "Share");
             return Json(response);
-
         }
 
         private Content[] ConvertToSend(IList<Google.Apis.Drive.v3.Data.File> files)
@@ -281,28 +289,44 @@ namespace front_end.Controllers
             return file;
         }
 
-        private void RecordFileAction(string fileID, string actionType)
+        //private void RecordFileAction(string fileID, DriveService service, string actionType)
+        //{
+
+        //    DriveData.File file = GetDriveFile(fileID);
+        //    string userID = GetUserID(service);
+        //    FileAction action = new FileAction(
+        //        fileID,
+        //        file.Md5Checksum,
+        //        "Google Drive",
+        //        userID,
+        //        actionType,
+        //        DateTime.Now);
+
+        //}
+
+        private void RecordFileAction(DriveData.File file, DriveService service, string actionType)
         {
-            DriveService service = GetService();
             FileActionService fileActionService = new FileActionService();
 
-            DriveData.File file = GetDriveFile(fileID);
-            AboutResource.GetRequest request = service.About.Get();
-            request.Fields = "user(emailAddress)";
-            string userID = request.Execute().User.EmailAddress;
+            string userID = GetUserID(service);
 
             FileAction action = new FileAction(
-                fileID,
+                file.Id,
                 file.Md5Checksum,
                 "Google Drive",
                 userID,
                 actionType,
                 DateTime.Now);
 
-            fileActionService.RecordFileAction(action);
+            Task.Run(() => { fileActionService.RecordFileAction(action); });
         }
 
-
-
+        private string GetUserID(DriveService service)
+        {
+            AboutResource.GetRequest request = service.About.Get();
+            request.Fields = "user(emailAddress)";
+            string id = request.Execute().User.EmailAddress;
+            return id;
+        }
     }
 }
