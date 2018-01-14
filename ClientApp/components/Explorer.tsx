@@ -13,6 +13,8 @@ import EmptyFolder from "../components/Alerts/EmptyFolder";
 import * as utility from "../components/utility";
 import { EmptySearch } from "../components/Alerts/EmptySearch";
 import { saveAs } from "file-saver";
+import { ContextMenu } from "./contextmenu";
+
 
 interface ExplorerState {
     // This is space we will put the json response
@@ -326,7 +328,8 @@ export class Explorer extends React.Component<{}, ExplorerState> {
             }
 
             return (
-                <div className="well well-lg pull-down">
+                <div className="well well-lg pull-down" id="target">
+                    <ContextMenu root="target"/>
                     <ToastContainer position="bottom-right" hideProgressBar={true} pauseOnHover={true} newestOnTop={true} toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
 
                     <div style={{ float: "right" }} className="user-details">
