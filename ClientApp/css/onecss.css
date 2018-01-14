@@ -310,6 +310,21 @@ a {
 tr {
     width: 100%;
     display: inline-table;
+    
+}
+
+td {
+    font-size: 11px;
+    vertical-align: middle !important;
+    padding: 6px !important;
+    margin: 0px;
+}
+
+td p {
+    font-size: 11px;
+    vertical-align: middle;
+    padding: 0px;
+    margin: 0px;
 }
 
 tbody {
@@ -317,8 +332,8 @@ tbody {
     overflow-x: hidden;
     height: calc(100vh - 250px);
     position: absolute;
-    padding-right: 36px;
-    width: 100%;
+    padding-right: 0px; 
+    width: calc(100% - 47px);  /*17px for scrollbar width, 24px for explorer well padding, 1px for well border, 5px for explorer margin: THIS DISPLAYS THE SCROLLBAR IN THE CORRECT POSITION*/
 }
 
 /** DROPDOWN MENU **/
@@ -329,6 +344,11 @@ tbody {
 
 .dropdown-menu li {
     cursor: pointer;
+}
+
+.action-btn {
+    padding: 2px 5px !important;
+    font-size: 11px !important;
 }
 
 /** CONTEXT MENU **/
@@ -561,7 +581,7 @@ thead {
 }
 
 tbody {
-    width: 100%;
+    /**width: 100%;**/
 }
 
 /** HOME AND TUTORIAL **/
