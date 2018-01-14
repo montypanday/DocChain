@@ -158,18 +158,18 @@ export class Row extends React.Component<AppProps, AppState> {
         var a = this.getFileExtension(this.props.filename);
         var iconClass = this.getIconClass(a, this.props.mimeType);
         var icon;
-        icon = <span className={iconClass} style={{ verticalAlign: "middle", float: "left", fontSize: "2em" }}></span>;
+        icon = <span className={iconClass} style={{ verticalAlign: "middle", float: "left", fontSize: "1.5em" }}></span>;
         return (
             <tr>
                 <td className="col-xs-6 " >
                     <a onClick={this.props.navHandler} style={{ cursor: "pointer" }}>
                         {icon}
-                        <h5 style={{ float: "left", paddingLeft: "15px" }}>{this.props.filename}</h5>
+                        <p style={{ float: "left", paddingLeft: "15px" }}>{this.props.filename}</p>
                     </a>
                 </td>
                 <td className="col-xs-1 ">
                     {this.props.id != "sharedWithMe" && <div className="dropdown">
-                        <button className="btn btn-default dropdown-toggle" style={{ verticalAlign: "middle" }} type="button" data-toggle="dropdown">...
+                        <button className="btn btn-default dropdown-toggle action-btn" style={{ verticalAlign: "middle" }} type="button" data-toggle="dropdown">...
                             </button>
                         <ul className="dropdown-menu">
                             <li><a onClick={this.props.downloadHandler}><i className="fa fa-download dropDownIcon" aria-hidden="true"></i>Download</a></li>
