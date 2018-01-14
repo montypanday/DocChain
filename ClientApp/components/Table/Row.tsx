@@ -3,9 +3,6 @@ import { render } from "react-dom";
 import { formatSizeUnits } from "./FormatSize";
 import { CheckIfTracked } from "../../api/Chain/FileTracker";
 
-//require('./Dropdown.css');
-//require('./fa-icons.css');
-
 export interface AppProps {
     type: string;
     filename: string;

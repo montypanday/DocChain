@@ -8,8 +8,6 @@ import { HELPIcon } from "../components/SVGs/icon-HELP";
 import { LOGINIcon } from "../components/SVGs/icon-LOGIN";
 import { HOMEIcon } from "../components/SVGs/icon-HOME";
 
-require("../components/Navbar (WIP)/Navbar.css");
-
 export class NavMenu extends React.Component<{}, {}> {
     constructor(props) {
         super(props);

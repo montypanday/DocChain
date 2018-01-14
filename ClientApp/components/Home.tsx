@@ -4,7 +4,6 @@ import { Tutorial2 } from "./tutorial2";
 import { Tutorial3 } from "./tutorial3";
 import { Tutorial4 } from "./tutorial4";
 import { Tutorial5 } from "./tutorial5";
-const s = require("../css/home.css");
 
 //import ErrorSplash from '../components/Alerts/ErrorSplash';
 //import EmptyFolder from '../components/Alerts/EmptyFolder';

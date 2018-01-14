@@ -1,6 +1,5 @@
 ﻿import * as React from "react";
 import { LostConnIcon } from "../SVGs/icon-LostConn";
-require("./ErrorSplash.css");
 
 export default class LostConnect extends React.Component {
 

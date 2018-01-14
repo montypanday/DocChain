@@ -1,5 +1,4 @@
 ﻿import * as React from "react";
-require("../css/singleLogin.css");
 
 interface LoginState {
     loggedIn: boolean;

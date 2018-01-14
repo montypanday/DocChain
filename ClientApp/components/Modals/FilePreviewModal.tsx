@@ -1,7 +1,6 @@
 ﻿import * as React from "react";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-require("./previewModal.css");
 
 export interface AppProps {
     PreviewFileName: any;

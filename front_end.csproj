@@ -92,6 +92,10 @@
   <ItemGroup>
     <PackageReference Update="Microsoft.NETCore.App" Version="2.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ClientApp\components\Breadcrumb %28WIP%29\" />
+    <Folder Include="ClientApp\components\Navbar %28WIP%29\" />
+  </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec Command="npm install" />

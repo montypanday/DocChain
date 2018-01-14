@@ -1,0 +1,736 @@
+﻿/** NAVBAR  **/
+
+.navbar-nav > li > a {
+    padding-right: 10px;
+    padding-left: 10px;
+    height: 50px;
+}
+
+.main-nav li .glyphicon {
+    margin-right: 10px;
+}
+
+/* Highlighting rules for nav menu items */
+.main-nav li a.active,
+.main-nav li a.active:hover,
+.main-nav li a.active:focus {
+    background-color: #4189C7;
+    color: white;
+}
+
+/* Keep the nav menu independent of scrolling and on top of other items */
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    font-family: 'europa', sans-serif;
+    font-style: normal;
+    color: rgba(104, 104, 104, 0.89);
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+/*
+@media (max-width: 767px) {
+    // On small screens, the nav menu spans the full width of the screen. Leave a space for it. 
+    body {
+        padding-top: 50px;
+    }
+}*/
+
+/** SVGs **/
+
+.icon {
+    float: left;
+    vertical-align: middle;
+    margin-right: 8px;
+    margin-top: -5px;
+}
+
+.GDIcon {
+    margin-top: -2px;
+}
+
+.DBIcon {
+    margin-top: -5px;
+}
+
+.ODIcon {
+    margin-top: -7px;
+}
+
+.HELPIcon {
+    margin-top: 0;
+}
+
+.LOGINIcon {
+    margin-top: 0;
+}
+
+.HOMEIcon {
+    margin-top: 0;
+}
+
+.LinkText {
+    float: left;
+    display: none;
+    transition: ease 1s;
+}
+
+a:hover > .LinkText {
+    display: block;
+    clear: right;
+}
+
+.active > .LinkText {
+    display: block;
+    clear: right;
+}
+
+.active {
+    height: initial;
+}
+
+/** LOGIN PAGE **/
+
+.body {
+    font-family: 'europa', sans-serif;
+    color: rgba(104, 104, 104, 0.89);
+    font-size: 1vw;
+}
+
+.select {
+    font-size: 1.5vw;
+    text-align: center;
+    grid-area: select;
+    grid-column: span 2;
+    align-self: center;
+}
+
+.grid-container {
+    position: absolute;
+    width: 20vw;
+    display: grid;
+    left: 50%;
+    top: 10%;
+    margin-left: -10vw;
+    grid-template: repeat(3, 10vw) / repeat(2, 10vw);
+    grid-row-gap: 1vh;
+    grid-column-gap: 1vw;
+    grid-template-areas: 'select select' 'onedrive box' 'googledrive dropbox';
+}
+
+a {
+    text-decoration: none;
+    color: rgba(104, 104, 104, 0.89);
+}
+
+    a:visited {
+        text-decoration: none;
+        color: rgba(104, 104, 104, 0.89);
+    }
+
+    a:hover {
+        text-decoration: none;
+        color: rgba(104, 104, 104, 0.89);
+    }
+
+    a:focus {
+        text-decoration: none;
+        color: rgba(104, 104, 104, 0.89);
+    }
+
+    a:hover, a:active {
+        text-decoration: none;
+        color: rgba(104, 104, 104, 0.89);
+    }
+
+.onedrive {
+    grid-area: onedrive;
+    text-align: center;
+    align-self: baseline;
+}
+
+
+.onedrive-logo {
+    background-image: url('icons/onedrive-icons/icons8-onedrive.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 5vw;
+    margin: 2vh;
+}
+
+.googledrive {
+    grid-area: googledrive;
+    text-align: center;
+    align-self: baseline;
+}
+
+.googledrive-logo {
+    background-image: url('icons/google-product-logos/logo_drive_128px.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 5vw;
+    margin: 2vh;
+}
+
+.dropbox {
+    grid-area: dropbox;
+    text-align: center;
+    align-self: baseline;
+}
+
+.dropbox-logo {
+    background-image: url('icons/dropbox-icons/dropbox-icon256.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 5vw;
+    margin: 2vh;
+}
+
+.box {
+    grid-area: box;
+    text-align: center;
+    align-self: baseline;
+}
+
+.box-logo {
+    background-image: url('icons/box-icon/icons8-box-blue.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 5vw;
+    margin: 2vh;
+}
+
+
+@media (max-width: 767px) {
+
+    .body {
+        font-size: 1.5vh;
+    }
+
+    .grid-container {
+        top: 10%;
+        margin-left: -20vw;
+        width: 60vw;
+        grid-template: repeat(3, 20vw) / repeat(2, 20vw);
+        grid-row-gap: 4vh;
+        grid-column-gap: 0;
+        grid-template-areas: 'select select' 'onedrive box' 'googledrive dropbox';
+    }
+
+    .box-logo, .dropbox-logo, .googledrive-logo, .onedrive-logo {
+        height: 20vw;
+    }
+
+    .select {
+        font-size: 2vh;
+    }
+}
+
+/** SINGLE LOGIN **/
+
+.body {
+    margin-left: auto;
+    margin-right: auto;
+    height: calc(100% - 120px);
+}
+
+.header {
+    position: relative;
+    top: 24vh;
+    font-size: 1.5vw;
+    text-align: center;
+    grid-area: select;
+    grid-column: span 2;
+    align-self: center;
+}
+
+.logo-link {
+    position: relative;
+    top: 24vh;
+    width: 200px;
+}
+
+.logo {
+    text-align: center;
+    align-self: baseline;
+}
+
+.googledrive-logo {
+    background-image: url('icons/google-product-logos/logo_drive_128px.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 5vw;
+    margin: 2vh;
+}
+
+.box-logo {
+    background-image: url('icons/box-icon/icons8-box-blue.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 5vw;
+    margin: 2vh;
+}
+
+/** EXPLORER **/
+
+.loadingGif {
+    text-align: center;
+    align-content: center;
+    font-family: 'europa', sans-serif;
+    font-style: normal;
+    position: fixed;
+    left: 0;
+    right: 0;
+}
+
+.pull-down {
+    margin-top: 55px;
+    margin-left: 5px;
+    margin-right: 5px;
+    position: fixed;
+    height: calc(100vh - 65px);
+}
+
+.table {
+    table-layout: fixed;
+}
+
+tr {
+    width: 100%;
+    display: inline-table;
+}
+
+tbody {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: calc(100vh - 250px);
+    position: absolute;
+    padding-right: 36px;
+    width: 100%;
+}
+
+/** DROPDOWN MENU **/
+
+.dropdown-menu i {
+    padding-right: 5px
+}
+
+.dropdown-menu li {
+    cursor: pointer;
+}
+
+/** CONTEXT MENU **/
+
+.contextMenu {
+    float: left;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    background: white;
+    width: 200px;
+    box-shadow: 0px 2px 10px #999999;
+}
+
+/** BREADCRUMB **/
+
+.breadcrumb {
+    text-align: center;
+    font-family: 'europa', sans-serif;
+    display: inline-block;
+    /*box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.35);*/
+    overflow: hidden;
+    /*Lets add the numbers for each link using CSS counters. flag is the name of the counter. to be defined using counter-reset in the parent element of the links*/
+    counter-reset: flag;
+    width: 100%;
+    background: rgb(245, 245, 245);
+    padding: 0;
+}
+
+    .breadcrumb a {
+        text-decoration: none;
+        outline: none;
+        display: block;
+        float: left;
+        cursor: pointer;
+        line-height: 36px;
+        color: white;
+        /*need more margin on the left of links to accomodate the numbers*/
+        padding: 0 10px 0 30px;
+        background: #666;
+        background: linear-gradient(#666, #333);
+        position: relative;
+        border: 1px solid #e3e3e3;
+    }
+        /*since the first link does not have a triangle before it we can reduce the left padding to make it look consistent with other links*/
+        .breadcrumb a:first-child {
+            padding-left: 15px;
+            border-radius: 5px 0 0 5px; /*to match with the parent's radius*/
+        }
+
+            .breadcrumb a:first-child:before {
+                left: 14px;
+            }
+
+        .breadcrumb a:last-child {
+            border-radius: 0 5px 5px 0; /*this was to prevent glitches on hover*/
+            /*padding-right: 20px;*/
+            /*width: 100%;*/
+        }
+
+        /*hover/active styles*/
+        .breadcrumb a.active, .breadcrumb a:hover {
+            background: #333;
+            background: linear-gradient(#333, #000);
+        }
+
+            .breadcrumb a.active:after, .breadcrumb a:hover:after {
+                background: #333;
+                background: linear-gradient(135deg, #333, #000);
+            }
+
+        /*adding the arrows for the breadcrumbs using rotated pseudo elements*/
+        .breadcrumb a:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -18px; /*half of square's length*/
+            /*same dimension as the line-height of .breadcrumb a */
+            width: 36px;
+            height: 36px;
+            /*as you see the rotated square takes a larger height. which makes it tough to position it properly. So we are going to scale it down so that the diagonals become equal to the line-height of the link. We scale it to 70.7% because if square's:
+length = 1; diagonal = (1^2 + 1^2)^0.5 = 1.414 (pythagoras theorem)
+if diagonal required = 1; length = 1/1.414 = 0.707*/
+            transform: scale(0.707) rotate(45deg);
+            /*we need to prevent the arrows from getting buried under the next link*/
+            z-index: 1;
+            /*background same as links but the gradient will be rotated to compensate with the transform applied*/
+            background: #666;
+            background: linear-gradient(135deg, #666, #333);
+            /*THIS IS THE ARROW COLOURING stylish arrow design using box shadow*/
+            box-shadow: 2px -2px 0 2px rgba(108,187,255, 0.5), 3px -3px 0 2px rgba(108,187,255, 0.2);
+            /*
+5px - for rounded arrows and
+50px - to prevent hover glitches on the border created using shadows*/
+            border-radius: 0 5px 0 50px;
+        }
+        /*we dont need an arrow after the last link*/
+        .breadcrumb a:last-child:after {
+            content: none;
+        }
+
+.flat a, .flat a:after {
+    background: white;
+    color: black;
+    transition: all 0.5s;
+}
+
+    .flat a:hover, .flat a.active,
+    .flat a:hover:after, .flat a.active:after {
+        background: #DDDDDD;
+    }
+
+/** BUTTON TOOLBAR **/
+
+div {
+    font-family: 'europa', sans-serif;
+}
+
+.power-icon {
+    padding-right: 5px;
+}
+
+/** UPLOAD BUTTON **/
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: text;
+        display: block;
+    }
+
+/** TABLE HEADING **/
+
+thead {
+    font-family: 'europa', sans-serif;
+}
+
+/** FA ICONS **/
+
+.fa-lock {
+    color: rgb(108,187,255);
+}
+
+.fa-file-pdf-o {
+    color: red;
+}
+
+.fa-file-powerpoint-o {
+    color: coral;
+}
+
+.fa-file-word-o {
+    color: dodgerblue;
+}
+
+.fa-file-image-o {
+    color: slategrey;
+}
+
+
+.fa-file-excel-o {
+    color: forestgreen;
+}
+
+.fa-folder {
+    color: #ffcc80;
+}
+
+.fa-file-archive-o {
+    color: #ffcc80;
+}
+
+/** MODALS **/
+
+.preview-dialog > div:first-child {
+    width: 75vw;
+    height: 90vh;
+}
+
+.preview-dialog > .modal-dialog > div:first-child {
+    height: 100%;
+}
+
+.preview-body {
+    width: 100%;
+    height: calc(100% - 120px);
+    padding: 15px;
+}
+
+    .preview-body embed {
+        width: 100%;
+        height: 100%;
+    }
+
+/** ALERTS AND ERRORS **/
+
+.errorIcon {
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+.splash {
+    position: center;
+    margin-top: 100px;
+}
+
+    .splash p {
+        text-align: center;
+    }
+
+.inTbody {
+    padding-top: calc((100vh/2) - 220px);
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+tbody {
+    width: 100%;
+}
+
+/** HOME AND TUTORIAL **/
+
+.body {
+    background-color: white;
+    font-family: 'europa', sans-serif;
+    font-style: normal;
+    color: rgba(104, 104, 104, 0.89);
+    font-size: 16px;
+    height: 100vh;
+    margin: 0;
+}
+
+.welcome {
+    font-size: 2vw;
+    font-weight: 700;
+    color: #6CBBFF;
+    text-align: center;
+    margin: 0;
+    margin-bottom: 1vh;
+}
+
+.loading {
+    font-size: 1.25vw;
+    font-weight: 300;
+}
+
+.center-fade {
+    -moz-animation: fade 3s ease-in 1 forwards;
+    -webkit-animation: fade 3s ease-in 1 forwards;
+    animation: fade 3s ease-in 1 forwards;
+    padding-top: 30vh;
+    position: relative;
+    width: 50%;
+    left: 25%;
+}
+
+.pic-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.login-picture {
+    background-image: url("../css/img/LoginBTN.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 210px 48px;
+    height: 48px;
+    width: 210px;
+}
+
+
+.explorer-picture {
+    background-size: 210px 48px;
+    height: 48px;
+    width: 210px;
+    background-image: url("img/ExplorerBTN.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.embed-picture {
+    background-size: 210px 48px;
+    height: 48px;
+    width: 210px;
+    background-image: url("img/EmbedBTN.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.match-picture {
+    background-size: 210px 48px;
+    height: 48px;
+    width: 210px;
+    background-image: url("img/MatchBTN.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+
+.tutorial-container {
+    text-align: center;
+    font-size: 16px;
+    padding-top: 2vh;
+    -moz-animation: appear 2s ease-in 1 forwards;
+    -webkit-animation: appear 2s ease-in 1 forwards;
+    animation: appear 2s ease-in 1 forwards;
+    width: 50%;
+    margin-left: 25%;
+}
+
+.prev {
+    float: left;
+}
+
+.next {
+    float: right;
+}
+
+.center-fade {
+    text-align: center;
+    font-size: 16px;
+}
+
+.center-appear {
+    text-align: center;
+    font-size: 16px;
+    width: 30%;
+    padding-left: 35%;
+    -moz-animation: appear 3s ease-in 1 forwards;
+    -webkit-animation: appear 3s ease-in 1 forwards;
+    animation: appear 3s ease-in 1 forwards;
+}
+
+@-webkit-keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    33% {
+        opacity: 1;
+    }
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    33% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes appear {
+    0% {
+        opacity: 0;
+    }
+
+    90% {
+        opacity: 0;
+    }
+
+    99% {
+        opacity: .75;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+
+    90% {
+        opacity: 0;
+    }
+
+    99% {
+        opacity: .75;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

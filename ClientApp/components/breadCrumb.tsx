@@ -1,6 +1,5 @@
 ﻿﻿import * as React from "react";
 import { render } from "react-dom";
-require("../components/Breadcrumb (WIP)/breadcrumb.css");
 
 export interface BreadCrumbProps {
     pathCollection: any;

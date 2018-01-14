@@ -12,7 +12,6 @@ import { css } from "glamor";
 import EmptyFolder from "../components/Alerts/EmptyFolder";
 import * as utility from "../components/utility";
 import { EmptySearch } from "../components/Alerts/EmptySearch";
-require("../css/Explorers.css");
 import { saveAs } from "file-saver";
 
 interface ExplorerState {
