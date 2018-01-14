@@ -35,7 +35,7 @@ namespace front_end.Controllers
             }
             catch (Exception e)
             {
-                e.GetBaseException();
+                System.Diagnostics.Debug.WriteLine(e.Message);
                 return new JsonResult("Json deserializing failed");
             }
             try
@@ -44,8 +44,44 @@ namespace front_end.Controllers
                 return new JsonResult(JsonConvert.SerializeObject(fileAction));
             } catch (Exception e)
             {
-                e.GetBaseException();
+                System.Diagnostics.Debug.WriteLine(e.Message);
                 return new JsonResult("Database write failed");
+            }
+        }
+
+        [Route("GetActionsByFile/{fileID}/{platform}")]
+        [HttpGet]
+        public JsonResult GetActionsByFile([FromRoute]String fileID, [FromRoute]String platform)
+        {
+            List<FileAction> actions = new List<FileAction>();
+            try
+            {
+                actions = fileActionService.GetActionsByFile(fileID, platform);
+                string json = JsonConvert.SerializeObject(actions);
+                return new JsonResult(json);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+                return new JsonResult("File Action Query Failed");
+            }
+        }
+
+        [Route("GetActionsByUser/{email}")]
+        [HttpGet]
+        public JsonResult GetActionsByUser([FromRoute]String email)
+        {
+            List<FileAction> actions = new List<FileAction>();
+            try
+            {
+                actions = fileActionService.GetActionsByUser(email);
+                string json = JsonConvert.SerializeObject(actions);
+                return new JsonResult(json);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+                return new JsonResult("File Action Query Failed");
             }
         }
     }

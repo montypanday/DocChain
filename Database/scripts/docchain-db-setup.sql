@@ -20,13 +20,15 @@
 --
 CREATE TABLE `fileactions` (
   `ActionTime` datetime NOT NULL,
-  `fileID` varchar(64) NOT NULL,
+  `FileID` varchar(64) NOT NULL,
   `StoragePlatform` varchar(20) NOT NULL,
   `ActionType` varchar(20) NOT NULL,
   `UserName` varchar(64) NOT NULL,
   `UserEmail` varchar(64) NOT NULL,
   `FileHash` varchar(64) DEFAULT NULL,
-  PRIMARY KEY (`fileID`,`StoragePlatform`,`ActionTime`)
+  PRIMARY KEY (`fileID`,`StoragePlatform`,`ActionTime`),
+  KEY `index_file` (`FileID`,`StoragePlatform`),
+  KEY `index_user` (`UserEmail`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -35,7 +37,7 @@ CREATE TABLE `fileactions` (
 --
 LOCK TABLES `fileactions` WRITE;
 /*!40000 ALTER TABLE `fileactions` DISABLE KEYS */;
-INSERT INTO `fileactions` VALUES ();
+INSERT INTO `fileactions` VALUES ('2018-01-14 18:40:00','263262635409','Box','Preview','Matt Smith','smmath@deakin.edu.au','fbfe7fc35ac24fd40b83c41f7e7e515a8751af3c');
 /*!40000 ALTER TABLE `fileactions` ENABLE KEYS */;
 UNLOCK TABLES;
 
