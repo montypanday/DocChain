@@ -10,16 +10,18 @@ namespace Model
         public string FileID { get; set; }
         public string FileHash { get; set; }
         public string StoragePlatform { get; set; }
-        public string UserID { get; set; }
+        public string UserName { get; set; }
+        public string UserEmail { get; set; }
         public DateTime ActionTime { get; set; }
         public string ActionType { get; set; }
 
-        public FileAction(string id, string fileHash, string storagePlatform, string userID, string actionType, DateTime actionTime)
+        public FileAction(string id, string fileHash, string storagePlatform, string userName, string userEmail, string actionType, DateTime actionTime)
         {
             this.FileID = id;
             this.FileHash = fileHash;
             this.StoragePlatform = storagePlatform;
-            this.UserID = userID;
+            this.UserName = userName;
+            this.UserEmail = userEmail;
             this.ActionType = actionType;
             this.ActionTime = actionTime;
         }
@@ -36,7 +38,8 @@ namespace Model
             FileID = (string)jFileAction["FileID"];
             FileHash = (string)jFileAction["FileHash"];
             StoragePlatform = (string)jFileAction["StoragePlatform"];
-            UserID = (string)jFileAction["UserID"];
+            UserName = (string)jFileAction["UserName"];
+            UserEmail = (string)jFileAction["UserEmail"];
             ActionTime = DateTime.Now;
             ActionType = (string)jFileAction["ActionType"];
         }

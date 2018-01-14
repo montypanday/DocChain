@@ -279,7 +279,6 @@ namespace front_end.Controllers
         public IActionResult GetPreview(string id)
         {
             DriveService service = GetService();
-            string userID = GetUserID(service);
             RecordFileAction(GetDriveFile(id), service, "Preview");
             return Json("https://docs.google.com/viewer?srcid=" + id + "&pid=explorer&efh=false&a=v&chrome=false&embedded=true");
         }
@@ -404,44 +403,31 @@ namespace front_end.Controllers
             return file;
         }
 
-        //private void RecordFileAction(string fileID, DriveService service, string actionType)
-        //{
-
-        //    DriveData.File file = GetDriveFile(fileID);
-        //    string userID = GetUserID(service);
-        //    FileAction action = new FileAction(
-        //        fileID,
-        //        file.Md5Checksum,
-        //        "Google Drive",
-        //        userID,
-        //        actionType,
-        //        DateTime.Now);
-
-        //}
-
         private void RecordFileAction(DriveData.File file, DriveService service, string actionType)
         {
             FileActionService fileActionService = new FileActionService();
 
-            string userID = GetUserID(service);
-
+            string[] userDetails = GetUserDetails(service);
             FileAction action = new FileAction(
                 file.Id,
                 file.Md5Checksum,
-                "Google Drive",
-                userID,
+                "Drive",
+                userDetails[0],
+                userDetails[1],
                 actionType,
                 DateTime.Now);
 
             Task.Run(() => { fileActionService.RecordFileAction(action); });
         }
 
-        private string GetUserID(DriveService service)
+        private string[] GetUserDetails(DriveService service)
         {
+            string[] details = new string[2];
             AboutResource.GetRequest request = service.About.Get();
-            request.Fields = "user(emailAddress)";
-            string id = request.Execute().User.EmailAddress;
-            return id;
+            request.Fields = "user(emailAddress, displayName)";
+            details.SetValue(request.Execute().User.EmailAddress, 0);
+            details.SetValue(request.Execute().User.DisplayName, 1);
+            return details;
         }
     }
 }

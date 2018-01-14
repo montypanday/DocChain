@@ -508,12 +508,17 @@ namespace front_end.Controllers
         {
             FileActionService fileActionService = new FileActionService();
             Content file = GetBoxItem(client, fileID).Result;
-            string userID = client.UsersManager.GetCurrentUserInformationAsync(new String[1] { "id" }).Result.Id;
+            BoxUser user = client.UsersManager.GetCurrentUserInformationAsync(new String[2] { "name", "login" }).Result;
+            string userName = user.Name;
+            string userEmail = user.Login;
+            System.Diagnostics.Debug.WriteLine(userName + " " + userEmail);
+
             FileAction action = new FileAction(
                 fileID,
                 file.Hash,
                 "Box",
-                userID,
+                userName,
+                userEmail,
                 actionType,
                 DateTime.Now
             );

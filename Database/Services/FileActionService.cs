@@ -16,6 +16,7 @@ namespace Database.Services
             try
             {
                 connection.Get().Insert(action);
+                System.Diagnostics.Debug.WriteLine(action.ActionType + " action successfully tracked");
             }
             catch (MySqlException e)
             {
@@ -28,6 +29,7 @@ namespace Database.Services
             try
             {
                 connection.Get().Insert(actions);
+                System.Diagnostics.Debug.WriteLine("actions successfully tracked");
             }
             catch (MySqlException e)
             {
@@ -35,14 +37,14 @@ namespace Database.Services
             }
         }
 
-        public SortedList<DateTime, FileAction> GetUserActions(string userID)
+        public SortedList<DateTime, FileAction> GetUserActions(string email)
         {
             SortedList<DateTime, FileAction> sortedActions = new SortedList<DateTime, FileAction>();
 
             try
             {
-                string sql = "SELECT * FROM fileactions WHERE userid = @UserID";
-                var actions = connection.Get().Query<FileAction>(sql, new { UserID = userID }).AsList<FileAction>();
+                string sql = "SELECT * FROM fileactions WHERE userid = @UserEmail";
+                var actions = connection.Get().Query<FileAction>(sql, new { UserEmail = email}).AsList<FileAction>();
                 actions.ForEach(action => sortedActions.Add(action.ActionTime, action));
             }
             catch (MySqlException e)
