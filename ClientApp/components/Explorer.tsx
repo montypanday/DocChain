@@ -328,7 +328,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
             }
 
             return (
-                <div className="well well-lg pull-down" id="target">
+                <div className="well pull-down" id="target">
                     <ContextMenu root="target"/>
                     <ToastContainer position="bottom-right" hideProgressBar={true} pauseOnHover={true} newestOnTop={true} toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
 

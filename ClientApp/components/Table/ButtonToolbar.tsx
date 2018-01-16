@@ -34,18 +34,18 @@ export default class ButtonToolBar extends React.Component<ButtonToolbarProps, B
                     </button>
                     <ul className="dropdown-menu">
                         <li><a className="btn-file">
-                            Upload Files <input id="uploadINPUT" multiple type="file" onChange={e => { this.props.uploadHandler(e.target.files); }} />
+                            <i className="fa fa-arrow-circle-o-up dropDownIcon" aria-hidden="true"></i>Upload file <input id="uploadINPUT" multiple type="file" onChange={e => { this.props.uploadHandler(e.target.files); }} />
                         </a></li>
                     </ul>
                 </div>
                 <div className="btn-group">
                     <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        New <span className="caret"></span>
+                        <i className="fa fa-plus-square-o dropDownIcon" aria-hidden="true"></i>New <span className="caret"></span>
                     </button>
                     <ul className="dropdown-menu">
                         {/* // TODO: PATRICK: Add icon for dropdown options.
                          // For example New Folder option should show a fontawesome folder in left*/}
-                        <li><a onClick={this.props.NewFolderHandler} > New Folder</a></li>
+                        <li><a onClick={this.props.NewFolderHandler} > <i className="fa fa-folder-open-o dropDownIcon" aria-hidden="true"></i>New Folder</a></li>
                     </ul>
                 </div>
                 <Button bsStyle="danger"><i className="fa fa-power-off power-icon" aria-hidden="true"></i>Logout</Button>

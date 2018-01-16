@@ -1,4 +1,33 @@
-﻿/** NAVBAR  **/
+﻿/*DESIGN SCHEME RULES*/
+/*
+DocChain Grey: #636363
+DocChain Blue: #AFCBFF
+DocChain Deep Blue: #058ED9
+DocChain Deep Grey: #1B1B1E
+Plain White: #FFFFFF
+Font: Europa
+Font-Size: 11px base.
+*/
+
+
+/*BASE RULES*/
+body {
+    color: #636363;
+    font-family: "europa",sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 11px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /*background-color: #1B1B1E;*/
+}
+
+/** NAVBAR  **/
+
+.navbar {
+    background-color: #1B1B1E;
+    border-color: #636363;
+}
 
 .navbar-nav > li > a {
     padding-right: 10px;
@@ -14,7 +43,7 @@
 .main-nav li a.active,
 .main-nav li a.active:hover,
 .main-nav li a.active:focus {
-    background-color: #4189C7;
+    background-color: #058ED9;
     color: white;
 }
 
@@ -25,14 +54,10 @@
     left: 0;
     right: 0;
     z-index: 100;
-    font-family: 'europa', sans-serif;
-    font-style: normal;
-    color: rgba(104, 104, 104, 0.89);
-    font-size: 16px;
+    color: #1B1B1E;
+    font-size: 14px;
     margin: 0;
     padding: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 /*
 @media (max-width: 767px) {
@@ -98,8 +123,6 @@ a:hover > .LinkText {
 /** LOGIN PAGE **/
 
 .body {
-    font-family: 'europa', sans-serif;
-    color: rgba(104, 104, 104, 0.89);
     font-size: 1vw;
 }
 
@@ -126,27 +149,27 @@ a:hover > .LinkText {
 
 a {
     text-decoration: none;
-    color: rgba(104, 104, 104, 0.89);
+    color: #636363;
 }
 
     a:visited {
         text-decoration: none;
-        color: rgba(104, 104, 104, 0.89);
+        color: #636363;
     }
 
     a:hover {
         text-decoration: none;
-        color: rgba(104, 104, 104, 0.89);
+        color: #636363;
     }
 
     a:focus {
         text-decoration: none;
-        color: rgba(104, 104, 104, 0.89);
+        color: #636363;
     }
 
     a:hover, a:active {
         text-decoration: none;
-        color: rgba(104, 104, 104, 0.89);
+        color: #636363;
     }
 
 .onedrive {
@@ -288,8 +311,6 @@ a {
 .loadingGif {
     text-align: center;
     align-content: center;
-    font-family: 'europa', sans-serif;
-    font-style: normal;
     position: fixed;
     left: 0;
     right: 0;
@@ -301,6 +322,7 @@ a {
     margin-right: 5px;
     position: fixed;
     height: calc(100vh - 65px);
+    border-color: #636363;
 }
 
 .table {
@@ -309,19 +331,29 @@ a {
 
 tr {
     width: 100%;
-    display: inline-table;
-    
+    display: inline-table;  
 }
 
 td {
-    font-size: 11px;
     vertical-align: middle !important;
     padding: 6px !important;
     margin: 0px;
 }
 
+.dropdown {
+    text-align: center;
+}
+
+.action-head, .secure-head{
+    text-align: center;
+}
+
+.secure-col{
+    text-align:center;
+    font-size: .85em;
+}
+
 td p {
-    font-size: 11px;
     vertical-align: middle;
     padding: 0px;
     margin: 0px;
@@ -338,12 +370,19 @@ tbody {
 
 /** DROPDOWN MENU **/
 
-.dropdown-menu i {
-    padding-right: 5px
+.dropDownIcon {
+    padding-right: 5px;
+    text-align: left;
+    color: #636363;
 }
 
 .dropdown-menu li {
     cursor: pointer;
+    font-size:11px;
+}
+
+.dropdown-menu > li > a {
+    padding-left: 12px; /*Override the bootstrap 20px padding, it's too much*/
 }
 
 .action-btn {
@@ -367,7 +406,7 @@ tbody {
 
 .breadcrumb {
     text-align: center;
-    font-family: 'europa', sans-serif;
+    font-size: 12px;
     display: inline-block;
     /*box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.35);*/
     overflow: hidden;
@@ -384,18 +423,18 @@ tbody {
         display: block;
         float: left;
         cursor: pointer;
-        line-height: 36px;
+        line-height: 2.3em;
         color: white;
         /*need more margin on the left of links to accomodate the numbers*/
-        padding: 0 10px 0 30px;
+        padding: 0 10px 0 25px;
         background: #666;
         background: linear-gradient(#666, #333);
         position: relative;
-        border: 1px solid #e3e3e3;
+        border: 1px solid #636363;
     }
         /*since the first link does not have a triangle before it we can reduce the left padding to make it look consistent with other links*/
         .breadcrumb a:first-child {
-            padding-left: 15px;
+            padding-left: 10px;
             border-radius: 5px 0 0 5px; /*to match with the parent's radius*/
         }
 
@@ -425,10 +464,10 @@ tbody {
             content: '';
             position: absolute;
             top: 0;
-            right: -18px; /*half of square's length*/
+            right: -1.15em; /*half of square's length*/
             /*same dimension as the line-height of .breadcrumb a */
-            width: 36px;
-            height: 36px;
+            width: 2.3em;
+            height: 2.3em;
             /*as you see the rotated square takes a larger height. which makes it tough to position it properly. So we are going to scale it down so that the diagonals become equal to the line-height of the link. We scale it to 70.7% because if square's:
 length = 1; diagonal = (1^2 + 1^2)^0.5 = 1.414 (pythagoras theorem)
 if diagonal required = 1; length = 1/1.414 = 0.707*/
@@ -439,7 +478,7 @@ if diagonal required = 1; length = 1/1.414 = 0.707*/
             background: #666;
             background: linear-gradient(135deg, #666, #333);
             /*THIS IS THE ARROW COLOURING stylish arrow design using box shadow*/
-            box-shadow: 2px -2px 0 2px rgba(108,187,255, 0.5), 3px -3px 0 2px rgba(108,187,255, 0.2);
+            box-shadow: 2px -2px 0 2px #058ED9, 3px -3px 0 2px #058ED9;
             /*
 5px - for rounded arrows and
 50px - to prevent hover glitches on the border created using shadows*/
@@ -458,14 +497,10 @@ if diagonal required = 1; length = 1/1.414 = 0.707*/
 
     .flat a:hover, .flat a.active,
     .flat a:hover:after, .flat a.active:after {
-        background: #DDDDDD;
+        background: #AFCBFF;
     }
 
 /** BUTTON TOOLBAR **/
-
-div {
-    font-family: 'europa', sans-serif;
-}
 
 .power-icon {
     padding-right: 5px;
@@ -476,6 +511,7 @@ div {
 .btn-file {
     position: relative;
     overflow: hidden;
+    line-height: 2.3em;
 }
 
     .btn-file input[type=file] {
@@ -494,16 +530,10 @@ div {
         display: block;
     }
 
-/** TABLE HEADING **/
-
-thead {
-    font-family: 'europa', sans-serif;
-}
-
 /** FA ICONS **/
 
 .fa-lock {
-    color: rgb(108,187,255);
+    color: #058ED9;
 }
 
 .fa-file-pdf-o {
@@ -575,7 +605,7 @@ thead {
     }
 
 .inTbody {
-    padding-top: calc((100vh/2) - 220px);
+    padding-top: calc((100vh/2) - 280px);
     padding-bottom: 5px;
     width: 100%;
 }
@@ -587,11 +617,6 @@ tbody {
 /** HOME AND TUTORIAL **/
 
 .body {
-    background-color: white;
-    font-family: 'europa', sans-serif;
-    font-style: normal;
-    color: rgba(104, 104, 104, 0.89);
-    font-size: 16px;
     height: 100vh;
     margin: 0;
 }

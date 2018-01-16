@@ -285,7 +285,7 @@ export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
             //rows is the variable which is being inserted into the render function at its given function see {rows} in render method.
 
             return (
-                <div className="well well-lg pull-down" id="target">
+                <div className="well pull-down" id="target">
                     <ContextMenu root="target" />
                     <ToastContainer position="bottom-right" toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
                     <div style={{ float: "right" }} className="user-details">
