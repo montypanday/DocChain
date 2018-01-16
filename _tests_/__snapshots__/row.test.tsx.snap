@@ -1,9 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Link changes the class when hovered 1`] = `
-<tr>
+<tr
+  id="43970020269"
+>
   <td
     className="col-xs-6 "
+    id="43970020269"
   >
     <a
       onClick={[MockFunction]}
@@ -18,12 +21,12 @@ exports[`Link changes the class when hovered 1`] = `
         style={
           Object {
             "float": "left",
-            "fontSize": "2em",
+            "fontSize": "1.5em",
             "verticalAlign": "middle",
           }
         }
       />
-      <h5
+      <p
         style={
           Object {
             "float": "left",
@@ -32,7 +35,7 @@ exports[`Link changes the class when hovered 1`] = `
         }
       >
         sample folder
-      </h5>
+      </p>
     </a>
   </td>
   <td
@@ -42,11 +45,12 @@ exports[`Link changes the class when hovered 1`] = `
       className="dropdown"
     >
       <button
-        className="btn btn-default dropdown-toggle"
+        className="btn btn-default dropdown-toggle action-btn"
         data-toggle="dropdown"
         style={
           Object {
             "verticalAlign": "middle",
+            "zIndex": 0,
           }
         }
         type="button"
@@ -58,8 +62,7 @@ exports[`Link changes the class when hovered 1`] = `
       >
         <li>
           <a
-            download={true}
-            href="#"
+            onClick=""
           >
             <i
               aria-hidden="true"
@@ -82,7 +85,7 @@ exports[`Link changes the class when hovered 1`] = `
         </li>
         <li>
           <a
-            href="#"
+            onClick=""
           >
             <i
               aria-hidden="true"
@@ -93,7 +96,61 @@ exports[`Link changes the class when hovered 1`] = `
         </li>
         <li>
           <a
-            href="#"
+            onClick=""
+          >
+            <i
+              aria-hidden="true"
+              className="fa fa-share dropDownIcon"
+            />
+            Share
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div
+      className="contextmenu dropdown"
+      id="contextMenu43970020269"
+    >
+      <ul
+        className="dropdown-menu"
+      >
+        <li>
+          <a
+            onClick=""
+          >
+            <i
+              aria-hidden="true"
+              className="fa fa-download dropDownIcon"
+            />
+            Download
+          </a>
+        </li>
+        <li>
+           
+          <a
+            onClick={[MockFunction]}
+          >
+            <i
+              aria-hidden="true"
+              className="fa fa-trash-o dropDownIcon"
+            />
+            Delete
+          </a>
+        </li>
+        <li>
+          <a
+            onClick=""
+          >
+            <i
+              aria-hidden="true"
+              className="fa fa-pencil-square-o dropDownIcon"
+            />
+            Rename
+          </a>
+        </li>
+        <li>
+          <a
+            onClick=""
           >
             <i
               aria-hidden="true"
