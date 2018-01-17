@@ -8,22 +8,20 @@ Currently your Google Drive and Box.com files can be used, with plans to broaden
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 
 --Prequisites--
-What things you need to install and how to install them.
-//
+
 	1. Visual Studio Community '17
 		i. https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=Community&rel=15
 		ii. install as you would any program
 	2. NodeJS
 		i. https://nodejs.org/dist/v8.9.4/node-v8.9.4-x64.msi
 		ii. run the .msi
-//	
-		
+	
 --Installing--
 A step-by-step guide of examples that will get your development environment running
 
 ((BEAR IN MIND THINGS WE CANNOT INCLUDE FOR SECURITY PURPOSES))
 
-//
+
 1. Gathering all the required files.
 	i. Navigate to the Clone or Download button on the GitHub repo, and selection an option.
 	ii. Download the required >>dist<< folder _here_ which you will need to move to the project wwwroot folder
@@ -57,28 +55,28 @@ A step-by-step guide of examples that will get your development environment runn
 	xiii. if there are, select, right-click and update these packages, to do this for all packages at once right-click npm and update all packages
 4. Intialising the Database
 	i.
-//
+
 	
 --Built With--
 
 The core technologies used to build the project.
-//
+
 	1. ReactJS
 	2. ASP.NET
 	3. NodeJS
 	4. Webpack
 	5. SQL SERVER?
-//
+
 
 --Authors--
 
-//
+
 	- Monty Panday: Chief Programmer, Project Lead 					https://github.com/montypanday
 	- Matthew Smith: Programmer, Database Integrations				https://github.com/smmath
 	- Patrick Mitchell: Programmer, UX & UI Designer					https://github.com/pgmitche
 	- Roy Lou: Programmer														https://github.com/LGNRoy
 	- Anushi Jayawardana: Security Analysis and Documentation
-//
+
 	
 --Acknowledgments--
 Individuals of note and projects we pilfered.
@@ -86,11 +84,11 @@ Individuals of note and projects we pilfered.
 	- Leonard Hoon: Guidance, advice and supervision
 	
 	These already come with the project but deserve mentioning for heavily augmenting the UX;
-	//
+
 	- Toastify: https://www.npmjs.com/package/react-toastify for handling in-app alerts and notifications
 	- React-file-viewer: https://www.npmjs.com/package/react-file-viewer for handling in-app file previews
 	- Bootstrap: https://www.npmjs.com/package/react-bootstrap for some design assistance
 	- FontAwesome: https://www.npmjs.com/package/font-awesome for providing some icons
 	- React-dropzone: https://www.npmjs.com/package/react-dropzone for handling drag-drop uploads
-	//
+
 ----- END -----	
