@@ -46,6 +46,17 @@ export function GetPreview(id: string): Promise<any> {
         });
 }
 
+/**
+ * Download File as stream.
+ * @param id
+ */
+export function GDownload(id: string): Promise<any> {
+    return fetch("api/Google/Download/" + id, { credentials: "same-origin" })
+        .then(response => {
+            return response.blob();
+        });
+}
+
 export function GNavigateIntoFolder(id: string) {
     return fetch("api/Google/GetFolderItems/" + id, { credentials: "same-origin" })
         .then(response => {

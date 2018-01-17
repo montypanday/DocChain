@@ -5,6 +5,7 @@ require("./ErrorSplash.css");
 export default class EmptyFolder extends React.Component {
 
     public render() {
+      
         return (<div className="splash inTbody">
             <EmptyFolderIcon></EmptyFolderIcon>
             <p>This folder contains no files.</p>

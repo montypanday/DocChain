@@ -20,7 +20,7 @@ namespace Database
                 Server = "localhost",
                 Database = "docchain",
                 UserID = "root",
-                Password = "Lincd"
+                Password = "root"
             };
             connection = new MySqlConnection(connectionString.ToString());
             Open();
@@ -67,7 +67,7 @@ namespace Database
                 return false;
             }
         }
-        
+
 
         //Closing the database connection before the object is cleaned up by garbage collection
         ~ConnectionProvider()

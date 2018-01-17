@@ -57,18 +57,6 @@ exports[`Link changes the class when hovered 1`] = `
         className="dropdown-menu"
       >
         <li>
-          <a
-            download={true}
-            href="#"
-          >
-            <i
-              aria-hidden="true"
-              className="fa fa-download dropDownIcon"
-            />
-            Download
-          </a>
-        </li>
-        <li>
            
           <a
             onClick={[MockFunction]}
@@ -82,7 +70,7 @@ exports[`Link changes the class when hovered 1`] = `
         </li>
         <li>
           <a
-            href="#"
+            onClick=""
           >
             <i
               aria-hidden="true"
@@ -93,7 +81,7 @@ exports[`Link changes the class when hovered 1`] = `
         </li>
         <li>
           <a
-            href="#"
+            onClick=""
           >
             <i
               aria-hidden="true"
@@ -105,14 +93,6 @@ exports[`Link changes the class when hovered 1`] = `
       </ul>
     </div>
   </td>
-  <td
-    className="col-xs-1 "
-    style={
-      Object {
-        "verticalAlign": "middle",
-      }
-    }
-  />
   <td
     className="col-xs-1 "
     style={

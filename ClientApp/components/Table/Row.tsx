@@ -3,8 +3,8 @@ import { render } from "react-dom";
 import { formatSizeUnits } from "./FormatSize";
 import { CheckIfTracked } from "../../api/Chain/FileTracker";
 
-//require('./Dropdown.css');
-//require('./fa-icons.css');
+// require('./Dropdown.css');
+// require('./fa-icons.css');
 
 export interface AppProps {
     type: string;
@@ -16,10 +16,8 @@ export interface AppProps {
     mimeType: any;
     deleteHandler: any;
     downloadHandler: any,
-
     renameHandler: any;
     shareLinkHandler: any;
-
     platform: string;
 }
 
@@ -142,7 +140,7 @@ export class Row extends React.Component<AppProps, AppState> {
         return (a || b || c || d);
     }
 
-    //This method is method is no longer being used, was created to query the database to check whether or not a file was being tracked, and set the row state accordingly. 
+    //This method is method is no longer being used, was created to query the database to check whether or not a file was being tracked, and set the row state accordingly.
     //Keeping it here in case we need similar functionality in the future.
     checkIfTracked() {
         var isTracked = CheckIfTracked(this.props.id, this.props.platform)
@@ -175,26 +173,19 @@ export class Row extends React.Component<AppProps, AppState> {
                         <button className="btn btn-default dropdown-toggle" style={{ verticalAlign: "middle" }} type="button" data-toggle="dropdown">...
                             </button>
                         <ul className="dropdown-menu">
-                            <li><a onClick={this.props.downloadHandler}><i className="fa fa-download dropDownIcon" aria-hidden="true"></i>Download</a></li>
+                            {this.props.type != "folder" && < li > <a onClick={this.props.downloadHandler}><i className="fa fa-download dropDownIcon" aria-hidden="true"></i>Download</a></li>}
                             {this.props.type != "folder" && <li><a onClick={this.props.navHandler} ><i className="fa fa-eye dropDownIcon" aria-hidden="true"></i>Preview</a></li>}
                             {this.props.id != "sharedWithMe" && < li > <a onClick={this.props.deleteHandler}><i className="fa fa-trash-o dropDownIcon" aria-hidden="true"></i>Delete</a></li>}
                             <li><a onClick={this.props.renameHandler}><i className="fa fa-pencil-square-o dropDownIcon" aria-hidden="true"></i>Rename</a></li>
                             <li><a onClick={this.props.shareLinkHandler}><i className="fa fa-share dropDownIcon" aria-hidden="true"></i>Share</a></li>
 
                             {this.props.type != "folder" && <li className="divider"></li>}
-                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-database dropDownIcon" aria-hidden="true"></i>Get Document Trail</a></li>}
-                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-play dropDownIcon" aria-hidden="true"></i>Start Trail</a></li>}
-                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-stop dropDownIcon" aria-hidden="true"></i>Stop Trail</a></li>}
-                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-certificate dropDownIcon" aria-hidden="true"></i>Get DocChain Certificate</a></li>}
-                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-link dropDownIcon" aria-hidden="true"></i>Embed Document</a></li>}
-                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-calendar-check-o dropDownIcon" aria-hidden="true"></i>Check File</a></li>}
+                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-history dropDownIcon" aria-hidden="true"></i>History</a></li>}
+
                         </ul>
                     </div>}
                 </td>
 
-                <td className="col-xs-1 " style={{ verticalAlign: "middle" }}>
-                    {this.props.type != "folder" && <i className="fa fa-lock fa-2x"></i>}
-                </td>
                 <td className="col-xs-1 " style={{ verticalAlign: "middle" }}>{formatSizeUnits(this.props.size)}</td>
 
                 <td className="col-xs-2 " style={{ verticalAlign: "middle" }}>{this.props.lastModified}</td>
@@ -202,4 +193,11 @@ export class Row extends React.Component<AppProps, AppState> {
         );
     }
 }
+
+
 //<td><i className="fa fa-exclamation-triangle fa-2x"></i></td>
+//{ this.props.type != "folder" && <li><a href="#"><i className="fa fa-play dropDownIcon" aria-hidden="true"></i>Start Trail</a></li> }
+//{ this.props.type != "folder" && <li><a href="#"><i className="fa fa-stop dropDownIcon" aria-hidden="true"></i>Stop Trail</a></li> }
+//{ this.props.type != "folder" && <li><a href="#"><i className="fa fa-certificate dropDownIcon" aria-hidden="true"></i>Get DocChain Certificate</a></li> }
+//{ this.props.type != "folder" && <li><a href="#"><i className="fa fa-link dropDownIcon" aria-hidden="true"></i>Embed Document</a></li> }
+//{ this.props.type != "folder" && <li><a href="#"><i className="fa fa-calendar-check-o dropDownIcon" aria-hidden="true"></i>Check File</a></li> }

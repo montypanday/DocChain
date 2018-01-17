@@ -5,13 +5,14 @@ import { ContextMenu } from "../components/ContextMenu";
 import { LoadingGif, SearchBar, BreadCrumb, BoxLogin } from "../components";
 import { FilePreviewModal, DeleteModal, NewFolderModal, ShowShareLinkModal, RenameFileModal } from "./Modals";
 import { ButtonToolBar, Row, TableHeading } from "./Table";
-import { GSearch, GNavigateIntoFolder, GDelete, Upload, GetPreview, GCreateNewFolder, GRename } from "../api/Google_Utilities";
+import { GSearch, GNavigateIntoFolder, GDelete, Upload, GetPreview, GCreateNewFolder, GRename, GDownload } from "../api/Google_Utilities";
 import { ToastContainer, toast } from "react-toastify";
 import { css } from "glamor";
 import EmptyFolder from "../components/Alerts/EmptyFolder";
-import * as utility from "../components/utility";
-
+//import * as utility from "../components/utility";
+var utility = require("../components/utility");
 import { EmptySearch } from "../components/Alerts/EmptySearch";
+import { saveAs } from "file-saver";
 require("../css/ContextMenu.css");
 require("../css/Explorers.css");
 
@@ -258,6 +259,24 @@ export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
         this.setState({ showRenameModal: true, toBeRenameId: row.id, OldName: row.fileName, toBeRenameType: row.type });
     }
 
+    download(row, event) {
+        console.log(row);
+        var toastIndex = toast.info("Downloading " + row.fileName, { autoClose: false, hideProgressBar: true });
+       GDownload(row.id).then(blobb => {
+            console.log(blobb);
+            saveAs(blobb, row.fileName);
+            toast.update(toastIndex, {
+                autoClose: 5000, hideProgressBar: true, type: "success", render: "Download complete: " + row.fileName
+            });
+        })
+            .catch(function (error) {
+                console.log(error);
+                toast.update(toastIndex, {
+                    autoClose: 5000, hideProgressBar: true, type: "error", render: "Download Failed: " + row.fileName
+                });
+            });
+    }
+
     public render() {
         if (this.state.loading === false) {
             var rows;
@@ -276,8 +295,7 @@ export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
                         lastModified={row.lastModified}
                         platform={"Drive"}
                         deleteHandler={this.showDeleteModal.bind(null, row)}
-
-                        downloadHandler=""
+                        downloadHandler={this.download.bind(null, row)}
 
                         shareLinkHandler=""
                         renameHandler={this.renameHandler.bind(null, row)}>

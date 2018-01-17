@@ -10,7 +10,8 @@ import AlertCollection from "../components/Alerts/AlertCollection";
 import { ToastContainer, toast } from "react-toastify";
 import { css } from "glamor";
 import EmptyFolder from "../components/Alerts/EmptyFolder";
-import * as utility from "../components/utility";
+var utility = require("../components/utility");
+//import * as utility from "../components/utility";
 import { EmptySearch } from "../components/Alerts/EmptySearch";
 require("../css/Explorers.css");
 import { saveAs } from "file-saver";
@@ -308,8 +309,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
                 rows = <EmptySearch />;
             } else {
                 rows = this.state.filesarray.map(function (row) {
-                    return (<Row
-                        key={row.id}
+                    return (<Row key={row.id}
                         id={row.id}
                         type={row.type}
                         navHandler={this.navigate.bind(null, row)}

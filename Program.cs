@@ -10,10 +10,17 @@ namespace front_end
         {
             BuildWebHost(args).Run();
         }
-        public static IWebHost BuildWebHost(string[] args) =>
-        WebHost.CreateDefaultBuilder(args)
-            .UseStartup<Startup>()
-            .UseKestrel()
-            .Build();
+        /// <summary>
+        /// Creates configured WebHost.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
+                        .UseStartup<Startup>()
+                        .UseIISIntegration()
+                        .Build();
+        }
     }
 }

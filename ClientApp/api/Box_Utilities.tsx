@@ -39,7 +39,7 @@ export function Delete(type: string, id: string, currentFolderID: string): Promi
  * @returns {Promise}
  */
 export function Download(id: string): Promise<any> {
-    return fetch("api/Box/Download/" + id, { credentials: "same-origin" })
+    return fetch("api/Box/Download/"+ id, { credentials: "same-origin" })
         .then(response => {
             return response.blob();
         });

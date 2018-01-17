@@ -9,10 +9,7 @@ namespace front_end.Middleware
     {
         private readonly RequestDelegate _next;
 
-        public ExceptionHandlingMiddleware(RequestDelegate next)
-        {
-            _next = next;
-        }
+        public ExceptionHandlingMiddleware(RequestDelegate next) => _next = next;
 
         public Task Invoke(HttpContext httpContext)
         {
