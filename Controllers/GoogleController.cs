@@ -161,6 +161,15 @@ namespace front_end.Controllers
                                 .Parse(file.ContentDisposition)
                                 .FileName
                                 .Trim('"');
+                var requestCheckIfNameExists = service.Files.List();
+                requestCheckIfNameExists.PageSize = 2;
+                requestCheckIfNameExists.Q = "name = '" + filename + "' and '" + currentFolderID + "' in parents";
+                requestCheckIfNameExists.Fields = @"files(name)";
+                var list = requestCheckIfNameExists.Execute().Files;
+                if (list.Count != 0)
+                {
+                    continue;
+                }
 
                 int bufferSize = 4096;
                 using (FileStream fs = System.IO.File.Create(filename, bufferSize, FileOptions.DeleteOnClose))
@@ -175,8 +184,6 @@ namespace front_end.Controllers
 
                     request = service.Files.Create(fileMetadata, fs, file.ContentType);
                     request.Fields = "id";
-                    //request.ProgressChanged += Upload_ProgressChanged;
-                    //request.ResponseReceived += Upload_ResponseReceived;
                     request.Upload();
                     RecordFileAction(GetDriveFile(request.ResponseBody.Id), service, "Upload");
                 }
@@ -199,7 +206,7 @@ namespace front_end.Controllers
             var request_2 = service.Files.Get(id);
             var stream = new MemoryStream();
             request_2.Download(stream);
-            return new FileStreamResult(stream,file.MimeType);
+            return new FileStreamResult(stream, file.MimeType);
         }
 
         /// <summary>

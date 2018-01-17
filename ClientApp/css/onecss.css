@@ -22,14 +22,14 @@ body {
     /*background-color: #1B1B1E;*/
 }
 
-.btn-line{
+.btn-line {
     border-color: #636363;
 }
 
-.btn-line:hover {
-    background-color: #AFCBFF;
-    transition: 0.5s;
-}
+    .btn-line:hover {
+        background-color: #AFCBFF;
+        transition: 0.5s;
+    }
 
 /** NAVBAR  **/
 
@@ -91,14 +91,14 @@ body {
     padding: 0px;
 }
 
-.BOXIcon{
+.BOXIcon {
     margin-top: -8px;
 }
 
-.BOXIcon > svg{
-    width: 2.6em;
-    height: 2.2em;
-}
+    .BOXIcon > svg {
+        width: 2.6em;
+        height: 2.2em;
+    }
 
 .GDIcon {
     margin-top: 0px;
@@ -175,27 +175,27 @@ a {
     color: #636363;
 }
 
-a:visited {
-    text-decoration: none;
-    color: #636363;
-}
+    a:visited {
+        text-decoration: none;
+        color: #636363;
+    }
 
-a:hover {
-    text-decoration: none;
-    color: #636363;
-}
+    a:hover {
+        text-decoration: none;
+        color: #636363;
+    }
 
-a:focus {
-    text-decoration: none;
-    color: #636363;
-}
+    a:focus {
+        text-decoration: none;
+        color: #636363;
+    }
 
-a:hover, a:active {
-    text-decoration: none;
-    color: #636363;
-}
+    a:hover, a:active {
+        text-decoration: none;
+        color: #636363;
+    }
 
-.onedrive{
+.onedrive {
     grid-area: onedrive;
     text-align: center;
     align-self: baseline;
@@ -257,25 +257,25 @@ a:hover, a:active {
 /** SINGLE LOGIN **/
 .login-zone {
     text-align: center;
-    position:fixed;
+    position: fixed;
     top: 30%;
     left: 37.5%;
     width: 25%;
 }
 
-.login-zone p {
-    font-size: 2vw;
-    clear: both;
-}
+    .login-zone p {
+        font-size: 2vw;
+        clear: both;
+    }
 
-.login-zone > a > div > svg {
-    left: calc(50% - 10vw);
-    position: fixed;
-    width: 20vw;
-    height: calc(20vw * 0.8);
-    margin: 0;
-    padding: 0;
-}
+    .login-zone > a > div > svg {
+        left: calc(50% - 10vw);
+        position: fixed;
+        width: 20vw;
+        height: calc(20vw * 0.8);
+        margin: 0;
+        padding: 0;
+    }
 
 .login-box > a > div > svg > path {
     fill: #058ED9;
@@ -418,78 +418,78 @@ tbody {
     padding: 0;
 }
 
-.breadcrumb a {
-    text-decoration: none;
-    outline: none;
-    display: block;
-    float: left;
-    cursor: pointer;
-    line-height: 2.3em;
-    color: white;
-    /*need more margin on the left of links to accomodate the numbers*/
-    padding: 0 10px 0 25px;
-    background: #666;
-    background: linear-gradient(#666, #333);
-    position: relative;
-    border: 1px solid #636363;
-}
-/*since the first link does not have a triangle before it we can reduce the left padding to make it look consistent with other links*/
-.breadcrumb a:first-child {
-    padding-left: 10px;
-    border-radius: 5px 0 0 5px; /*to match with the parent's radius*/
-}
+    .breadcrumb a {
+        text-decoration: none;
+        outline: none;
+        display: block;
+        float: left;
+        cursor: pointer;
+        line-height: 2.3em;
+        color: white;
+        /*need more margin on the left of links to accomodate the numbers*/
+        padding: 0 10px 0 25px;
+        background: #666;
+        background: linear-gradient(#666, #333);
+        position: relative;
+        border: 1px solid #636363;
+    }
+        /*since the first link does not have a triangle before it we can reduce the left padding to make it look consistent with other links*/
+        .breadcrumb a:first-child {
+            padding-left: 10px;
+            border-radius: 5px 0 0 5px; /*to match with the parent's radius*/
+        }
 
-.breadcrumb a:first-child:before {
-    left: 14px;
-}
+            .breadcrumb a:first-child:before {
+                left: 14px;
+            }
 
-.breadcrumb a:last-child {
-    border-radius: 0 5px 5px 0; /*this was to prevent glitches on hover*/
-    /*padding-right: 20px;*/
-    /*width: 100%;*/
-}
+        .breadcrumb a:last-child {
+            border-radius: 0 5px 5px 0; /*this was to prevent glitches on hover*/
+            /*padding-right: 20px;*/
+            /*width: 100%;*/
+        }
 
-/*hover/active styles*/
-.breadcrumb a.active, .breadcrumb a:hover {
-    background: #333;
-    background: linear-gradient(#333, #000);
-}
+        /*hover/active styles*/
+        .breadcrumb a.active, .breadcrumb a:hover {
+            background: #333;
+            background: linear-gradient(#333, #000);
+        }
 
-.breadcrumb a.active:after, .breadcrumb a:hover:after {
-    background: #333;
-    background: linear-gradient(135deg, #333, #000);
-}
+            .breadcrumb a.active:after, .breadcrumb a:hover:after {
+                background: #333;
+                background: linear-gradient(135deg, #333, #000);
+            }
 
-/*adding the arrows for the breadcrumbs using rotated pseudo elements*/
-.breadcrumb a:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: -1.15em; /*half of square's length*/
-    /*same dimension as the line-height of .breadcrumb a */
-    width: 2.3em;
-    height: 2.3em;
-    /*as you see the rotated square takes a larger height. which makes it tough to position it properly. So we are going to scale it down so that the diagonals become equal to the line-height of the link. We scale it to 70.7% because if square's:
+        /*adding the arrows for the breadcrumbs using rotated pseudo elements*/
+        .breadcrumb a:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -1.15em; /*half of square's length*/
+            /*same dimension as the line-height of .breadcrumb a */
+            width: 2.3em;
+            height: 2.3em;
+            /*as you see the rotated square takes a larger height. which makes it tough to position it properly. So we are going to scale it down so that the diagonals become equal to the line-height of the link. We scale it to 70.7% because if square's:
     length = 1; diagonal = (1^2 + 1^2)^0.5 = 1.414 (pythagoras theorem)
     if diagonal required = 1; length = 1/1.414 = 0.707*/
-    transform: scale(0.707) rotate(45deg);
-    /*we need to prevent the arrows from getting buried under the next link*/
-    z-index: 1;
-    /*background same as links but the gradient will be rotated to compensate with the transform applied*/
-    background: #666;
-    background: linear-gradient(135deg, #666, #333);
-    /*THIS IS THE ARROW COLOURING stylish arrow design using box shadow*/
-    box-shadow: 2px -2px 0 2px #74ACE5, 3px -3px 0 2px #74ACE5;
-    /*
+            transform: scale(0.707) rotate(45deg);
+            /*we need to prevent the arrows from getting buried under the next link*/
+            z-index: 1;
+            /*background same as links but the gradient will be rotated to compensate with the transform applied*/
+            background: #666;
+            background: linear-gradient(135deg, #666, #333);
+            /*THIS IS THE ARROW COLOURING stylish arrow design using box shadow*/
+            box-shadow: 2px -2px 0 2px #74ACE5, 3px -3px 0 2px #74ACE5;
+            /*
     5px - for rounded arrows and
     50px - to prevent hover glitches on the border created using shadows*/
-    border-radius: 0 5px 0 50px;
-}
+            border-radius: 0 5px 0 50px;
+        }
 
-/*we dont need an arrow after the last link*/
-.breadcrumb a:last-child:after {
-    content: none;
-}
+        /*we dont need an arrow after the last link*/
+        .breadcrumb a:last-child:after {
+            content: none;
+        }
 
 .flat a, .flat a:after {
     background: white;
@@ -497,10 +497,10 @@ tbody {
     transition: all 0.5s;
 }
 
-.flat a:hover, .flat a.active,
-.flat a:hover:after, .flat a.active:after {
-    background: #AFCBFF;
-}
+    .flat a:hover, .flat a.active,
+    .flat a:hover:after, .flat a.active:after {
+        background: #AFCBFF;
+    }
 
 /** BUTTON TOOLBAR **/
 
@@ -516,21 +516,21 @@ tbody {
     line-height: 2.3em;
 }
 
-.btn-file input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 100%;
-    min-height: 100%;
-    font-size: 100px;
-    text-align: right;
-    filter: alpha(opacity=0);
-    opacity: 0;
-    outline: none;
-    background: white;
-    cursor: text;
-    display: block;
-}
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: text;
+        display: block;
+    }
 
 /** FA ICONS **/
 
@@ -584,10 +584,10 @@ tbody {
     padding: 15px;
 }
 
-.preview-body embed {
-    width: 100%;
-    height: 100%;
-}
+    .preview-body embed {
+        width: 100%;
+        height: 100%;
+    }
 
 /** ALERTS AND ERRORS **/
 

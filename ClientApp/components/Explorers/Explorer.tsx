@@ -11,53 +11,43 @@ import { Alert } from "react-bootstrap";
 import AlertCollection from "../Alerts/AlertCollection";
 import { ToastContainer, toast } from "react-toastify";
 import { css } from "glamor";
-
-
-
 import EmptyFolder from "../Alerts/EmptyFolder";
 import * as utility from "../utility";
 import { EmptySearch } from "../Alerts/EmptySearch";
-
 import { saveAs } from "file-saver";
 import { ContextMenu } from "./ContextMenu";
 
-
 interface ExplorerState {
-    // This is space we will put the json response
-    filesarray: any,
+    // this is space we will put the json response
+    filesarray: any;
     // this is just true or false, determines whether the network request has finished, display a gif or a table
-    loading: any,
-    errorFound: any,
-    errorMessage: any,
-
-    PreviewUrl: any,
-    PreviewFileName: any,
-    showPreviewModal: any,
-
-    query: any,
-    user: any,
-
-    showRenameModal: any,
-    toBeRenameId: any,
-    toBeRenameType: any,
-    OldName: any,
-
-    showDeleteModal: any,
-    pathCollection: any,
-    show401Alert: any,
-    currentFolderID: any,
-    showNewFolderModal: any,
-    ToBeDeletedName: any,
-    ToBeDeletedID: any,
-    ToBeDeletedType: any,
-    ToBeUploadedFiles: any,
-    FolderEmpty: any,
-    filesPreview: any,
-    filesToBeSent: any,
-    SearchEmpty: any,
-    showShareModal: any,
-
-    tempShareURL: any
+    loading: any;
+    errorFound: any;
+    errorMessage: any;
+    PreviewUrl: any;
+    PreviewFileName: any;
+    showPreviewModal: any;
+    query: any;
+    user: any;
+    showRenameModal: any;
+    toBeRenameId: any;
+    toBeRenameType: any;
+    OldName: any;
+    showDeleteModal: any;
+    pathCollection: any;
+    show401Alert: any;
+    currentFolderID: any;
+    showNewFolderModal: any;
+    ToBeDeletedName: any;
+    ToBeDeletedID: any;
+    ToBeDeletedType: any;
+    ToBeUploadedFiles: any;
+    FolderEmpty: any;
+    filesPreview: any;
+    filesToBeSent: any;
+    SearchEmpty: any;
+    showShareModal: any;
+    tempShareURL: any;
 }
 
 export class Explorer extends React.Component<{}, ExplorerState> {
@@ -117,14 +107,13 @@ export class Explorer extends React.Component<{}, ExplorerState> {
             filesToBeSent: [],
             SearchEmpty: false,
             showShareModal: false,
-
             tempShareURL: ""
         };
     }
 
     componentDidMount() {
         GetFolderItemsAsync("0").then(newData => {
-            let isEmpty = newData.length == 0 ? true : false;
+            let isEmpty = newData.length === 0 ? true : false;
             this.setState({ filesarray: newData, loading: false, show401Alert: false, currentFolderID: "0", FolderEmpty: isEmpty });
         })
             .catch(function (error) {
@@ -136,14 +125,14 @@ export class Explorer extends React.Component<{}, ExplorerState> {
 
     performSearch(e) {
         this.state.query !== "" && Search(this.state.query).then(newData => {
-            let isSearchEmpty = newData.length == 0 ? true : false;
+            let isSearchEmpty = newData.length === 0 ? true : false;
             this.setState({ filesarray: newData, loading: false, SearchEmpty: isSearchEmpty, pathCollection: [{ fileId: "0", Name: "All Files" }] });
         });
     }
 
     navigate(row, event) {
         var ToastIndex, newArray2;
-        row.type == "folder" ?
+        row.type === "folder" ?
             (
                 newArray2 = JSON.parse(JSON.stringify(this.state.pathCollection)),
                 newArray2.push({ fileId: row.id, Name: row.fileName }),
@@ -155,7 +144,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
                 }).catch(function (error) {
                     console.log(error);
                     toast.dismiss();
-                    error.status == 415 ?
+                    error.status === 415 ?
                         (
                             ToastIndex = toast.error("File Preview for this file format is not supported yet", { hideProgressBar: true, position: "bottom-right", onClose: () => toast.dismiss(ToastIndex) })
                         ) :
@@ -170,7 +159,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
 
     searchInFolder(id, newArray) {
         GetFolderItemsAsync(id).then(newData => {
-            let isEmpty = newData.length == 0 ? true : false;
+            let isEmpty = newData.length === 0 ? true : false;
             this.setState({ filesarray: newData, loading: false, pathCollection: newArray, currentFolderID: id, FolderEmpty: isEmpty, SearchEmpty: false });
         });
     }
@@ -231,7 +220,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
     deleteItem() {
         Delete(this.state.ToBeDeletedType, this.state.ToBeDeletedID, this.state.currentFolderID)
             .then(newData => {
-                let isEmpty = newData.length == 0 ? true : false;
+                let isEmpty = newData.length === 0 ? true : false;
                 this.setState({ filesarray: newData, showDeleteModal: false, ToBeDeletedID: "", ToBeDeletedName: "", ToBeDeletedType: "", FolderEmpty: isEmpty, SearchEmpty: false });
                 toast.success("Deleted successfully!", { hideProgressBar: true });
             });
@@ -240,7 +229,6 @@ export class Explorer extends React.Component<{}, ExplorerState> {
     closeRenameFileModal() { this.setState({ showRenameModal: false, toBeRenameId: "", OldName: "", toBeRenameType: "" }); }
 
     submitRename(newName) {
-        //console.log("Rename will happen here ==>>>>>> "+newName.toString());
         Rename(this.state.toBeRenameId, newName, this.state.currentFolderID, this.state.toBeRenameType)
             .then(newData => {
                 this.setState({ filesarray: newData, showRenameModal: false });
@@ -279,7 +267,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
     FileUploadHandler(files) {
         var toastIndex, placeholder, formData, fileList;
         toast.dismiss();
-        placeholder = files.length == 1 ? "file" : "files";
+        placeholder = files.length === 1 ? "file" : "files";
         toastIndex = toast.info("Uploading " + files.length + " " + placeholder, { autoClose: false, hideProgressBar: true });
         formData = new FormData(); 1;
         fileList = files;
@@ -288,7 +276,12 @@ export class Explorer extends React.Component<{}, ExplorerState> {
         }
         Upload(this.state.currentFolderID, formData)
             .then(newData => {
-                let isEmpty = newData.length == 0 ? true : false;
+                console.log("hahahhahhahhhhhhhhhhhhhhhhhhhhh");
+                if (Object.keys(newData).length != (this.state.filesarray.length + fileList.length)) {
+                    
+                    throw Error("Not all files were successfully uploaded, file names must be unique!");
+                }
+                let isEmpty = newData.length === 0 ? true : false;
                 this.setState({ filesarray: newData, loading: false, FolderEmpty: isEmpty, SearchEmpty: false });
                 toast.update(toastIndex, {
                     autoClose: 5000, hideProgressBar: true, type: "success", render: "Successfully Uploaded " + files.length + " " + placeholder
@@ -296,12 +289,12 @@ export class Explorer extends React.Component<{}, ExplorerState> {
             }).catch(function (error) {
                 console.log(error);
 
-                if (error.status == 409) {
+                if (error.status === 409) {
                     toast.update(toastIndex, {
                         autoClose: false, hideProgressBar: true, type: "warning", render: "Cannot Upload File because a file with same name exists"
                     });
                 } else {
-                    alert(error);
+                    toast.error(error);
                 }
             }.bind(this));
     }

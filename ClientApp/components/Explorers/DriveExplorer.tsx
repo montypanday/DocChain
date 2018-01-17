@@ -13,6 +13,8 @@ import EmptyFolder from "../Alerts/EmptyFolder";
 import * as utility from "../utility";
 import { EmptySearch } from "../Alerts/EmptySearch";
 
+
+
 interface DriveExplorerState {
     pathCollection: any;
     filesarray: any;
@@ -151,8 +153,8 @@ export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
         console.log("Searching in folder -> " + fileID);
         GNavigateIntoFolder(fileID).then(newData => {
             this.setState({ currentFolderID: fileID });
-            this.state.currentFolderID == "root" && newData.unshift(this.getSharedWithMeFolder());
-            let isEmpty = newData.length == 0 ? true : false;
+            this.state.currentFolderID === "root" && newData.unshift(this.getSharedWithMeFolder());
+            let isEmpty = newData.length === 0 ? true : false;
             this.setState({ filesarray: newData, loading: false, pathCollection: newArray, FolderEmpty: isEmpty, SearchEmpty: false });
         });
     }
@@ -177,7 +179,7 @@ export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
         console.log("Creating New Folder with name -> " + newName);
         GCreateNewFolder(this.state.currentFolderID, newName)
             .then(newData => {
-                let isEmpty = newData.length == 0 ? true : false;
+                let isEmpty = newData.length === 0 ? true : false;
                 this.setState({ filesarray: newData, showNewFolderModal: false, FolderEmpty: isEmpty, SearchEmpty: false });
                 toast.success("Folder created successfully!", { hideProgressBar: true });
             });
@@ -190,7 +192,7 @@ export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
     deleteItem() {
         GDelete(this.state.ToBeDeletedID, this.state.currentFolderID)
             .then(newData => {
-                let isEmpty = newData.length == 0 ? true : false;
+                let isEmpty = newData.length === 0 ? true : false;
                 this.setState({ filesarray: newData, showDeleteModal: false, ToBeDeletedID: "", ToBeDeletedName: "", ToBeDeletedType: "", FolderEmpty: isEmpty });
                 toast.success("Deleted successfully!", { hideProgressBar: true });
             });
@@ -209,13 +211,15 @@ export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
         for (var x = 0; x < fileList.length; x++) {
             formData.append("file" + x, fileList.item(x));
         }
-        var a = "";
-        if (files.length == 1) {
-            a = "file";
-        } else { a = "files"; }
+
+        var a = files.length === 1 ? "file" : "files";
         Upload(this.state.currentFolderID, formData)
             .then(newData => {
-                let isEmpty = newData.length == 0 ? true : false;
+                if (Object.keys(newData).length != (this.state.filesarray.length + fileList.length)) {
+
+                    throw Error("Not all files were successfully uploaded, file names inside a folder must be unique!");
+                }
+                let isEmpty = newData.length === 0 ? true : false;
                 this.setState({ filesarray: newData, loading: false, FolderEmpty: isEmpty, SearchEmpty: false });
                 toast.update(toastIndex, {
                     autoClose: 5000, hideProgressBar: true, type: "success", render: "Successfully Uploaded " + files.length + " " + a
@@ -223,13 +227,16 @@ export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
             }).catch(function (error) {
                 console.log(error);
 
-                if (error.status == 409) {
+                if (error.status === 409) {
                     toast.update(toastIndex, {
-                        autoClose: false, hideProgressBar: true, type: "warning", render: "Cannot Upload File because a file with same name exists"
+                        autoClose: 5000, hideProgressBar: true, type: "warning", render: "Cannot Upload File because a file with same name exists"
                     });
                 } else {
-                    alert(error);
+                    toast.update(toastIndex, {
+                        autoClose: 5000, hideProgressBar: true, type: "warning", render: error.message
+                    });
                 }
+                
             }.bind(this));
     }
 
