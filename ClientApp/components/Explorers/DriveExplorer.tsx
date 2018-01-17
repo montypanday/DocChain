@@ -1,33 +1,17 @@
 ﻿import * as React from "react";
 import { render } from "react-dom";
 import { Link, NavLink, Redirect } from "react-router-dom";
-<<<<<<< HEAD:ClientApp/components/DriveExplorer.tsx
-import { ContextMenu } from "../components/ContextMenu";
-import { LoadingGif, SearchBar, BreadCrumb, BoxLogin } from "../components";
-import { FilePreviewModal, DeleteModal, NewFolderModal, ShowShareLinkModal, RenameFileModal } from "./Modals";
-import { ButtonToolBar, Row, TableHeading } from "./Table";
-import { GSearch, GNavigateIntoFolder, GDelete, Upload, GetPreview, GCreateNewFolder, GRename, GDownload } from "../api/Google_Utilities";
-import { ToastContainer, toast } from "react-toastify";
-import { css } from "glamor";
-import EmptyFolder from "../components/Alerts/EmptyFolder";
-//import * as utility from "../components/utility";
-var utility = require("../components/utility");
-import { EmptySearch } from "../components/Alerts/EmptySearch";
 import { saveAs } from "file-saver";
-require("../css/ContextMenu.css");
-require("../css/Explorers.css");
-=======
 import { ContextMenu } from "./ContextMenu";
 import { LoadingGif, SearchBar, BreadCrumb, BoxLogin } from "../";
 import { FilePreviewModal, DeleteModal, NewFolderModal, ShowShareLinkModal, RenameFileModal } from "../Modals";
 import { ButtonToolBar, Row, TableHeading } from "../Table";
-import { GSearch, GNavigateIntoFolder, GDelete, Upload, GetPreview, GCreateNewFolder, GRename } from "../../api/Google_Utilities";
+import { GSearch, GNavigateIntoFolder, GDelete, Upload, GetPreview, GCreateNewFolder, GRename, GDownload } from "../../api/Google_Utilities";
 import { ToastContainer, toast } from "react-toastify";
 import { css } from "glamor";
 import EmptyFolder from "../Alerts/EmptyFolder";
 import * as utility from "../utility";
 import { EmptySearch } from "../Alerts/EmptySearch";
->>>>>>> 88bddadad1b5311940d5a97377eaff7e36ee70a1:ClientApp/components/Explorers/DriveExplorer.tsx
 
 interface DriveExplorerState {
     pathCollection: any;

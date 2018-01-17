@@ -11,17 +11,13 @@ import { Alert } from "react-bootstrap";
 import AlertCollection from "../Alerts/AlertCollection";
 import { ToastContainer, toast } from "react-toastify";
 import { css } from "glamor";
-<<<<<<< HEAD:ClientApp/components/Explorer.tsx
-import EmptyFolder from "../components/Alerts/EmptyFolder";
-var utility = require("../components/utility");
-//import * as utility from "../components/utility";
-import { EmptySearch } from "../components/Alerts/EmptySearch";
-require("../css/Explorers.css");
-=======
+
+
+
 import EmptyFolder from "../Alerts/EmptyFolder";
 import * as utility from "../utility";
 import { EmptySearch } from "../Alerts/EmptySearch";
->>>>>>> 88bddadad1b5311940d5a97377eaff7e36ee70a1:ClientApp/components/Explorers/Explorer.tsx
+
 import { saveAs } from "file-saver";
 import { ContextMenu } from "./ContextMenu";
 

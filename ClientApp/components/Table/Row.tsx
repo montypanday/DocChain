@@ -4,11 +4,6 @@ import { formatSizeUnits } from "./FormatSize";
 import { CheckIfTracked } from "../../api/Chain/FileTracker";
 import { ContextMenu } from "../Explorers/contextmenu";
 
-<<<<<<< HEAD
-// require('./Dropdown.css');
-// require('./fa-icons.css');
-=======
->>>>>>> 88bddadad1b5311940d5a97377eaff7e36ee70a1
 
 export interface AppProps {
     type: string;
@@ -169,98 +164,60 @@ export class Row extends React.Component<AppProps, AppState> {
                     </a>
                 </td>
                 <td className="col-xs-1 ">
-                    {this.props.id != "sharedWithMe" && <div className="dropdown">
-                        <button className="btn btn-default btn-line dropdown-toggle action-btn" style={{ verticalAlign: "middle", zIndex: 0 }} type="button" data-toggle="dropdown">...
+                    {this.props.id != "sharedWithMe" &&
+                        <div className="dropdown">
+                            <button className="btn btn-default btn-line dropdown-toggle action-btn" style={{ verticalAlign: "middle", zIndex: 0 }} type="button" data-toggle="dropdown">...
                             </button>
-                        <ul className="dropdown-menu">
-<<<<<<< HEAD
-                            {this.props.type != "folder" && < li > <a onClick={this.props.downloadHandler}><i className="fa fa-download dropDownIcon" aria-hidden="true"></i>Download</a></li>}
-                            {this.props.type != "folder" && <li><a onClick={this.props.navHandler} ><i className="fa fa-eye dropDownIcon" aria-hidden="true"></i>Preview</a></li>}
-=======
-                            <li>
-                                <a onClick={this.props.downloadHandler}><i className="fa fa-download dropDownIcon" aria-hidden="true"></i>Download</a>
-                            </li>
-                            {this.props.type != "folder" &&
+                            <ul className="dropdown-menu">
+
+                                {this.props.type != "folder" && <li><a onClick={this.props.navHandler} ><i className="fa fa-eye dropDownIcon" aria-hidden="true"></i>Preview</a></li>}
+                                {this.props.type != "folder" && <li><a onClick={this.props.downloadHandler}><i className="fa fa-download dropDownIcon" aria-hidden="true"></i>Download</a></li>}
+                                {this.props.id != "sharedWithMe" &&
+                                    <li>
+                                        <a onClick={this.props.deleteHandler}><i className="fa fa-trash-o dropDownIcon" aria-hidden="true"></i>Delete</a>
+                                    </li>
+                                }
                                 <li>
-                                    <a onClick={this.props.navHandler}><i className="fa fa-eye dropDownIcon" aria-hidden="true"></i>Preview</a>
+                                    <a onClick={this.props.renameHandler}><i className="fa fa-pencil-square-o dropDownIcon" aria-hidden="true"></i>Rename</a>
                                 </li>
-                            }
-                            {this.props.id != "sharedWithMe" &&
                                 <li>
-                                    <a onClick={this.props.deleteHandler}><i className="fa fa-trash-o dropDownIcon" aria-hidden="true"></i>Delete</a>
+                                    <a onClick={this.props.shareLinkHandler}><i className="fa fa-share dropDownIcon" aria-hidden="true"></i>Share</a>
                                 </li>
+                                {this.props.type != "folder" &&
+                                    <li className="divider">
+                                    </li>
                             }
-                            <li>
-                                <a onClick={this.props.renameHandler}><i className="fa fa-pencil-square-o dropDownIcon" aria-hidden="true"></i>Rename</a>
-                            </li>
-                            <li>
-                                <a onClick={this.props.shareLinkHandler}><i className="fa fa-share dropDownIcon" aria-hidden="true"></i>Share</a>
-                            </li>
-                            {this.props.type != "folder" &&
-                                <li className="divider">
-                                </li>
-                            }
-                            {this.props.type != "folder" &&
-                                <li>
-                                    <a href="#"><i className="fa fa-database dropDownIcon" aria-hidden="true"></i>Get Document Trail</a>
-                                </li>
-                            }
-                            {/*{this.props.type != "folder" && <li><a href="#"><i className="fa fa-play dropDownIcon" aria-hidden="true"></i>Start Trail</a></li>}
-                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-stop dropDownIcon" aria-hidden="true"></i>Stop Trail</a></li>}*/}
-                            {this.props.type != "folder" &&
-                                <li>
-                                    <a href="#"><i className="fa fa-certificate dropDownIcon" aria-hidden="true"></i>Get DocChain Certificate</a>
-                                </li>
-                            }
-                            {this.props.type != "folder" &&
-                                <li>
-                                    <a href="#"><i className="fa fa-link dropDownIcon" aria-hidden="true"></i>Embed Document</a>
-                                </li>
-                            }
-                            {this.props.type != "folder" &&
-                                <li>
-                                    <a href="#"><i className="fa fa-calendar-check-o dropDownIcon" aria-hidden="true"></i>Check File</a>
-                                </li>
-                            }
-                        </ul>
-                    </div>}
+                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-history dropDownIcon" aria-hidden="true"></i>History</a></li>}
+                            </ul>
+                        </div>}
                     <div className="contextmenu dropdown" id={"contextMenu" + this.props.id}>
                         <ul className="dropdown-menu">
-                            <li>
-                                <a onClick={this.props.downloadHandler}><i className="fa fa-download dropDownIcon" aria-hidden="true"></i>Download</a>
-                            </li>
+                            {this.props.type != "folder" &&
+                                <li>
+                                    <a onClick={this.props.downloadHandler}><i className="fa fa-download dropDownIcon" aria-hidden="true"></i>Download</a>
+                                </li>
+                            }
                             {this.props.type != "folder" &&
                                 <li>
                                     <a onClick={this.props.navHandler} ><i className="fa fa-eye dropDownIcon" aria-hidden="true"></i>Preview</a>
                                 </li>
                             }
->>>>>>> 88bddadad1b5311940d5a97377eaff7e36ee70a1
+
                             {this.props.id != "sharedWithMe" && < li > <a onClick={this.props.deleteHandler}><i className="fa fa-trash-o dropDownIcon" aria-hidden="true"></i>Delete</a></li>}
                             <li><a onClick={this.props.renameHandler}><i className="fa fa-pencil-square-o dropDownIcon" aria-hidden="true"></i>Rename</a></li>
                             <li><a onClick={this.props.shareLinkHandler}><i className="fa fa-share dropDownIcon" aria-hidden="true"></i>Share</a></li>
 
                             {this.props.type != "folder" && <li className="divider"></li>}
-<<<<<<< HEAD
                             {this.props.type != "folder" && <li><a href="#"><i className="fa fa-history dropDownIcon" aria-hidden="true"></i>History</a></li>}
-
-=======
-                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-database dropDownIcon" aria-hidden="true"></i>Get Document Trail</a></li>}
-                            {/*{this.props.type != "folder" && <li><a href="#"><i className="fa fa-play dropDownIcon" aria-hidden="true"></i>Start Trail</a></li>}
-                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-stop dropDownIcon" aria-hidden="true"></i>Stop Trail</a></li>}*/}
-                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-certificate dropDownIcon" aria-hidden="true"></i>Get DocChain Certificate</a></li>}
-                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-link dropDownIcon" aria-hidden="true"></i>Embed Document</a></li>}
-                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-calendar-check-o dropDownIcon" aria-hidden="true"></i>Check File</a></li>}
->>>>>>> 88bddadad1b5311940d5a97377eaff7e36ee70a1
                         </ul>
                     </div>
                 </td>
 
-<<<<<<< HEAD
-=======
+
                 <td className="col-xs-1 secure-col" style={{ verticalAlign: "middle" }}>
                     {this.props.type != "folder" && <i className="fa fa-lock fa-2x"></i>}
                 </td>
->>>>>>> 88bddadad1b5311940d5a97377eaff7e36ee70a1
+
                 <td className="col-xs-1 " style={{ verticalAlign: "middle" }}>{formatSizeUnits(this.props.size)}</td>
 
                 <td className="col-xs-2 " style={{ verticalAlign: "middle" }}>{this.props.lastModified}</td>
@@ -269,10 +226,3 @@ export class Row extends React.Component<AppProps, AppState> {
     }
 }
 
-
-//<td><i className="fa fa-exclamation-triangle fa-2x"></i></td>
-//{ this.props.type != "folder" && <li><a href="#"><i className="fa fa-play dropDownIcon" aria-hidden="true"></i>Start Trail</a></li> }
-//{ this.props.type != "folder" && <li><a href="#"><i className="fa fa-stop dropDownIcon" aria-hidden="true"></i>Stop Trail</a></li> }
-//{ this.props.type != "folder" && <li><a href="#"><i className="fa fa-certificate dropDownIcon" aria-hidden="true"></i>Get DocChain Certificate</a></li> }
-//{ this.props.type != "folder" && <li><a href="#"><i className="fa fa-link dropDownIcon" aria-hidden="true"></i>Embed Document</a></li> }
-//{ this.props.type != "folder" && <li><a href="#"><i className="fa fa-calendar-check-o dropDownIcon" aria-hidden="true"></i>Check File</a></li> }
