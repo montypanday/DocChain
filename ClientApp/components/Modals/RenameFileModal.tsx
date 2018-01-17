@@ -81,7 +81,7 @@ export default class RenameFileModal extends React.Component<Props, State> {
         let isLoading = this.state.isLoading;
         return (
             <Modal show={true} bsSize="small" >
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title id="contained-modal-title-lg">Rename {this.props.oldFileName}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

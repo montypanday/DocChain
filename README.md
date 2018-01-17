@@ -11,15 +11,13 @@ These instructions will get you a copy of the project up and running on your loc
 --Prequisites--
 What things you need to install and how to install them.
 
-	1. Typescript 2.6
-		i. 
-	2. Visual Studio Community '17
+	1. Visual Studio Community '17
 		i.
-	3. .NET Core (latest)
-		i. 
-	4. NodeJS
+	2. NodeJS
 		i.
 
+	
+		
 --Installing--
 A step-by-step guide of examples that will get your development environment running
 

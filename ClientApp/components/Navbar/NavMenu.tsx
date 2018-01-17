@@ -1,12 +1,13 @@
 import * as React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { GDIcon } from "../components/SVGs/icon-GD";
-import { BOXIcon } from "../components/SVGs/icon-BOX";
-import { ODIcon } from "../components/SVGs/icon-OD";
-import { DBIcon } from "../components/SVGs/icon-DB";
-import { HELPIcon } from "../components/SVGs/icon-HELP";
-import { LOGINIcon } from "../components/SVGs/icon-LOGIN";
-import { HOMEIcon } from "../components/SVGs/icon-HOME";
+import { GDIcon } from "../SVGs/icon-GD";
+import { BOXIcon } from "../SVGs/icon-BOX";
+import { ODIcon } from "../SVGs/icon-OD";
+import { DBIcon } from "../SVGs/icon-DB";
+import { HELPIcon } from "../SVGs/icon-HELP";
+import { LOGINIcon } from "../SVGs/icon-LOGIN";
+import { HOMEIcon } from "../SVGs/icon-HOME";
+import { ChainIcon } from "../SVGs/icon-Chain";
 
 export class NavMenu extends React.Component<{}, {}> {
     constructor(props) {
@@ -27,7 +28,7 @@ export class NavMenu extends React.Component<{}, {}> {
                         <span className="icon-bar"></span>
                         <span className="icon-bar"></span>
                     </button>
-                    <Link className="navbar-brand" to={"/"}>DocChain</Link>
+                    <Link className="navbar-brand" to={"/"}><ChainIcon/>DocChain</Link>
                 </div>
 
                 <div className="navbar-collapse collapse">

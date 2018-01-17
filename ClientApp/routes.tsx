@@ -1,22 +1,22 @@
 import * as React from "react";
 import { Route } from "react-router-dom";
 import { Layout } from "./components/Layout";
-import { Home } from "./components/Home";
+import { Home } from "./components/Home/Home";
 import { contentPicker } from "./components/Box Original/contentPicker";
 import { fileExplorer } from "./components/Box Original/fileExplorer";
-import { Login } from "./components/login";
-import { Logout } from "./components/logout";
+import { Login } from "./components/Navbar/login";
+import { Logout } from "./components/Utils/logout";
 import { contentChecker } from "./components/Box Original/contentChecker";
-import { Tutorial1 } from "./components/tutorial1";
-import { Tutorial2 } from "./components/tutorial2";
-import { Tutorial3 } from "./components/tutorial3";
-import { Tutorial4 } from "./components/tutorial4";
-import { Tutorial5 } from "./components/tutorial5";
-import { Faq } from "./components/FAQ";
-import { Explorer } from "./components/Explorer";
-import { DriveExplorer } from "./components/DriveExplorer";
-import { DriveLogin } from "./components/DriveLogin";
-import { BoxLogin } from "./components/BoxLogin";
+import { Tutorial1 } from "./components/Home/tutorial1";
+import { Tutorial2 } from "./components/Home/tutorial2";
+import { Tutorial3 } from "./components/Home/tutorial3";
+import { Tutorial4 } from "./components/Home/tutorial4";
+import { Tutorial5 } from "./components/Home/tutorial5";
+import { Faq } from "./components/Navbar/FAQ";
+import { Explorer } from "./components/Explorers/Explorer";
+import { DriveExplorer } from "./components/Explorers/DriveExplorer";
+import { DriveLogin } from "./components/Explorers/DriveLogin";
+import { BoxLogin } from "./components/Explorers/BoxLogin";
 
 export const routes = <Layout>
 

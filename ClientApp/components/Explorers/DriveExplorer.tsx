@@ -1,16 +1,16 @@
 ﻿import * as React from "react";
 import { render } from "react-dom";
 import { Link, NavLink, Redirect } from "react-router-dom";
-import { ContextMenu } from "../components/ContextMenu";
-import { LoadingGif, SearchBar, BreadCrumb, BoxLogin } from "../components";
-import { FilePreviewModal, DeleteModal, NewFolderModal, ShowShareLinkModal, RenameFileModal } from "./Modals";
-import { ButtonToolBar, Row, TableHeading } from "./Table";
-import { GSearch, GNavigateIntoFolder, GDelete, Upload, GetPreview, GCreateNewFolder, GRename } from "../api/Google_Utilities";
+import { ContextMenu } from "./ContextMenu";
+import { LoadingGif, SearchBar, BreadCrumb, BoxLogin } from "../";
+import { FilePreviewModal, DeleteModal, NewFolderModal, ShowShareLinkModal, RenameFileModal } from "../Modals";
+import { ButtonToolBar, Row, TableHeading } from "../Table";
+import { GSearch, GNavigateIntoFolder, GDelete, Upload, GetPreview, GCreateNewFolder, GRename } from "../../api/Google_Utilities";
 import { ToastContainer, toast } from "react-toastify";
 import { css } from "glamor";
-import EmptyFolder from "../components/Alerts/EmptyFolder";
-import * as utility from "../components/utility";
-import { EmptySearch } from "../components/Alerts/EmptySearch";
+import EmptyFolder from "../Alerts/EmptyFolder";
+import * as utility from "../utility";
+import { EmptySearch } from "../Alerts/EmptySearch";
 
 interface DriveExplorerState {
     pathCollection: any;

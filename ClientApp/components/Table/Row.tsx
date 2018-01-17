@@ -2,7 +2,7 @@
 import { render } from "react-dom";
 import { formatSizeUnits } from "./FormatSize";
 import { CheckIfTracked } from "../../api/Chain/FileTracker";
-import { ContextMenu } from "../contextmenu";
+import { ContextMenu } from "../Explorers/contextmenu";
 
 
 export interface AppProps {
@@ -167,7 +167,7 @@ export class Row extends React.Component<AppProps, AppState> {
                 </td>
                 <td className="col-xs-1 ">
                     {this.props.id != "sharedWithMe" && <div className="dropdown">
-                        <button className="btn btn-default dropdown-toggle action-btn" style={{ verticalAlign: "middle", zIndex: 0 }} type="button" data-toggle="dropdown">...
+                        <button className="btn btn-default btn-line dropdown-toggle action-btn" style={{ verticalAlign: "middle", zIndex: 0 }} type="button" data-toggle="dropdown">...
                             </button>
                         <ul className="dropdown-menu">
                             <li>
@@ -175,7 +175,7 @@ export class Row extends React.Component<AppProps, AppState> {
                             </li>
                             {this.props.type != "folder" &&
                                 <li>
-                                    <a onClick={this.props.navHandler} ><i className="fa fa-eye dropDownIcon" aria-hidden="true"></i>Preview</a>
+                                    <a onClick={this.props.navHandler}><i className="fa fa-eye dropDownIcon" aria-hidden="true"></i>Preview</a>
                                 </li>
                             }
                             {this.props.id != "sharedWithMe" &&

@@ -24,7 +24,7 @@ export default class ShowShareLinkModal extends React.Component<Props, State> {
     render() {
         return (
             <Modal show={true} bsSize="small" >
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title id="contained-modal-title-lg">Share </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

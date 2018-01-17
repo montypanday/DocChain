@@ -56,6 +56,7 @@
     <None Remove="ClientApp\components\iconGD.tsx" />
     <None Remove="ClientApp\components\Modals\FilePreviewModal.tsx" />
     <None Remove="ClientApp\components\SVGs\icon-BOX.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-Chain.tsx" />
     <None Remove="ClientApp\components\SVGs\icon-DB.tsx" />
     <None Remove="ClientApp\components\SVGs\icon-EmptyFolder.tsx" />
     <None Remove="ClientApp\components\SVGs\icon-EmptySearch.tsx" />
@@ -69,12 +70,13 @@
     <None Remove="yarn.lock" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-Chain.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Table\FormatSize.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Alerts\EmptySearch.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Alerts\EmptyFolder.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Alerts\LostConnect.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Alerts\ErrorSplash.tsx" />
-    <TypeScriptCompile Include="ClientApp\components\ErrorBoundary.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Utils\ErrorBoundary.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-BOX.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-EmptySearch.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-HELP.tsx" />
@@ -91,10 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Update="Microsoft.NETCore.App" Version="2.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ClientApp\components\Breadcrumb %28WIP%29\" />
-    <Folder Include="ClientApp\components\Navbar %28WIP%29\" />
   </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->

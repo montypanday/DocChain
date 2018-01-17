@@ -1,6 +1,8 @@
-﻿import { LoadingGif } from "./loadingGif";
-import { SearchBar } from "./SearchBar";
-import { BreadCrumb } from "./breadCrumb";
-import { BoxLogin } from "./BoxLogin";
+﻿import { LoadingGif } from "./Utils/loadingGif";
+import { SearchBar } from "./FeatureBar/SearchBar";
+import { BreadCrumb } from "./FeatureBar/breadCrumb";
+import { BoxLogin } from "./Explorers/BoxLogin";
+import { DriveLogin } from "./Explorers/DriveLogin";
+
 
 export { LoadingGif, SearchBar, BreadCrumb, BoxLogin };

@@ -62,7 +62,7 @@ export default class NewFolderModal extends React.Component<NewFolderModalProps,
         let isLoading = this.state.isLoading;
         return (
             <Modal show={true} bsSize="small" >
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title id="contained-modal-title-lg">Create New Folder </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
