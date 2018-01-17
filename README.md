@@ -19,16 +19,20 @@ __Prequisites__
 __Installing__
 A step-by-step guide of examples that will get your development environment running. __*There are steps missing due to security concerns.*__
 
-1. Gathering all the required files.  
+	1. Gathering all the required files.  
 	i. Navigate to the Clone or Download button on the GitHub repo, and selection an option.  
 	ii. Download the required >>dist<< folder _here_ which you will need to move to the project wwwroot folder  
 	iii. Download the provided loading animation _here_ which you will need to move to the dist folder  
-2. Starting the project.  
+	
+	
+	2. Starting the project.  
 	i. Start Visual Studio 2017  
 	ii. Open a project  
 	iii. Navigate to the downloaded project files you collected in step 1i.   
 	iv. Select the front_end.sln and open it.  
-3. Project set-up  
+	
+	
+	3. Project set-up  
 	i. Navigate to the Solution Explorer in Visual studio  
 	ii. Select the front_end project and right click it  
 	iii. Open the properties panel  
@@ -50,7 +54,9 @@ A step-by-step guide of examples that will get your development environment runn
 	xi. Select and drop-down npm  
 	xii. Ensure there are no warning yellow-triangle icons present on the icons of each npm package  
 	xiii. if there are, select, right-click and update these packages, to do this for all packages at once right-click npm and update all packages  
-4. Intialising the Database  
+	
+	
+	4. Intialising the Database  
 	i.  
 
 	
@@ -64,28 +70,24 @@ The core technologies used to build the project.
 	4. Webpack
 	5. SQL SERVER?
 
-
 __Authors__
-
 
 	- Monty Panday: Chief Programmer, Project Lead 			https://github.com/montypanday
 	- Matthew Smith: Programmer, Database Integrations		https://github.com/smmath
 	- Patrick Mitchell: Programmer, UX & UI Designer		https://github.com/pgmitche
 	- Roy Lou: Programmer						https://github.com/LGNRoy			
 	- Anushi Jayawardana: Security Analysis and Documentation
-
 	
 __Acknowledgments__  
 Individuals of note and projects we pilfered.
 
-	- Leonard Hoon: Guidance, advice and supervision
-	
-	These already come with the project but deserve mentioning for heavily augmenting the UX
+	1. Leonard Hoon: Guidance, advice and supervision
 
-	- [Toastify](https://www.npmjs.com/package/react-toastify) for handling in-app alerts and notifications
-	- [React-file-viewer](https://www.npmjs.com/package/react-file-viewer) for handling in-app file previews
-	- [Bootstrap](https://www.npmjs.com/package/react-bootstrap) for some design assistance
-	- [FontAwesome](https://www.npmjs.com/package/font-awesome) for providing some icons
-	- [React-dropzone](https://www.npmjs.com/package/react-dropzone) for handling drag-drop uploads
+These already come with the project but deserve mentioning for heavily augmenting the UX  
+	- [Toastify](https://www.npmjs.com/package/react-toastify) for handling in-app alerts and notifications  
+	- [React-file-viewer](https://www.npmjs.com/package/react-file-viewer) for handling in-app file previews  
+	- [Bootstrap](https://www.npmjs.com/package/react-bootstrap) for some design assistance  
+	- [FontAwesome](https://www.npmjs.com/package/font-awesome) for providing some icons  
+	- [React-dropzone](https://www.npmjs.com/package/react-dropzone) for handling drag-drop uploads  
 
 __END__ 
