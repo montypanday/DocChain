@@ -1,5 +1,4 @@
 ﻿import * as React from "react";
-require("./icons.css");
 
 export class ODIcon extends React.Component {
 

@@ -1,7 +1,9 @@
 import * as React from "react";
-import { NavMenu } from "./NavMenu";
+import { NavMenu } from "./Navbar/NavMenu";
 import { Alert } from "react-bootstrap";
-import  ErrorBoundary  from "../components/ErrorBoundary";
+import ErrorBoundary from "../components/Utils/ErrorBoundary";
+
+require('../css/onecss.css');
 
 export interface LayoutProps {
     children?: React.ReactNode;

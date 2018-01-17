@@ -1,20 +1,30 @@
 ﻿import * as React from "react";
 import { render } from "react-dom";
-import { ButtonToolBar, Row, TableHeading } from "./Table";
+import { ButtonToolBar, Row, TableHeading } from "../Table";
 import { Link, NavLink, Redirect } from "react-router-dom";
-import { LoadingGif, SearchBar, BreadCrumb, BoxLogin } from "../components";
-import { FilePreviewModal, DeleteModal, NewFolderModal, ShowShareLinkModal, RenameFileModal } from "./Modals";
-import { Search, Delete, Upload, GetFolderItemsAsync, getPreviewLink, CreateNewFolder, Rename, getSharedLink, Download } from "../api/Box_Utilities";
+import { LoadingGif, BoxLogin } from "../";
+import { SearchBar } from "../FeatureBar/searchBar";
+import { BreadCrumb } from "../FeatureBar/breadCrumb";
+import { FilePreviewModal, DeleteModal, NewFolderModal, ShowShareLinkModal, RenameFileModal } from "../Modals";
+import { Search, Delete, Upload, GetFolderItemsAsync, getPreviewLink, CreateNewFolder, Rename, getSharedLink, Download } from "../../api/Box_Utilities";
 import { Alert } from "react-bootstrap";
-import AlertCollection from "../components/Alerts/AlertCollection";
+import AlertCollection from "../Alerts/AlertCollection";
 import { ToastContainer, toast } from "react-toastify";
 import { css } from "glamor";
+<<<<<<< HEAD:ClientApp/components/Explorer.tsx
 import EmptyFolder from "../components/Alerts/EmptyFolder";
 var utility = require("../components/utility");
 //import * as utility from "../components/utility";
 import { EmptySearch } from "../components/Alerts/EmptySearch";
 require("../css/Explorers.css");
+=======
+import EmptyFolder from "../Alerts/EmptyFolder";
+import * as utility from "../utility";
+import { EmptySearch } from "../Alerts/EmptySearch";
+>>>>>>> 88bddadad1b5311940d5a97377eaff7e36ee70a1:ClientApp/components/Explorers/Explorer.tsx
 import { saveAs } from "file-saver";
+import { ContextMenu } from "./ContextMenu";
+
 
 interface ExplorerState {
     // This is space we will put the json response
@@ -327,7 +337,8 @@ export class Explorer extends React.Component<{}, ExplorerState> {
             }
 
             return (
-                <div className="well well-lg pull-down">
+                <div className="well pull-down" id="target">
+                    <ContextMenu root="target"/>
                     <ToastContainer position="bottom-right" hideProgressBar={true} pauseOnHover={true} newestOnTop={true} toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
 
                     <div style={{ float: "right" }} className="user-details">
@@ -342,7 +353,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
                         </Alert>}
                     {this.state.show401Alert && <BoxLogin></BoxLogin>}
                     {!this.state.show401Alert && <BreadCrumb pathCollection={this.state.pathCollection} navigateOutHandler={this.navigateOut.bind(this)} />}
-                    {!this.state.show401Alert && < table className="table table-striped table-hover table-responsive well header-fixed">
+                    {!this.state.show401Alert && <table className="table table-striped table-hover table-responsive header-fixed">
                         <TableHeading />
                         <tbody>
                             {!this.state.FolderEmpty ?

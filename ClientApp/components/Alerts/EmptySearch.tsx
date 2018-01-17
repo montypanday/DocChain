@@ -1,6 +1,5 @@
 ﻿import * as React from "react";
 import { EmptySearchIcon } from "../SVGs/icon-EmptySearch";
-require("./ErrorSplash.css");
 
 export class EmptySearch extends React.Component {
 

@@ -1,5 +1,4 @@
 ﻿using Model;
-using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 using Dapper;
@@ -16,6 +15,7 @@ namespace Database.Services
             try
             {
                 connection.Get().Insert(action);
+                System.Diagnostics.Debug.WriteLine(action.ActionType + " action successfully tracked");
             }
             catch (MySqlException e)
             {
@@ -28,6 +28,7 @@ namespace Database.Services
             try
             {
                 connection.Get().Insert(actions);
+                System.Diagnostics.Debug.WriteLine("actions successfully tracked");
             }
             catch (MySqlException e)
             {
@@ -35,21 +36,42 @@ namespace Database.Services
             }
         }
 
-        public SortedList<DateTime, FileAction> GetUserActions(string userID)
+        public List<FileAction> GetActionsByUser(string email)
         {
-            SortedList<DateTime, FileAction> sortedActions = new SortedList<DateTime, FileAction>();
-
+            List<FileAction> actions = new List<FileAction>();
             try
             {
-                string sql = "SELECT * FROM fileactions WHERE userid = @UserID";
-                var actions = connection.Get().Query<FileAction>(sql, new { UserID = userID }).AsList<FileAction>();
-                actions.ForEach(action => sortedActions.Add(action.ActionTime, action));
+                string sql = "SELECT *, " +
+                    "MD5(concat(ActionTime, FileID, StoragePlatform, ActionType, UserName, UserEmail, FileHash)) AS RowHash " +
+                    "FROM fileactions " +
+                    "WHERE UserEmail = @UserEmail " +
+                    "ORDER BY ActionTime DESC";
+                 actions = connection.Get().Query<FileAction>(sql, new { UserEmail = email}).AsList<FileAction>();
             }
             catch (MySqlException e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
-            return sortedActions;
+            return actions;
+        }
+
+        public List<FileAction> GetActionsByFile(string fileID, string platform)
+        {
+            List<FileAction> actions = new List<FileAction>();
+            try
+            {
+                string sql = "SELECT *," +
+                    "MD5(concat(ActionTime, FileID, StoragePlatform, ActionType, UserName, UserEmail, FileHash)) AS RowHash " +
+                    "FROM fileactions " +
+                    "WHERE FileID = @FileID AND StoragePlatform = @Platform " +
+                    "ORDER BY ActionTime DESC";
+                actions = connection.Get().Query<FileAction>(sql, new { FileID = fileID, Platform = platform }).AsList<FileAction>();
+            }
+            catch (MySqlException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+            return actions;
         }
     }
 }

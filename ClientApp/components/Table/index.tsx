@@ -1,4 +1,4 @@
-﻿import ButtonToolBar from "./ButtonToolbar";
+﻿import ButtonToolBar from "../FeatureBar/ButtonToolbar";
 import { Row } from "./Row";
 import TableHeading from "./TableHeading";
 

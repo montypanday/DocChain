@@ -20,12 +20,15 @@
 --
 CREATE TABLE `fileactions` (
   `ActionTime` datetime NOT NULL,
-  `fileID` varchar(64) NOT NULL,
+  `FileID` varchar(64) NOT NULL,
   `StoragePlatform` varchar(20) NOT NULL,
   `ActionType` varchar(20) NOT NULL,
-  `UserID` varchar(64) NOT NULL,
+  `UserName` varchar(64) NOT NULL,
+  `UserEmail` varchar(64) NOT NULL,
   `FileHash` varchar(64) DEFAULT NULL,
-  PRIMARY KEY (`fileID`,`StoragePlatform`,`ActionTime`)
+  PRIMARY KEY (`fileID`,`StoragePlatform`,`ActionTime`),
+  KEY `index_file` (`FileID`,`StoragePlatform`),
+  KEY `index_user` (`UserEmail`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -34,7 +37,7 @@ CREATE TABLE `fileactions` (
 --
 LOCK TABLES `fileactions` WRITE;
 /*!40000 ALTER TABLE `fileactions` DISABLE KEYS */;
-INSERT INTO `fileactions` VALUES ('2017-12-31 21:30:31','0B9_WPLEFe8EdWHFCbVZFb3Z1U3M','Google Drive','Delete','mathewsmith2k13@gmail.com',NULL),('2017-12-31 21:10:20','1522XkRF4CEbHbw5Cu9qbx-cLrz9QOW-P','Google Drive','Upload','mathewsmith2k13@gmail.com',NULL),('2017-12-31 12:07:26','1vcanBJJobKqvNvpiVdZK76xkxqAvU2aNIOiRpNopRsQ','Google Drive','Delete','mathewsmith2k13@gmail.com',NULL),('2017-12-31 21:09:49','1vGrf9Gq0s0-Vz6MWg_A2Tag14NsTC-xGZHSE762SQ8g','Google Drive','Delete','mathewsmith2k13@gmail.com',NULL),('2017-12-31 12:11:11','1XiD-8oQ2bSOT458PpF7n0ZrKCj7PN23PDBW1Qt5GRMk','Google Drive','Delete','mathewsmith2k13@gmail.com',NULL),('2017-12-31 12:13:11','1ynA5-7SCbQwo1INkMmQ3KKccI_NMB4W6YHhDjeUa_JI','Google Drive','Delete','mathewsmith2k13@gmail.com',NULL),('2017-12-28 14:24:30','249123917778','Box','Preview','Box.V2.Models.BoxUser','cc704155ba934fe0befb558430836f0e9f3ff0ac'),('2017-12-28 14:28:37','249123917778','Box','Preview','2881201177','cc704155ba934fe0befb558430836f0e9f3ff0ac'),('2017-12-28 14:33:00','249123917778','Box','Preview','2881201177','cc704155ba934fe0befb558430836f0e9f3ff0ac'),('2017-12-28 15:03:56','249123917778','Box','Preview','2881201177','cc704155ba934fe0befb558430836f0e9f3ff0ac'),('2017-12-28 15:20:41','249123917778','Box','Preview','2881201177','cc704155ba934fe0befb558430836f0e9f3ff0ac'),('2017-12-28 15:45:44','249123917778','Box','Preview','2881201177','cc704155ba934fe0befb558430836f0e9f3ff0ac'),('2017-12-28 15:47:12','249123917778','Box','Preview','2881201177','cc704155ba934fe0befb558430836f0e9f3ff0ac'),('2017-12-28 14:27:13','249123929748','Box','Preview','Box.V2.Models.BoxUser','7df98e30a6e7b2ad6ba296f06bf9f22fc22ba588'),('2017-12-31 10:21:43','249123929748','Box','Preview','2881201177','7df98e30a6e7b2ad6ba296f06bf9f22fc22ba588'),('2017-12-31 21:02:52','261060626661','Box','Preview','2881201177','13759e8b0338b0aa3b78795a76edf3cc395a4d78'),('2017-12-31 21:04:26','261060718295','Box','Preview','2881201177','13759e8b0338b0aa3b78795a76edf3cc395a4d78');
+INSERT INTO `fileactions` VALUES ('2018-01-14 18:40:00','263262635409','Box','Preview','Matt Smith','smmath@deakin.edu.au','fbfe7fc35ac24fd40b83c41f7e7e515a8751af3c');
 /*!40000 ALTER TABLE `fileactions` ENABLE KEYS */;
 UNLOCK TABLES;
 

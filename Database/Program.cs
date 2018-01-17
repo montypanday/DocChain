@@ -14,22 +14,13 @@ namespace Database
 
             TrackedFileService fileTracker = new TrackedFileService();
 
-            if (fileTracker.TrackFile("testFile", "testPlatform"))
-                System.Diagnostics.Debug.WriteLine("Tracked");
-            else
-                System.Diagnostics.Debug.WriteLine("Track Failed");
+            FileActionService fileActionService = new FileActionService();
 
-            if (fileTracker.CheckIfTracked("testFile", "testPlatform"))
-                System.Diagnostics.Debug.WriteLine("File is tacked");
-            else
-                System.Diagnostics.Debug.WriteLine("File is not tracked or query failed");
+            List<FileAction> userActions = fileActionService.GetActionsByUser("smmath@deakin.edu.au");
+            userActions.ForEach(a => Console.WriteLine(a.ActionTime + " " + a.UserName + " " + a.ActionType + " " + a.FileID + " " + a.RowHash));
 
-            //if (fileTracker.UntrackFile("testFile", "testPlatform"))
-            //    System.Diagnostics.Debug.WriteLine("Untracked");
-            //else
-            //    System.Diagnostics.Debug.WriteLine("Untrack Failed");
-
-            Console.WriteLine("No good");
+            List<FileAction> fileActions = fileActionService.GetActionsByFile("263262238234", "Box");
+            fileActions.ForEach(a => Console.WriteLine(a.RowHash));
         }
     }
 }

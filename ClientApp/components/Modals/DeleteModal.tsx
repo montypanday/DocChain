@@ -38,7 +38,7 @@ export default class FilePreviewModal extends React.Component<AppProps, AppState
         let isLoading = this.state.isLoading;
         return (
             <Modal show={true}>
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title id="contained-modal-title-lg">Delete {this.props.fileName}
                     </Modal.Title>
                 </Modal.Header>
