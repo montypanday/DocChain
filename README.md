@@ -17,10 +17,7 @@ These instructions will get you a copy of the project up and running on your loc
 		ii. run the .msi
 	
 --Installing--
-A step-by-step guide of examples that will get your development environment running
-
-((BEAR IN MIND THINGS WE CANNOT INCLUDE FOR SECURITY PURPOSES))
-
+A step-by-step guide of examples that will get your development environment running. *There are steps missing due to security concerns.*
 
 1. Gathering all the required files.
 	i. Navigate to the Clone or Download button on the GitHub repo, and selection an option.
