@@ -72,11 +72,11 @@ The core technologies used to build the project.
 
 __Authors__
 
-	- Monty Panday: Chief Programmer, Project Lead 			https://github.com/montypanday
-	- Matthew Smith: Programmer, Database Integrations		https://github.com/smmath
-	- Patrick Mitchell: Programmer, UX & UI Designer		https://github.com/pgmitche
-	- Roy Lou: Programmer						https://github.com/LGNRoy			
-	- Anushi Jayawardana: Security Analysis and Documentation
+- [Monty Panday](https://github.com/montypanday): Chief Programmer, Project Lead 			
+- [Matthew Smith](https://github.com/smmath): Programmer, Database Integrations		
+- [Patrick Mitchell](https://github.com/pgmitche): Programmer, UX & UI Designer		
+- [Roy Lou](https://github.com/LGNRoy): Programmer									
+- Anushi Jayawardana: Security Analysis and Documentation
 	
 __Acknowledgments__  
 Individuals of note and projects we pilfered.
@@ -84,10 +84,10 @@ Individuals of note and projects we pilfered.
 	1. Leonard Hoon: Guidance, advice and supervision
 
 These already come with the project but deserve mentioning for heavily augmenting the UX  
-	- [Toastify](https://www.npmjs.com/package/react-toastify) for handling in-app alerts and notifications  
-	- [React-file-viewer](https://www.npmjs.com/package/react-file-viewer) for handling in-app file previews  
-	- [Bootstrap](https://www.npmjs.com/package/react-bootstrap) for some design assistance  
-	- [FontAwesome](https://www.npmjs.com/package/font-awesome) for providing some icons  
-	- [React-dropzone](https://www.npmjs.com/package/react-dropzone) for handling drag-drop uploads  
+	- [Toastify](https://www.npmjs.com/package/react-toastify): for handling in-app alerts and notifications  
+	- [React-file-viewer](https://www.npmjs.com/package/react-file-viewer): for handling in-app file previews  
+	- [Bootstrap](https://www.npmjs.com/package/react-bootstrap): for some design assistance  
+	- [FontAwesome](https://www.npmjs.com/package/font-awesome): for providing some icons  
+	- [React-dropzone](https://www.npmjs.com/package/react-dropzone): for handling drag-drop uploads  
 
 __END__ 
