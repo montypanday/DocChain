@@ -1,13 +1,13 @@
---DOCCHAIN--
+__DOCCHAIN__
 
 DocChain is a a file storage medium, capable of tracking, documenting and retaining the integrity of files and actions performed on them, with the reliability of blockchain technology.
 
 Currently your Google Drive and Box.com files can be used, with plans to broaden file storage services in the future.
 
---Getting Started--
+__Getting Started__
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 
---Prequisites--
+__Prequisites__
 
 	1. Visual Studio Community '17
 		i. https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=Community&rel=15
@@ -16,8 +16,8 @@ These instructions will get you a copy of the project up and running on your loc
 		i. https://nodejs.org/dist/v8.9.4/node-v8.9.4-x64.msi
 		ii. run the .msi
 	
---Installing--
-A step-by-step guide of examples that will get your development environment running. *There are steps missing due to security concerns.*
+__Installing__
+A step-by-step guide of examples that will get your development environment running. __*There are steps missing due to security concerns.*__
 
 1. Gathering all the required files.  
 	i. Navigate to the Clone or Download button on the GitHub repo, and selection an option.  
@@ -54,7 +54,7 @@ A step-by-step guide of examples that will get your development environment runn
 	i.  
 
 	
---Built With--
+__Built With__
 
 The core technologies used to build the project.
 
@@ -65,27 +65,27 @@ The core technologies used to build the project.
 	5. SQL SERVER?
 
 
---Authors--
+__Authors__
 
 
-	- Monty Panday: Chief Programmer, Project Lead 					https://github.com/montypanday
-	- Matthew Smith: Programmer, Database Integrations				https://github.com/smmath
-	- Patrick Mitchell: Programmer, UX & UI Designer					https://github.com/pgmitche
-	- Roy Lou: Programmer														https://github.com/LGNRoy
+	- Monty Panday: Chief Programmer, Project Lead 			https://github.com/montypanday
+	- Matthew Smith: Programmer, Database Integrations		https://github.com/smmath
+	- Patrick Mitchell: Programmer, UX & UI Designer		https://github.com/pgmitche
+	- Roy Lou: Programmer						https://github.com/LGNRoy			
 	- Anushi Jayawardana: Security Analysis and Documentation
 
 	
---Acknowledgments--
+__Acknowledgments__  
 Individuals of note and projects we pilfered.
 
 	- Leonard Hoon: Guidance, advice and supervision
 	
-	These already come with the project but deserve mentioning for heavily augmenting the UX;
+	These already come with the project but deserve mentioning for heavily augmenting the UX
 
-	- Toastify: https://www.npmjs.com/package/react-toastify for handling in-app alerts and notifications
-	- React-file-viewer: https://www.npmjs.com/package/react-file-viewer for handling in-app file previews
-	- Bootstrap: https://www.npmjs.com/package/react-bootstrap for some design assistance
-	- FontAwesome: https://www.npmjs.com/package/font-awesome for providing some icons
-	- React-dropzone: https://www.npmjs.com/package/react-dropzone for handling drag-drop uploads
+	- [Toastify](https://www.npmjs.com/package/react-toastify) for handling in-app alerts and notifications
+	- [React-file-viewer](https://www.npmjs.com/package/react-file-viewer) for handling in-app file previews
+	- [Bootstrap](https://www.npmjs.com/package/react-bootstrap) for some design assistance
+	- [FontAwesome](https://www.npmjs.com/package/font-awesome) for providing some icons
+	- [React-dropzone](https://www.npmjs.com/package/react-dropzone) for handling drag-drop uploads
 
------ END -----	
+__END__ 
