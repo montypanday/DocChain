@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link changes the class when hovered 1`] = `
+<div
+  className="srch-bar-container"
+>
+  <div
+    className="input-group"
+  >
+    <input
+      className="form-control srch-bar"
+      onChange={[MockFunction]}
+      onKeyPress={[Function]}
+      placeholder="Search for files and folders"
+      type="text"
+    />
+    <span
+      className="input-group-btn"
+    >
+      <button
+        className="btn btn-default btn-line"
+        onClick={[MockFunction]}
+        type="button"
+      >
+         Search
+      </button>
+    </span>
+  </div>
+</div>
+`;

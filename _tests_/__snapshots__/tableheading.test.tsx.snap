@@ -9,12 +9,12 @@ exports[`Link changes the class when hovered 1`] = `
       File Name
     </th>
     <th
-      className="col-xs-1"
+      className="col-xs-1 action-head"
     >
       Actions
     </th>
     <th
-      className="col-xs-1"
+      className="col-xs-1 secure-head"
     >
       Secure
     </th>
