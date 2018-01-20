@@ -107,34 +107,16 @@ export class Faq extends React.Component<FAQProp, FAQState> {
                         </div>
                         <div className="panel panel-default">
                             <div className="panel-heading">
-                                <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
-                                    How to access to delete files? (unfinished)
-                        </a></h4>
-                            </div>
-                            <div id="collapseSix" className="panel-collapse collapse">
-                                <div className="panel-body">
-                                    <ul>
-                                        <li>Turn to <strong>Match with Blockchain</strong>.</li>
-                                        <li>Select files you want to check</li>
-                                        <li>Click the button "Match"</li>
-                                        <li>If the file is not matched, there would be a alarm message.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="panel panel-default">
-                            <div className="panel-heading">
                                 <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
-                                    How to logout/change the cloud drive? (unfinished)
+                                    How to logout/change the cloud drive?
                         </a></h4>
                             </div>
                             <div id="collapseSeven" className="panel-collapse collapse">
                                 <div className="panel-body">
                                     <ul>
-                                        <li>Turn to <strong>Home</strong>.</li>
+                                        <li>Turn to the <strong>Cloud</strong> page.</li>
                                         <li>Click the button "Logout"</li>
-                                        <li>Turn to <strong>Login</strong>.</li>
-                                        <li>Change to the other cloud Drive Provider</li>
+                                        <li>The page will turn back to <strong>Login</strong> page</li>
                                     </ul>
                                 </div>
                             </div>
@@ -145,13 +127,16 @@ export class Faq extends React.Component<FAQProp, FAQState> {
                         <div className="panel panel-default">
                             <div className="panel-heading">
                                 <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight">
-                                    Why there is an error when I access to <strong>File Explorer</strong>? (unfinished)
+                                    Why there is an error when I access to <strong>File Explorer</strong>?
                         </a></h4>
                             </div>
                             <div id="collapseEight" className="panel-collapse collapse">
                                 <div className="panel-body">
-                                    unfinished
-                        </div>
+                                    <ul>
+                                        <li>1. Please check your network connection.</li>
+                                        <li>2. Please check your account</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <div className="panel panel-default">
