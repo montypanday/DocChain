@@ -96,7 +96,7 @@ namespace front_end.Controllers
         [Route("Upload/{currentFolderID}")]
         [HttpPost]
         public async Task<IActionResult> Upload(string currentFolderID)
-        {
+        { 
             var client = Initialise();
 
             var files = Request.Form.Files;
@@ -457,6 +457,7 @@ namespace front_end.Controllers
             cont.Size = boxFile.Size.ToString();
             cont.Hash = boxFile.Sha1;
             cont.LastModified = boxFile.ModifiedAt.ToString();
+            cont.Secure = "false";
             return cont;
         }
 
@@ -467,13 +468,15 @@ namespace front_end.Controllers
         /// <returns></returns>
         private Content GetCustomFolderObject(BoxFolder boxFolder)
         {
-            Content cont = new Content();
-            cont.Type = boxFolder.Type;
-            cont.Id = boxFolder.Id;
-            cont.FileName = boxFolder.Name;
-            cont.Size = boxFolder.Size.ToString();
-            cont.LastModified = boxFolder.ModifiedAt.ToString();
-            //cont.DownloadUrl = DownloadUrl;
+            Content cont = new Content
+            {
+                Type = boxFolder.Type,
+                Id = boxFolder.Id,
+                FileName = boxFolder.Name,
+                Size = boxFolder.Size.ToString(),
+                LastModified = boxFolder.ModifiedAt.ToString(),
+                Secure = "false"
+            };
             return cont;
         }
 

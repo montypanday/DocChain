@@ -1,7 +1,13 @@
 ﻿using Database.Services;
+using front_end.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -19,35 +25,68 @@ namespace front_end.Controllers
     {
         private IConfiguration _configuration;
 
+        private readonly ILogger _logger;
+
         /// <summary>
         /// This Configuration API is used access User secrets.
         /// </summary>
-        public IConfiguration Configuration { get => _configuration; set => _configuration = value; }
+        public IConfiguration Configuration { get; set; }
 
         /// <summary>
         /// Manages all communication with Blockchain API.
         /// </summary>
         /// <param name="config"></param>
-        public ChainController(IConfiguration config) => Configuration = config;
+        /// <param name="logger"></param>
+        public ChainController(IConfiguration config, ILogger<BoxController> logger)
+        {
+            Configuration = config;
+            _logger = logger;
+        }
 
         /// <summary>
         /// Get method is used to verify something exist in Blockchain.
         /// </summary>
-        /// <param name="hash"></param>
         /// <returns></returns>
         // GET api/<controller>/5
         [Route("GetAsync")]
-        [HttpGet]
-        public async Task<Boolean> GetAsync(string hash)
+        [HttpPost]
+        public async Task<JsonResult> GetAsync()
         {
-            HttpClient client = GetHTTPClient();
-            // gets the response from the Blockchain API and send it back to browser. A GET request is used.
-            var response = await client.GetAsync(Configuration["ChainURL"] + hash);
-            if (response.IsSuccessStatusCode)
+            var streamReader = new StreamReader(Request.Body);
+            var data = await streamReader.ReadToEndAsync();
+            var content = JsonConvert.DeserializeObject<Content[]>(data);
+            
+
+            foreach (var item in content)
             {
-                return true;
+                if (ValidateItem(item))
+                {
+                    var client = GetHTTPClient();
+                    var response = await client.GetAsync(Configuration["ChainURL"] + ConvertToBase64(item.Hash));
+                    _logger.LogInformation(response.ToString());
+                    _logger.LogDebug("Request " + response.RequestMessage);
+                }
             }
-            return false;
+            return Json(content);
+
+           
+        }
+
+       
+
+        private bool ValidateItem(Content item)
+        {
+            if(item.Hash == "" || item.Type == "folder" || item.Id == "sharedWithMe")
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private string ConvertToBase64(string hash)
+        {  
+            byte[] encodedBytes = System.Text.Encoding.Unicode.GetBytes(hash);
+            return Convert.ToBase64String(encodedBytes);
         }
 
         /// <summary>
@@ -113,5 +152,7 @@ namespace front_end.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", base64);
             return client;
         }
+
+       
     }
 }

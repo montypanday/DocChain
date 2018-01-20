@@ -361,6 +361,7 @@ namespace front_end.Controllers
                 cont.Hash = files[i].Md5Checksum;
                 cont.LastModified = files[i].ModifiedTime.ToString();
                 cont.MimeType = files[i].MimeType;
+                cont.Secure = "false";
                 list[i] = cont;
             }
             return list;
@@ -394,6 +395,7 @@ namespace front_end.Controllers
             //request.Fields = @"files(*)";
             request.Fields = @"files(id,name,kind,md5Checksum,modifiedTime,mimeType,size)";
             IList<DriveData.File> files = request.Execute().Files;
+            
             return Json(ConvertToSend(files));
         }
 
