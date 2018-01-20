@@ -15,6 +15,9 @@ __Prequisites__
 	2. NodeJS
 		i. https://nodejs.org/dist/v8.9.4/node-v8.9.4-x64.msi
 		ii. run the .msi
+	3. MySQL Server (App will run without a MySQL server setup however file action tracking won't be functional)
+		i. https://dev.mysql.com/downloads/installer/
+		ii. Run the installer and follow the setup wizard
 	
 __Installing__
 A step-by-step guide of examples that will get your development environment running. __*There are steps missing due to security concerns.*__
