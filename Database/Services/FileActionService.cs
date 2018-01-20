@@ -41,8 +41,7 @@ namespace Database.Services
             List<FileAction> actions = new List<FileAction>();
             try
             {
-                string sql = "SELECT *, " +
-                    "MD5(concat(ActionTime, FileID, StoragePlatform, ActionType, UserName, UserEmail, FileHash)) AS RowHash " +
+                string sql = "SELECT * " +
                     "FROM fileactions " +
                     "WHERE UserEmail = @UserEmail " +
                     "ORDER BY ActionTime DESC";
@@ -60,8 +59,7 @@ namespace Database.Services
             List<FileAction> actions = new List<FileAction>();
             try
             {
-                string sql = "SELECT *," +
-                    "MD5(concat(ActionTime, FileID, StoragePlatform, ActionType, UserName, UserEmail, FileHash)) AS RowHash " +
+                string sql = "SELECT * " +
                     "FROM fileactions " +
                     "WHERE FileID = @FileID AND StoragePlatform = @Platform " +
                     "ORDER BY ActionTime DESC";

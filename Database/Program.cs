@@ -17,10 +17,10 @@ namespace Database
             FileActionService fileActionService = new FileActionService();
 
             List<FileAction> userActions = fileActionService.GetActionsByUser("smmath@deakin.edu.au");
-            userActions.ForEach(a => Console.WriteLine(a.ActionTime + " " + a.UserName + " " + a.ActionType + " " + a.FileID + " " + a.RowHash));
+            userActions.ForEach(a => Console.WriteLine(a.ActionTime + " " + a.UserName + " " + a.ActionType + " " + a.FileID + " "));
 
             List<FileAction> fileActions = fileActionService.GetActionsByFile("263262238234", "Box");
-            fileActions.ForEach(a => Console.WriteLine(a.RowHash));
+            fileActions.ForEach(a => Console.WriteLine(a.FileHash));
         }
     }
 }
