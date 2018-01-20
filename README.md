@@ -15,6 +15,9 @@ __Prequisites__
 	2. NodeJS
 		i. https://nodejs.org/dist/v8.9.4/node-v8.9.4-x64.msi
 		ii. run the .msi
+	3. MySQL Server (App will run without a MySQL server setup however file action tracking won't be functional)
+		i. https://dev.mysql.com/downloads/installer/
+		ii. Run the installer and follow the setup wizard
 	
 __Installing__
 A step-by-step guide of examples that will get your development environment running. __*There are steps missing due to security concerns.*__
@@ -57,7 +60,11 @@ A step-by-step guide of examples that will get your development environment runn
 	
 	
 	4. Intialising the Database  
-	i.  
+	i. Download and install MySQL Server and MySQL workbench from https://dev.mysql.com/downloads/installer/
+	ii. Follow the setup wizard. Ensure your server username and password match those specified within the application.
+	iii. In MySQL workbench add a new schema to the server named "docchain"
+	iv. Open and run the script docchain-db-setup.sql, found within the Database\scripts subdirectory.
+	v. After setting up for the first time with the above steps, updates to the database can be applied by first running docchain-db-teardown.sql script, then running the new docchain-db-setup.sql script.
 
 	
 __Built With__
@@ -68,12 +75,12 @@ The core technologies used to build the project.
 	2. ASP.NET
 	3. NodeJS
 	4. Webpack
-	5. SQL SERVER?
+	5. MySQL
 
 __Authors__
 
 - [Monty Panday](https://github.com/montypanday): Chief Programmer, Project Lead 			
-- [Matthew Smith](https://github.com/smmath): Programmer, Database Integrations		
+- [Mathew Smith](https://github.com/smmath): Programmer, Database Integrations		
 - [Patrick Mitchell](https://github.com/pgmitche): Programmer, UX & UI Designer		
 - [Roy Lou](https://github.com/LGNRoy): Programmer									
 - Anushi Jayawardana: Security Analysis and Documentation

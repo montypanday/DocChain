@@ -14,7 +14,6 @@ namespace Model
         public string UserEmail { get; set; }
         public DateTime ActionTime { get; set; }
         public string ActionType { get; set; }
-        public string RowHash { get; set; }
 
         public FileAction(string id, string fileHash, string storagePlatform, string userName, string userEmail, string actionType, DateTime actionTime)
         {
@@ -43,7 +42,6 @@ namespace Model
             UserEmail = (string)jFileAction["UserEmail"];
             ActionTime = DateTime.Now;
             ActionType = (string)jFileAction["ActionType"];
-            RowHash = (string)jFileAction["RowHash"];
         }
     }
 }

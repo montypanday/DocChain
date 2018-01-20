@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link changes the class when hovered 1`] = `
+<div
+  className="btn-toolbar"
+  role="toolbar"
+>
+  <div
+    className="btn-group"
+  >
+    <button
+      aria-expanded="false"
+      aria-haspopup="true"
+      className="btn btn-default btn-line dropdown-toggle"
+      data-toggle="dropdown"
+      type="button"
+    >
+      <i
+        className="fa fa-upload"
+        style={
+          Object {
+            "paddingRight": "4px",
+          }
+        }
+      />
+      Upload 
+      <span
+        className="caret"
+      />
+    </button>
+    <ul
+      className="dropdown-menu"
+    >
+      <li>
+        <a
+          className="btn-file"
+        >
+          <i
+            aria-hidden="true"
+            className="fa fa-arrow-circle-o-up dropDownIcon"
+          />
+          Upload file 
+          <input
+            id="uploadINPUT"
+            multiple={true}
+            onChange={[Function]}
+            type="file"
+          />
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    className="btn-group"
+  >
+    <button
+      aria-expanded="false"
+      aria-haspopup="true"
+      className="btn btn-default btn-line dropdown-toggle"
+      data-toggle="dropdown"
+      type="button"
+    >
+      <i
+        aria-hidden="true"
+        className="fa fa-plus dropDownIcon"
+      />
+      New 
+      <span
+        className="caret"
+      />
+    </button>
+    <ul
+      className="dropdown-menu"
+    >
+      <li>
+        <a
+          onClick={undefined}
+        >
+           
+          <i
+            aria-hidden="true"
+            className="fa fa-folder-open-o dropDownIcon"
+          />
+          New Folder
+        </a>
+      </li>
+    </ul>
+  </div>
+  <button
+    className="btn btn-danger"
+    disabled={false}
+    type="button"
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-power-off power-icon"
+    />
+    Logout
+  </button>
+</div>
+`;
