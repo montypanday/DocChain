@@ -20,7 +20,7 @@ namespace Database
                 Server = "localhost",
                 Database = "docchain",
                 UserID = "root",
-                Password = "root"
+                Password = "Lincd"
             };
             connection = new MySqlConnection(connectionString.ToString());
             Open();
