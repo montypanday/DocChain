@@ -16,7 +16,7 @@ exports[`Link changes the class when hovered 1`] = `
     <th
       className="col-xs-1 secure-head"
     >
-      Secure
+      Status
     </th>
     <th
       className="col-xs-1"
