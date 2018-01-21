@@ -18,7 +18,6 @@ export class NavMenu extends React.Component<{}, {}> {
         };
     }
     public render() {
-        console.log("NavMenu was rendered");
         return <div className="main-nav">
             <div className="navbar navbar-inverse navbar-fixed-top">
                 <div className="navbar-header">

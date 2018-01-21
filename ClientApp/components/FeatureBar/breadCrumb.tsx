@@ -17,9 +17,8 @@ export class BreadCrumb extends React.Component<BreadCrumbProps, {}> {
         return a;
     }
     render() {
-        console.log("Breadcrumb was rendered");
         var pathElements = this.props.pathCollection.map(function (row) {
-            return (<a key={row.fileID} onClick={() => { this.props.navigateOutHandler(row); }}>{row.Name}</a>);
+            return (<a key={row.fileID}  onClick={() => { this.props.navigateOutHandler(row); }}>{row.Name}</a>);
         }.bind(this));
         return (
             <div className="breadcrumb flat">

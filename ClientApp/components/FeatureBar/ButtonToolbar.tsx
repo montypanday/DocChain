@@ -23,7 +23,6 @@ export default class ButtonToolBar extends React.Component<ButtonToolbarProps, B
     }
 
     render() {
-        console.log("Button Toolbar was rendered again");
         return (
 
             <ButtonToolbar>
