@@ -263,19 +263,19 @@ a {
     width: 25%;
 }
 
-    .login-zone p {
-        font-size: 2vw;
-        clear: both;
-    }
+.login-zone p {
+    font-size: 2vw;
+    clear: both;
+}
 
-    .login-zone > a > div > svg {
-        left: calc(50% - 10vw);
-        position: fixed;
-        width: 20vw;
-        height: calc(20vw * 0.8);
-        margin: 0;
-        padding: 0;
-    }
+.login-zone > a > div > svg {
+    left: calc(50% - 10vw);
+    position: fixed;
+    width: 20vw;
+    height: calc(20vw * 0.8);
+    margin: 0;
+    padding: 0;
+}
 
 .login-box > a > div > svg > path {
     fill: #058ED9;
@@ -331,11 +331,11 @@ td {
 }
 
 .dropdown {
-    text-align: center;
+    text-align: left;
 }
 
 .action-head, .secure-head {
-    text-align: center;
+    text-align: left;
 }
 
 .secure-col {
@@ -378,6 +378,12 @@ tbody {
 .action-btn {
     padding: 2px 5px !important;
     font-size: 11px !important;
+    float: left;
+}
+
+.history{
+    text-align: right;
+    float:left;
 }
 
 /** CONTEXT MENU **/
