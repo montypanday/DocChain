@@ -1,4 +1,4 @@
-﻿import * as React from "react";
+﻿ import * as React from "react";
 import { render } from "react-dom";
 import { ButtonToolBar, Row, TableHeading } from "../Table";
 import { Link, NavLink, Redirect } from "react-router-dom";
