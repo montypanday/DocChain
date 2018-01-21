@@ -7,8 +7,8 @@ using Model;
 using Database.Services;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using System.Net;
+using System.Net.Http;
 
 namespace front_end.Controllers
 {
@@ -26,7 +26,7 @@ namespace front_end.Controllers
 
         [Route("LogAction")]
         [HttpPost]
-        public JsonResult LogAction([FromBody] JObject json)
+        public async Task<JsonResult> LogAction([FromBody] JObject json)
         {
             FileAction fileAction;
             try
@@ -40,8 +40,8 @@ namespace front_end.Controllers
             }
             try
             {
-                fileActionService.RecordFileAction(fileAction);
-                return new JsonResult(JsonConvert.SerializeObject(fileAction));
+                string rowHash = fileActionService.RecordFileAction(fileAction);
+                return new JsonResult(JsonConvert.SerializeObject(rowHash));
             } catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
@@ -63,7 +63,7 @@ namespace front_end.Controllers
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
-                return new JsonResult("File Action Query Failed");
+                throw e;
             }
         }
 
@@ -81,8 +81,26 @@ namespace front_end.Controllers
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
-                return new JsonResult("File Action Query Failed");
+                throw e;
             }
+        }
+
+        [Route("GetDocchainStatus/{fileID}/{platform}/{hash}")]
+        [HttpGet]
+        public JsonResult GetDocchainStatus([FromRoute]String fileID, [FromRoute]String platform, [FromRoute]String fileHash)
+        {
+            DocchainResult status;
+            try
+            {
+                status = fileActionService.GetCurrentHashes(fileID, platform);
+            } catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+                throw e;
+            }
+
+            string json = JsonConvert.SerializeObject(status);
+            return new JsonResult(json);
         }
     }
 }
