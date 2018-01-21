@@ -11,7 +11,7 @@ namespace front_end.Models
         {
 
         }
-        public Content(string type, string id, string fileName, string size, string hash, string modifiedat)
+        public Content(string type, string id, string fileName, string size, string hash, string modifiedat,string secure)
         {
             this.Type = type;
             this.Id = id;
@@ -19,6 +19,7 @@ namespace front_end.Models
             this.Size = size;
             this.Hash = hash;
             this.LastModified = modifiedat;
+            this.Secure = secure;
         }
         public string Type { get; set; }
         // in Google, type is called kind and is always drive#file.
@@ -43,11 +44,12 @@ namespace front_end.Models
         // To be verified for Box.
         // Box calls it modified_at, Drive calls it modifiedByMeDate
 
-       
 
-     
+
+
         public string MimeType { get; set; }
 
+        public string Secure { get; set; }
 
 
 

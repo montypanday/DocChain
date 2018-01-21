@@ -29,7 +29,6 @@ export class SearchBar extends React.Component<AppProps, AppState> {
     }
 
     render() {
-        console.log("SearchBar was rendered");
         return (
             <div className="srch-bar-container">
                 <div className="input-group">

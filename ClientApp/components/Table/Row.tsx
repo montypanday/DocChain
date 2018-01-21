@@ -19,6 +19,7 @@ export interface AppProps {
     renameHandler: any;
     shareLinkHandler: any;
     platform: string;
+    secure: string;
 }
 
 export interface AppState {
@@ -133,7 +134,8 @@ export class Row extends React.Component<AppProps, AppState> {
         const b = this.props.filename !== nextProps.filename;
         const c = this.props.size !== nextProps.size;
         const d = this.props.lastModified !== nextProps.lastModified;
-        return (a || b || c || d);
+        const e = this.props.secure !== nextProps.secure;
+        return (a || b || c || d || e);
     }
 
     //This method is method is no longer being used, was created to query the database to check whether or not a file was being tracked, and set the row state accordingly.
@@ -151,7 +153,6 @@ export class Row extends React.Component<AppProps, AppState> {
     }
 
     render() {
-        console.log("Row was renderered again");
         var a = this.getFileExtension(this.props.filename);
         var iconClass = this.getIconClass(a, this.props.mimeType);
         var icon;

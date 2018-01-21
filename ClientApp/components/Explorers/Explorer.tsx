@@ -314,6 +314,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
                         navHandler={this.navigate.bind(null, row)}
                         downloadHandler={this.download.bind(null, row)}
                         mimeType=""
+                        secure={row.secure}
                         filename={row.fileName}
                         size={row.size}
                         lastModified={row.lastModified}

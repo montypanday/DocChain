@@ -163,7 +163,7 @@ namespace front_end.Controllers
             Content[] list = new Content[files.Count];
             for (int i = 0; i < files.Count; i++)
             {
-                list[i] = new Content(files[i].Kind, files[i].Id, files[i].Name, files[i].Size.ToString(), files[i].Md5Checksum, files[i].ModifiedTime.ToString());
+                list[i] = new Content(files[i].Kind, files[i].Id, files[i].Name, files[i].Size.ToString(), files[i].Md5Checksum, files[i].ModifiedTime.ToString(),"false");
             }
             return Json(list);
         }

@@ -17,6 +17,7 @@ test("Link changes the class when hovered", () => {
             downloadHandler=""
             renameHandler=""
             shareLinkHandler=""
+            secure = ""
 
             deleteHandler={test_delete_handler}
             platform={"testPlatform"}
