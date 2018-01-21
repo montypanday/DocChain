@@ -3,6 +3,7 @@ import { render } from "react-dom";
 import { formatSizeUnits } from "./FormatSize";
 import { CheckIfTracked } from "../../api/Chain/FileTracker";
 import { ContextMenu } from "../Explorers/contextmenu";
+import { CertDrawer } from "../Explorers/CertDrawer";
 
 
 export interface AppProps {
@@ -158,6 +159,7 @@ export class Row extends React.Component<AppProps, AppState> {
         icon = <span className={iconClass} style={{ verticalAlign: "middle", float: "left", fontSize: "1.5em" }}></span>;
         return (
             <tr id={this.props.id}>
+                
                 <td className="col-xs-6 " id={this.props.id}>
                     <a onClick={this.props.navHandler} style={{ cursor: "pointer" }}>
                         {icon}
@@ -165,10 +167,17 @@ export class Row extends React.Component<AppProps, AppState> {
                     </a>
                 </td>
                 <td className="col-xs-1 ">
+
+                    
+
                     {this.props.id != "sharedWithMe" &&
+              
                         <div className="dropdown">
                             <button className="btn btn-default btn-line dropdown-toggle action-btn" style={{ verticalAlign: "middle", zIndex: 0 }} type="button" data-toggle="dropdown">...
                             </button>
+
+                            
+                        
                             <ul className="dropdown-menu">
 
                                 {this.props.type != "folder" && <li><a onClick={this.props.navHandler} ><i className="fa fa-eye dropDownIcon" aria-hidden="true"></i>Preview</a></li>}
@@ -210,8 +219,12 @@ export class Row extends React.Component<AppProps, AppState> {
 
                             {this.props.type != "folder" && <li className="divider"></li>}
                             {this.props.type != "folder" && <li><a href="#"><i className="fa fa-history dropDownIcon" aria-hidden="true"></i>History</a></li>}
-                        </ul>
+                        </ul>                   
                     </div>
+                    {
+                        this.props.type != "folder" &&
+                        <CertDrawer />
+                    }
                 </td>
 
 
