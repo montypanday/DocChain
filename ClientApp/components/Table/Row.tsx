@@ -1,10 +1,9 @@
 ﻿import * as React from "react";
 import { render } from "react-dom";
 import { formatSizeUnits } from "./FormatSize";
-import { CheckIfTracked } from "../../api/Chain/FileTracker";
+import { CheckIfTracked } from "../../api/Chain_Utilities";
 import { ContextMenu } from "../Explorers/contextmenu";
 import { CertDrawer } from "../Explorers/CertDrawer";
-
 
 export interface AppProps {
     type: string;
@@ -15,7 +14,7 @@ export interface AppProps {
     id: any;
     mimeType: any;
     deleteHandler: any;
-    downloadHandler: any,
+    downloadHandler: any;
     renameHandler: any;
     shareLinkHandler: any;
     platform: string;

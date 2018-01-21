@@ -89,15 +89,20 @@ namespace front_end.Controllers
         [HttpGet]
         public JsonResult GetDocchainStatus([FromRoute]String fileID, [FromRoute]String platform, [FromRoute]String fileHash)
         {
-            DocchainResult status;
+            DocchainResult status = new DocchainResult();
             try
             {
                 status = fileActionService.GetCurrentHashes(fileID, platform);
             } catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
-                throw e;
+                status.Embedded = false;
+                status.FileHash = "";
+                status.RowHash = "";
             }
+
+            //TODO: Check if row hash matches that embedded on the blockchain
+            //TODO: Check if file hash matches that stored in the database
 
             string json = JsonConvert.SerializeObject(status);
             return new JsonResult(json);
