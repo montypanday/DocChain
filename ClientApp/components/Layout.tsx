@@ -3,7 +3,7 @@ import { NavMenu } from "./Navbar/NavMenu";
 import { Alert } from "react-bootstrap";
 import ErrorBoundary from "../components/Utils/ErrorBoundary";
 
-require('../css/onecss.css');
+require("../css/onecss.css");
 
 export interface LayoutProps {
     children?: React.ReactNode;
