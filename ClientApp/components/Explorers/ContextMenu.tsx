@@ -81,10 +81,7 @@ export class ContextMenu extends React.Component<AppProps, AppState> {
             if (bottom) {
                 contextMenu.style.top = `${clickY - contextMenuH - 5}px`;
             }
-        }
-
-        
-
+        }    
     }
 
     getParentTrId = (node: Element) => {

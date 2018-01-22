@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cert changes the class when hovered Clicked 1`] = `
+<div>
+  <button
+    className="history action-btn btn-line btn btn-default"
+    disabled={false}
+    onBlur={[Function]}
+    onFocus={[Function]}
+    type="button"
+  >
+     
+    <i
+      className="fa fa-history"
+    />
+    
+  </button>
+  <div
+    className="popover right"
+    id="popover-trigger-click-root-close"
+    role="tooltip"
+    style={
+      Object {
+        "display": "block",
+        "left": undefined,
+        "top": undefined,
+      }
+    }
+  >
+    <div
+      className="arrow"
+      style={
+        Object {
+          "left": undefined,
+          "top": undefined,
+        }
+      }
+    />
+    <h3
+      className="popover-title"
+    >
+      File Certificate
+    </h3>
+    <div
+      className="popover-content"
+    >
+      Here is where certificate data goes
+    </div>
+  </div>
+</div>
+`;
