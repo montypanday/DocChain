@@ -71,7 +71,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
         this.shareLinkHandler = this.shareLinkHandler.bind(this);
         this.closeShareModal = this.closeShareModal.bind(this);
         this.download = this.download.bind(this);
-
+        this.showHistoryModal = this.showHistoryModal.bind(this);
         this.FileUploadHandler = this.FileUploadHandler.bind(this);
         this.state = {
             // This is space we will put the json response
@@ -215,7 +215,13 @@ export class Explorer extends React.Component<{}, ExplorerState> {
 
     closeShareModal() { this.setState({ showShareModal: false, tempShareURL: "" }); }
 
-    showDeleteModal(row, event) { this.setState({ showDeleteModal: true, ToBeDeletedID: row.id, ToBeDeletedName: row.fileName, ToBeDeletedType: row.type }); }
+    showDeleteModal(row, event) {
+        this.setState({ showDeleteModal: true, ToBeDeletedID: row.id, ToBeDeletedName: row.fileName, ToBeDeletedType: row.type });
+    }
+
+    showHistoryModal(row, event) {
+
+    }
 
     deleteItem() {
         Delete(this.state.ToBeDeletedType, this.state.ToBeDeletedID, this.state.currentFolderID)
@@ -278,7 +284,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
             .then(newData => {
                 console.log("hahahhahhahhhhhhhhhhhhhhhhhhhhh");
                 if (Object.keys(newData).length != (this.state.filesarray.length + fileList.length)) {
-                    
+
                     throw Error("Not all files were successfully uploaded, file names must be unique!");
                 }
                 let isEmpty = newData.length === 0 ? true : false;
@@ -321,6 +327,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
                         shareLinkHandler={this.shareLinkHandler.bind(null, row)}
                         renameHandler={this.renameHandler.bind(null, row)}
                         deleteHandler={this.showDeleteModal.bind(null, row)}
+                        historyModalHandler={this.showHistoryModal.bind(null,row)}
                         platform={"Box"}>
                     </Row>);
                 }.bind(this));
@@ -328,21 +335,25 @@ export class Explorer extends React.Component<{}, ExplorerState> {
 
             return (
                 <div className="well pull-down" id="target">
-                    <ContextMenu root="target"/>
-                    <ToastContainer position="bottom-right" hideProgressBar={true} pauseOnHover={true} newestOnTop={true} toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
+                    {!this.state.show401Alert && < ContextMenu root="target"></ ContextMenu>}
+                    <ToastContainer position="bottom-right" hideProgressBar={true} pauseOnHover={true} newestOnTop={true} toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })}>
+                    </ToastContainer>
 
-                    <div style={{ float: "right" }} className="user-details">
-                        {/*this.state['user']*/}
-                        <ButtonToolBar NewFolderHandler={this.NewFolderHandler} uploadHandler={this.FileUploadHandler} ></ButtonToolBar>
-                    </div>
-                    <SearchBar changeHandler={e => { this.setState({ query: e.target.value }); }} searchHandler={this.performSearch}></SearchBar>
+                    {!this.state.show401Alert && <div style={{ float: "right" }} className="user-details">
+                        <ButtonToolBar NewFolderHandler={this.NewFolderHandler} uploadHandler={this.FileUploadHandler}>
+                        </ButtonToolBar>
+                    </div>}
+                    {!this.state.show401Alert &&
+                        <SearchBar changeHandler={e => { this.setState({ query: e.target.value }); }} searchHandler={this.performSearch}/>}
 
                     {this.state.show401Alert &&
                         <Alert bsStyle="warning">
-                            <strong>401 Unauthorized </strong> Please sign in first
+                            <strong>Unauthorized: </strong> Please sign in first
                         </Alert>}
                     {this.state.show401Alert && <BoxLogin></BoxLogin>}
-                    {!this.state.show401Alert && <BreadCrumb pathCollection={this.state.pathCollection} navigateOutHandler={this.navigateOut.bind(this)} />}
+                    {!this.state.show401Alert &&
+                        <BreadCrumb pathCollection={this.state.pathCollection} navigateOutHandler={this.navigateOut.bind(this)}>
+                        </BreadCrumb>}
                     {!this.state.show401Alert && <table className="table table-striped table-hover table-responsive header-fixed">
                         <TableHeading />
                         <tbody>

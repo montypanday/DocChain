@@ -20,6 +20,7 @@ export interface AppProps {
     shareLinkHandler: any;
     platform: string;
     secure: string;
+    historyModalHandler: any;
 }
 
 export interface AppState {
@@ -197,7 +198,7 @@ export class Row extends React.Component<AppProps, AppState> {
                                     <li className="divider">
                                     </li>
                             }
-                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-history dropDownIcon" aria-hidden="true"></i>History</a></li>}
+                            {this.props.type != "folder" && <li><a onClick={this.props.historyModalHandler} > <i className="fa fa-history dropDownIcon" aria-hidden="true"></i>History</a></li>}
                             </ul>
                         </div>}
                     <div className="contextmenu dropdown" id={"contextMenu" + this.props.id}>
@@ -228,9 +229,9 @@ export class Row extends React.Component<AppProps, AppState> {
                 </td>
 
 
-                <td className="col-xs-1 secure-col" style={{ verticalAlign: "middle" }}>
+                {/*<td className="col-xs-1 secure-col" style={{ verticalAlign: "middle" }}>
                     {this.props.type != "folder" && <i className="fa fa-lock fa-2x"></i>}
-                </td>
+                </td>*/}
 
                 <td className="col-xs-1 " style={{ verticalAlign: "middle" }}>{formatSizeUnits(this.props.size)}</td>
 

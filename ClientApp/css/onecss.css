@@ -307,6 +307,7 @@ a {
 }
 
 .pull-down {
+    width:99%;
     margin-top: 55px;
     margin-left: 5px;
     margin-right: 7px;
@@ -786,4 +787,7 @@ tbody {
     100% {
         opacity: 1;
     }
+}
+.fa-folder {
+    color: #ffcc80;
 }

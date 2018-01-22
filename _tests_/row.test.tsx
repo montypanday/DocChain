@@ -24,8 +24,24 @@ const init = () => {
         secure: "",
     }
 
-    const component = renderer.create(
-        <Row {...props}></Row>,
+     const component = renderer.create(
+        <Row filename="sample folder"
+            id="43970020269"
+            lastModified="1/01/2018 6:46:08 PM"
+            mimeType=""
+            size="28528"
+            type="folder"
+            key="43970020269"
+            navHandler={testnavHandler}
+            downloadHandler=""
+            renameHandler=""
+            shareLinkHandler=""
+            secure=""
+            historyModalHandler=''
+            deleteHandler={test_delete_handler}
+            platform={"testPlatform"}
+
+        ></Row>,
     );
 
     return component;
