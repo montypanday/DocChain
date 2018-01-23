@@ -1,5 +1,6 @@
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using System.IO;
+using Microsoft.Extensions.Logging.Console;
 
 namespace front_end
 {
@@ -7,14 +8,19 @@ namespace front_end
     {
         public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .Build();
-
-            host.Run();
+            BuildWebHost(args).Run();
+        }
+        /// <summary>
+        /// Creates configured WebHost.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
+                        .UseStartup<Startup>()
+                        .UseIISIntegration()
+                        .Build();
         }
     }
 }

@@ -1,20 +1,49 @@
-import * as React from 'react';
-import { NavMenu } from './NavMenu';
+import * as React from "react";
+import { NavMenu } from "./Navbar/NavMenu";
+import { Alert } from "react-bootstrap";
+import ErrorBoundary from "../components/Utils/ErrorBoundary";
+
+require("../css/onecss.css");
 
 export interface LayoutProps {
     children?: React.ReactNode;
 }
 
-export class Layout extends React.Component<LayoutProps, {}> {
+var divstyle = {
+    "padding": "3px"
+};
+
+export interface LayoutState {
+    errorFound: boolean;
+    Error: any;
+    errorInformation: any;
+}
+
+export class Layout extends React.Component<LayoutProps, LayoutState> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            Error :"",
+            errorFound: false,
+            errorInformation: ""
+        };
+    }
+
+    //componentDidCatch(error, errorInfo) {
+    //    this.setState({ Error: error, errorFound: true, errorInformation: errorInfo });
+    //}
+
     public render() {
-        return <div className='container-fluid'>
-            <div className='row'>
-                <div className='col-sm-3'>
+        return <div className="container-fluid">
+            <div className="row">
+                <div >
                     <NavMenu />
                 </div>
-                <div className='col-sm-9'>
+                <ErrorBoundary>
+                <div style={divstyle}>
                     { this.props.children }
-                </div>
+                    </div>
+                </ErrorBoundary>
             </div>
         </div>;
     }

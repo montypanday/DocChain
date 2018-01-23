@@ -1,24 +1,162 @@
 ﻿<Project ToolsVersion="15.0" Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <IsPackable>false</IsPackable>
-    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <StartupObject>front_end.Program</StartupObject>
+    <UserSecretsId>8e341a53-9148-4882-bb14-172c1bb76120</UserSecretsId>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp2.0\front_end.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Box.V2.Core" Version="3.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OAuth" Version="1.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Session" Version="1.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="1.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
+    <Compile Remove="Database\**" />
+    <Compile Remove="Migration\**" />
+    <Compile Remove="Model\**" />
+    <Content Remove="Database\**" />
+    <Content Remove="Migration\**" />
+    <Content Remove="Model\**" />
+    <EmbeddedResource Remove="Database\**" />
+    <EmbeddedResource Remove="Migration\**" />
+    <EmbeddedResource Remove="Model\**" />
+    <None Remove="Database\**" />
+    <None Remove="Migration\**" />
+    <None Remove="Model\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Box.V2.Core" Version="3.3.0" />
+    <PackageReference Include="Google.Apis.Drive.v3" Version="1.32.0.1093" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OAuth" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
+    <PackageReference Include="Microsoft.TypeScript.Compiler" Version="2.6.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0-dev-00023" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="1.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="1.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="1.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Model\Model.csproj" />
+    <ProjectReference Include="Database\Database.csproj" />
   </ItemGroup>
   <ItemGroup>
     <!-- Files not to show in IDE -->
+    <None Remove="ClientApp\api\SearchRoot.tsx" />
+    <None Remove="ClientApp\components\Alerts\EmptyFolder.tsx" />
+    <None Remove="ClientApp\components\Alerts\EmptySearch.tsx" />
+    <None Remove="ClientApp\components\Alerts\ErrorSplash.tsx" />
+    <None Remove="ClientApp\components\Alerts\LostConnect.tsx" />
+    <None Remove="ClientApp\components\ErrorBoundary.tsx" />
+    <None Remove="ClientApp\components\FAQ\Errors\eEmbed.tsx" />
+    <None Remove="ClientApp\components\FAQ\Errors\eFileExplorer.tsx" />
+    <None Remove="ClientApp\components\FAQ\Errors\eMatch.tsx" />
+    <None Remove="ClientApp\components\FAQ\faqFileExplorer.tsx" />
+    <None Remove="ClientApp\components\FAQ\Functionality.tsx" />
+    <None Remove="ClientApp\components\FAQ\Functionality\fEmbedding.tsx" />
+    <None Remove="ClientApp\components\FAQ\Functionality\fFileInteraction.tsx" />
+    <None Remove="ClientApp\components\FAQ\Functionality\fLogin.tsx" />
+    <None Remove="ClientApp\components\FAQ\Functionality\fLogoutandSwitch.tsx" />
+    <None Remove="ClientApp\components\FAQ\General.tsx" />
+    <None Remove="ClientApp\components\FAQ\General\gAbout.tsx" />
+    <None Remove="ClientApp\components\FAQ\General\gFileTypes.tsx" />
+    <None Remove="ClientApp\components\iconGD.tsx" />
+    <None Remove="ClientApp\components\Modals\FilePreviewModal.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-BOX.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-Chain.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-DB.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-EmptyFolder.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-EmptySearch.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-HELP.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-HOME.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-LOGIN.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-LostConn.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-NetError.tsx" />
+    <None Remove="ClientApp\components\SVGs\icon-OD.tsx" />
+    <None Remove="ClientApp\components\TableHeading.tsx" />
     <None Remove="yarn.lock" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\dist\font-awesome-4.7.0\css\font-awesome.css" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\less\animated.less" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\less\core.less" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\less\fixed-width.less" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\less\font-awesome.less" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\less\icons.less" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\less\larger.less" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\less\list.less" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\less\mixins.less" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\less\path.less" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\less\screen-reader.less" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\less\stacked.less" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\less\variables.less" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\scss\_animated.scss" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\scss\_core.scss" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\scss\_icons.scss" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\scss\_larger.scss" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\scss\_list.scss" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\scss\_mixins.scss" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\scss\_path.scss" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\scss\_stacked.scss" />
+    <None Include="wwwroot\dist\font-awesome-4.7.0\scss\_variables.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\FAQ\Errors\eMatch.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\Errors\eEmbed.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\Errors\eFileExplorer.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\Functionality.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\Functionality\fLogoutandSwitch.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\Functionality\fEmbedding.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\Functionality\fFileInteraction.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\Functionality\fLogin.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\General.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\Errors.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\General\gFileTypes.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\General\gAbout.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-Chain.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Table\FormatSize.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Alerts\EmptySearch.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Alerts\EmptyFolder.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Alerts\LostConnect.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Alerts\ErrorSplash.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Utils\ErrorBoundary.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-BOX.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-EmptySearch.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-HELP.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-LOGIN.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-HOME.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-DB.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-EmptyFolder.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-NetError.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-LostConn.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-OD.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SVGs\icon-GD.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Modals\FilePreviewModal.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Table\TableHeading.tsx" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="Microsoft.NETCore.App" Version="2.0.0" />
   </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
@@ -35,4 +173,19 @@
       </ResolvedFileToPublish>
     </ItemGroup>
   </Target>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
 </Project>

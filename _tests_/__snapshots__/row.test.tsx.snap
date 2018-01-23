@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Whether the componet is right rendered 1`] = `
+<tr
+  id="43970020269"
+>
+  <td
+    className="col-xs-6 "
+    id="43970020269"
+  >
+    <a
+      onClick=""
+      style={
+        Object {
+          "cursor": "pointer",
+        }
+      }
+    >
+      <span
+        className="fa fa-folder fa-2x"
+        style={
+          Object {
+            "float": "left",
+            "fontSize": "1.5em",
+            "verticalAlign": "middle",
+          }
+        }
+      />
+      <p
+        style={
+          Object {
+            "float": "left",
+            "paddingLeft": "15px",
+          }
+        }
+      >
+        sample folder
+      </p>
+    </a>
+  </td>
+  <td
+    className="col-xs-1 "
+  >
+    <div
+      className="dropdown"
+    >
+      <button
+        className="btn btn-default btn-line dropdown-toggle action-btn"
+        data-toggle="dropdown"
+        style={
+          Object {
+            "verticalAlign": "middle",
+            "zIndex": 0,
+          }
+        }
+        type="button"
+      >
+        ...
+      </button>
+      <ul
+        className="dropdown-menu"
+      >
+        <li>
+          <a
+            onClick=""
+          >
+            <i
+              aria-hidden="true"
+              className="fa fa-trash-o dropDownIcon"
+            />
+            Delete
+          </a>
+        </li>
+        <li>
+          <a
+            onClick=""
+          >
+            <i
+              aria-hidden="true"
+              className="fa fa-pencil-square-o dropDownIcon"
+            />
+            Rename
+          </a>
+        </li>
+        <li>
+          <a
+            onClick=""
+          >
+            <i
+              aria-hidden="true"
+              className="fa fa-share dropDownIcon"
+            />
+            Share
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div
+      className="contextmenu dropdown"
+      id="contextMenu43970020269"
+    >
+      <ul
+        className="dropdown-menu"
+      >
+        <li>
+           
+          <a
+            onClick=""
+          >
+            <i
+              aria-hidden="true"
+              className="fa fa-trash-o dropDownIcon"
+            />
+            Delete
+          </a>
+        </li>
+        <li>
+          <a
+            onClick=""
+          >
+            <i
+              aria-hidden="true"
+              className="fa fa-pencil-square-o dropDownIcon"
+            />
+            Rename
+          </a>
+        </li>
+        <li>
+          <a
+            onClick=""
+          >
+            <i
+              aria-hidden="true"
+              className="fa fa-share dropDownIcon"
+            />
+            Share
+          </a>
+        </li>
+      </ul>
+    </div>
+  </td>
+  <td
+    className="col-xs-1 secure-col"
+    style={
+      Object {
+        "verticalAlign": "middle",
+      }
+    }
+  />
+  <td
+    className="col-xs-1 "
+    style={
+      Object {
+        "verticalAlign": "middle",
+      }
+    }
+  >
+    27.86 KB
+  </td>
+  <td
+    className="col-xs-2 "
+    style={
+      Object {
+        "verticalAlign": "middle",
+      }
+    }
+  >
+    1/01/2018 6:46:08 PM
+  </td>
+</tr>
+`;

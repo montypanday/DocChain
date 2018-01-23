@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
+    //"allowJs": true,
     "baseUrl": ".",
+    "pretty": true,
+    
     "moduleResolution": "node",
     "target": "es5",
     "jsx": "react",
@@ -8,7 +11,8 @@
     "skipDefaultLibCheck": true,
     "types": [
       "webpack-env",
-      "aspnet-webpack-react"
+      "aspnet-webpack-react",
+      "jest"
     ],
     "paths": {
       // Fix "Duplicate identifier" errors caused by multiple dependencies fetching their own copies of type definitions.

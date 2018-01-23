@@ -1,9 +1,36 @@
-@{
-    ViewData["Title"] = "Home Page";
+﻿@{
+    ViewData["Title"] = "DocChain";
 }
 
-<div id="react-app">Loading...</div>
+
+
+<div id="react-app">
+    <div>
+        <img style="position: absolute;
+         top: 25%;
+         left: calc(50vw - 80px);
+         margin: 0px 0px 0px 0px;
+         " src="~/dist/loading.gif" />
+    </div>
+</div>
+
+
+
 
 @section scripts {
     <script src="~/dist/main.js" asp-append-version="true"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    @*<link href="~/dist/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />*@
+
+
+    <script>
+        (function (d) {
+            var config = {
+                kitId: 'dee8yaf',
+                scriptTimeout: 3000,
+                async: true
+            },
+                h = d.documentElement, t = setTimeout(function () { h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive"; }, config.scriptTimeout), tk = d.createElement("script"), f = false, s = d.getElementsByTagName("script")[0], a; h.className += " wf-loading"; tk.src = 'https://use.typekit.net/' + config.kitId + '.js'; tk.async = true; tk.onload = tk.onreadystatechange = function () { a = this.readyState; if (f || a && a != "complete" && a != "loaded") return; f = true; clearTimeout(t); try { Typekit.load(config) } catch (e) { } }; s.parentNode.insertBefore(tk, s)
+        })(document);
+    </script>
 }

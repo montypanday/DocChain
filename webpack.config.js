@@ -16,6 +16,14 @@ module.exports = (env) => {
             publicPath: '/dist/'
         },
         module: {
+            loaders: [
+                {
+                    test: /\.(png|jpg)$/,
+                    loader: 'url?limit=25000'
+                }
+            ]
+        },
+        module: {
             rules: [
                 { test: /\.tsx?$/, include: /ClientApp/, use: 'awesome-typescript-loader?silent=true' },
                 { test: /\.css$/, use: isDevBuild ? ['style-loader', 'css-loader'] : ExtractTextPlugin.extract({ use: 'css-loader?minimize' }) },

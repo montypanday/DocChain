@@ -26,6 +26,9 @@ Bin/
 obj/
 Obj/
 
+# Log Files
+Logs/
+
 # Visual Studio 2015 cache/options directory
 .vs/
 /wwwroot/dist/
@@ -234,3 +237,5 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+*.zip
+Database/scripts/docchain-db-setup-and-teardown-old.sql
