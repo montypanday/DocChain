@@ -24,14 +24,17 @@ const init = () => {
         secure: "",
     }
 
-     const component = renderer.create(
+    const component = renderer.create(
         <Row filename="sample folder"
             id="43970020269"
             lastModified="1/01/2018 6:46:08 PM"
             mimeType=""
+            hash="123"
             size="28528"
             type="folder"
             key="43970020269"
+            putHandler=""
+             
             navHandler={testnavHandler}
             downloadHandler=""
             renameHandler=""

@@ -5,8 +5,10 @@ import * as renderer from "react-test-renderer";
 test("Link changes the class when hovered", () => {
     const folderHandler = jest.fn();
     const uploadHandler = jest.fn();
+    const logoutHandler = jest.fn();
     const component = renderer.create(
         <ButtonToolBar
+            logoutHandler={this.logoutHandler}
             NewFolderHandler={this.folderHandler}
             uploadHandler={this.uploadHandler}
         >

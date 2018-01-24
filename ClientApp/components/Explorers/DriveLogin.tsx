@@ -47,7 +47,7 @@ export class DriveLogin extends React.Component<{}, LoginState> {
         if (sessionStorage.getItem("accessToken") == null) {
 
             return <div className="login-zone">
-                    <a className="logo-link" href="https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/drive&client_id=900082198060-kdvsjc3ecm82gn48dl9083cg0gihggm1.apps.googleusercontent.com&redirect_uri=https://localhost:44374/Login/&response_type=code&access_type=offline&include_granted_scopes=true&state=state_parameter_passthrough_value&prompt=consent" >
+                <a className="logo-link" href="https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/drive&client_id=900082198060-kdvsjc3ecm82gn48dl9083cg0gihggm1.apps.googleusercontent.com&redirect_uri=https://localhost:44374/api/Google/Authenticate&response_type=code&access_type=offline&include_granted_scopes=true&state=state_parameter_passthrough_value&prompt=consent" >
                         <p>Click to login to Google Drive </p>
                         <GDIcon/>
                     </a>

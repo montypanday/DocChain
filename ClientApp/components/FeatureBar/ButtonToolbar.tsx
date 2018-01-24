@@ -6,6 +6,7 @@ import { Button, DropdownButton, MenuItem } from "react-bootstrap";
 export interface ButtonToolbarProps {
     NewFolderHandler: any;
     uploadHandler: any;
+    logoutHandler: any;
 }
 
 export interface ButtonToolbarState {
@@ -49,7 +50,11 @@ export default class ButtonToolBar extends React.Component<ButtonToolbarProps, B
                         <li><a onClick={this.props.NewFolderHandler} > <i className="fa fa-folder dropDownIcon" aria-hidden="true"></i>New Folder</a></li>
                     </ul>
                 </div>
-                <Button bsStyle="danger"><i className="fa fa-power-off power-icon" aria-hidden="true"></i>Logout</Button>
+                <Button onClick={this.props.logoutHandler} bsStyle="danger">
+                    <i className="fa fa-power-off power-icon" aria-hidden="true">
+                    </i>
+                    Logout
+                    </Button>
             </ButtonToolbar>
 
         );

@@ -8,7 +8,6 @@ export function CreateNewFolder(parentID: string, newName: string): Promise<any>
     return fetch("/api/Box/NewFolder/" + parentID + "/" + newName, { credentials: "same-origin" })
         .then(response => {
             if (!response.ok) {
-                alert(response.status + "=> " + response.statusText);
                 throw response;
             }
             return response.json();
@@ -26,7 +25,6 @@ export function Delete(type: string, id: string, currentFolderID: string): Promi
     return fetch("/api/Box/Delete/" + type + "/" + id + "/" + currentFolderID, { credentials: "same-origin" })
         .then(response => {
             if (!response.ok) {
-                alert(response.status + "=> " + response.statusText);
                 throw response;
             }
             return response.json();
@@ -146,7 +144,7 @@ export function Upload(currentFolderID: string, formData: any): Promise<any> {
 export function Logout() {
     return fetch("api/Box/Logout", { credentials: "same-origin" })
         .then(response => {
-            if (!response.ok) { alert(response.status + "=> " + response.statusText); }
+            if (!response.ok) { throw response; }
             return response.text();  //we only get here if there is no error)
         });
 }
