@@ -28,13 +28,13 @@ export class Guide extends React.Component<AppProps, AppState> {
 
     render() {
         const stylesheet = {
-            pageXOffset: this.state.position.x,
-            pageYOffset: this.state.position.y,
+            left: this.state.position.x,
+            top: this.state.position.y,
             zindex: 1,
         }
 
         return (
-            <div className={"tooltip-container " + this.state.direction}>
+            <div className={"tooltip-container " + this.state.direction} style={stylesheet} >
                 <div className="tooltip-content">
                     <b><h4>{this.state.title}</h4></b>
                     <span>{this.state.content}</span>
