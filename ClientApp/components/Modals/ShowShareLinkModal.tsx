@@ -31,14 +31,14 @@ export default class ShowShareLinkModal extends React.Component<Props, State> {
                     <form>
                         <FormGroup>
                             <div className="input-group">
-                                <FormControl id="input_share_link" className="input_type" type="text" placeholder="Normal text" autoFocus readOnly value={this.props.url} />
+                                <FormControl id="input_share_link" className="input_type" type="text" placeholder="Normal text" autoFocus readOnly value={(this.props.url).replace(/['"]+/g, '')} />
 
                             </div>
                         </FormGroup>
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.props.closeHandler} > Cancel </Button>
+                    <Button bsStyle="primary" onClick={this.props.closeHandler} > Ok </Button>
                 </Modal.Footer>
             </Modal>
         );

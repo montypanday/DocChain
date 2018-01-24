@@ -329,15 +329,33 @@ namespace front_end.Controllers
         /// <param name="type"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        [Route("GetSharedLink/{type}/{id}")]
+        [Route("GetSharedLink/{id}")]
         [HttpGet]
-        public IActionResult GetSharedLink(string type, string id)
+        public IActionResult GetSharedLink(string id)
         {
             var service = GetService();
             var request = service.Files.Get(id);
-            var response = request.Execute();
-            RecordFileAction(GetDriveFile(id), service, "Share");
-            return Json(response);
+            request.Fields = "webViewLink";
+            //RecordFileAction(GetDriveFile(id), service, "Share");
+            return Json(request.Execute().WebViewLink);
+        }
+
+        /// <summary>
+        /// Log out the user by deleting the Cookie.
+        /// </summary>
+        /// <returns></returns>
+        [Route("Logout")]
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            CookieOptions options = new CookieOptions
+            {
+                Path = "/api/Google",
+                Expires = DateTime.Now.AddDays(-1),
+                HttpOnly = true
+            };
+            Response.Cookies.Append("GoogleCred", "", options);
+            return StatusCode(200);
         }
 
         /// <summary>

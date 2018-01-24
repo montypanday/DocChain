@@ -93,3 +93,28 @@ export function Upload(currentFolderID: string, formData: any) {
         return response.json();
     });
 }
+
+export function Logout() {
+    return fetch("api/Google/Logout", { credentials: "same-origin" })
+        .then(response => {
+            if (!response.ok) { throw response; }
+            return response.text();  //we only get here if there is no error)
+        });
+}
+
+
+/**
+ * Get URL share link for file or folder.
+ * @param id
+ * @param type
+ * @returns {Promise}
+ */
+export function getSharedLink(id: string): Promise<any> {
+    return fetch("/api/Google/GetSharedLink/" + id, { credentials: "same-origin" })
+        .then(response => {
+            if (!response.ok) {
+                throw response;
+            }
+            return response.text();
+        });
+}

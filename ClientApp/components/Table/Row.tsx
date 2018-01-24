@@ -13,6 +13,7 @@ export interface AppProps {
     lastModified: string;
     navHandler: any;
     id: any;
+    hash: any;
     mimeType: any;
     deleteHandler: any;
     downloadHandler: any,
@@ -21,6 +22,7 @@ export interface AppProps {
     platform: string;
     secure: string;
     historyModalHandler: any;
+    putHandler: any;
 }
 
 export interface AppState {
@@ -160,7 +162,7 @@ export class Row extends React.Component<AppProps, AppState> {
         icon = <span className={iconClass} style={{ verticalAlign: "middle", float: "left", fontSize: "1.5em" }}></span>;
         return (
             <tr id={this.props.id}>
-                
+
                 <td className="col-xs-6 " id={this.props.id}>
                     <a onClick={this.props.navHandler} style={{ cursor: "pointer" }}>
                         {icon}
@@ -168,17 +170,10 @@ export class Row extends React.Component<AppProps, AppState> {
                     </a>
                 </td>
                 <td className="col-xs-1 ">
-
-                    
-
                     {this.props.id != "sharedWithMe" &&
-              
                         <div className="dropdown">
                             <button className="btn btn-default btn-line dropdown-toggle action-btn" style={{ verticalAlign: "middle", zIndex: 0 }} type="button" data-toggle="dropdown">...
                             </button>
-
-                            
-                        
                             <ul className="dropdown-menu">
 
                                 {this.props.type != "folder" && <li><a onClick={this.props.navHandler} ><i className="fa fa-eye dropDownIcon" aria-hidden="true"></i>Preview</a></li>}
@@ -197,8 +192,9 @@ export class Row extends React.Component<AppProps, AppState> {
                                 {this.props.type != "folder" &&
                                     <li className="divider">
                                     </li>
-                            }
-                            {this.props.type != "folder" && <li><a onClick={this.props.historyModalHandler} > <i className="fa fa-history dropDownIcon" aria-hidden="true"></i>History</a></li>}
+                                }
+                            {this.props.type != "folder" && <li><a onClick={this.props.historyModalHandler} > <i className="fa fa-check dropDownIcon" aria-hidden="true"></i>Check with Blockchain</a></li>}
+                            {this.props.type != "folder" && <li><a onClick={this.props.putHandler}> <i className="fa fa-link dropDownIcon" aria-hidden="true"></i> Embed Into Blockchain</a></li>}
                             </ul>
                         </div>}
                     <div className="contextmenu dropdown" id={"contextMenu" + this.props.id}>
@@ -214,27 +210,26 @@ export class Row extends React.Component<AppProps, AppState> {
                                 </li>
                             }
 
-                            {this.props.id != "sharedWithMe" && < li > <a onClick={this.props.deleteHandler}><i className="fa fa-trash-o dropDownIcon" aria-hidden="true"></i>Delete</a></li>}
-                            <li><a onClick={this.props.renameHandler}><i className="fa fa-pencil-square-o dropDownIcon" aria-hidden="true"></i>Rename</a></li>
+                            {this.props.id != "sharedWithMe" &&
+                                <li> <a onClick={this.props.deleteHandler}><i className="fa fa-trash-o dropDownIcon" aria-hidden="true"></i>Delete</a>
+                                </li>}
+                            <li>
+                                <a onClick={this.props.renameHandler}><i className="fa fa-pencil-square-o dropDownIcon" aria-hidden="true"></i>Rename
+                                </a>
+                            </li>
                             <li><a onClick={this.props.shareLinkHandler}><i className="fa fa-share dropDownIcon" aria-hidden="true"></i>Share</a></li>
 
                             {this.props.type != "folder" && <li className="divider"></li>}
-                            {this.props.type != "folder" && <li><a href="#"><i className="fa fa-history dropDownIcon" aria-hidden="true"></i>History</a></li>}
-                        </ul>                   
+                            {this.props.type != "folder" && <li><a onClick={this.props.historyModalHandler}><i className="fa fa-check dropDownIcon" aria-hidden="true"></i>Check with Blockchain</a></li>}
+                            {this.props.type != "folder" && <li><a onClick={this.props.putHandler}> <i className="fa fa-link dropDownIcon" aria-hidden="true"></i> Embed Into Blockchain</a></li>}
+                        </ul>
                     </div>
-                    {
+                    {/*
                         this.props.type != "folder" &&
                         <CertDrawer />
-                    }
+                    */}
                 </td>
-
-
-                {/*<td className="col-xs-1 secure-col" style={{ verticalAlign: "middle" }}>
-                    {this.props.type != "folder" && <i className="fa fa-lock fa-2x"></i>}
-                </td>*/}
-
                 <td className="col-xs-1 " style={{ verticalAlign: "middle" }}>{formatSizeUnits(this.props.size)}</td>
-
                 <td className="col-xs-2 " style={{ verticalAlign: "middle" }}>{this.props.lastModified}</td>
             </tr>
         );

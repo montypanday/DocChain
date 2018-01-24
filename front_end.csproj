@@ -54,6 +54,18 @@
     <None Remove="ClientApp\components\Alerts\ErrorSplash.tsx" />
     <None Remove="ClientApp\components\Alerts\LostConnect.tsx" />
     <None Remove="ClientApp\components\ErrorBoundary.tsx" />
+    <None Remove="ClientApp\components\FAQ\Errors\eEmbed.tsx" />
+    <None Remove="ClientApp\components\FAQ\Errors\eFileExplorer.tsx" />
+    <None Remove="ClientApp\components\FAQ\Errors\eMatch.tsx" />
+    <None Remove="ClientApp\components\FAQ\faqFileExplorer.tsx" />
+    <None Remove="ClientApp\components\FAQ\Functionality.tsx" />
+    <None Remove="ClientApp\components\FAQ\Functionality\fEmbedding.tsx" />
+    <None Remove="ClientApp\components\FAQ\Functionality\fFileInteraction.tsx" />
+    <None Remove="ClientApp\components\FAQ\Functionality\fLogin.tsx" />
+    <None Remove="ClientApp\components\FAQ\Functionality\fLogoutandSwitch.tsx" />
+    <None Remove="ClientApp\components\FAQ\General.tsx" />
+    <None Remove="ClientApp\components\FAQ\General\gAbout.tsx" />
+    <None Remove="ClientApp\components\FAQ\General\gFileTypes.tsx" />
     <None Remove="ClientApp\components\iconGD.tsx" />
     <None Remove="ClientApp\components\Modals\FilePreviewModal.tsx" />
     <None Remove="ClientApp\components\SVGs\icon-BOX.tsx" />
@@ -110,6 +122,18 @@
     <None Include="wwwroot\dist\font-awesome-4.7.0\scss\_variables.scss" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\FAQ\Errors\eMatch.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\Errors\eEmbed.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\Errors\eFileExplorer.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\Functionality.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\Functionality\fLogoutandSwitch.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\Functionality\fEmbedding.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\Functionality\fFileInteraction.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\Functionality\fLogin.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\General.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\Errors.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\General\gFileTypes.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\FAQ\General\gAbout.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SVGs\icon-Chain.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Table\FormatSize.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Alerts\EmptySearch.tsx" />

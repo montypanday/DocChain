@@ -914,3 +914,9 @@ tbody {
 .fa-folder {
     color: #ffcc80;
 }
+.form-group{
+    width:100%;
+}
+.input-group {
+    width: 100%;
+}
