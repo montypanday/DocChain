@@ -4,6 +4,7 @@ export interface AppProps {
     direction: string,
     title: string,
     content: string,
+    id: string,
     position: {x, y},
 }
 
@@ -11,6 +12,7 @@ export interface AppState {
     direction: string,
     title: string,
     content: string,
+    id: string,
     position: { x, y },
 }
 
@@ -22,6 +24,7 @@ export class Guide extends React.Component<AppProps, AppState> {
             direction: props.direction,
             title: props.title,
             content: props.content,
+            id: props.id,
             position: props.position,
         };
     }
@@ -34,7 +37,7 @@ export class Guide extends React.Component<AppProps, AppState> {
         }
 
         return (
-            <div className={"tooltip-container " + this.state.direction} style={stylesheet} >
+            <div className={"tooltip-container hidden " + this.state.direction} id={this.state.id} style={stylesheet} >
                 <div className="tooltip-content">
                     <b><h4>{this.state.title}</h4></b>
                     <span>{this.state.content}</span>

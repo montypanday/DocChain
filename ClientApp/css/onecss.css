@@ -729,6 +729,22 @@ tbody {
     border-style: dashed dashed solid dashed;
 }
 
+.down-left > s {
+    top: 100px;
+    *top: -22px;
+    left: 15px;
+    border-color: #666 transparent transparent transparent;
+    border-style: solid dashed dashed dashed;
+}
+
+.down-right > s {
+    top: 100px;
+    *top: -22px;
+    left: 155px;
+    border-color: #666 transparent transparent transparent;
+    border-style: solid dashed dashed dashed;
+}
+
 .left-top > s {
     top: 15px;
     *top: -22px;

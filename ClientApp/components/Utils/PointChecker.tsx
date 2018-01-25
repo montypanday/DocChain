@@ -24,7 +24,7 @@ export class PointChecker extends React.Component<AppProps, AppState> {
         document.addEventListener("click", this._getPoint);
         target.x = document.getElementById("target").offsetLeft;
         target.y = document.getElementById("target").offsetTop;
-        console.log("picture: (" + target.x + ", " + target.y + ")")
+        console.log("picture: (" + target.x + ", " + target.y + ")");
     }
 
     _getPoint = (event) => {
@@ -32,11 +32,11 @@ export class PointChecker extends React.Component<AppProps, AppState> {
         const clickX = event.clientX;
         const clickY = event.clientY;
 
-        const resultX = clickX - target.x;
-        const resultY = clickY - target.y;
+        const resultX = clickX - target.x - 22;
+        const resultY = clickY - target.y + 7;
 
         console.log("click  : (" + clickX + ", " + clickY + ")");
-        console.log("result : (" + resultX + ", " + resultY + ")");
+        console.log("result top-left : (" + resultX + ", " + resultY + ")");
     }
 
     public render() {
