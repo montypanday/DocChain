@@ -32,11 +32,13 @@ export class PointChecker extends React.Component<AppProps, AppState> {
         const clickX = event.clientX;
         const clickY = event.clientY;
 
-        const resultX = clickX - target.x - 22;
-        const resultY = clickY - target.y + 7;
+        const resultX = clickX - target.x;
+        const resultY = clickY - target.y;
 
         console.log("click  : (" + clickX + ", " + clickY + ")");
-        console.log("result top-left : (" + resultX + ", " + resultY + ")");
+        console.log("result top-left  : (" + (resultX + 30) + ", " + (resultY - 15) + ")");
+        console.log("result top-right : (" + (resultX -30) + ", " + (resultY + 20) + ")");
+        console.log("result down-right: (" + (resultX + 170) + ", " + (resultY + 115) + ")");
     }
 
     public render() {

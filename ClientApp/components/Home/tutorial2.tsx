@@ -34,14 +34,20 @@ export class Tutorial2 extends React.Component<Tutorial2Prop, Tutorial2State> {
         if (!this.state.isRendered) {
             position.x = document.getElementById("target").offsetLeft;
             position.y = document.getElementById("target").offsetTop;
-            console.log("(" + position.x + ", " + position.y + ")");
+           //console.log("(" + position.x + ", " + position.y + ")");
             this.setState({ isRendered: true });
             this.render();
         } else {
-            console.log("rerender");
+            //console.log("rerender");
+            document.getElementById("guide0").classList.remove("hidden");
         }
 
         document.addEventListener("click", this._showGuide);
+        //document.addEventListener("click", this._handler);
+    }
+
+    _handler = () => {
+        location.href = "/tutorial3";
     }
 
     _showGuide = (event) => {
@@ -63,15 +69,15 @@ export class Tutorial2 extends React.Component<Tutorial2Prop, Tutorial2State> {
                 this.setState({ nextGuide: "guide" + this.state.index });
             } else {
                 this.setState({ nextGuide: "end" });
-                document.addEventListener("click", this.props.handler);
+                document.addEventListener("click", this._handler);
             }
 
-            console.log(this.state.thisGuide);
-            console.log(this.state.nextGuide);
+           //console.log(this.state.thisGuide);
+           //console.log(this.state.nextGuide);
 
 
         } else {
-            console.log("end");
+           //console.log("end");
         }
         event.preventDefault();
 

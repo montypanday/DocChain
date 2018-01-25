@@ -51,7 +51,7 @@ export class Home extends React.Component<HomeProperties, HomeState> {
             {this.state.slideCount === 2 ? <Tutorial2 handler={this.handler} decHandler={this.decHandler} /> : null}
             {this.state.slideCount === 3 ? <Tutorial3 handler={this.handler} decHandler={this.decHandler} /> : null}
             {this.state.slideCount === 4 ? <Tutorial4 handler={this.handler} decHandler={this.decHandler} /> : null}
-            {this.state.slideCount === 5 ? <Tutorial5 handler={this.handler} decHandler={this.decHandler} finishHandler={this.finishHandler} /> : null}
+            {this.state.slideCount === 5 ? <Tutorial5 handler={this.handler} decHandler={this.decHandler} /> : null}
         </div>;
     }
 }

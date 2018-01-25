@@ -761,6 +761,22 @@ tbody {
     border-style: dashed solid dashed dashed;
 }
 
+.right-top > s {
+    top: 15px;
+    *top: -22px;
+    left: 200px;
+    border-color: transparent transparent transparent #666;
+    border-style: dashed dashed dashed solid;
+}
+
+.right-down > s {
+    top: 55px;
+    *top: -22px;
+    left: 200px;
+    border-color: transparent transparent transparent #666;
+    border-style: dashed dashed dashed solid;
+}
+
 .tooltip-container > i {
     position: absolute;
     top: -9px;
