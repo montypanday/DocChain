@@ -1,5 +1,8 @@
 __DOCCHAIN__
 
+DocChain is a project build by Deakin University students as a proof of concept that Blockchain can be used for the purposes of Document Integrity and secured versioning.
+
+It connects with different cloud storage providers like Google Drive and Box.
 DocChain is a a file storage medium, capable of tracking, documenting and retaining the integrity of files and actions performed on them, with the reliability of blockchain technology.
 
 Currently your Google Drive and Box.com files can be used, with plans to broaden file storage services in the future.
