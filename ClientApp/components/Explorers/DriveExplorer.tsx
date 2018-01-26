@@ -4,9 +4,9 @@ import { Link, NavLink, Redirect } from "react-router-dom";
 import { saveAs } from "file-saver";
 import { ContextMenu } from "./ContextMenu";
 import { LoadingGif, SearchBar, BreadCrumb, BoxLogin } from "../";
-import { FilePreviewModal, DeleteModal, NewFolderModal, ShowShareLinkModal, RenameFileModal } from "../Modals";
+import { FilePreviewModal, DeleteModal, NewFolderModal, ShowShareLinkModal, RenameFileModal, HistoryModal } from "../Modals";
 import { ButtonToolBar, Row, TableHeading } from "../Table";
-import { GSearch, GNavigateIntoFolder, GDelete, Upload, GetPreview, GCreateNewFolder, GRename, GDownload } from "../../api/Google_Utilities";
+import { GSearch, GNavigateIntoFolder, GDelete, Upload, GetPreview, GCreateNewFolder, GRename, GDownload, Logout, getSharedLink } from "../../api/Google_Utilities";
 import { ToastContainer, toast } from "react-toastify";
 import { css } from "glamor";
 import EmptyFolder from "../Alerts/EmptyFolder";
@@ -14,8 +14,7 @@ import * as utility from "../utility";
 import { EmptySearch } from "../Alerts/EmptySearch";
 import { Alert } from "react-bootstrap";
 import { DriveLogin } from "./DriveLogin";
-
-
+import { Check, PutOnChain } from "../../api/util_chain";
 
 interface DriveExplorerState {
     pathCollection: any;
@@ -40,13 +39,13 @@ interface DriveExplorerState {
     OldName: any;
     SearchEmpty: any;
     show401Alert: any;
+    showHistoryModal: any;
+    receivedCode: any;
+    showShareModal: any;
+    tempShareURL: any;
 }
 
 export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
-    worker: Worker;
-    blobURL: string;
-    blob: Blob;
-
     constructor(props) {
         super(props);
         this.performSearch = this.performSearch.bind(this);
@@ -65,59 +64,38 @@ export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
         this.FileUploadHandler = this.FileUploadHandler.bind(this);
         this.getSharedWithMeFolder = this.getSharedWithMeFolder.bind(this);
         this.showHistoryModal = this.showHistoryModal.bind(this);
-        this.blob = new Blob([
-            `onmessage = function (e)
-                {
-                console.log(e.data);
-               fetch('https://localhost:44374/api/Chain/GetAsync', { method: "POST", body: JSON.stringify(e.data) })
-            .then(response => {
-                if (!response.ok) {
-                    throw response;
-                }
-                return response;
-            })
-            .then(resp => {
-                console.log(resp);
-            }
-            );
-
-                    
-                }`]);
-
-        this.blobURL = window.URL.createObjectURL(this.blob);
-        this.worker = new Worker(this.blobURL);
+        this.closeHistoryModal = this.closeHistoryModal.bind(this);
+        this.putHandler = this.putHandler.bind(this);
+        this.Logout = this.Logout.bind(this);
+        this.shareLinkHandler = this.shareLinkHandler.bind(this);
+        this.closeShareModal = this.closeShareModal.bind(this);
         this.state = {
-            // This is space we will put the json response
             filesarray: {},
-            // this is just true or false, determines whether the network request has finished, display a gif or a table
             loading: true,
             errorFound: false,
             errorMessage: "",
-
             PreviewUrl: "",
             PreviewFileName: "",
             showPreviewModal: false,
-
             query: "",
-
             pathCollection: [{ fileId: "root", Name: "All Files" }],
-
             currentFolderID: "",
             showNewFolderModal: false,
-
             ToBeDeletedName: "",
             ToBeDeletedID: "",
             ToBeDeletedType: "",
             showDeleteModal: false,
-
             FolderEmpty: false,
-
             showRenameModal: false,
             toBeRenameId: false,
             toBeRenameType: "",
             OldName: "",
             show401Alert: false,
-            SearchEmpty: false
+            SearchEmpty: false,
+            showHistoryModal: false,
+            receivedCode: "",
+            showShareModal: false,
+            tempShareURL : ""
         };
     }
 
@@ -138,25 +116,15 @@ export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
     }
 
     componentDidMount() {
-        this.worker.onmessage = function (e) {
-            // e.data == 'msg from worker'
-            console.log(e.data);
-        };
         GNavigateIntoFolder("root").then(newData => {
             newData.unshift(this.getSharedWithMeFolder());
             let isEmpty = newData.length === 0 ? true : false;
             this.setState({ filesarray: newData, loading: false, currentFolderID: "root", FolderEmpty: isEmpty, SearchEmpty: false });
-            this.worker.postMessage(this.state.filesarray); // Start the worker.
         })
             .catch(function (error) {
                 this.setState({ loading: false, filesarray: [], show401Alert: true, SearchEmpty: false });
             }.bind(this));
-
-
     }
-
-
-
 
     performSearch(e) {
         this.state.query !== "" &&
@@ -324,9 +292,51 @@ export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
             });
     }
 
-    showHistoryModal(row, event) {
-
+    putHandler(row, event) {
+        PutOnChain(row.hash)
+            .then(data => {
+                toast.success("Hash Embedded! Any change to document can now be detected");
+            })
+            .catch(function (error) {
+                toast.error("Something Went wrong");
+            }.bind(this));
     }
+
+    showHistoryModal(row, event) {
+        Check(row.hash).then
+            (data => {
+                console.log(data);
+                this.setState({ showHistoryModal: true, receivedCode: data.statusCode });
+            })
+            .catch(function (error) {
+                toast.error("Something Went wrong");
+            }.bind(this));
+    }
+
+    closeHistoryModal() { this.setState({ showHistoryModal: false, receivedCode: "" }); }
+
+    Logout() {
+        Logout().then(response => {
+            this.setState({ show401Alert: true });
+        })
+            .catch(function (error) {
+                toast.error("Something went wrong");
+            }.bind(this));
+    }
+
+    shareLinkHandler(row, event) {
+        getSharedLink(row.id)
+            .then(response => {
+                console.log("this is shared link " + response);
+                this.setState({ showShareModal: true, tempShareURL: response });
+            })
+            .catch(function (error) {
+                toast.error("Operation Failed: Could not get Share Link!");
+            }.bind(this));
+    }
+
+    closeShareModal() { this.setState({ showShareModal: false, tempShareURL: "" }); }
+
 
     public render() {
         if (this.state.loading === false) {
@@ -338,6 +348,7 @@ export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
                     return (<Row
                         key={row.id}
                         id={row.id}
+                        hash={row.hash}
                         type={row.type}
                         navHandler={this.navigate.bind(null, row)}
                         mimeType={row.mimeType}
@@ -349,8 +360,10 @@ export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
                         downloadHandler={this.download.bind(null, row)}
                         secure={row.secure}
                         historyModalHandler={this.showHistoryModal.bind(null, row)}
-                        shareLinkHandler=""
+                        putHandler={this.putHandler.bind(null,row)}
+                        shareLinkHandler={this.shareLinkHandler.bind(null, row)}
                         renameHandler={this.renameHandler.bind(null, row)}>
+                        
                     </Row>);
                 }.bind(this));
             }
@@ -365,9 +378,13 @@ export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
                         </Alert>}
                     {this.state.show401Alert && <DriveLogin></DriveLogin>}
                     <ContextMenu root="target" />
-                    <ToastContainer position="bottom-right" toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
+                    <ToastContainer position="bottom-right" hideProgressBar={true} toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
                     <div style={{ float: "right" }} className="user-details">
-                        {!this.state.show401Alert && < ButtonToolBar NewFolderHandler={this.NewFolderHandler} uploadHandler={this.FileUploadHandler} ></ButtonToolBar>}
+                        {!this.state.show401Alert && < ButtonToolBar
+                            NewFolderHandler={this.NewFolderHandler}
+                            uploadHandler={this.FileUploadHandler}
+                            logoutHandler={this.Logout}
+                        ></ButtonToolBar>}
                     </div>
                     {!this.state.show401Alert && <SearchBar changeHandler={e => { this.setState({ query: e.target.value }); }} searchHandler={this.performSearch}></SearchBar>}
                     {!this.state.show401Alert && < BreadCrumb pathCollection={this.state.pathCollection} navigateOutHandler={this.navigateOut.bind(this)} />}
@@ -388,6 +405,11 @@ export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
                     {this.state.showPreviewModal && <FilePreviewModal PreviewFileName={this.state.PreviewFileName} PreviewUrl={this.state.PreviewUrl} closeModal={this.closePreviewModal}></FilePreviewModal>}
                     {this.state.showNewFolderModal && <NewFolderModal closeHandler={this.CloseNewFolderModalHandler} createFolderHandler={this.createNewFolderHandler} ></NewFolderModal>}
                     {this.state.showDeleteModal && <DeleteModal fileName={this.state.ToBeDeletedName} id={this.state.ToBeDeletedID} type={this.state.ToBeDeletedType} closeHandler={this.closeDeleteModal} deleteActionHandler={this.deleteItem}></DeleteModal>}
+                    {this.state.showHistoryModal &&
+                        <HistoryModal closeHandler={this.closeHistoryModal} StatusCode={this.state.receivedCode} >
+                        </HistoryModal>}
+                    {this.state.showShareModal &&
+                        <ShowShareLinkModal url={this.state.tempShareURL} closeHandler={this.closeShareModal} ></ShowShareLinkModal>}
                 </div>
             );
         } else {

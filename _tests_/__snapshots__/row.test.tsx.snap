@@ -9,7 +9,7 @@ exports[`Whether the componet is right rendered 1`] = `
     id="43970020269"
   >
     <a
-      onClick=""
+      onClick={[MockFunction]}
       style={
         Object {
           "cursor": "pointer",
@@ -62,7 +62,7 @@ exports[`Whether the componet is right rendered 1`] = `
       >
         <li>
           <a
-            onClick=""
+            onClick={[MockFunction]}
           >
             <i
               aria-hidden="true"
@@ -105,7 +105,7 @@ exports[`Whether the componet is right rendered 1`] = `
         <li>
            
           <a
-            onClick=""
+            onClick={[MockFunction]}
           >
             <i
               aria-hidden="true"
@@ -139,14 +139,6 @@ exports[`Whether the componet is right rendered 1`] = `
       </ul>
     </div>
   </td>
-  <td
-    className="col-xs-1 secure-col"
-    style={
-      Object {
-        "verticalAlign": "middle",
-      }
-    }
-  />
   <td
     className="col-xs-1 "
     style={

@@ -17,6 +17,7 @@ namespace Database
         {
             MySqlConnectionStringBuilder connectionString = new MySqlConnectionStringBuilder
             {
+                //TODO: MATT: Store credentials somewhere.
                 Server = "localhost",
                 Database = "docchain",
                 UserID = "root",
