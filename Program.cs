@@ -18,9 +18,8 @@ namespace front_end
         public static IWebHost BuildWebHost(string[] args)
         {
             return WebHost.CreateDefaultBuilder(args)
-                        .UseStartup<Startup>()
-                        .UseIISIntegration()
-                        .Build();
+           .UseStartup<Startup>()
+           .Build();
         }
     }
 }

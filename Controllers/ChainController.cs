@@ -48,45 +48,12 @@ namespace front_end.Controllers
         /// </summary>
         /// <returns></returns>
         // GET api/<controller>/5
-        [Route("GetAsync")]
-        [HttpPost]
-        public async Task<JsonResult> GetAsync()
+        [Route("GetAsync/{hash}")]
+        [HttpGet]
+        public async Task<JsonResult> GetAsync(string hash)
         {
-            var streamReader = new StreamReader(Request.Body);
-            var data = await streamReader.ReadToEndAsync();
-            var content = JsonConvert.DeserializeObject<Content[]>(data);
-            
-
-            foreach (var item in content)
-            {
-                if (ValidateItem(item))
-                {
-                    var client = GetHTTPClient();
-                    var response = await client.GetAsync(Configuration["ChainURL"] + ConvertToBase64(item.Hash));
-                    _logger.LogInformation(response.ToString());
-                    _logger.LogDebug("Request " + response.RequestMessage);
-                }
-            }
-            return Json(content);
-
-           
-        }
-
-       
-
-        private bool ValidateItem(Content item)
-        {
-            if(item.Hash == "" || item.Type == "folder" || item.Id == "sharedWithMe")
-            {
-                return false;
-            }
-            return true;
-        }
-
-        private string ConvertToBase64(string hash)
-        {  
-            byte[] encodedBytes = System.Text.Encoding.Unicode.GetBytes(hash);
-            return Convert.ToBase64String(encodedBytes);
+            var client = GetHTTPClient();
+            return Json(await client.GetAsync(Configuration["ChainURL"] + ConvertToBase64(hash)));
         }
 
         /// <summary>
@@ -94,20 +61,29 @@ namespace front_end.Controllers
         /// </summary>
         /// <param name="hash"></param>
         // PUT api/<controller>/5
-        [Route("PostAsync")]
-        [HttpPost]
-        public async Task<Boolean> PostAsync(string hash)
+        [Route("PutAsync/{hash}")]
+        [HttpGet]
+        public async Task<JsonResult> PutAsync(string hash)
         {
-            // This method does the same thing as below but sends a PUT request instead. THis puts data on Blockchain
+            var content = new StringContent(string.Empty, Encoding.UTF8, "application/json");
+            var client = GetHTTPClient();
+            return  Json(await client.PutAsync(Configuration["ChainURL"] + ConvertToBase64(hash), content));
+        }
 
-            HttpContent content = new StringContent("jsonstring");
-            HttpClient client = GetHTTPClient();
-            HttpResponseMessage response = await client.PutAsync(Configuration["ChainURL"] + hash, content);
-            if (response.IsSuccessStatusCode)
+        private string ConvertToBase64(string hash)
+        {
+            byte[] encodedBytes = System.Text.Encoding.Unicode.GetBytes(hash);
+            return Convert.ToBase64String(encodedBytes);
+        }
+
+
+        private bool ValidateItem(Content item)
+        {
+            if (item.Hash == "" || item.Type == "folder" || item.Id == "sharedWithMe" || item.Hash == null)
             {
-                return true;
+                return false;
             }
-            return false;
+            return true;
         }
 
         [Route("CheckIfTracked")]
@@ -151,6 +127,6 @@ namespace front_end.Controllers
             return client;
         }
 
-       
+
     }
 }

@@ -52,7 +52,7 @@ export class NavMenu extends React.Component<{}, {}> {
                             </NavLink>
 
                         </li>
-                        <li>
+                        {/*<li>
                             <NavLink to={"/#"} activeClassName="active">
                                 <ODIcon />
                                 <div className="LinkText"><div className="visible-md-block visible-lg-block">OneDrive</div></div>
@@ -68,6 +68,7 @@ export class NavMenu extends React.Component<{}, {}> {
                             </NavLink>
 
                         </li>
+                        */}
 
                         <li>
                             <NavLink to={"/faq"} activeClassName="active">
@@ -77,11 +78,6 @@ export class NavMenu extends React.Component<{}, {}> {
                         <li>
                             <NavLink to={"/Login"} activeClassName="active">
                                 <LOGINIcon /> Account
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={"/fileexplorer"} activeClassName="active">
-                                <i className="fa fa-question-circle" aria-hidden="true"></i> Box Explorer
                             </NavLink>
                         </li>
                     </ul>

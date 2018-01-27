@@ -6,6 +6,7 @@ import { Button, DropdownButton, MenuItem } from "react-bootstrap";
 export interface ButtonToolbarProps {
     NewFolderHandler: any;
     uploadHandler: any;
+    logoutHandler: any;
 }
 
 export interface ButtonToolbarState {
@@ -46,10 +47,14 @@ export default class ButtonToolBar extends React.Component<ButtonToolbarProps, B
                     <ul className="dropdown-menu">
                         {/* // TODO: PATRICK: Add icon for dropdown options.
                          // For example New Folder option should show a fontawesome folder in left*/}
-                        <li><a onClick={this.props.NewFolderHandler} > <i className="fa fa-folder-open-o dropDownIcon" aria-hidden="true"></i>New Folder</a></li>
+                        <li><a onClick={this.props.NewFolderHandler} > <i className="fa fa-folder dropDownIcon" aria-hidden="true"></i>New Folder</a></li>
                     </ul>
                 </div>
-                <Button bsStyle="danger"><i className="fa fa-power-off power-icon" aria-hidden="true"></i>Logout</Button>
+                <Button onClick={this.props.logoutHandler} bsStyle="danger">
+                    <i className="fa fa-power-off power-icon" aria-hidden="true">
+                    </i>
+                    Logout
+                    </Button>
             </ButtonToolbar>
 
         );

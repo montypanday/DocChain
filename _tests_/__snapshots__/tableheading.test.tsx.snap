@@ -14,11 +14,6 @@ exports[`Link changes the class when hovered 1`] = `
       Actions
     </th>
     <th
-      className="col-xs-1 secure-head"
-    >
-      Status
-    </th>
-    <th
       className="col-xs-1"
     >
       Size 

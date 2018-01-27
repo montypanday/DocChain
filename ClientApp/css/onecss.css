@@ -307,6 +307,7 @@ a {
 }
 
 .pull-down {
+    width:99%;
     margin-top: 55px;
     margin-left: 5px;
     margin-right: 7px;
@@ -657,8 +658,163 @@ tbody {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: -1;
 }
 
+.pic-example {
+    border-style: double;
+    border-width: 5px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 924px 651px;
+    height: 651px;
+    width: 924px;
+    position: absolute;
+    top: 50%;
+    height: 651px;
+    margin-top: -330px;
+}
+
+.example-step1 {
+    background-image: url('../css/img/example_step1.png');
+}
+
+.example-step2 {
+    background-image: url('../css/img/example_step2.png');
+}
+
+.example-step3 {
+    background-image: url('../css/img/example_step3.png');
+}
+
+.example-step4 {
+    background-image: url('../css/img/example_step4.png');
+}
+
+.tooltip-container {
+    position: absolute;
+    top: 230px;
+    left: 340px;
+    font-size: 9pt;
+    display: block;
+    height: 100px;
+    width: 200px;
+    background-color: transparent;
+    *border: 1px solid #666;
+}
+
+.tooltip-container > s {
+    position: absolute;
+    display: block;
+    height: 0;
+    width: 0;
+    font-size: 0;
+    line-height: 0;
+    border-width: 15px;
+}
+
+.top-left > s {
+    top: -30px;
+    *top: -22px;
+    left: 15px;
+    border-color: transparent transparent #666 transparent;
+    border-style: dashed dashed solid dashed;
+}
+
+.top-right > s {
+    top: -30px;
+    *top: -22px;
+    left: 155px;
+    border-color: transparent transparent #666 transparent;
+    border-style: dashed dashed solid dashed;
+}
+
+.down-left > s {
+    top: 100px;
+    *top: -22px;
+    left: 15px;
+    border-color: #666 transparent transparent transparent;
+    border-style: solid dashed dashed dashed;
+}
+
+.down-right > s {
+    top: 100px;
+    *top: -22px;
+    left: 155px;
+    border-color: #666 transparent transparent transparent;
+    border-style: solid dashed dashed dashed;
+}
+
+.left-top > s {
+    top: 15px;
+    *top: -22px;
+    left: -30px;
+    border-color: transparent #666 transparent transparent;
+    border-style: dashed solid dashed dashed;
+}
+
+.left-down > s {
+    top: 55px;
+    *top: -22px;
+    left: -30px;
+    border-color: transparent #666 transparent transparent;
+    border-style: dashed solid dashed dashed;
+}
+
+.right-top > s {
+    top: 15px;
+    *top: -22px;
+    left: 200px;
+    border-color: transparent transparent transparent #666;
+    border-style: dashed dashed dashed solid;
+}
+
+.right-down > s {
+    top: 55px;
+    *top: -22px;
+    left: 200px;
+    border-color: transparent transparent transparent #666;
+    border-style: dashed dashed dashed solid;
+}
+
+.tooltip-container > i {
+    position: absolute;
+    top: -9px;
+    *top: -9px;
+    left: -10px;
+    display: block;
+    height: 0;
+    width: 0;
+    font-size: 0;
+    line-height: 0;
+    border-color: transparent transparent #fff transparent;
+    border-style: dashed dashed solid dashed;
+    border-width: 10px;
+}
+
+.tooltip-content {
+    border: 1px solid #666;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    *top: -2px;
+    *border-top: 1px solid #666;
+    *border-top: 1px solid #666;
+    *border-left: none;
+    *border-right: none;
+    *height: 102px;
+    box-shadow: 3px 3px 4px #999;
+    -moz-box-shadow: 3px 3px 4px #999;
+    -webkit-box-shadow: 3px 3px 4px #999;
+    /* For IE 5.5 - 7 */
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#999999');
+    /* For IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#999999')";
+}
 
 .login-picture {
     background-image: url("../css/img/LoginBTN.png");
@@ -786,4 +942,13 @@ tbody {
     100% {
         opacity: 1;
     }
+}
+.fa-folder {
+    color: #ffcc80;
+}
+.form-group{
+    width:100%;
+}
+.input-group {
+    width: 100%;
 }

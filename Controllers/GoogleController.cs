@@ -267,12 +267,9 @@ namespace front_end.Controllers
         {
             DriveData.File fileData = GetDriveFile(id); //Need to retrieve this before deleting in order to record the action
             var service = GetService();
-
             var deleterequest = service.Files.Delete(id);
-            var verify = deleterequest.Execute();
-
+            deleterequest.Execute();
             RecordFileAction(fileData, service, "Delete");
-
             return GetGoogleFolderItems(service, currentFolderID);
         }
 
@@ -332,15 +329,33 @@ namespace front_end.Controllers
         /// <param name="type"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        [Route("GetSharedLink/{type}/{id}")]
+        [Route("GetSharedLink/{id}")]
         [HttpGet]
-        public IActionResult GetSharedLink(string type, string id)
+        public IActionResult GetSharedLink(string id)
         {
             var service = GetService();
             var request = service.Files.Get(id);
-            var response = request.Execute();
-            RecordFileAction(GetDriveFile(id), service, "Share");
-            return Json(response);
+            request.Fields = "webViewLink";
+            //RecordFileAction(GetDriveFile(id), service, "Share");
+            return Json(request.Execute().WebViewLink);
+        }
+
+        /// <summary>
+        /// Log out the user by deleting the Cookie.
+        /// </summary>
+        /// <returns></returns>
+        [Route("Logout")]
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            CookieOptions options = new CookieOptions
+            {
+                Path = "/api/Google",
+                Expires = DateTime.Now.AddDays(-1),
+                HttpOnly = true
+            };
+            Response.Cookies.Append("GoogleCred", "", options);
+            return StatusCode(200);
         }
 
         /// <summary>
@@ -406,10 +421,13 @@ namespace front_end.Controllers
         /// <returns></returns>
         private DriveData.File GetDriveFile(string id)
         {
+            // TODO Matt: We don't need to create a new service just for this request. Please pass that service as parameter and use it here.
             DriveService service = GetService();
             FilesResource.GetRequest request = service.Files.Get(id);
-            DriveData.File file = request.Execute();
-            return file;
+            // TO MATT: Verify: We have to specify the fields we want to get.
+            // If it does not work please reopen the issue. if it works delete these comments.
+            request.Fields = @"files(id,name,kind,md5Checksum)";
+            return request.Execute();
         }
 
         private void RecordFileAction(DriveData.File file, DriveService service, string actionType)

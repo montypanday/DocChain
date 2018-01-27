@@ -5,8 +5,8 @@ import { Link, NavLink, Redirect } from "react-router-dom";
 import { LoadingGif, BoxLogin } from "../";
 import { SearchBar } from "../FeatureBar/searchBar";
 import { BreadCrumb } from "../FeatureBar/breadCrumb";
-import { FilePreviewModal, DeleteModal, NewFolderModal, ShowShareLinkModal, RenameFileModal } from "../Modals";
-import { Search, Delete, Upload, GetFolderItemsAsync, getPreviewLink, CreateNewFolder, Rename, getSharedLink, Download } from "../../api/Box_Utilities";
+import { FilePreviewModal, DeleteModal, NewFolderModal, ShowShareLinkModal, RenameFileModal, HistoryModal } from "../Modals";
+import { Search, Delete, Upload, GetFolderItemsAsync, getPreviewLink, CreateNewFolder, Rename, getSharedLink, Download, Logout } from "../../api/Box_Utilities";
 import { Alert } from "react-bootstrap";
 import AlertCollection from "../Alerts/AlertCollection";
 import { ToastContainer, toast } from "react-toastify";
@@ -16,6 +16,7 @@ import * as utility from "../utility";
 import { EmptySearch } from "../Alerts/EmptySearch";
 import { saveAs } from "file-saver";
 import { ContextMenu } from "./ContextMenu";
+import { Check, PutOnChain } from "../../api/util_chain";
 
 interface ExplorerState {
     // this is space we will put the json response
@@ -48,6 +49,8 @@ interface ExplorerState {
     SearchEmpty: any;
     showShareModal: any;
     tempShareURL: any;
+    showHistoryModal: any;
+    receivedCode: any;
 }
 
 export class Explorer extends React.Component<{}, ExplorerState> {
@@ -71,8 +74,11 @@ export class Explorer extends React.Component<{}, ExplorerState> {
         this.shareLinkHandler = this.shareLinkHandler.bind(this);
         this.closeShareModal = this.closeShareModal.bind(this);
         this.download = this.download.bind(this);
-
+        this.showHistoryModal = this.showHistoryModal.bind(this);
         this.FileUploadHandler = this.FileUploadHandler.bind(this);
+        this.closeHistoryModal = this.closeHistoryModal.bind(this);
+        this.putHandler = this.putHandler.bind(this);
+        this.Logout = this.Logout.bind(this);
         this.state = {
             // This is space we will put the json response
             filesarray: {},
@@ -107,7 +113,9 @@ export class Explorer extends React.Component<{}, ExplorerState> {
             filesToBeSent: [],
             SearchEmpty: false,
             showShareModal: false,
-            tempShareURL: ""
+            tempShareURL: "",
+            showHistoryModal: false,
+            receivedCode: ""
         };
     }
 
@@ -178,6 +186,8 @@ export class Explorer extends React.Component<{}, ExplorerState> {
 
     closePreviewModal() { this.setState({ PreviewUrl: "", showPreviewModal: false, PreviewFileName: "" }); }
 
+
+
     showPreview() { this.setState({ showPreviewModal: true }); }
 
     getUser() {
@@ -215,7 +225,32 @@ export class Explorer extends React.Component<{}, ExplorerState> {
 
     closeShareModal() { this.setState({ showShareModal: false, tempShareURL: "" }); }
 
-    showDeleteModal(row, event) { this.setState({ showDeleteModal: true, ToBeDeletedID: row.id, ToBeDeletedName: row.fileName, ToBeDeletedType: row.type }); }
+    showDeleteModal(row, event) {
+        this.setState({ showDeleteModal: true, ToBeDeletedID: row.id, ToBeDeletedName: row.fileName, ToBeDeletedType: row.type });
+    }
+
+    showHistoryModal(row, event) {
+        Check(row.hash).then
+            (data => {
+                console.log(data);
+                this.setState({ showHistoryModal: true, receivedCode: data.statusCode });
+            })
+            .catch(function (error) {
+                toast.error("Something Went wrong");
+            }.bind(this));
+    }
+
+    putHandler(row, event) {
+        PutOnChain(row.hash)
+            .then(data => {
+                toast.success("Hash Embedded! Any change to document can now be detected");
+            })
+            .catch(function (error) {
+                toast.error("Something Went wrong");
+            }.bind(this));
+    }
+
+    closeHistoryModal() { this.setState({ showHistoryModal: false, receivedCode: "" }); }
 
     deleteItem() {
         Delete(this.state.ToBeDeletedType, this.state.ToBeDeletedID, this.state.currentFolderID)
@@ -278,7 +313,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
             .then(newData => {
                 console.log("hahahhahhahhhhhhhhhhhhhhhhhhhhh");
                 if (Object.keys(newData).length != (this.state.filesarray.length + fileList.length)) {
-                    
+
                     throw Error("Not all files were successfully uploaded, file names must be unique!");
                 }
                 let isEmpty = newData.length === 0 ? true : false;
@@ -299,6 +334,16 @@ export class Explorer extends React.Component<{}, ExplorerState> {
             }.bind(this));
     }
 
+    Logout() {
+        Logout().then(response => {
+            this.setState({ show401Alert: true });
+        })
+            .catch(function (error) {
+                toast.error("Something went wrong");
+            }.bind(this));
+   
+    }
+
     public render() {
         console.log("Explorer was rendered");
 
@@ -310,6 +355,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
                 rows = this.state.filesarray.map(function (row) {
                     return (<Row key={row.id}
                         id={row.id}
+                        hash={row.hash}
                         type={row.type}
                         navHandler={this.navigate.bind(null, row)}
                         downloadHandler={this.download.bind(null, row)}
@@ -321,6 +367,8 @@ export class Explorer extends React.Component<{}, ExplorerState> {
                         shareLinkHandler={this.shareLinkHandler.bind(null, row)}
                         renameHandler={this.renameHandler.bind(null, row)}
                         deleteHandler={this.showDeleteModal.bind(null, row)}
+                        historyModalHandler={this.showHistoryModal.bind(null, row)}
+                        putHandler={this.putHandler.bind(null,row)}
                         platform={"Box"}>
                     </Row>);
                 }.bind(this));
@@ -328,21 +376,28 @@ export class Explorer extends React.Component<{}, ExplorerState> {
 
             return (
                 <div className="well pull-down" id="target">
-                    <ContextMenu root="target"/>
-                    <ToastContainer position="bottom-right" hideProgressBar={true} pauseOnHover={true} newestOnTop={true} toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
+                    {!this.state.show401Alert && < ContextMenu root="target"></ ContextMenu>}
+                    <ToastContainer position="bottom-right" hideProgressBar={true} pauseOnHover={true} newestOnTop={true} toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })}>
+                    </ToastContainer>
 
-                    <div style={{ float: "right" }} className="user-details">
-                        {/*this.state['user']*/}
-                        <ButtonToolBar NewFolderHandler={this.NewFolderHandler} uploadHandler={this.FileUploadHandler} ></ButtonToolBar>
-                    </div>
-                    <SearchBar changeHandler={e => { this.setState({ query: e.target.value }); }} searchHandler={this.performSearch}></SearchBar>
+                    {!this.state.show401Alert && <div style={{ float: "right" }} className="user-details">
+                        <ButtonToolBar
+                            NewFolderHandler={this.NewFolderHandler}
+                            uploadHandler={this.FileUploadHandler}
+                            logoutHandler={this.Logout}>
+                        </ButtonToolBar>
+                    </div>}
+                    {!this.state.show401Alert &&
+                        <SearchBar changeHandler={e => { this.setState({ query: e.target.value }); }} searchHandler={this.performSearch} />}
 
                     {this.state.show401Alert &&
                         <Alert bsStyle="warning">
-                            <strong>401 Unauthorized </strong> Please sign in first
+                            <strong>Unauthorized: </strong> Please sign in first
                         </Alert>}
                     {this.state.show401Alert && <BoxLogin></BoxLogin>}
-                    {!this.state.show401Alert && <BreadCrumb pathCollection={this.state.pathCollection} navigateOutHandler={this.navigateOut.bind(this)} />}
+                    {!this.state.show401Alert &&
+                        <BreadCrumb pathCollection={this.state.pathCollection} navigateOutHandler={this.navigateOut.bind(this)}>
+                        </BreadCrumb>}
                     {!this.state.show401Alert && <table className="table table-striped table-hover table-responsive header-fixed">
                         <TableHeading />
                         <tbody>
@@ -367,6 +422,9 @@ export class Explorer extends React.Component<{}, ExplorerState> {
                     {this.state.showNewFolderModal &&
                         <NewFolderModal closeHandler={this.CloseNewFolderModalHandler} createFolderHandler={this.createNewFolderHandler} >
                         </NewFolderModal>}
+                    {this.state.showHistoryModal &&
+                        <HistoryModal closeHandler={this.closeHistoryModal} StatusCode={this.state.receivedCode} >
+                        </HistoryModal>}
                 </div>
             );
         } else {
