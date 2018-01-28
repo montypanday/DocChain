@@ -14,8 +14,9 @@ namespace Model
         public string UserEmail { get; set; }
         public DateTime ActionTime { get; set; }
         public string ActionType { get; set; }
+        public string RowHash { get; set; }
 
-        public FileAction(string id, string fileHash, string storagePlatform, string userName, string userEmail, string actionType, DateTime actionTime)
+        public FileAction(string id, string fileHash, string storagePlatform, string userName, string userEmail, string actionType, DateTime actionTime, string rowHash = "")
         {
             this.FileID = id;
             this.FileHash = fileHash;
@@ -24,6 +25,7 @@ namespace Model
             this.UserEmail = userEmail;
             this.ActionType = actionType;
             this.ActionTime = actionTime;
+            this.RowHash = rowHash;
         }
 
         public FileAction()

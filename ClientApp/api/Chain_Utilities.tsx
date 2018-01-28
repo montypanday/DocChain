@@ -25,7 +25,7 @@ export function GetDocchainStatus(fileID: string, platform: string, hash: string
         });
 }
 
-export function GetFileHistory(fileID: string, platform: string) {
+export function GetFileHistory(fileID: string, platform: string): Promise<any> {
     return fetch("/api/FileAction/GetActionsByFile/" + fileID + "/" + platform,
         {
             credentials: "same-origin",
@@ -34,9 +34,29 @@ export function GetFileHistory(fileID: string, platform: string) {
         .then(response => {
             if (!response.ok) { throw response; }
             return response.json();
-        }).then(data => {
-            console.log(data);
-            return data
         });
+}
+
+export function MapHistory(fileID: string, platform: string) {
+    var dict = new Object();
+    var json = GetFileHistory(fileID, platform).then(data => {
+        console.log(data);
+        dict = JSON.parse(data);
+    });
+
+}
+
+function MapFileAction(json: string) {
+    var dict = {
+        isValid         : json["isValid"],
+        FileID          : json["fileID"],
+        FileHash        : json["fileHash"],
+        StoragePlatform : json["StoragePlatform"],
+        UserName        : json["UserName"],
+        UserEmail       : json["UserEmail"],
+        ActionTime      : json["ActionTime"],
+        ActionType      : json["ActionType"],
+        RowHash         : json["RowHash"]
+    }
 }
 

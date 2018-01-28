@@ -4,6 +4,7 @@ import { formatSizeUnits } from "./FormatSize";
 import { CheckIfTracked } from "../../api/Chain_Utilities";
 import { ContextMenu } from "../Explorers/contextmenu";
 import { CertDrawer } from "../Explorers/CertDrawer";
+import { MapHistory } from "../../api/Chain_Utilities";
 
 export interface AppProps {
     type: string;
@@ -129,6 +130,10 @@ export class Row extends React.Component<AppProps, AppState> {
             },
             body: JSON.stringify(fileActionJson)
         });
+    }
+
+    componentDidMount() {
+        //MapHistory(this.props.id, this.props.platform);
     }
 
     shouldComponentUpdate(nextProps) {

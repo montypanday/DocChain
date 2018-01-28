@@ -42,7 +42,8 @@ namespace Database.Services
             List<FileAction> actions = new List<FileAction>();
             try
             {
-                string sql = "SELECT * " +
+                string sql = "SELECT *, " +
+                    "MD5(concat(ActionTime, FileID, StoragePlatform, ActionType, UserName, UserEmail, FileHash)) AS RowHash " +
                     "FROM fileactions " +
                     "WHERE UserEmail = @UserEmail " +
                     "ORDER BY ActionTime DESC";
@@ -60,7 +61,8 @@ namespace Database.Services
             List<FileAction> actions = new List<FileAction>();
             try
             {
-                string sql = "SELECT * " +
+                string sql = "SELECT *, " +
+                    "MD5(concat(ActionTime, FileID, StoragePlatform, ActionType, UserName, UserEmail, FileHash)) AS RowHash " +
                     "FROM fileactions " +
                     "WHERE FileID = @FileID AND StoragePlatform = @Platform " +
                     "ORDER BY ActionTime DESC";
@@ -73,13 +75,12 @@ namespace Database.Services
             return actions;
         }
 
-        public DocchainResult GetCurrentHashes(string fileID, string platform)
+        public FileAction GetCurrentHashes(string fileID, string platform)
         {
-            DocchainResult result = new DocchainResult();
+            FileAction result = new FileAction();
             try
             {
-                string sql = "SELECT " +
-                    "FileHash, " +
+                string sql = "SELECT *, " +
                     "MD5(concat(ActionTime, FileID, StoragePlatform, ActionType, UserName, UserEmail, FileHash)) AS RowHash " +
                     "FROM fileactions " +
                     "WHERE ActionTime = " +
@@ -87,7 +88,7 @@ namespace Database.Services
                     "FROM fileactions " +
                     "WHERE FileID = @FileID " +
                     "AND StoragePlatform = @Platform);";
-                result = connection.Get().Query<DocchainResult>(sql, new { FileID = fileID, Platform = platform }).First();
+                result = connection.Get().Query<FileAction>(sql, new { FileID = fileID, Platform = platform }).First();
             } catch (MySqlException e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);

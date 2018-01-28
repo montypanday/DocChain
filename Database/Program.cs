@@ -32,8 +32,8 @@ namespace Database
             string hash = fileActionService.RecordFileAction(testAction);
             Console.WriteLine(hash);
 
-            DocchainResult recentHash = fileActionService.GetCurrentHashes("1382872324890", "testPlatform");
-            Console.WriteLine(recentHash.RowHash + " " +recentHash.FileHash);
+            FileAction action = fileActionService.GetCurrentHashes("333", "TestPlatform");
+            Console.WriteLine(action.RowHash + " " + action.FileHash);
 
             //List<FileAction> fileActions = fileActionService.GetActionsByFile("263262238234", "Box");
             //fileActions.ForEach(a => Console.WriteLine(a.FileHash));

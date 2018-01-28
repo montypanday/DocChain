@@ -509,7 +509,8 @@ namespace front_end.Controllers
 
         private void RecordFileAction(BoxClient client, string fileID, string actionType)
         {
-            FileActionService fileActionService = new FileActionService();
+            FileActionController fileActionController = new FileActionController(Configuration);
+
             Content file = GetBoxItem(client, fileID).Result;
             BoxUser user = client.UsersManager.GetCurrentUserInformationAsync(new String[2] { "name", "login" }).Result;
             string userName = user.Name;
@@ -525,7 +526,7 @@ namespace front_end.Controllers
                 actionType,
                 DateTime.Now
             );
-            fileActionService.RecordFileAction(action);
+            fileActionController.RecordFileAction(action);
         }
 
         private string GetMimeTypeByWindowsRegistry(string fileNameOrExtension)

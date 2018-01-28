@@ -15,6 +15,7 @@ import { EmptySearch } from "../Alerts/EmptySearch";
 import { Alert } from "react-bootstrap";
 import { DriveLogin } from "./DriveLogin";
 import { Check, PutOnChain } from "../../api/util_chain";
+import { MapHistory, GetFileHistory } from "../../api/Chain_Utilities";
 
 interface DriveExplorerState {
     pathCollection: any;
@@ -43,6 +44,9 @@ interface DriveExplorerState {
     receivedCode: any;
     showShareModal: any;
     tempShareURL: any;
+    currentRowID: any;
+    currentRowName: any;
+    currentRowHash: any;
 }
 
 export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
@@ -95,7 +99,10 @@ export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
             showHistoryModal: false,
             receivedCode: "",
             showShareModal: false,
-            tempShareURL : ""
+            tempShareURL: "",
+            currentRowID: "",
+            currentRowName: "",
+            currentRowHash: ""
         };
     }
 
@@ -303,14 +310,17 @@ export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
     }
 
     showHistoryModal(row, event) {
-        Check(row.hash).then
-            (data => {
-                console.log(data);
-                this.setState({ showHistoryModal: true, receivedCode: data.statusCode });
-            })
-            .catch(function (error) {
-                toast.error("Something Went wrong");
-            }.bind(this));
+
+        this.setState({ currentRowID: row.id, currentRowName: row.filename, currentRowHash: row.hash, showHistoryModal: true });
+
+        //Check(row.hash).then
+        //    (data => {
+        //        console.log(data);
+        //        this.setState({ showHistoryModal: true, receivedCode: data.statusCode });
+        //    })
+        //    .catch(function (error) {
+        //        toast.error("Something Went wrong");
+        //    }.bind(this));
     }
 
     closeHistoryModal() { this.setState({ showHistoryModal: false, receivedCode: "" }); }
@@ -406,7 +416,7 @@ export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
                     {this.state.showNewFolderModal && <NewFolderModal closeHandler={this.CloseNewFolderModalHandler} createFolderHandler={this.createNewFolderHandler} ></NewFolderModal>}
                     {this.state.showDeleteModal && <DeleteModal fileName={this.state.ToBeDeletedName} id={this.state.ToBeDeletedID} type={this.state.ToBeDeletedType} closeHandler={this.closeDeleteModal} deleteActionHandler={this.deleteItem}></DeleteModal>}
                     {this.state.showHistoryModal &&
-                        <HistoryModal closeHandler={this.closeHistoryModal} StatusCode={this.state.receivedCode} >
+                        <HistoryModal fileID={this.state.currentRowID} fileName={this.state.currentRowName} platform="Drive" fileHash={this.state.currentRowHash} closeHandler = { this.closeHistoryModal } >
                         </HistoryModal>}
                     {this.state.showShareModal &&
                         <ShowShareLinkModal url={this.state.tempShareURL} closeHandler={this.closeShareModal} ></ShowShareLinkModal>}
