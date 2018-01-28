@@ -23,14 +23,13 @@ namespace front_end.Controllers
     [Route("api/[controller]")]
     public class ChainController : Controller
     {
-        private IConfiguration _configuration;
 
         private readonly ILogger _logger;
 
         /// <summary>
         /// This Configuration API is used access User secrets.
         /// </summary>
-        public IConfiguration Configuration { get; set; }
+        private IConfiguration Configuration { get; set; }
 
         /// <summary>
         /// Manages all communication with Blockchain API.

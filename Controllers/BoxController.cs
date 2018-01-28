@@ -96,7 +96,7 @@ namespace front_end.Controllers
         [Route("Upload/{currentFolderID}")]
         [HttpPost]
         public async Task<IActionResult> Upload(string currentFolderID)
-        { 
+        {
             var client = Initialise();
 
             var files = Request.Form.Files;
@@ -124,7 +124,7 @@ namespace front_end.Controllers
                         newFile = await client.FilesManager.UploadAsync(req, fs);
 
                         // VERIFY: MATT: Can you get the details for client from the client object, like name, email etc.
-                        Task.Run(() => { RecordFileAction(client, newFile.Id, "Upload"); });
+                        //Task.Run(() => { RecordFileAction(client, newFile.Id, "Upload"); });
                     }
                     catch (BoxException exp)
                     {

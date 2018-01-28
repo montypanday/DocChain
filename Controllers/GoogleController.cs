@@ -185,7 +185,7 @@ namespace front_end.Controllers
                     request = service.Files.Create(fileMetadata, fs, file.ContentType);
                     request.Fields = "id";
                     request.Upload();
-                    RecordFileAction(GetDriveFile(request.ResponseBody.Id), service, "Upload");
+                    //RecordFileAction(GetDriveFile(request.ResponseBody.Id), service, "Upload");
                 }
             }
             return GetGoogleFolderItems(service, currentFolderID);
@@ -265,11 +265,11 @@ namespace front_end.Controllers
         [HttpGet]
         public IActionResult Delete(string id, string currentFolderID)
         {
-            DriveData.File fileData = GetDriveFile(id); //Need to retrieve this before deleting in order to record the action
+            //DriveData.File fileData = GetDriveFile(id); //Need to retrieve this before deleting in order to record the action
             var service = GetService();
             var deleterequest = service.Files.Delete(id);
             deleterequest.Execute();
-            RecordFileAction(fileData, service, "Delete");
+            //RecordFileAction(fileData, service, "Delete");
             return GetGoogleFolderItems(service, currentFolderID);
         }
 
@@ -282,8 +282,8 @@ namespace front_end.Controllers
         [HttpGet]
         public IActionResult GetPreview(string id)
         {
-            DriveService service = GetService();
-            RecordFileAction(GetDriveFile(id), service, "Preview");
+            //    DriveService service = GetService();
+            //    RecordFileAction(GetDriveFile(id), service, "Preview");
             return Json("https://docs.google.com/viewer?srcid=" + id + "&pid=explorer&efh=false&a=v&chrome=false&embedded=true");
         }
 
@@ -311,7 +311,7 @@ namespace front_end.Controllers
             System.Diagnostics.Debug.WriteLine(uid + " " + file);
             //string userID = GetUserID(service);
             //Task.Run(() => { RecordFileAction(uid, userID, "Rename"); });
-            RecordFileAction(GetDriveFile(uid), service, "Rename");
+            //RecordFileAction(GetDriveFile(uid), service, "Rename");
             return GetGoogleFolderItems(service, currentFolderID);
             //BoxFile fileAfterRename = await client.FilesManager.UpdateInformationAsync(new BoxFileRequest() { Id = uid, Name = newName });
             //}
