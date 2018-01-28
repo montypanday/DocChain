@@ -239,3 +239,4 @@ _Pvt_Extensions
 .fake/
 *.zip
 Database/scripts/docchain-db-setup-and-teardown-old.sql
+ClientApp/components/Home/tutorial2.tsx

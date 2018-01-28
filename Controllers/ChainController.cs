@@ -100,7 +100,6 @@ namespace front_end.Controllers
         public Boolean TrackFile(string fileID, string platform)
         {
             TrackedFileService fileTracker = new TrackedFileService();
-
             bool request = fileTracker.TrackFile(fileID, platform);
             return request;
         }
@@ -110,7 +109,6 @@ namespace front_end.Controllers
         public Boolean UntrackFile(string fileID, string platform)
         {
             TrackedFileService fileTracker = new TrackedFileService();
-
             bool request = fileTracker.TrackFile(fileID, platform);
             return request;
         }

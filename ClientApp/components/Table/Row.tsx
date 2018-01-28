@@ -1,10 +1,10 @@
 ﻿import * as React from "react";
 import { render } from "react-dom";
 import { formatSizeUnits } from "./FormatSize";
-import { CheckIfTracked } from "../../api/Chain/FileTracker";
+import { CheckIfTracked } from "../../api/Chain_Utilities";
 import { ContextMenu } from "../Explorers/contextmenu";
 import { CertDrawer } from "../Explorers/CertDrawer";
-
+import { MapHistory } from "../../api/Chain_Utilities";
 
 export interface AppProps {
     type: string;
@@ -16,7 +16,7 @@ export interface AppProps {
     hash: any;
     mimeType: any;
     deleteHandler: any;
-    downloadHandler: any,
+    downloadHandler: any;
     renameHandler: any;
     shareLinkHandler: any;
     platform: string;
@@ -132,6 +132,10 @@ export class Row extends React.Component<AppProps, AppState> {
         });
     }
 
+    componentDidMount() {
+        //MapHistory(this.props.id, this.props.platform);
+    }
+
     shouldComponentUpdate(nextProps) {
         const a = this.props.type !== nextProps.type;
         const b = this.props.filename !== nextProps.filename;
@@ -220,8 +224,7 @@ export class Row extends React.Component<AppProps, AppState> {
                             <li><a onClick={this.props.shareLinkHandler}><i className="fa fa-share dropDownIcon" aria-hidden="true"></i>Share</a></li>
 
                             {this.props.type != "folder" && <li className="divider"></li>}
-                            {this.props.type != "folder" && <li><a onClick={this.props.historyModalHandler}><i className="fa fa-check dropDownIcon" aria-hidden="true"></i>Check with Blockchain</a></li>}
-                            {this.props.type != "folder" && <li><a onClick={this.props.putHandler}> <i className="fa fa-link dropDownIcon" aria-hidden="true"></i> Embed Into Blockchain</a></li>}
+                            {this.props.type != "folder" && <li><a onClick={this.props.historyModalHandler}><i className="fa fa-check dropDownIcon" aria-hidden="true"></i>Check Against Blockchain</a></li>}
                         </ul>
                     </div>
                     {/*

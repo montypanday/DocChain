@@ -196,7 +196,7 @@ namespace front_end.Controllers
             var client = Initialise();
             _logger.LogInformation("Getting Preview Link for file => " + id);
             ////log this preview in database.
-            Task.Run(() => { RecordFileAction(client, id, "Preview"); });
+            //Task.Run(() => { RecordFileAction(client, id, "Preview"); });
             try
             {
                 return Json(await client.FilesManager.GetPreviewLinkAsync(id));
@@ -233,7 +233,7 @@ namespace front_end.Controllers
                     BoxFolder boxFolder = await client.FoldersManager.UpdateInformationAsync(new BoxFolderRequest() { Id = uid, Name = newName });
                 }
 
-                Task.Run(() => { RecordFileAction(client, uid, "Rename"); });
+                //Task.Run(() => { RecordFileAction(client, uid, "Rename"); });
                 return await GetBoxFolderItems(client, currentFolderID);
             }
             catch (BoxException exp)
@@ -261,7 +261,7 @@ namespace front_end.Controllers
                 _logger.LogInformation("Getting Shared link for File =>" + id);
 
                 //Logging action to Database
-                Task.Run(() => { RecordFileAction(client, id, "Share Link"); });
+                //Task.Run(() => { RecordFileAction(client, id, "Share Link"); });
 
                 return Json(file.SharedLink.Url);
             }
@@ -288,7 +288,7 @@ namespace front_end.Controllers
             if (type == "file")
             {
                 _logger.LogInformation("Deleting File =>" + id);
-                Task.Run(() => { RecordFileAction(client, id, "Delete"); });
+                //Task.Run(() => { RecordFileAction(client, id, "Delete"); });
                 await client.FilesManager.DeleteAsync(id);
                 return await GetBoxFolderItems(client, currentFolderID);
             }
@@ -310,7 +310,7 @@ namespace front_end.Controllers
             var client = Initialise();
             var stream = await client.FilesManager.DownloadStreamAsync(id);
             var information = await client.FilesManager.GetInformationAsync(id);
-            Task.Run(() => { RecordFileAction(client, id, "Download"); });
+            //Task.Run(() => { RecordFileAction(client, id, "Download"); });
             return new FileStreamResult(stream, GetMimeTypeByWindowsRegistry(information.Name));
         }
 
@@ -509,7 +509,8 @@ namespace front_end.Controllers
 
         private void RecordFileAction(BoxClient client, string fileID, string actionType)
         {
-            FileActionService fileActionService = new FileActionService();
+            FileActionController fileActionController = new FileActionController(Configuration);
+
             Content file = GetBoxItem(client, fileID).Result;
             BoxUser user = client.UsersManager.GetCurrentUserInformationAsync(new String[2] { "name", "login" }).Result;
             string userName = user.Name;
@@ -525,7 +526,7 @@ namespace front_end.Controllers
                 actionType,
                 DateTime.Now
             );
-            fileActionService.RecordFileAction(action);
+            fileActionController.RecordFileAction(action);
         }
 
         private string GetMimeTypeByWindowsRegistry(string fileNameOrExtension)
