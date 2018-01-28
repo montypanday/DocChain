@@ -387,7 +387,7 @@ export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
                             <strong>Unauthorized: </strong> Please sign in first
                         </Alert>}
                     {this.state.show401Alert && <DriveLogin></DriveLogin>}
-                    <ContextMenu root="target" />
+                    {/*<ContextMenu root="target" />*/}
                     <ToastContainer position="bottom-right" hideProgressBar={true} toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
                     <div style={{ float: "right" }} className="user-details">
                         {!this.state.show401Alert && < ButtonToolBar
