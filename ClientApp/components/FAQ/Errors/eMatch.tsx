@@ -6,7 +6,7 @@ export class Match extends React.Component {
         return (<div className="panel panel-default">
             <div className="panel-heading">
                 <h4 className="panel-title"><a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">
-                    Why there is an error when I attempt to <strong>confirm & match a file with the blockchain</strong>? (WIP)
+                    Why there is an error when I attempt to <strong>Check with Blockchain</strong>? (WIP)
                         </a></h4>
             </div>
             <div id="collapseTen" className="panel-collapse collapse">

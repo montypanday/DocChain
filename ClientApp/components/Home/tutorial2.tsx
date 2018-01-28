@@ -38,8 +38,7 @@ export class Tutorial2 extends React.Component<Tutorial2Prop, Tutorial2State> {
             this.setState({ isRendered: true });
             this.render();
         } else {
-            //console.log("rerender");
-            document.getElementById("guide0").classList.remove("hidden");
+
         }
 
         document.addEventListener("click", this._showGuide);
