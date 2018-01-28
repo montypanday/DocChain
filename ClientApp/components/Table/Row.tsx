@@ -224,8 +224,7 @@ export class Row extends React.Component<AppProps, AppState> {
                             <li><a onClick={this.props.shareLinkHandler}><i className="fa fa-share dropDownIcon" aria-hidden="true"></i>Share</a></li>
 
                             {this.props.type != "folder" && <li className="divider"></li>}
-                            {this.props.type != "folder" && <li><a onClick={this.props.historyModalHandler}><i className="fa fa-check dropDownIcon" aria-hidden="true"></i>Check with Blockchain</a></li>}
-                            {this.props.type != "folder" && <li><a onClick={this.props.putHandler}> <i className="fa fa-link dropDownIcon" aria-hidden="true"></i> Embed Into Blockchain</a></li>}
+                            {this.props.type != "folder" && <li><a onClick={this.props.historyModalHandler}><i className="fa fa-check dropDownIcon" aria-hidden="true"></i>Check Against Blockchain</a></li>}
                         </ul>
                     </div>
                     {/*
