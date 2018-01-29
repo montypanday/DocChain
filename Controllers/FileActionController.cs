@@ -7,8 +7,12 @@ using Model;
 using Database.Services;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using System.Net;
+using System.Net.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace front_end.Controllers
 {
@@ -16,6 +20,18 @@ namespace front_end.Controllers
     public class FileActionController : Controller
     {
         private FileActionService fileActionService = new FileActionService();
+
+        private IConfiguration _configuration;
+
+        /// <summary>
+        /// This Configuration API is used access User secrets.
+        /// </summary>
+        public IConfiguration Configuration { get; set; }
+
+        public FileActionController(IConfiguration config)
+        {
+            Configuration = config;
+        }
 
         // GET: /<controller>/
         [HttpGet]
@@ -26,9 +42,10 @@ namespace front_end.Controllers
 
         [Route("LogAction")]
         [HttpPost]
-        public JsonResult LogAction([FromBody] JObject json)
+        public async Task<JsonResult> LogAction([FromBody] JObject json)
         {
             FileAction fileAction;
+            string rowHash;
             try
             {
                 fileAction = new FileAction(json);
@@ -38,14 +55,25 @@ namespace front_end.Controllers
                 System.Diagnostics.Debug.WriteLine(e.Message);
                 return new JsonResult("Json deserializing failed");
             }
+
             try
             {
-                fileActionService.RecordFileAction(fileAction);
-                return new JsonResult(JsonConvert.SerializeObject(fileAction));
-            } catch (Exception e)
+                rowHash = fileActionService.RecordFileAction(fileAction);                
+            }
+            catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
-                return new JsonResult("Database write failed");
+                return new JsonResult("Logging action to the database failed");
+            }
+
+            try
+            {
+                return new JsonResult(await EmbeddToDocchain(rowHash));
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+                return new JsonResult("Embedding action to the blockchain failed");
             }
         }
 
@@ -57,13 +85,27 @@ namespace front_end.Controllers
             try
             {
                 actions = fileActionService.GetActionsByFile(fileID, platform);
-                string json = JsonConvert.SerializeObject(actions);
-                return new JsonResult(json);
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
-                return new JsonResult("File Action Query Failed");
+                throw e;
+            }
+
+            List<ValidatedFileAction> validatedActions = new List<ValidatedFileAction>();
+            try
+            {
+                validatedActions = (from a in actions
+                                    select ValidateAction(a)).ToList();
+
+                string json = JsonConvert.SerializeObject(validatedActions);
+                System.Diagnostics.Debug.WriteLine(json);
+                return new JsonResult(json);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("Checking against blockchain failed");
+                throw e;
             }
         }
 
@@ -75,14 +117,101 @@ namespace front_end.Controllers
             try
             {
                 actions = fileActionService.GetActionsByUser(email);
-                string json = JsonConvert.SerializeObject(actions);
-                return new JsonResult(json);
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
-                return new JsonResult("File Action Query Failed");
+                throw e;
             }
+
+            List<ValidatedFileAction> validatedActions = new List<ValidatedFileAction>();
+            try
+            {
+                validatedActions = (from a in actions
+                                    select ValidateAction(a)).ToList();
+
+                string json = JsonConvert.SerializeObject(validatedActions);
+                System.Diagnostics.Debug.WriteLine(json);
+                return new JsonResult(json);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("Checking against blockchain failed");
+                throw e;
+            }
+        }
+
+        [Route("GetDocchainStatus/{fileID}/{platform}/{fileHash}")]
+        [HttpGet]
+        public JsonResult GetDocchainStatus([FromRoute]String fileID, [FromRoute]String platform, [FromRoute]String fileHash)
+        {
+            FileAction action;
+            ValidatedFileAction validatedAction;
+            try
+            {
+                action = fileActionService.GetCurrentHashes(fileID, platform);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+                validatedAction = new ValidatedFileAction(new FileAction());
+                return new JsonResult(JsonConvert.SerializeObject(validatedAction));
+            }
+
+            validatedAction = new ValidatedFileAction(action);
+
+            HttpResponseMessage response = (HttpResponseMessage) CheckWithDocchain(action.RowHash).Result.Value;
+            if (response.IsSuccessStatusCode && validatedAction.FileHash == fileHash)
+                validatedAction.isValid = true;
+
+            string json = JsonConvert.SerializeObject(validatedAction);
+            return new JsonResult(json);
+        }
+
+        private ValidatedFileAction ValidateAction(FileAction action)
+        {
+            ValidatedFileAction validatedAction = new ValidatedFileAction(action);
+
+            HttpResponseMessage response = (HttpResponseMessage)CheckWithDocchain(validatedAction.RowHash).Result.Value;
+            if (response.IsSuccessStatusCode && validatedAction.FileHash == action.FileHash)
+                validatedAction.isValid = true;
+
+            return validatedAction;
+        }
+
+        private async Task<JsonResult> CheckWithDocchain(string hash)
+        {
+            var client = GetHTTPClient();
+            return Json(await client.GetAsync(Configuration["ChainURL"] + ConvertToBase64(hash)));
+        }
+
+        private async Task<JsonResult> EmbeddToDocchain(string hash)
+        {
+            var content = new StringContent(string.Empty, Encoding.UTF8, "application/json");
+            var client = GetHTTPClient();
+            return Json(await client.PutAsync(Configuration["ChainURL"] + ConvertToBase64(hash), content));
+        }
+
+        private string ConvertToBase64(string hash)
+        {
+            byte[] encodedBytes = System.Text.Encoding.Unicode.GetBytes(hash);
+            return Convert.ToBase64String(encodedBytes);
+        }
+
+        private HttpClient GetHTTPClient()
+        {
+            HttpClient client = new HttpClient();
+            byte[] bytes = Encoding.UTF8.GetBytes(Configuration["ChainCred"] + ":");
+            string base64 = Convert.ToBase64String(bytes);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", base64);
+            return client;
+        }
+
+        [HttpPost]
+        public async void RecordFileAction(FileAction action)
+        {
+            string rowHash = fileActionService.RecordFileAction(action);
+            await EmbeddToDocchain(rowHash);
         }
     }
 }

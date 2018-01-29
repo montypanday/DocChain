@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Configuration;
 using System.Data;
 
 namespace Database
@@ -15,15 +16,15 @@ namespace Database
 
         private void Initialize()
         {
-            MySqlConnectionStringBuilder connectionString = new MySqlConnectionStringBuilder
-            {
-                //TODO: MATT: Store credentials somewhere.
-                Server = "localhost",
-                Database = "docchain",
-                UserID = "root",
-                Password = "Lincd"
-            };
-            connection = new MySqlConnection(connectionString.ToString());
+            ConnectionStringSettings local = ConfigurationManager.ConnectionStrings["local"];
+            string azureConnectionString = Environment.GetEnvironmentVariable("MYSQLCONNSTR_localdb");
+
+            //First attempting to connect to the azure MySql In-App DB, if that fails attempts to connect to a local database.
+            connection = new MySqlConnection(azureConnectionString);
+
+            if (!Open())
+                connection = new MySqlConnection(local.ConnectionString);
+
             Open();
         }
 

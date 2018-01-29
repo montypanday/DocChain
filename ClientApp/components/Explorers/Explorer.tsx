@@ -17,6 +17,7 @@ import { EmptySearch } from "../Alerts/EmptySearch";
 import { saveAs } from "file-saver";
 import { ContextMenu } from "./ContextMenu";
 import { Check, PutOnChain } from "../../api/util_chain";
+import { MapHistory, GetFileHistory } from "../../api/Chain_Utilities";
 
 interface ExplorerState {
     // this is space we will put the json response
@@ -51,6 +52,9 @@ interface ExplorerState {
     tempShareURL: any;
     showHistoryModal: any;
     receivedCode: any;
+    currentRowID: any;
+    currentRowName: any;
+    currentRowHash: any;
 }
 
 export class Explorer extends React.Component<{}, ExplorerState> {
@@ -115,7 +119,10 @@ export class Explorer extends React.Component<{}, ExplorerState> {
             showShareModal: false,
             tempShareURL: "",
             showHistoryModal: false,
-            receivedCode: ""
+            receivedCode: "",
+            currentRowID: "",
+            currentRowName: "",
+            currentRowHash: ""
         };
     }
 
@@ -230,14 +237,16 @@ export class Explorer extends React.Component<{}, ExplorerState> {
     }
 
     showHistoryModal(row, event) {
-        Check(row.hash).then
-            (data => {
-                console.log(data);
-                this.setState({ showHistoryModal: true, receivedCode: data.statusCode });
-            })
-            .catch(function (error) {
-                toast.error("Something Went wrong");
-            }.bind(this));
+        //Check(row.hash).then
+        //    (data => {
+        //        console.log(data);
+        //        this.setState({ receivedCode: data.statusCode });
+        //        console.log(this.state.receivedCode);
+        //    })
+        //    .catch(function (error) {
+        //        toast.error("Something Went wrong");
+        //    }.bind(this));
+        this.setState({ currentRowID: row.id, currentRowName: row.filename, currentRowHash: row.hash, showHistoryModal: true });
     }
 
     putHandler(row, event) {
@@ -376,7 +385,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
 
             return (
                 <div className="well pull-down" id="target">
-                    {!this.state.show401Alert && < ContextMenu root="target"></ ContextMenu>}
+                    {/*!this.state.show401Alert && < ContextMenu root="target"></ ContextMenu>*/}
                     <ToastContainer position="bottom-right" hideProgressBar={true} pauseOnHover={true} newestOnTop={true} toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })}>
                     </ToastContainer>
 
@@ -423,7 +432,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
                         <NewFolderModal closeHandler={this.CloseNewFolderModalHandler} createFolderHandler={this.createNewFolderHandler} >
                         </NewFolderModal>}
                     {this.state.showHistoryModal &&
-                        <HistoryModal closeHandler={this.closeHistoryModal} StatusCode={this.state.receivedCode} >
+                        <HistoryModal fileID={this.state.currentRowID} platform="Box" fileName={this.state.currentRowName} fileHash={this.state.currentRowHash} closeHandler = { this.closeHistoryModal } >
                         </HistoryModal>}
                 </div>
             );
