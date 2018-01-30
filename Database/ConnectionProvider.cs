@@ -17,7 +17,7 @@ namespace Database
         private void Initialize()
         {
             ConnectionStringSettings local = ConfigurationManager.ConnectionStrings["local"];
-            string azureConnectionString = Environment.GetEnvironmentVariable("MYSQLCONNSTR_localdb");
+            string azureConnectionString = Environment.GetEnvironmentVariable("MYSQLCONNSTR_localdb").ToString();
 
             //First attempting to connect to the azure MySql In-App DB, if that fails attempts to connect to a local database.
             connection = new MySqlConnection(azureConnectionString);
