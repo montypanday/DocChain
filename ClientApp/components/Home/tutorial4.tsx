@@ -84,12 +84,12 @@ export class Tutorial4 extends React.Component<Tutorial4Prop, Tutorial4State> {
 
     _addGuides = () => {
         //console.log("add guides");
-        const guide1 = <Guide key="0" id="guide0" direction="top-right" title="Click At Here" content="you can search a certain file" position={this._getPosition(170, 135)} />;
-        const guide2 = <Guide key="1" id="guide1" direction="top-right" title="Click At Here" content="To up load a local file" position={this._getPosition(505, 135)} />;
-        const guide3 = <Guide key="2" id="guide2" direction="top-right" title="Click At Here" content="To create a new folder" position={this._getPosition(600, 135)} />;
-        const guide4 = <Guide key="3" id="guide3" direction="down-left" title="Click At Here" content="And see the preview of the file" position={this._getPosition(120, 150)} />;
-        const guide5 = <Guide key="4" id="guide4" direction="down-left" title="Click At Here" content="And you could delete, rename and download the file" position={this._getPosition(530, 150)} />;
-        const guide6 = <Guide key="5" id="guide5" direction="top-left" title="Now Click At This Button" content="" position={this._getPosition(550, 300)} />;
+        const guide1 = <Guide key="0" id="guide0" direction="top-right" title="Click At Here" content="you can search a certain file" position={this._getPosition(170, 130)} />;
+        const guide2 = <Guide key="1" id="guide1" direction="top-right" title="Click At Here" content="To up load a local file" position={this._getPosition(505, 130)} />;
+        const guide3 = <Guide key="2" id="guide2" direction="top-right" title="Click At Here" content="To create a new folder" position={this._getPosition(600, 130)} />;
+        const guide4 = <Guide key="3" id="guide3" direction="down-left" title="Click At Here" content="And see the preview of the file" position={this._getPosition(120, 135)} />;
+        const guide5 = <Guide key="4" id="guide4" direction="down-left" title="Click At Here" content="And you could delete, rename and download the file" position={this._getPosition(530, 135)} />;
+        const guide6 = <Guide key="5" id="guide5" direction="top-left" title="Now Click At This Button" content="" position={this._getPosition(530, 285)} />;
         const container = <div>
             {guide1}
             {guide2}

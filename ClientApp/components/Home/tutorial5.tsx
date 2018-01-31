@@ -84,8 +84,8 @@ export class Tutorial5 extends React.Component<Tutorial5Prop, Tutorial5State> {
 
     _addGuides = () => {
         //console.log("add guides");
-        const guide1 = <Guide key="0" id="guide0" direction="left-down" title="Click At Here" content="You can check you files’ security by blockchain" position={this._getPosition(308, 150)} />;
-        const guide2 = <Guide key="1" id="guide1" direction="left-top" title="Click At Here" content="You can see where certificate data goes" position={this._getPosition(308, 230)} />;
+        const guide1 = <Guide key="0" id="guide0" direction="left-down" title="Click At Here" content="You can check you files’ security by blockchain" position={this._getPosition(700, 340)} />;
+        const guide2 = <Guide key="1" id="guide1" direction="left-top" title="Click At Here" content="You can see where certificate data goes" position={this._getPosition(700, 405)} />;
         const guide3 = <Guide key="2" id="guide2" direction="top-right" title="Click At Here" content="To logout or switch to other box accounts" position={this._getPosition(700, 135)} />;
         const container = <div>
             {guide1}
