@@ -1,8 +1,7 @@
 ﻿using Model;
 using System.Collections.Generic;
-using Dapper.Contrib.Extensions;
 using Dapper;
-using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace Database.Services
@@ -15,7 +14,6 @@ namespace Database.Services
         {
             try
             {
-                //connection.Get().Insert(action);
                 string sql = "usp_record_action_return_hash";
                 string hash = connection.Get().Query<string>(sql, new
                 {
@@ -27,11 +25,12 @@ namespace Database.Services
                     UserEmail = action.UserEmail,
                     FileHash = action.FileHash
                 }, commandType: System.Data.CommandType.StoredProcedure)
-                .First();
+                .First().ToString();
+                //string hashString = System.Text.Encoding.Default.GetString(hash);
                 System.Diagnostics.Debug.WriteLine(action.ActionType + " action successfully tracked");
                 return hash;
             }
-            catch (MySqlException e)
+            catch (SqlException e)
             {
                 throw e;
             }
@@ -43,13 +42,13 @@ namespace Database.Services
             try
             {
                 string sql = "SELECT *, " +
-                    "MD5(concat(ActionTime, FileID, StoragePlatform, ActionType, UserName, UserEmail, FileHash)) AS RowHash " +
+                    "sys.fn_sqlvarbasetostr(HASHBYTES('MD5', CONCAT(ActionTime, FileID, StoragePlatform, ActionType, UserName, UserEmail, FileHash))) AS RowHash " +
                     "FROM fileactions " +
                     "WHERE UserEmail = @UserEmail " +
                     "ORDER BY ActionTime DESC";
                  actions = connection.Get().Query<FileAction>(sql, new { UserEmail = email}).AsList<FileAction>();
             }
-            catch (MySqlException e)
+            catch (SqlException e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
@@ -62,13 +61,13 @@ namespace Database.Services
             try
             {
                 string sql = "SELECT *, " +
-                    "MD5(concat(ActionTime, FileID, StoragePlatform, ActionType, UserName, UserEmail, FileHash)) AS RowHash " +
+                    "sys.fn_sqlvarbasetostr(HASHBYTES('MD5', CONCAT(ActionTime, FileID, StoragePlatform, ActionType, UserName, UserEmail, FileHash))) AS RowHash " +
                     "FROM fileactions " +
                     "WHERE FileID = @FileID AND StoragePlatform = @Platform " +
                     "ORDER BY ActionTime DESC";
                 actions = connection.Get().Query<FileAction>(sql, new { FileID = fileID, Platform = platform }).AsList<FileAction>();
             }
-            catch (MySqlException e)
+            catch (SqlException e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
@@ -81,7 +80,7 @@ namespace Database.Services
             try
             {
                 string sql = "SELECT *, " +
-                    "MD5(concat(ActionTime, FileID, StoragePlatform, ActionType, UserName, UserEmail, FileHash)) AS RowHash " +
+                    "sys.fn_sqlvarbasetostr(HASHBYTES('MD5', CONCAT(ActionTime, FileID, StoragePlatform, ActionType, UserName, UserEmail, FileHash))) AS RowHash " +
                     "FROM fileactions " +
                     "WHERE ActionTime = " +
                     "(SELECT MAX(ActionTime) " +
@@ -89,7 +88,7 @@ namespace Database.Services
                     "WHERE FileID = @FileID " +
                     "AND StoragePlatform = @Platform);";
                 result = connection.Get().Query<FileAction>(sql, new { FileID = fileID, Platform = platform }).First();
-            } catch (MySqlException e)
+            } catch (SqlException e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }

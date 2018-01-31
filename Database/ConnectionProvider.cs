@@ -1,13 +1,13 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Configuration;
 using System.Data;
-
+using System.Data.SqlClient;
 namespace Database
 {
     public class ConnectionProvider
     {
-        private MySqlConnection connection;
+        //private MySqlConnection connection;
+        private SqlConnection connection;
 
         public ConnectionProvider()
         {
@@ -16,15 +16,9 @@ namespace Database
 
         private void Initialize()
         {
-            ConnectionStringSettings local = ConfigurationManager.ConnectionStrings["local"];
-            string azureConnectionString = Environment.GetEnvironmentVariable("MYSQLCONNSTR_localdb").ToString();
-
-            //First attempting to connect to the azure MySql In-App DB, if that fails attempts to connect to a local database.
-            connection = new MySqlConnection(azureConnectionString);
-
-            if (!Open())
-                connection = new MySqlConnection(local.ConnectionString);
-
+            //ConnectionStringSettings mySQL = ConfigurationManager.ConnectionStrings["MySQL"];
+            ConnectionStringSettings azure = ConfigurationManager.ConnectionStrings["Azure"]
+            connection = new SqlConnection(azure.ConnectionString);
             Open();
         }
 
@@ -40,7 +34,7 @@ namespace Database
                 connection.Open();
                 return true;
             }
-            catch (MySqlException e)
+            catch (SqlException e)
             {
                 switch (e.Number)
                 {
@@ -63,7 +57,7 @@ namespace Database
                 connection.Close();
                 return true;
             }
-            catch (MySqlException e)
+            catch (SqlException e)
             {
                 Console.WriteLine(e.Message);
                 return false;

@@ -1,9 +1,5 @@
-﻿using Dapper;
-using Dapper.Contrib.Extensions;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Dapper.Contrib.Extensions;
+using System.Data.SqlClient;
 
 namespace Database.Services
 {
@@ -33,7 +29,7 @@ namespace Database.Services
                 connection.Get().Insert(new TrackedFile(fileID, platform));
                 System.Diagnostics.Debug.WriteLine("File with id " + fileID + " is now being tracked");
                 return true;
-            } catch (MySqlException e)
+            } catch (SqlException e)
             {
                 if (e.ErrorCode == 1062)
                 {
@@ -55,7 +51,7 @@ namespace Database.Services
                 connection.Get().Delete<TrackedFile>(new TrackedFile(fileID, platform));
                 System.Diagnostics.Debug.WriteLine("File with id " + fileID + " is no longer being tracked");
                 return true;
-            } catch (MySqlException e)
+            } catch (SqlException e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
                 return false;
@@ -81,7 +77,7 @@ namespace Database.Services
                     return false;
                 }
             }
-            catch (MySqlException e)
+            catch (SqlException e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
                 return false;

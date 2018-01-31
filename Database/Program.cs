@@ -2,8 +2,6 @@
 using Model;
 using System;
 using System.Collections.Generic;
-using Dapper.Contrib.Extensions;
-using System.Linq;
 
 namespace Database
 {
@@ -13,11 +11,13 @@ namespace Database
         {
             ConnectionProvider connection = new ConnectionProvider();
 
-            TrackedFileService fileTracker = new TrackedFileService();
+            Console.WriteLine(connection.Get());
+
+            //TrackedFileService fileTracker = new TrackedFileService();
 
             FileActionService fileActionService = new FileActionService();
 
-            List<FileAction> userActions = fileActionService.GetActionsByUser("smmath@deakin.edu.au");
+            List<FileAction> userActions = fileActionService.GetActionsByUser("test@email.com");
             userActions.ForEach(a => Console.WriteLine(a.ActionTime + " " + a.UserName + " " + a.ActionType + " " + a.FileID + " "));
 
             FileAction testAction = new FileAction(
@@ -32,11 +32,11 @@ namespace Database
             string hash = fileActionService.RecordFileAction(testAction);
             Console.WriteLine(hash);
 
-            FileAction action = fileActionService.GetCurrentHashes("333", "TestPlatform");
+            FileAction action = fileActionService.GetCurrentHashes("123", "test-platform");
             Console.WriteLine(action.RowHash + " " + action.FileHash);
 
-            //List<FileAction> fileActions = fileActionService.GetActionsByFile("263262238234", "Box");
-            //fileActions.ForEach(a => Console.WriteLine(a.FileHash));
+            List<FileAction> fileActions = fileActionService.GetActionsByFile("123", "test-platform");
+            fileActions.ForEach(a => Console.WriteLine(a.FileHash));
         }
     }
 }
