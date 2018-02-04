@@ -10,7 +10,7 @@ export interface Props {
     fileHash: string;
     platform: string;
     closeHandler: any;
-    //StatusCode: any;
+    StatusCode: any;
 }
 
 export interface State {
@@ -51,6 +51,7 @@ export default class HistoryModal extends React.Component<Props, State> {
 
 
     render() {
+      
         console.log(this.props.fileID);
         console.log(this.state.history);
         console.log(typeof this.state.history);
@@ -64,46 +65,52 @@ export default class HistoryModal extends React.Component<Props, State> {
 
         if (this.state.history.length > 0) {
             historyDict = JSON.parse(this.state.history);
-            rows = historyDict.map(function (row) {
-                return (
-                    <HistoryRecord
-                        isValid={row["isValid"]}
-                        FileID={row["FileID"]}
-                        FileHash={row["FileHash"]}
-                        StoragePlatform={row["StoragePlatform"]}
-                        UserName={row["UserName"]}
-                        UserEmail={row["UserEmail"]}
-                        ActionTime={row["ActionTime"]}
-                        ActionType={row["ActionType"]}
-                        RowHash={row["RowHash"]}>
-                    </HistoryRecord>
-                );
-            }.bind(this));
-
-            if (this.props.fileHash == historyDict[0].FileHash) {
-                isValid = true;
-                statusMessage = <p className="alert alert-success"><b>SUCCESS:</b> This file is up to date with the most recent version embedded on the block-chain</p>;
-            } else {
-                isValid = false;
-                statusMessage = <p className="alert alert-danger"><b>WARNING:</b> This file does not match the most recent version embedded on the block-chain</p>;
+            if (this.state.history == null) {
+                rows = "";
             }
-
-            mismatchCount = 0;
-            historyDict.forEach(r => {
-                if (r.isValid == false) {
-                    mismatchCount++;
-                }
-            });
-
-            if (mismatchCount > 0) {
-                mismatchCountMessage = <p className="alert alert-warning"><b>WARNING:</b> {mismatchCount} file-action records could not be matched with the block-chain</p>;
-            } else {
-                mismatchCountMessage = <p className="alert alert-info"><b>INFO:</b> The entire file history has correctly matched the blockchain</p>;
+            else {
+                rows = historyDict.map(function (row) {
+                    return (
+                        <HistoryRecord
+                            isValid={row["isValid"]}
+                            FileID={row["FileID"]}
+                            FileHash={row["FileHash"]}
+                            StoragePlatform={row["StoragePlatform"]}
+                            UserName={row["UserName"]}
+                            UserEmail={row["UserEmail"]}
+                            ActionTime={row["ActionTime"]}
+                            ActionType={row["ActionType"]}
+                            RowHash={row["RowHash"]}>
+                        </HistoryRecord>
+                    );
+                }.bind(this));
             }
+            
+
+            //if (this.props.fileHash == historyDict[0].FileHash) {
+            //    isValid = true;
+            //    statusMessage = <p className="alert alert-success"><b>SUCCESS:</b> This file is up to date with the most recent version embedded on the block-chain</p>;
+            //} else {
+            //    isValid = false;
+            //    statusMessage = <p className="alert alert-danger"><b>WARNING:</b> This file does not match the most recent version embedded on the block-chain</p>;
+            //}
+
+            //mismatchCount = 0;
+            //historyDict.forEach(r => {
+            //    if (r.isValid == false) {
+            //        mismatchCount++;
+            //    }
+            //});
+
+            //if (mismatchCount > 0) {
+            //    mismatchCountMessage = <p className="alert alert-warning"><b>WARNING:</b> {mismatchCount} file-action records could not be matched with the block-chain</p>;
+            //} else {
+            //    mismatchCountMessage = <p className="alert alert-info"><b>INFO:</b> The entire file history has correctly matched the blockchain</p>;
+            //}
 
 
-            console.log(isValid);
-            console.log("Mismatches: " + mismatchCount);
+            //console.log(isValid);
+            //console.log("Mismatches: " + mismatchCount);
 
             return (
                 <Modal show={true} bsSize="small" className="history-modal">
@@ -111,10 +118,10 @@ export default class HistoryModal extends React.Component<Props, State> {
                         <Modal.Title id="contained-modal-title-lg">{this.props.fileName} History </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {/*{this.props.StatusCode == 404 && <div className="alert alert-warning" role="alert"><strong>Not Found:</strong> Please Embed On Chain to keep track </div>}
-                    {this.props.StatusCode == 200 && <div className="alert alert-success" role="alert"><strong>Match Found:</strong> Your file has not changed since the last time.</div>}*/}
-                        {statusMessage}
-                        {mismatchCountMessage}
+                        {this.props.StatusCode == 404 && <div className="alert alert-warning" role="alert"><strong>Not Found:</strong> Please Embed On Chain to keep track </div>}
+                    {this.props.StatusCode == 200 && <div className="alert alert-success" role="alert"><strong>Match Found:</strong> Your file has not changed since the last time.</div>}
+                        {/*statusMessage*/}
+                        {/*mismatchCountMessage*/}
                         <table>
                             <tbody>
                                 <tr>

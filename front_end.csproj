@@ -30,6 +30,7 @@
   <ItemGroup>
     <PackageReference Include="Box.V2.Core" Version="3.3.0" />
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.32.0.1093" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.0.0" />
@@ -162,6 +163,9 @@
   <ItemGroup>
     <PackageReference Update="Microsoft.NETCore.App" Version="2.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec Command="npm install" />
@@ -194,5 +198,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <ApplicationInsightsResourceId>/subscriptions/9f84c492-44de-465a-a110-c999678c11fe/resourcegroups/DocChain/providers/microsoft.insights/components/DocChain</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/9f84c492-44de-465a-a110-c999678c11fe/resourcegroups/DocChain/providers/microsoft.insights/components/DocChain</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 </Project>

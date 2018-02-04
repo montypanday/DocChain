@@ -36,8 +36,11 @@ namespace front_end.Controllers
     public class BoxController : Controller
     {
         private IConfiguration Configuration { get; set; }
+
         private IDataProtector _protector { get; set; }
+
         private readonly ILogger _logger;
+
         private IHostingEnvironment hostingEnv;
 
         /// <summary>
@@ -124,7 +127,7 @@ namespace front_end.Controllers
                         newFile = await client.FilesManager.UploadAsync(req, fs);
 
                         // VERIFY: MATT: Can you get the details for client from the client object, like name, email etc.
-                        //Task.Run(() => { RecordFileAction(client, newFile.Id, "Upload"); });
+                        Task.Run(() => { RecordFileAction(client, newFile.Id, "Upload"); });
                     }
                     catch (BoxException exp)
                     {
@@ -196,7 +199,7 @@ namespace front_end.Controllers
             var client = Initialise();
             _logger.LogInformation("Getting Preview Link for file => " + id);
             ////log this preview in database.
-            //Task.Run(() => { RecordFileAction(client, id, "Preview"); });
+            Task.Run(() => { RecordFileAction(client, id, "Preview"); });
             try
             {
                 return Json(await client.FilesManager.GetPreviewLinkAsync(id));
@@ -233,7 +236,7 @@ namespace front_end.Controllers
                     BoxFolder boxFolder = await client.FoldersManager.UpdateInformationAsync(new BoxFolderRequest() { Id = uid, Name = newName });
                 }
 
-                //Task.Run(() => { RecordFileAction(client, uid, "Rename"); });
+                Task.Run(() => { RecordFileAction(client, uid, "Rename"); });
                 return await GetBoxFolderItems(client, currentFolderID);
             }
             catch (BoxException exp)
@@ -261,7 +264,7 @@ namespace front_end.Controllers
                 _logger.LogInformation("Getting Shared link for File =>" + id);
 
                 //Logging action to Database
-                //Task.Run(() => { RecordFileAction(client, id, "Share Link"); });
+                Task.Run(() => { RecordFileAction(client, id, "Share Link"); });
 
                 return Json(file.SharedLink.Url);
             }
@@ -288,7 +291,7 @@ namespace front_end.Controllers
             if (type == "file")
             {
                 _logger.LogInformation("Deleting File =>" + id);
-                //Task.Run(() => { RecordFileAction(client, id, "Delete"); });
+                Task.Run(() => { RecordFileAction(client, id, "Delete"); });
                 await client.FilesManager.DeleteAsync(id);
                 return await GetBoxFolderItems(client, currentFolderID);
             }
@@ -310,7 +313,7 @@ namespace front_end.Controllers
             var client = Initialise();
             var stream = await client.FilesManager.DownloadStreamAsync(id);
             var information = await client.FilesManager.GetInformationAsync(id);
-            //Task.Run(() => { RecordFileAction(client, id, "Download"); });
+            Task.Run(() => { RecordFileAction(client, id, "Download"); });
             return new FileStreamResult(stream, GetMimeTypeByWindowsRegistry(information.Name));
         }
 

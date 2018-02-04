@@ -237,15 +237,15 @@ export class Explorer extends React.Component<{}, ExplorerState> {
     }
 
     showHistoryModal(row, event) {
-        //Check(row.hash).then
-        //    (data => {
-        //        console.log(data);
-        //        this.setState({ receivedCode: data.statusCode });
-        //        console.log(this.state.receivedCode);
-        //    })
-        //    .catch(function (error) {
-        //        toast.error("Something Went wrong");
-        //    }.bind(this));
+        Check(row.hash).then
+            (data => {
+                console.log(data);
+                this.setState({ receivedCode: data.statusCode });
+                console.log(this.state.receivedCode);
+            })
+            .catch(function (error) {
+                toast.error("Something Went wrong");
+            }.bind(this));
         this.setState({ currentRowID: row.id, currentRowName: row.filename, currentRowHash: row.hash, showHistoryModal: true });
     }
 
@@ -432,7 +432,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
                         <NewFolderModal closeHandler={this.CloseNewFolderModalHandler} createFolderHandler={this.createNewFolderHandler} >
                         </NewFolderModal>}
                     {this.state.showHistoryModal &&
-                        <HistoryModal fileID={this.state.currentRowID} platform="Box" fileName={this.state.currentRowName} fileHash={this.state.currentRowHash} closeHandler = { this.closeHistoryModal } >
+                        <HistoryModal fileID={this.state.currentRowID} platform="Box" fileName={this.state.currentRowName} fileHash={this.state.currentRowHash} closeHandler={this.closeHistoryModal} StatusCode={this.state.receivedCode} >
                         </HistoryModal>}
                 </div>
             );

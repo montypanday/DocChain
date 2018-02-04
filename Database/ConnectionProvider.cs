@@ -16,8 +16,8 @@ namespace Database
 
         private void Initialize()
         {
-            //ConnectionStringSettings mySQL = ConfigurationManager.ConnectionStrings["MySQL"];
-            ConnectionStringSettings azure = ConfigurationManager.ConnectionStrings["Azure"]
+        //ConnectionStringSettings mySQL = ConfigurationManager.ConnectionStrings["MySQL"];
+        ConnectionStringSettings azure = ConfigurationManager.ConnectionStrings["Azure"];
             connection = new SqlConnection(azure.ConnectionString);
             Open();
         }
