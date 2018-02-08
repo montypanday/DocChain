@@ -37,6 +37,7 @@ export class ContextMenu extends React.Component<AppProps, AppState> {
     }
 
     _handleContextMenu = (event) => {
+        console.log("_handleContextMenu Was Called");
         event.preventDefault();
         this.closeBtmMenu();
 
