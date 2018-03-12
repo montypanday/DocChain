@@ -1,5 +1,5 @@
 ﻿import * as React from "react";
-import { EmptyFolderIcon } from "../SVGs/icon-EmptyFolder";
+import { EmptyFolderIcon } from "../svg/icon-EmptyFolder";
 
 export default class EmptyFolder extends React.Component {
 

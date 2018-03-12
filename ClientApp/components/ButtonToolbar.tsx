@@ -1,7 +1,6 @@
 ﻿import * as React from "react";
 import { render } from "react-dom";
-import { ButtonToolbar } from "react-bootstrap";
-import { Button, DropdownButton, MenuItem } from "react-bootstrap";
+import { ButtonToolbar, Button, DropdownButton, MenuItem } from "react-bootstrap";
 
 export interface ButtonToolbarProps {
     NewFolderHandler: any;
@@ -12,12 +11,9 @@ export interface ButtonToolbarProps {
 export interface ButtonToolbarState {
 }
 
-export default class ButtonToolBar extends React.Component<ButtonToolbarProps, ButtonToolbarState> {
+export class ButtonToolBar extends React.Component<ButtonToolbarProps, ButtonToolbarState> {
     constructor(props: ButtonToolbarProps) {
         super(props);
-
-        this.state = {
-        };
     }
     shouldComponentUpdate(nextProps) {
         return false;
@@ -45,16 +41,13 @@ export default class ButtonToolBar extends React.Component<ButtonToolbarProps, B
                         <i className="fa fa-plus dropDownIcon" aria-hidden="true"></i>New <span className="caret"></span>
                     </button>
                     <ul className="dropdown-menu">
-                        {/* // TODO: PATRICK: Add icon for dropdown options.
-                         // For example New Folder option should show a fontawesome folder in left*/}
-                        <li><a onClick={this.props.NewFolderHandler} > <i className="fa fa-folder dropDownIcon" aria-hidden="true"></i>New Folder</a></li>
+                        <li><a onClick={this.props.NewFolderHandler} ><i className="fa fa-folder dropDownIcon" aria-hidden="true"></i>New Folder</a></li>
                     </ul>
                 </div>
                 <Button onClick={this.props.logoutHandler} bsStyle="danger">
-                    <i className="fa fa-power-off power-icon" aria-hidden="true">
-                    </i>
+                    <i className="fa fa-power-off power-icon" aria-hidden="true"></i>
                     Logout
-                    </Button>
+                </Button>
             </ButtonToolbar>
 
         );

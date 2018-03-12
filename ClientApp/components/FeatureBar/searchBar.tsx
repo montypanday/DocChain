@@ -12,9 +12,6 @@ export interface AppState {
 export class SearchBar extends React.Component<AppProps, AppState> {
     constructor(props: AppProps) {
         super(props);
-
-        this.state = {
-        };
     }
 
     handleKeyPress = (event) => {

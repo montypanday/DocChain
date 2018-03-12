@@ -1,5 +1,5 @@
 ﻿import * as React from "react";
-import { LostConnIcon } from "../SVGs/icon-LostConn";
+import { LostConnIcon } from "../svg/icon-LostConn";
 
 export default class LostConnect extends React.Component {
 

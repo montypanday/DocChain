@@ -1,5 +1,5 @@
 ﻿import * as React from "react";
-import { NetError } from "../SVGs/icon-NetError";
+import { NetError } from "../svg/icon-NetError";
 
 export default class ErrorSplash extends React.Component {
 

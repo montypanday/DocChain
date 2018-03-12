@@ -62,19 +62,15 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 100;
-    color: #1B1B1E;
-    font-size: 15px;
-    margin: 0;
-    padding: 0;
+    z-index: 1;
 }
-/*
+
 @media (max-width: 767px) {
-    // On small screens, the nav menu spans the full width of the screen. Leave a space for it. 
+    //On small screens, the nav menu spans the full width of the screen. Leave a space for it. 
     body {
         padding-top: 50px;
     }
-}*/
+}
 
 /** SVGs **/
 
@@ -307,12 +303,8 @@ a {
 }
 
 .pull-down {
-    width:99%;
-    margin-top: 55px;
-    margin-left: 5px;
-    margin-right: 7px;
-    position: fixed;
-    height: calc(100vh - 65px);
+  
+    height: calc(100vh);
     border-color: #636363;
 }
 
@@ -353,10 +345,10 @@ td p {
 tbody {
     overflow-y: scroll;
     overflow-x: hidden;
-    height: calc(100vh - 230px);
+    height: 100vh;
     position: absolute;
     padding-right: 0px;
-    width: calc(100% - 38px); /*17px for scrollbar width, 19px for explorer well padding, THIS DISPLAYS THE SCROLLBAR IN THE CORRECT POSITION*/
+    width: calc(100% - 25px); /*17px for scrollbar width, 19px for explorer well padding, THIS DISPLAYS THE SCROLLBAR IN THE CORRECT POSITION*/
 }
 
 /** DROPDOWN MENU **/
@@ -951,4 +943,50 @@ tbody {
 }
 .input-group {
     width: 100%;
+}
+
+@media (min-width: 768px) {
+    /* On small screens, convert the nav menu to a vertical sidebar */
+    .main-nav {
+        height: 100%;
+        width: 16.66666667%;
+    }
+
+        .main-nav .navbar {
+            border-radius: 0px;
+            border-width: 0px;
+            height: 100%;
+        }
+
+        .main-nav .navbar-header {
+            float: none;
+        }
+
+        .main-nav .navbar-collapse {
+            border-top: 1px solid #444;
+            padding: 0px;
+        }
+
+        .main-nav .navbar ul {
+            float: none;
+        }
+
+        .main-nav .navbar li {
+            float: none;
+            font-size: 15px;
+            margin: 6px;
+        }
+
+            .main-nav .navbar li a {
+                padding: 10px 16px;
+                border-radius: 4px;
+            }
+
+        .main-nav .navbar a {
+            /* If a menu item's text is too long, truncate it */
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 }

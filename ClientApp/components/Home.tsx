@@ -1,23 +1,31 @@
-﻿import * as React from "react";
+import * as React from "react";
 
-
-interface Tutorial1Prop {
-    handler: any;
+interface HomeState {
+    slideCount: number;
 }
-interface Tutorial1State {
+interface HomeProperties {
 
 }
-export class Tutorial1 extends React.Component<Tutorial1Prop, Tutorial1State> {
+export class Home extends React.Component<HomeProperties, HomeState> {
 
     constructor(props) {
         super(props);
+
+        this.handler = this.handler.bind(this);
         this.state = {
-            loggedIn: false
+            slideCount: 1
         };
     }
 
+    handler(e) {
+        e.preventDefault();
+        this.setState({
+            slideCount: this.state.slideCount + 1
+        });
+    }
+
     public render() {
-        return <div className="body">
+         return <div className="body">
             <div className="center-fade">
                 <p className="welcome">Welcome to DocChain</p>
                 <div className="about">
@@ -29,14 +37,8 @@ export class Tutorial1 extends React.Component<Tutorial1Prop, Tutorial1State> {
                     </p>
                 </div>
             </div>
-            <div className="tutorial-container">
-                <div className="tutorial-start">
-                    <p>
 
-                    </p>
-                </div>
-                <button className="button" onClick={this.props.handler}>Start Tutorial</button>
-            </div>
         </div>;
     }
 }
+

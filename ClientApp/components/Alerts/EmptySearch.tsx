@@ -1,5 +1,5 @@
 ﻿import * as React from "react";
-import { EmptySearchIcon } from "../SVGs/icon-EmptySearch";
+import { EmptySearchIcon } from "../svg/icon-EmptySearch";
 
 export class EmptySearch extends React.Component {
 

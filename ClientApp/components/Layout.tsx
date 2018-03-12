@@ -1,17 +1,13 @@
 import * as React from "react";
-import { NavMenu } from "./Navbar/NavMenu";
+import { NavMenu } from "./";
 import { Alert } from "react-bootstrap";
-import ErrorBoundary from "../components/Utils/ErrorBoundary";
-
+require("font-awesome/css/font-awesome.min.css");
 require("../css/onecss.css");
 
 export interface LayoutProps {
     children?: React.ReactNode;
 }
 
-var divstyle = {
-    "padding": "3px"
-};
 
 export interface LayoutState {
     errorFound: boolean;
@@ -22,28 +18,19 @@ export interface LayoutState {
 export class Layout extends React.Component<LayoutProps, LayoutState> {
     constructor(props) {
         super(props);
-        this.state = {
-            Error :"",
-            errorFound: false,
-            errorInformation: ""
-        };
     }
-
-    //componentDidCatch(error, errorInfo) {
-    //    this.setState({ Error: error, errorFound: true, errorInformation: errorInfo });
-    //}
+    
 
     public render() {
         return <div className="container-fluid">
             <div className="row">
-                <div >
+                <div className="col-sm-2" >
                     <NavMenu />
                 </div>
-                <ErrorBoundary>
-                <div style={divstyle}>
+
+                <div className="col-sm-10" style={{ paddingLeft: "0px", paddingRight: "0px" }}>
                     { this.props.children }
-                    </div>
-                </ErrorBoundary>
+                </div>
             </div>
         </div>;
     }

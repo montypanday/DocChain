@@ -2,10 +2,9 @@
 import { render } from "react-dom";
 import { Link, NavLink, Redirect } from "react-router-dom";
 import { saveAs } from "file-saver";
-import { ContextMenu } from "./ContextMenu";
-import { LoadingGif, SearchBar, BreadCrumb, BoxLogin } from "../";
+import { LoadingGif, SearchBar, BreadCrumb, BoxLogin, ButtonToolBar } from "../";
 import { FilePreviewModal, DeleteModal, NewFolderModal, ShowShareLinkModal, RenameFileModal, HistoryModal } from "../Modals";
-import { ButtonToolBar, Row, TableHeading } from "../Table";
+import { Row, TableHeading } from "../Table";
 import { GSearch, GNavigateIntoFolder, GDelete, Upload, GetPreview, GCreateNewFolder, GRename, GDownload, Logout, getSharedLink } from "../../api/Google_Utilities";
 import { ToastContainer, toast } from "react-toastify";
 import { css } from "glamor";
@@ -377,7 +376,7 @@ export class DriveExplorer extends React.Component<{}, DriveExplorerState> {
                             <strong>Unauthorized: </strong> Please sign in first
                         </Alert>}
                     {this.state.show401Alert && <DriveLogin></DriveLogin>}
-                    <ContextMenu root="target" />
+                  
                     <ToastContainer position="bottom-right" hideProgressBar={true} toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })} />
                     <div style={{ float: "right" }} className="user-details">
                         {!this.state.show401Alert && < ButtonToolBar

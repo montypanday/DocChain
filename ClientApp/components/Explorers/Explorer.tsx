@@ -1,10 +1,10 @@
 ﻿import * as React from "react";
 import { render } from "react-dom";
-import { ButtonToolBar, Row, TableHeading } from "../Table";
+import { Row, TableHeading } from "../Table";
 import { Link, NavLink, Redirect } from "react-router-dom";
 import { LoadingGif, BoxLogin } from "../";
 import { SearchBar } from "../FeatureBar/searchBar";
-import { BreadCrumb } from "../FeatureBar/breadCrumb";
+import { BreadCrumb, ButtonToolBar } from "../";
 import { FilePreviewModal, DeleteModal, NewFolderModal, ShowShareLinkModal, RenameFileModal, HistoryModal } from "../Modals";
 import { Search, Delete, Upload, GetFolderItemsAsync, getPreviewLink, CreateNewFolder, Rename, getSharedLink, Download, Logout } from "../../api/Box_Utilities";
 import { Alert } from "react-bootstrap";
@@ -15,12 +15,11 @@ import EmptyFolder from "../Alerts/EmptyFolder";
 import * as utility from "../utility";
 import { EmptySearch } from "../Alerts/EmptySearch";
 import { saveAs } from "file-saver";
-import { ContextMenu } from "./ContextMenu";
 import { Check, PutOnChain } from "../../api/util_chain";
 
 interface ExplorerState {
     // this is space we will put the json response
-    filesarray: any;
+    filesArray: any;
     // this is just true or false, determines whether the network request has finished, display a gif or a table
     loading: any;
     errorFound: any;
@@ -81,7 +80,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
         this.Logout = this.Logout.bind(this);
         this.state = {
             // This is space we will put the json response
-            filesarray: {},
+            filesArray: {},
             // this is just true or false, determines whether the network request has finished, display a gif or a table
             loading: true,
             errorFound: false,
@@ -122,10 +121,10 @@ export class Explorer extends React.Component<{}, ExplorerState> {
     componentDidMount() {
         GetFolderItemsAsync("0").then(newData => {
             let isEmpty = newData.length === 0 ? true : false;
-            this.setState({ filesarray: newData, loading: false, show401Alert: false, currentFolderID: "0", FolderEmpty: isEmpty });
+            this.setState({ filesArray: newData, loading: false, show401Alert: false, currentFolderID: "0", FolderEmpty: isEmpty });
         })
             .catch(function (error) {
-                this.setState({ loading: false, filesarray: [], show401Alert: true, SearchEmpty: false });
+                this.setState({ loading: false, filesArray: [], show401Alert: true, SearchEmpty: false });
             }.bind(this));
     }
 
@@ -134,7 +133,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
     performSearch(e) {
         this.state.query !== "" && Search(this.state.query).then(newData => {
             let isSearchEmpty = newData.length === 0 ? true : false;
-            this.setState({ filesarray: newData, loading: false, SearchEmpty: isSearchEmpty, pathCollection: [{ fileId: "0", Name: "All Files" }] });
+            this.setState({ filesArray: newData, loading: false, SearchEmpty: isSearchEmpty, pathCollection: [{ fileId: "0", Name: "All Files" }] });
         });
     }
 
@@ -168,7 +167,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
     searchInFolder(id, newArray) {
         GetFolderItemsAsync(id).then(newData => {
             let isEmpty = newData.length === 0 ? true : false;
-            this.setState({ filesarray: newData, loading: false, pathCollection: newArray, currentFolderID: id, FolderEmpty: isEmpty, SearchEmpty: false });
+            this.setState({ filesArray: newData, loading: false, pathCollection: newArray, currentFolderID: id, FolderEmpty: isEmpty, SearchEmpty: false });
         });
     }
 
@@ -179,7 +178,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
     createNewFolderHandler(newName) {
         CreateNewFolder(this.state.currentFolderID, newName)
             .then(newData => {
-                this.setState({ filesarray: newData, showNewFolderModal: false });
+                this.setState({ filesArray: newData, showNewFolderModal: false });
                 toast.success("Folder created successfully!", { hideProgressBar: true });
             });
     }
@@ -256,7 +255,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
         Delete(this.state.ToBeDeletedType, this.state.ToBeDeletedID, this.state.currentFolderID)
             .then(newData => {
                 let isEmpty = newData.length === 0 ? true : false;
-                this.setState({ filesarray: newData, showDeleteModal: false, ToBeDeletedID: "", ToBeDeletedName: "", ToBeDeletedType: "", FolderEmpty: isEmpty, SearchEmpty: false });
+                this.setState({ filesArray: newData, showDeleteModal: false, ToBeDeletedID: "", ToBeDeletedName: "", ToBeDeletedType: "", FolderEmpty: isEmpty, SearchEmpty: false });
                 toast.success("Deleted successfully!", { hideProgressBar: true });
             });
     }
@@ -266,7 +265,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
     submitRename(newName) {
         Rename(this.state.toBeRenameId, newName, this.state.currentFolderID, this.state.toBeRenameType)
             .then(newData => {
-                this.setState({ filesarray: newData, showRenameModal: false });
+                this.setState({ filesArray: newData, showRenameModal: false });
                 toast.success("Item Renamed Successfully!", { hideProgressBar: true });
             })
             .catch(function (error) {
@@ -311,13 +310,12 @@ export class Explorer extends React.Component<{}, ExplorerState> {
         }
         Upload(this.state.currentFolderID, formData)
             .then(newData => {
-                console.log("hahahhahhahhhhhhhhhhhhhhhhhhhhh");
-                if (Object.keys(newData).length != (this.state.filesarray.length + fileList.length)) {
+                if (Object.keys(newData).length != (this.state.filesArray.length + fileList.length)) {
 
                     throw Error("Not all files were successfully uploaded, file names must be unique!");
                 }
                 let isEmpty = newData.length === 0 ? true : false;
-                this.setState({ filesarray: newData, loading: false, FolderEmpty: isEmpty, SearchEmpty: false });
+                this.setState({ filesArray: newData, loading: false, FolderEmpty: isEmpty, SearchEmpty: false });
                 toast.update(toastIndex, {
                     autoClose: 5000, hideProgressBar: true, type: "success", render: "Successfully Uploaded " + files.length + " " + placeholder
                 });
@@ -352,7 +350,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
             if (this.state.SearchEmpty) {
                 rows = <EmptySearch />;
             } else {
-                rows = this.state.filesarray.map(function (row) {
+                rows = this.state.filesArray.map(function (row) {
                     return (<Row key={row.id}
                         id={row.id}
                         hash={row.hash}
@@ -376,7 +374,7 @@ export class Explorer extends React.Component<{}, ExplorerState> {
 
             return (
                 <div className="well pull-down" id="target">
-                    {!this.state.show401Alert && < ContextMenu root="target"></ ContextMenu>}
+                    
                     <ToastContainer position="bottom-right" hideProgressBar={true} pauseOnHover={true} newestOnTop={true} toastClassName={css({ fontFamily: "Europa, Serif", paddingLeft: "15px" })}>
                     </ToastContainer>
 

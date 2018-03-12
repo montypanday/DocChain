@@ -1,5 +1,5 @@
 ﻿import * as React from "react";
-import { BOXIcon } from "../SVGs/icon-BOX";
+import { BOXIcon } from "../svg/icon-BOX";
 
 interface LoginState {
     loggedIn: boolean;
@@ -32,7 +32,7 @@ export class BoxLogin extends React.Component<{}, LoginState> {
         if (sessionStorage.getItem("accessToken") == null) {
 
             return <div className="login-zone login-box">
-                    <a className="logo-link" href="https://account.box.com/api/oauth2/authorize?response_type=code&client_id=3syx1zpgoraznjex526u78ozutwvgeby&state=security_token%3DKnhMJatFipTAnM0nHlZA">
+                <a className="logo-link" href="https://account.box.com/api/oauth2/authorize?response_type=code&client_id=3syx1zpgoraznjex526u78ozutwvgeby&state=security_token%3DKnhMJatFipTAnM0nHlZA">
                         <p>Click to login to Box.com</p>
                         <BOXIcon/>
                     </a>
